@@ -1,4 +1,4 @@
-# Labyrinth G26 Edition
+# Labyrinth G26 Edition [A2]
 
 Labyrinth is a board game in which players must navigate an every shifting maze.
 
