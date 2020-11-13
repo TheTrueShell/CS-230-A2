@@ -7,7 +7,7 @@ Labyrinth is a board game in which players must navigate an every shifting maze.
 Use [git](https://git-scm.com/) to download the source.
 
 ```
-git clone https://github.com/TheTrueShell/CS-230-A1.git 
+git clone https://github.com/TheTrueShell/CS-230-A2.git 
 ```
 
 ## Usage
