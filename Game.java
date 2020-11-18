@@ -158,7 +158,10 @@ public class Game {
         this.board = null;
     }
 
-    //create profile
+    /**
+     * Creates a new profile with name
+     * @param name the name of the profile
+     */
     public void createProfile(String name){
         //TODO: Waiting on profile to exist
         Profile profile = new Profile(name);
