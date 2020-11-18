@@ -169,7 +169,10 @@ public class Game {
         saveProfiles();
     }
 
-    //remove profile
+    /**
+     * Removes a profile from the profile list then saves to save this change
+     * @param profile the profile to be deleted
+     */
     public void removeProfile(Profile profile){
         profiles.remove(profile);
         saveProfiles();
