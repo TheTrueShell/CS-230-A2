@@ -80,11 +80,11 @@ public class Game {
     }
 
     /**
-     *
+     * load game in progress from file
      * @throws FileNotFoundException if board doesn't exist
      */
     public void loadBoard() throws FileNotFoundException {
-        File myObj = new File("filename.txt");
+        File myObj = new File("gameInProgress.txt");
         Scanner myReader = new Scanner(myObj);
         //TODO: handle if the file isn't thr correct length
         int boardX = myReader.nextInt();
