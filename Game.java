@@ -224,8 +224,7 @@ public class Game {
             return new TJunctionTile();
         }if (type.equals("STRAIGTH")){
             return new StraightTile();
-        }if (type.equals("GOAL")){
-            return new GoalTile();
         }
+        return new GoalTile();
     }
 }
