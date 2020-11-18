@@ -147,7 +147,9 @@ public class Game {
         //TODO: Discuss, should it be in board not game?
     }
 
-    //delete board
+    /**
+     * Deletes current game and updates the profiles to reflect this
+     */
     public void deleteBoard(){
         //TODO: delete game from player profiles, needs profile to exist
         //for (Player p : this.board.getPlayers()){
