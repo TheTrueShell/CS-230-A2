@@ -8,5 +8,6 @@
 public abstract class Tile {
 
     public abstract void play();
+    protected int drawnOnTurn;
 
 }

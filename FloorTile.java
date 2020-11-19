@@ -14,7 +14,7 @@ public abstract class FloorTile extends Tile {
     private boolean[] acessibleSides = new boolean[4]; // Top. right, bottom, Left
     public abstract void play();
 
-    public FloorTile(int tileRotation) throws Exception {
+    public FloorTile(int tileRotation, boolean isTileFixed) throws Exception {
 
         try {
         this.setRotation(tileRotation);
@@ -22,7 +22,57 @@ public abstract class FloorTile extends Tile {
 
             throw new Exception(ex.getMessage());
 
-        } 
+        }
+        setTileFixed(isTileFixed);
+        setIsFrozen(false);
+        setIsOnFire(false);
+
+    }
+
+    public FloorTile(int tileRotation, boolean isTileFixed, boolean isFozen, boolean isOnFire) throws Exception {
+
+        try {
+            this.setRotation(tileRotation);
+        } catch (Exception ex) {
+
+            throw new Exception(ex.getMessage());
+
+        }
+        setTileFixed(isTileFixed);
+        setIsFrozen(isFrozen);
+        setIsOnFire(isOnFire);
+
+    }
+
+    public boolean canBeMovedOnto() {
+
+        if ( isTileFixed ) {
+
+            return false;
+
+        } else {
+
+            return true;
+        }
+
+    }
+
+    public void setTileFixed(boolean isTileFixed) {
+
+        this.isTileFixed = isTileFixed;
+
+    }
+
+
+    public void setIsFrozen (boolean isFrozen) {
+
+        this.isFrozen = isFrozen;
+
+    }
+
+    public void setIsOnFire (boolean isFire) {
+
+        this.isOnFire = isFire;
 
     }
 
@@ -42,5 +92,27 @@ public abstract class FloorTile extends Tile {
 
         }
     }
+
+    public boolean getIsFrozen() {
+
+        return this.isFrozen;
+
+    }
+
+    public boolean getIsOnFire() {
+
+        return this.isOnFire;
+
+    }
+
+    public int getRotation() {
+
+        return this.tileRotation;
+
+    }
+
+
+
+
 
 }
