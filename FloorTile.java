@@ -14,36 +14,6 @@ public abstract class FloorTile extends Tile {
     private boolean[] acessibleSides = new boolean[4]; // Top. right, bottom, Left
     public abstract void play();
 
-    public FloorTile(int tileRotation, boolean isTileFixed) throws Exception {
-
-        try {
-        this.setRotation(tileRotation);
-        } catch (Exception ex) {
-
-            throw new Exception(ex.getMessage());
-
-        }
-        setTileFixed(isTileFixed);
-        setIsFrozen(false);
-        setIsOnFire(false);
-
-    }
-
-    public FloorTile(int tileRotation, boolean isTileFixed, boolean isFozen, boolean isOnFire) throws Exception {
-
-        try {
-            this.setRotation(tileRotation);
-        } catch (Exception ex) {
-
-            throw new Exception(ex.getMessage());
-
-        }
-        setTileFixed(isTileFixed);
-        setIsFrozen(isFrozen);
-        setIsOnFire(isOnFire);
-
-    }
-
     public boolean canBeMovedOnto() {
 
         if ( isTileFixed ) {
