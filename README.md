@@ -16,7 +16,7 @@
     <!--<a href="https://github.com/RoryDurrant/InfoPlus">View Demo</a>-->
     <a href="https://github.com/TheTrueShell/CS-230-A2/issues">Report Bug</a>
     ·
-    <a href="https://github.com/TheTrueShell/CS-230-A2/issues">Request Feature</a>
+    <a href="https://github.com/TheTrueShell/CS-230-A2/labels/enhancement">Request Feature</a>
   </p>
 </center>
 
