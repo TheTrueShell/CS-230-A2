@@ -6,12 +6,11 @@
  *  This class implements the ActionTile superclass.
  */
 
-public abstract class Corner extends FloorTile {
+public class Corner extends FloorTile {
 
     public Corner(int tileRotation) {
-        super(tileRotation);
+        super.tileRotation = tileRotation;
     }
 
-    public abstract boolean hasPlayerOn();
 
 }

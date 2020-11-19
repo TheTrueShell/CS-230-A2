@@ -7,6 +7,12 @@
  */
 public class IceTile extends ActionTile {
 
+    public IceTile() {
+
+        super.setPlayable(false);
+
+    }
+
     @Override
     public void action(FloorTile tile) throws Exception {
 
