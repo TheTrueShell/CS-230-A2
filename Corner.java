@@ -8,9 +8,12 @@
 
 public class Corner extends FloorTile {
 
-    public Corner(int tileRotation) {
-        super.tileRotation = tileRotation;
-    }
+    public Corner(int tileRotation) throws Exception {
+        setRotation(tileRotation);
+        setIsFrozen(false);
+        setIsFrozen(false);
+        setTileFixed(false);
 
+    }
 
 }

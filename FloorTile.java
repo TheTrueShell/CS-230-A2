@@ -7,11 +7,11 @@
 
 public abstract class FloorTile extends Tile {
 
-    private boolean isTileFixed;
-    private boolean isFrozen;
-    private boolean isOnFire;
-    private int tileRotation; //In 360 degrees
-    private boolean[] acessibleSides = new boolean[4]; // Top. right, bottom, Left
+    protected boolean isTileFixed;
+    protected boolean isFrozen;
+    protected boolean isOnFire;
+    protected int tileRotation; //In 360 degrees
+    protected boolean[] accessibleSides; // Top. right, bottom, Left
 
     public boolean canBeMovedOnto() {
 
