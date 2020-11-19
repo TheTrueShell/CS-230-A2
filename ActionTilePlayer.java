@@ -8,19 +8,6 @@
 
 public abstract class ActionTilePlayer extends ActionTile {
 
-    private boolean isPlayable;
     public abstract void action(Player player);
-
-    public boolean getIsPlayable(){
-
-       return isPlayable;
-
-    }
-
-    public void setPlayable(boolean playable) {
-
-        this.isPlayable = playable;
-
-    }
 
 }

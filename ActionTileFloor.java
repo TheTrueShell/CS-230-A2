@@ -8,19 +8,6 @@
 
 public abstract class ActionTileFloor extends ActionTile {
 
-    private boolean isPlayable;
     public abstract void action(FloorTile tile) throws Exception;
-
-    public boolean getIsPlayable(){
-
-       return isPlayable;
-
-    }
-
-    public void setPlayable(boolean playable) {
-
-        this.isPlayable = playable;
-
-    }
 
 }

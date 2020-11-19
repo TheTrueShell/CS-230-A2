@@ -10,7 +10,7 @@ public class Corner extends FloorTile {
 
     public Corner(int tileRotation) throws Exception {
         boolean[] sides  = {true,true,false,false};
-        setAcessibleSides(sides);
+        setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);
         setIsFrozen(false);

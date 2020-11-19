@@ -9,10 +9,14 @@
 public abstract class GoalTile extends FloorTile {
 
     public GoalTile(int tileRotation) throws Exception {
+
+        boolean[] sides  = {true,true,false,false};
+        setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);
         setIsFrozen(false);
         setTileFixed(false);
+
     }
 
 }
