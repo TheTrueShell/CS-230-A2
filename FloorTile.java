@@ -12,7 +12,6 @@ public abstract class FloorTile extends Tile {
     private boolean isOnFire;
     private int tileRotation; //In 360 degrees
     private boolean[] acessibleSides = new boolean[4]; // Top. right, bottom, Left
-    public abstract void play();
 
     public boolean canBeMovedOnto() {
 
