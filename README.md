@@ -1,26 +1,100 @@
-# Labyrinth G26 Edition [A2]
+<!-- PROJECT LOGO -->
+<br />
+<center><p align="center">
+  <a href="https://github.com/RoryDurrant/InfoPlus">
+    <img src="https://i.imgur.com/8jJLpxO.png" alt="Logo">
+  </a>
 
-Labyrinth is a board game in which players must navigate an every shifting maze.
+  <h3 align="center">Labyrinth</h3>
 
-## Installation
+  <p align="center">
+    A turn based board game written in Java and JavaFX
+    <br />
+    <a href="https://github.com/TheTrueShell/CS-230-A2/wiki"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <!--<a href="https://github.com/RoryDurrant/InfoPlus">View Demo</a>-->
+    <a href="https://github.com/TheTrueShell/CS-230-A2/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/TheTrueShell/CS-230-A2/issues">Request Feature</a>
+  </p>
+</center>
 
-Use [git](https://git-scm.com/) to download the source.
 
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [Contact](#contact)
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+
+
+### Built With
+
+ <img src="https://image.flaticon.com/icons/png/512/226/226777.png" alt="Java" width="40"> 
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+Programs needed before you can compile or run this program from source.
+* Java 8
+* JavaFX
+
+### Installation
+ 
+1. Clone the repo:
+```sh
+git clone https://github.com/TheTrueShell/CS-230-A2.git
 ```
-git clone https://github.com/TheTrueShell/CS-230-A2.git 
-```
-
+2. Open in your IDE of choice.
+<!-- USAGE EXAMPLES -->
 ## Usage
 
-Compile and run the program.
+Compile all the classes and run _Main_ to start the game.
 
+_For more examples, please refer to the [Documentation](https://github.com/TheTrueShell/CS-230-A2/wiki/)_
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+See the [Issues](https://github.com/TheTrueShell/CS-230-A2/issuess) for a list of proposed features (and known issues).
+
+
+
+<!-- CONTRIBUTING -->
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Reccomendations
-- GitKraken (Over SourceTree)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-##
-Group 26 rise up
+
+
+<!-- CONTACT -->
+## Contact
+
+
+Project Link: [https://github.com/TheTrueShell/](https://github.com/TheTrueShell/)
