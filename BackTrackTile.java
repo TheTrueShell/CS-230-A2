@@ -12,7 +12,7 @@ public class BackTrackTile extends ActionTilePlayer {
     @Override
     public void action(Player player) {
 
-        player.moveplayer(player.getPreviousPositions()); //May need try catch around it at somepoint
+        player.moveplayer(player.getPreviousPosition2()); //May need try catch around it at somepoint
 
     }
 
