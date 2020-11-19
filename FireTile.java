@@ -6,7 +6,7 @@
  *  This class implements the Firetile Class.This tile will cause a fire to appear wherever the user requests.
  */
 
-public class FireTile extends ActionTile {
+public class FireTile extends ActionTileFloor {
 
     public FireTile() {
 

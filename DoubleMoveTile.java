@@ -6,8 +6,14 @@
  *  This class implements the DoubleMoveTile. This allows the player to perform a second action.
  */
 
-public abstract class DoubleMoveTile extends ActionTile {
+public abstract class DoubleMoveTile extends ActionTilePlayer {
 
 
+    @Override
+    public void action(Player player) {
+
+        player.replay(); //Talk to others about how to implement on friday
+
+    }
 
 }
