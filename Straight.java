@@ -9,6 +9,8 @@
 public class Straight extends FloorTile {
 
     public Straight(int tileRotation) throws Exception {
+        boolean[] sides  = {true,false,false,true};
+        setAcessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);
         setIsFrozen(false);

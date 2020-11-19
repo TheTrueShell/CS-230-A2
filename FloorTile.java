@@ -45,6 +45,18 @@ public abstract class FloorTile extends Tile {
 
     }
 
+    public void setAcessibleSides(boolean[] acessibleSides) {
+
+        this.acessibleSides = acessibleSides;
+
+    }
+
+    public boolean[] getAcessibleSides() {
+
+        return this.acessibleSides;
+
+    }
+
     public void setRotation(int rotation) throws Exception {
 
         if (rotation % 90 != 0) {
@@ -58,8 +70,49 @@ public abstract class FloorTile extends Tile {
         } else {
 
             this.tileRotation = rotation;
+            int x = rotation / 90;
+            for (int i = 0; i < x; i++) {
+                roateAcessibleSides();
+            }
 
         }
+    }
+
+    //As the model of the tile rotates so will the possible enterances and exits
+
+    public void roateAcessibleSides() {
+
+        for(int i = 0; i < acessibleSides.length; i++) {
+
+           boolean[] acessibleSidestemp =  acessibleSides;
+
+            if (acessibleSides[i] == true) {
+
+                acessibleSidestemp[i] = false;
+
+                try { acessibleSidestemp[i+1] = true; }
+                catch (ArrayIndexOutOfBoundsException ex) {
+
+                    acessibleSidestemp[0] = true;
+
+                }
+
+            } else {
+
+                acessibleSidestemp[i] = true;
+
+                try { acessibleSidestemp[i+1] = false; }
+                catch (ArrayIndexOutOfBoundsException ex) {
+
+                    acessibleSidestemp[0] = false;
+
+                }
+            }
+
+            acessibleSides = acessibleSidestemp;
+
+        }
+
     }
 
     public boolean getIsFrozen() {
