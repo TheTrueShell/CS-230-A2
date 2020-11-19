@@ -5,7 +5,7 @@
  *  - no copyright
  *  This class implements the IceTile class. This tile freezes floor tiles
  */
-public class IceTile extends ActionTile {
+public class IceTile extends ActionTileFloor {
 
     public IceTile() {
 

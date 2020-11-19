@@ -6,9 +6,10 @@
  *  This class implements the ActionTile superclass.
  */
 
-public abstract class ActionTile extends Tile {
+public abstract class ActionTileFloor extends ActionTile {
 
     private boolean isPlayable;
+    public abstract void action(FloorTile tile) throws Exception;
 
     public boolean getIsPlayable(){
 

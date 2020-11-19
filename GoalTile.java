@@ -8,10 +8,11 @@
 
 public abstract class GoalTile extends FloorTile {
 
-    public GoalTile(int tileRotation) {
-        super(tileRotation);
+    public GoalTile(int tileRotation) throws Exception {
+        setRotation(tileRotation);
+        setIsFrozen(false);
+        setIsFrozen(false);
+        setTileFixed(false);
     }
-
-    public abstract boolean hasPlayerOn();
 
 }
