@@ -1,11 +1,11 @@
+/**
+ * This class controls each individial player.
+ * @author Rory Durrant, Joel Lawless
+ * @version 0.0.1
+ */
 import java.util.ArrayList;
-
 public class Player {
-    /**
-     * This class controls each individial player.
-     * @author Rory Durrant, Joel Lawless
-     * @version 0.0.1
-     */
+
 
     /** Represents current position with X and Y
      */

@@ -1,9 +1,9 @@
+/**
+ * This class controls the basiscs of the individual player profiles.
+ * @author Rory Durrant, Joel Lawless
+ * @version 0.0.1
+ */
 public class Profile {
-    /**
-     * This class controls the basiscs of the individual player profiles.
-     * @author Rory Durrant, Joel Lawless
-     * @version 0.0.1
-     */
 
     private String Name;
     private int GamesPlayed;
