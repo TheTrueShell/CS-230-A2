@@ -6,11 +6,11 @@
  *  This class implements the ActionTile superclass.
  */
 
-public abstract class GoalTile extends FloorTile {
+public class GoalTile extends FloorTile {
 
     public GoalTile(int tileRotation) throws Exception {
 
-        boolean[] sides  = {true,true,false,false};
+        boolean[] sides  = {true,true,true,true};
         setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);
