@@ -83,8 +83,8 @@ public class Player {
     /**
      * Draws a random card from the bag.
      */
-    public void drawCard(){
+    public void addToHand(Tile t){
         //TODO - CHECK BAG FUNCTION
-        HandOfCards.add(null);
+        HandOfCards.add(t);
     }
 }
