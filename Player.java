@@ -29,37 +29,39 @@ public class Player {
     /**
      * Contains the current profile
      */
-    private Profile currentProfile;
+    private String currentProfile;
     /** Stores the current name */
     //private String name;
 
     /**
-     * @param x    - Represents the X coordinate of the player.
-     * @param y    - Represents the Y coordinate of the player
-     * @param name - Represents the name of the player.
+     * @param x       - Represents the X coordinate of the player.
+     * @param y       - Represents the Y coordinate of the player
+     * @param name - Represents the name of the profile the player is linked to.
      */
     public Player(int x, int y, String name) {
         CurrentPosition[0] = x;
         CurrentPosition[1] = y;
-        findCurrentProfile(name);
+        currentProfile = name;
     }
 
-    private Profile findCurrentProfile(String name) {
-        //TODO
-        return null;
+    /**
+     * @return - Returns current profile associated with this player.
+     */
+    public String getProfile() {
+        return currentProfile;
     }
 
     /**
      * @return - Returns X position of player.
      */
-    public int getX(){
+    public int getX() {
         return CurrentPosition[0];
     }
 
     /**
      * @return - Returns Y position of player.
      */
-    public int getY(){
+    public int getY() {
         return CurrentPosition[1];
     }
 
@@ -99,14 +101,7 @@ public class Player {
         PreviousPosition2[1] = y;
     }
 
-    /**
-     * @return - Returns current profile associated with this player.
-     */
-    public Profile getProfile() {
-        return currentProfile;
-    }
-
-    public int getNumOfTiles(){
+    public int getNumOfTiles() {
         return HandOfCards.size();
     }
 
