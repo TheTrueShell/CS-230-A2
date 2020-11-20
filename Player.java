@@ -106,7 +106,7 @@ public class Player {
         return currentProfile;
     }
 
-    public int numOfTiles(){
+    public int getNumOfTiles(){
         return HandOfCards.size();
     }
 
