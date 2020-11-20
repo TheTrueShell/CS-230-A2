@@ -6,10 +6,11 @@
  *  This class implements the ActionTile superclass.
  */
 
-public class Straight extends FloorTile {
+public class TJunctionTile extends FloorTile {
 
-    public Straight(int tileRotation) throws Exception {
-        boolean[] sides  = {true,false,false,true};
+    public TJunctionTile(int tileRotation) throws Exception {
+
+        boolean[] sides  = {false,true,true,true};
         setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);

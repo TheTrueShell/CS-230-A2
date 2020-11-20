@@ -6,11 +6,10 @@
  *  This class implements the ActionTile superclass.
  */
 
-public class TJunction extends FloorTile {
+public class CornerTile extends FloorTile {
 
-    public TJunction(int tileRotation) throws Exception {
-
-        boolean[] sides  = {false,true,true,true};
+    public CornerTile(int tileRotation) throws Exception {
+        boolean[] sides  = {true,true,false,false};
         setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);
