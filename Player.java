@@ -1,5 +1,5 @@
 /**
- * This class controls each individial player.
+ * This class controls each individual player.
  *
  * @author Rory Durrant, Joel Lawless
  * @version 0.0.1
@@ -8,8 +8,6 @@
 import java.util.ArrayList;
 
 public class Player {
-
-
     /**
      * Represents current position with X and Y
      */
@@ -34,8 +32,8 @@ public class Player {
     //private String name;
 
     /**
-     * @param x       - Represents the X coordinate of the player.
-     * @param y       - Represents the Y coordinate of the player
+     * @param x    - Represents the X coordinate of the player.
+     * @param y    - Represents the Y coordinate of the player
      * @param name - Represents the name of the profile the player is linked to.
      */
     public Player(int x, int y, String name) {
@@ -117,5 +115,12 @@ public class Player {
      */
     public void addToHand(Tile t) {
         HandOfCards.add(t);
+    }
+
+    /**
+     * Clears the hand of the player.
+     */
+    public void clearHand() {
+        HandOfCards.clear();
     }
 }
