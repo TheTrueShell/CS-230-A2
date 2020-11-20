@@ -1,11 +1,12 @@
 /**
  * This class controls each individial player.
+ *
  * @author Rory Durrant, Joel Lawless
  * @version 0.0.1
  */
-import com.sun.xml.internal.bind.v2.TODO;
 
 import java.util.ArrayList;
+
 public class Player {
 
 
@@ -29,12 +30,12 @@ public class Player {
      * @param y - Represents the Y coordinate of the player
      * @param name - Represents the name of the player.
      */
-    public Player(int x, int y, String name){
+    public Player(int x, int y, String name) {
         CurrentPosition[0][0] = x;
         findCurrentProfile(name);
     }
 
-    private Profile findCurrentProfile(String name){
+    private Profile findCurrentProfile(String name) {
         //TODO
         return null;
     }
@@ -49,7 +50,7 @@ public class Player {
     /**
      * @return - Returns previous position in a x=[0], y=[1] format.
      */
-    public int[] getPreviousPosition2(){
+    public int[] getPreviousPosition2() {
         return PreviousPosition2;
     }
 
@@ -76,15 +77,14 @@ public class Player {
     /**
      * @return - Returns an ArrayList which consists of the current hand.
      */
-    public ArrayList<Tile> getHand(){
+    public ArrayList<Tile> getHand() {
         return HandOfCards;
     }
 
     /**
      * Draws a random card from the bag.
      */
-    public void addToHand(Tile t){
-        //TODO - CHECK BAG FUNCTION
+    public void addToHand(Tile t) {
         HandOfCards.add(t);
     }
 }
