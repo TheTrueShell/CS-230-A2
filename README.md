@@ -76,7 +76,7 @@ _For more examples, please refer to the [Documentation](https://github.com/TheTr
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [Issues](https://github.com/TheTrueShell/CS-230-A2/issuess) for a list of proposed features (and known issues).
+See the [Issues](https://github.com/TheTrueShell/CS-230-A2/issues) for a list of proposed features (and known issues).
 
 
 
@@ -97,4 +97,4 @@ Contributions are what make the open source community such an amazing place to b
 ## Contact
 
 
-Project Link: [https://github.com/TheTrueShell/](https://github.com/TheTrueShell/)
+Project Link: [https://github.com/TheTrueShell/CS-230-A2/](https://github.com/TheTrueShell/CS-230-A2/)
