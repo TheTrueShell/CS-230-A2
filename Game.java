@@ -9,10 +9,9 @@ import java.util.Scanner;
  * This class is the main entry point to the game.
  * It creates and runs the game.
  * @author Benjamin Rockley, Mohammed T
- * @version 0.1
+ * @version 0.2
  */
 public class Game {
-    //TODO:borad being played
     private Board board;
     //TODO:current profile avalible
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
@@ -42,19 +41,22 @@ public class Game {
             fileWriter.write(this.board.getNumberOfFixedtiles()+"\n");
             //wrtie fixed tiles
             //TODO: getFixed tiles not specified but is a pain to do here
-            for (Tile t : this.board.getFixedTiles()){
+            for (FloorTile t : this.board.getFixedTiles()){
                 //TODO: maybe move to FloorTile.toString() Method
+                //x and y are in board not
+                //get tile type needs to be  new method
                 fileWriter.write(t.getX()+","+t.getY()+","+t.getTileType+","+t.getRotation()+","
-                        +t.isOnFire()+","+t.isFrozen()+"\n");
+                        +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
             }
             //write non fixedTiles
             //TODO: check that this is implemented in the board class
-            for (Tile t : this.board.getNonFixedTiles()){
+            for (FloorTile t : this.board.getNonFixedTiles()){
                 //TODO: maybe move to FloorTile.toString() Method
                 fileWriter.write(t.getX()+","+t.getY()+","+t.getTileType+","+t.getRotation()+","
-                        +t.isOnFire()+","+t.isFrozen()+"\n");
+                        +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
             }
             fileWriter.write(this.board.getPlayersInGame()+"\n");
+            //TODO: get turn doesn't exist
             fileWriter.write(this.board.getTurn().getName());
             //x,y,profile,numoftilesinhand
             //write the players to the file
@@ -88,32 +90,36 @@ public class Game {
         Scanner myReader = new Scanner(myObj);
         //TODO: handle if the file isn't thr correct length
         int boardX = myReader.nextInt();
-        int boardY = myReader.nextInt()
+        int boardY = myReader.nextInt();
         this.board = new Board(boardX,boardY);
         int fixedNum = myReader.nextInt();
         //load fixed tiles
         for (int i = 0; i < fixedNum; i++){
             int x = myReader.nextInt();
             int y = myReader.nextInt();
-            Tile t = fromType(myReader.next());
+            String type = myReader.next();
+            //roation
             int r = myReader.nextInt();
+            FloorTile t = floorFromType(type,r);
             t.setIsOnFire(myReader.nextBoolean());
             t.setIsFrozen(myReader.nextBoolean());
-            t.setIsFixed(true);
+            t.setTileFixed(true);
             //TODO:Check that this is correct format
-            this.board.insertTile(t,x,y,r);
+            this.board.insertTile(t,x,y);
         }
         //load non fixed tiles
         for (int i = 0; i < ((boardX * boardY) - fixedNum); i++){
             int x = myReader.nextInt();
             int y = myReader.nextInt();
-            Tile t = fromType(myReader.next());
+            String type = myReader.next();
+            //roation
             int r = myReader.nextInt();
+            FloorTile t = floorFromType(type,r);
             t.setIsOnFire(myReader.nextBoolean());
             t.setIsFrozen(myReader.nextBoolean());
-            t.setIsFixed(false);
+            t.setTileFixed(false);
             //TODO:Check that this is correct format
-            this.board.insertTile(t,x,y,r);
+            this.board.insertTile(t,x,y);
         }
         //load players
         int playersInGame = myReader.nextInt();
@@ -126,16 +132,17 @@ public class Game {
             int numOfTiles = myReader.nextInt();
             for (int j = 0; j < numOfTiles; j++){
                 Tile t = formType(myReader.next());
-                //TODO: see how they implement this for it to work
+                //TODO: this is a pain as a roation doesn't exist at time of creation
                 p.addToHand(t);
             }
             //TODO: again check implementation in player class
-            player.setPreviousPosition(myReader.nextInt(),myReader.nextInt());
-            player.setPreviousPosition2(myReader.nextInt(),myReader.nextInt());
+            p.setPreviousPosition(myReader.nextInt(),myReader.nextInt());
+            p.setPreviousPosition2(myReader.nextInt(),myReader.nextInt());
         }
         //load bag
         //TODO: change if we change how this is stored
         while (myReader.hasNext()){
+            //issue exists as rotation is not guaranteed
             Tile t = fromType(myReader.next());
             this.board.getBag.insertTile(t);
         }
@@ -145,6 +152,7 @@ public class Game {
     //load from preset
     public void loadPreset(){
         //TODO: Discuss, should it be in board not game?
+        //implement anyway
     }
 
     /**
@@ -185,7 +193,7 @@ public class Game {
         //try to create file
         try{
             File file = new File("profiles.txt");
-            file.createNewFile();
+            boolean success = file.createNewFile();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -205,26 +213,55 @@ public class Game {
     }
 
     /**
-     * converts a string to a tile
+     * converts a string to a actionTile
      * @param type the type of tile you want
      * @return an instance of the tile class
      */
-    private Tile fromType(String type){
+    private ActionTile actionFromType(String type){
         if (type.equals("ICE")){
             return new IceTile();
         }if (type.equals("FIRE")){
             return new FireTile();
-        }if (type.equals("DOUBLEMOVE")){
-            return new DoubleMoveTile();
-        }if (type.equals("BACKTRACK")){
-            return new BackTrackTile();
-        }if (type.equals("CORNER")){
-            return new CornerTile();
-        }if (type.equals("TJUNCTION")){
-            return new TJunctionTile();
-        }if (type.equals("STRAIGTH")){
-            return new StraightTile();
         }
-        return new GoalTile();
+        //if (type.equals("DOUBLEMOVE")){
+            //abstacrt and can't be called
+            //return new DoubleMoveTile();
+        //}
+        return new BackTrackTile();
+    }
+    //roation can throw exception
+    private FloorTile floorFromType(String type, int rotation){
+        //this should resolve any issues
+        //should this be in the constructor?
+        if (rotation % 90 != 0){
+            rotation = 0;
+        }
+        if (type.equals("CORNER")){
+            try {
+                return new CornerTile(rotation);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }if (type.equals("TJUNCTION")){
+            try {
+                return new TJunctionTile(rotation);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }if (type.equals("STRAIGTH")){
+            try {
+                return new StraightTile(rotation);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //does goal tile need a roation?
+        try {
+            return new GoalTile(rotation);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //it will never reach here
+        return null;
     }
 }
