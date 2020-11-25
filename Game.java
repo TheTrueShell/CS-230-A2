@@ -15,13 +15,14 @@ public class Game {
     private Board board;
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
 
-    public Game(){
-        loadProfiles();
+    public static void main(String[] args){
+        Game test = new Game();
+        test.createProfile("Test");
+        test.saveProfiles();
     }
 
-    //create board
-    public void createBoard(int length, int width){
-        this.board = new Board(length,width);
+    public Game(){
+        loadProfiles();
     }
 
     /**
@@ -77,6 +78,7 @@ public class Game {
             }
             //TODO:Change this from a list of strings to a count of types
             //eg. numStraight,numCorner,numT,numGoal,numIce,numFire,numDouble,numBacktrack
+            //TODO: bag doesn't have get tiles method
             for (Tile t : this.board.getBag().getTiles()){
                 //TODO: ask if they can add this feature
                 fileWriter.write(t.getTileType()+"\n");
@@ -150,15 +152,42 @@ public class Game {
         while (myReader.hasNext()){
             //issue exists as rotation is not guaranteed
             Tile t = fromType(myReader.next());
+            //no get bag
             this.board.getBag.insertTile(t);
         }
         myReader.close();
     }
 
-    //load from preset
-    public void loadPreset(){
+    /**
+     * Load a preset from file
+     * @param preset the preset file name
+     * @param players String of profile names
+     * @throws Exception If preset doesn't exist
+     */
+    public void loadPreset(String preset,ArrayList<String> players) throws Exception{
         //TODO: Discuss, should it be in board not game?
-        //implement anyway
+        File presetFile = new File(preset);
+        Scanner presetReader = new Scanner(presetFile);
+        int width = presetReader.nextInt();
+        int height = presetReader.nextInt();
+        this.board = new Board(width,height);
+        for (int i = 0; i < presetReader.nextInt(); i++){
+            int x = presetReader.nextInt();
+            int y = presetReader.nextInt();
+            String type = presetReader.next();
+            int rotation = presetReader.nextInt();
+            FloorTile t = floorFromType(type,rotation);
+            t.setIsOnFire(presetReader.nextBoolean());
+            t.setIsFrozen(presetReader.nextBoolean());
+            this.board.insertTile(t,x,y);
+        }
+        for (int i = 0; i < 4; i++){
+            int x = presetReader.nextInt();
+            int y = presetReader.nextInt();
+            Player p = new Player(x,y,players.get(i));
+            //TODO: board doesn't have players
+            board.addPlayer(p);
+        }
     }
 
     /**
