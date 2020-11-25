@@ -13,11 +13,10 @@ import java.util.Scanner;
  */
 public class Game {
     private Board board;
-    //TODO:current profile avalible
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
 
     public Game(){
-
+        loadProfiles();
     }
 
     //create board
@@ -48,14 +47,18 @@ public class Game {
                 //TODO: maybe move to FloorTile.toString() Method
                 //x and y are in board not
                 //get tile type needs to be  new method
-                fileWriter.write(t.getX()+","+t.getY()+","+t.getTileType+","+t.getRotation()+","
+                int x = this.board.getTileX(t);
+                int y = this.board.getTileY(t);
+                fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
                         +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
             }
             //write non fixedTiles
             //TODO: check that this is implemented in the board class
             for (FloorTile t : this.board.getNonFixedTiles()){
                 //TODO: maybe move to FloorTile.toString() Method
-                fileWriter.write(t.getX()+","+t.getY()+","+t.getTileType+","+t.getRotation()+","
+                int x = this.board.getTileX(t);
+                int y = this.board.getTileY(t);
+                fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
                         +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
             }
             fileWriter.write(this.board.getPlayersInGame()+"\n");
@@ -75,13 +78,13 @@ public class Game {
             //TODO:Change this from a list of strings to a count of types
             //eg. numStraight,numCorner,numT,numGoal,numIce,numFire,numDouble,numBacktrack
             for (Tile t : this.board.getBag().getTiles()){
+                //TODO: ask if they can add this feature
                 fileWriter.write(t.getTileType()+"\n");
             }
             fileWriter.close();
         } catch (IOException e){
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -89,6 +92,9 @@ public class Game {
      * @throws FileNotFoundException if board doesn't exist
      */
     public void loadBoard() throws FileNotFoundException {
+        //remove board if there
+        deleteBoard();
+
         File myObj = new File("gameInProgress.txt");
         Scanner myReader = new Scanner(myObj);
         //TODO: handle if the file isn't thr correct length
@@ -101,13 +107,12 @@ public class Game {
             int x = myReader.nextInt();
             int y = myReader.nextInt();
             String type = myReader.next();
-            //roation
+            //rotation
             int r = myReader.nextInt();
             FloorTile t = floorFromType(type,r);
             t.setIsOnFire(myReader.nextBoolean());
             t.setIsFrozen(myReader.nextBoolean());
             t.setTileFixed(true);
-            //TODO:Check that this is correct format
             this.board.insertTile(t,x,y);
         }
         //load non fixed tiles
@@ -115,13 +120,12 @@ public class Game {
             int x = myReader.nextInt();
             int y = myReader.nextInt();
             String type = myReader.next();
-            //roation
+            //rotation
             int r = myReader.nextInt();
             FloorTile t = floorFromType(type,r);
             t.setIsOnFire(myReader.nextBoolean());
             t.setIsFrozen(myReader.nextBoolean());
             t.setTileFixed(false);
-            //TODO:Check that this is correct format
             this.board.insertTile(t,x,y);
         }
         //load players
@@ -134,11 +138,10 @@ public class Game {
             Player p = new Player(x,y,name);
             int numOfTiles = myReader.nextInt();
             for (int j = 0; j < numOfTiles; j++){
+                //creates with roation 0 if floor tile
                 Tile t = fromType(myReader.next());
-                //TODO: this is a pain as a roation doesn't exist at time of creation
                 p.addToHand(t);
             }
-            //TODO: again check implementation in player class
             p.setPreviousPosition(myReader.nextInt(),myReader.nextInt());
             p.setPreviousPosition2(myReader.nextInt(),myReader.nextInt());
         }
@@ -162,9 +165,9 @@ public class Game {
      * Deletes current game and updates the profiles to reflect this
      */
     public void deleteBoard(){
-        //TODO: delete game from player profiles, needs profile to exist
+        //TODO: ask if they want to add game canceled
         //for (Player p : this.board.getPlayers()){
-        //  p.setGamesPlayed(p.getgamesPlayer()-1);
+        //  p.getProfile().gameCanceled();
         //}
         this.board = null;
     }
@@ -312,9 +315,9 @@ public class Game {
 
     /**
      * convert string into floorTile
-     * @param type
-     * @param rotation the roation of the tile in degrees must be in 90 degree increments
-     * @return
+     * @param type the tiles type
+     * @param rotation the rotation of the tile in degrees must be in 90 degree increments
+     * @return a new tile of type
      */
     private FloorTile floorFromType(String type, int rotation){
         //this should resolve any issues
