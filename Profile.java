@@ -22,6 +22,20 @@ public class Profile {
     }
 
     /**
+     * Create a profile and populate all attributes
+     * @param name the name of the profile
+     * @param gamesPlayed the number of games they have played
+     * @param gamesWon the number of games won
+     * @param gamesLost the number of games lost
+     */
+    public Profile(String name, int gamesPlayed, int gamesWon, int gamesLost){
+        this.Name = name;
+        this.GamesPlayed = gamesPlayed;
+        this.GamesWon = gamesWon;
+        this.GamesLost = gamesLost;
+    }
+
+    /**
      * returns each of the variables.
      */
     public int getGamesPlayed() {
