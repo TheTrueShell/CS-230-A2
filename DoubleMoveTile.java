@@ -6,7 +6,7 @@
  *  This class implements the DoubleMoveTile. This allows the player to perform a second action.
  */
 
-public abstract class DoubleMoveTile extends ActionTilePlayer {
+public class DoubleMoveTile extends ActionTilePlayer {
 
 
     @Override
