@@ -16,6 +16,9 @@ public class Game {
     //TODO:current profile avalible
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
 
+    public Game(){
+
+    }
 
     //create board
     public void createBoard(int length, int width){
@@ -131,7 +134,7 @@ public class Game {
             Player p = new Player(x,y,name);
             int numOfTiles = myReader.nextInt();
             for (int j = 0; j < numOfTiles; j++){
-                Tile t = formType(myReader.next());
+                Tile t = fromType(myReader.next());
                 //TODO: this is a pain as a roation doesn't exist at time of creation
                 p.addToHand(t);
             }
@@ -167,11 +170,43 @@ public class Game {
     }
 
     /**
+     * load profiles into class from file
+     */
+    private void loadProfiles(){
+        File profileFile;
+        boolean created = false;
+        //try to create the file
+        try{
+            profileFile = new File("profiles.txt");
+            created = profileFile.createNewFile();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        if (created){
+            return;
+        }
+        profileFile = new File("profiles.txt");
+        Scanner profileReader;
+        try {
+            profileReader = new Scanner(profileFile);
+            while (profileReader.hasNext()){
+                String name = profileReader.next();
+                int gamesPlayed = profileReader.nextInt();
+                int gamesWon = profileReader.nextInt();
+                int gamesLost = profileReader.nextInt();
+                profiles.add(new Profile(name,gamesPlayed,gamesWon,gamesLost));
+            }
+        } catch (FileNotFoundException e) {
+            //this will never be reached as the file is always there
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Creates a new profile with name
      * @param name the name of the profile
      */
     public void createProfile(String name){
-        //TODO: Waiting on profile to exist
         Profile profile = new Profile(name);
         this.profiles.add(profile);
         saveProfiles();
@@ -212,6 +247,51 @@ public class Game {
         }
     }
 
+
+    /**
+     * Creates a tile from a type with defaults values and no rotation
+     * @param type the type of tile
+     * @return new tile of type
+     */
+    private Tile fromType(String type){
+        if (type.equals("ICE")){
+            return new IceTile();
+        }if (type.equals("FIRE")){
+            return new FireTile();
+        }
+        if (type.equals("DOUBLEMOVE")){
+        //abstacrt and can't be called
+            return new DoubleMoveTile();
+        }
+        if (type.equals("BACKTARCK")){
+            return new BackTrackTile();
+        }if (type.equals("CORNER")){
+            try {
+                return new CornerTile(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }if (type.equals("TJUNCTION")){
+            try {
+                return new TJunctionTile(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }if (type.equals("STRAIGTH")){
+            try {
+                return new StraightTile(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //does goal tile need a roation?
+        try {
+            return new GoalTile(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * converts a string to a actionTile
      * @param type the type of tile you want
@@ -223,13 +303,19 @@ public class Game {
         }if (type.equals("FIRE")){
             return new FireTile();
         }
-        //if (type.equals("DOUBLEMOVE")){
+        if (type.equals("DOUBLEMOVE")){
             //abstacrt and can't be called
-            //return new DoubleMoveTile();
-        //}
+            return new DoubleMoveTile();
+        }
         return new BackTrackTile();
     }
-    //roation can throw exception
+
+    /**
+     * convert string into floorTile
+     * @param type
+     * @param rotation the roation of the tile in degrees must be in 90 degree increments
+     * @return
+     */
     private FloorTile floorFromType(String type, int rotation){
         //this should resolve any issues
         //should this be in the constructor?
