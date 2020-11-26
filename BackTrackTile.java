@@ -12,7 +12,7 @@ public class BackTrackTile extends ActionTile {
 
     public void action(Player player) {
 
-        player.moveplayer(player.getPreviousPosition2()); //May need try catch around it at somepoint
+        player.movePlayer(player.getPreviousPosition2()); //May need try catch around it at somepoint
 
     }
 
