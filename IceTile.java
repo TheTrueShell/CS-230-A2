@@ -7,6 +7,8 @@
  */
 public class IceTile extends ActionTileFloor {
 
+    private final String TILETYPE = "IceTile";
+
     public IceTile() {
 
         super.setPlayable(false);

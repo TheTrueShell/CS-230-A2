@@ -6,10 +6,10 @@
  *  This class implements the BackTrack tiles. These tiles take the effected player back a turn.
  */
 
-public class BackTrackTile extends ActionTilePlayer {
+public class BackTrackTile extends ActionTile {
 
+    private final String TILETYPE = "BackTrackTile";
 
-    @Override
     public void action(Player player) {
 
         player.moveplayer(player.getPreviousPosition2()); //May need try catch around it at somepoint

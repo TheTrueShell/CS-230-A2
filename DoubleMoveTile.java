@@ -6,10 +6,10 @@
  *  This class implements the DoubleMoveTile. This allows the player to perform a second action.
  */
 
-public class DoubleMoveTile extends ActionTilePlayer {
+public class DoubleMoveTile extends ActionTile {
 
+    private final String TILETYPE = "DoubleMoveTile";
 
-    @Override
     public void action(Player player) {
 
         player.getPreviousPosition();

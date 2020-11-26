@@ -9,6 +9,7 @@
 public abstract class ActionTile extends Tile {
 
     private boolean isPlayable = false;
+    private final String TILETYPE = "ActionTile";
 
     public boolean getIsPlayable(){
 

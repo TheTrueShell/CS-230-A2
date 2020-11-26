@@ -8,6 +8,8 @@
 
 public class FireTile extends ActionTileFloor {
 
+    private final String TILETYPE = "FireTile";
+
     public FireTile() {
 
         super.setPlayable(false);
