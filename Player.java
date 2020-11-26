@@ -28,6 +28,12 @@ public class Player {
      */
     private String currentProfile;
 
+
+    /**
+     * Contains the players turn int.
+     */
+    private int currentTurn = 0;
+
     /**
      * @param x Represents the X coordinate of the player.
      * @param y Represents the Y coordinate of the player
@@ -44,6 +50,27 @@ public class Player {
      */
     public String getProfile() {
         return currentProfile;
+    }
+
+    /**
+     * @param coords the coords of the player on the board.
+     */
+    public void movePlayer(int[] coords){
+        CurrentPosition = coords;
+    }
+
+    /**
+     * Increases the turn counter by 1
+     */
+    public void increaseTurn(){
+        currentTurn++;
+    }
+
+    /**
+     * @param turn The turn you wish the player to be on [May be removed]
+     */
+    public void setTurn(int turn){
+        currentTurn = turn;
     }
 
     /**
