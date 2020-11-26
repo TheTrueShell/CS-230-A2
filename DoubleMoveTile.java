@@ -12,7 +12,7 @@ public class DoubleMoveTile extends ActionTilePlayer {
     @Override
     public void action(Player player) {
 
-        player.replay(); //Talk to others about how to implement on friday
+        player.getPreviousPosition();
 
     }
 
