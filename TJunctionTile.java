@@ -8,6 +8,8 @@
 
 public class TJunctionTile extends FloorTile {
 
+    private final String TILETYPE = "TJunctionTile";
+
     public TJunctionTile(int tileRotation) throws Exception {
 
         boolean[] sides  = {false,true,true,true};

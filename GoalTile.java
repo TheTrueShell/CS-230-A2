@@ -8,6 +8,8 @@
 
 public class GoalTile extends FloorTile {
 
+    private final String TILETYPE = "GoalTile";
+
     public GoalTile(int tileRotation) throws Exception {
 
         boolean[] sides  = {true,true,true,true};

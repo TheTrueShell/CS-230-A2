@@ -8,6 +8,8 @@
 
 public class CornerTile extends FloorTile {
 
+    private final String TILETYPE = "CornerTile";
+
     public CornerTile(int tileRotation) throws Exception {
         boolean[] sides  = {true,true,false,false};
         setAccessibleSides(sides);
@@ -15,6 +17,19 @@ public class CornerTile extends FloorTile {
         setIsFrozen(false);
         setIsFrozen(false);
         setTileFixed(false);
+        setImageLocation("");
+
+    }
+
+    public CornerTile (int tileRotation, String ImageLocation) throws Exception {
+
+        boolean[] sides  = {true,true,false,false};
+        setAccessibleSides(sides);
+        setRotation(tileRotation);
+        setIsFrozen(false);
+        setIsFrozen(false);
+        setTileFixed(false);
+        setImageLocation(ImageLocation);
 
     }
 

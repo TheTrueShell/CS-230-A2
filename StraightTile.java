@@ -8,6 +8,8 @@
 
 public class StraightTile extends FloorTile {
 
+    private final String TILETYPE = "StraightTile";
+
     public StraightTile(int tileRotation) throws Exception {
         boolean[] sides  = {true,false,false,true};
         setAccessibleSides(sides);
