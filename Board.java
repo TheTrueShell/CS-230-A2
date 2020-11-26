@@ -38,6 +38,17 @@ public class Board {
     }
 
     /**
+     * Gets the tile at the specified location
+     *
+     * @param x x co-ord of the tile
+     * @param y y co-ord of the tile
+     * @return the tile at (x,y)
+     */
+    public Tile getTile(int x, int y) {
+        return board[x - 1][y - 1];
+    }
+
+    /**
      * Inserts a tile onto the Board in a position specified by x and y
      *
      * @param tile The Tile that will be inserted onto the Board
