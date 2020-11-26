@@ -8,6 +8,15 @@
 
 public class TJunctionTile extends FloorTile {
 
+    private final String TILETYPE = "TJunctionTile";
+
+    /**
+     * Constructor for TJuctionTile. Inherits from FloorTile.java.
+     * Sets the rotation and uses default values for Rest
+     * @param tileRotation
+     * @throws Exception
+     */
+
     public TJunctionTile(int tileRotation) throws Exception {
 
         boolean[] sides  = {false,true,true,true};

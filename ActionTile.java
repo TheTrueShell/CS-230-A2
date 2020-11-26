@@ -8,7 +8,7 @@
 
 public abstract class ActionTile extends Tile {
 
-    private boolean isPlayable;
+    private boolean isPlayable = false;
 
     public boolean getIsPlayable(){
 

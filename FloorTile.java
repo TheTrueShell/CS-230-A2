@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * FloorTile.java
  * @author William Aodan Telford and Deividas Prokopovicius
@@ -12,6 +14,8 @@ public abstract class FloorTile extends Tile {
     private boolean isOnFire;
     private int tileRotation; //In 360 degrees
     private boolean[] accessibleSides = new boolean[4]; // Top. right, bottom, Left
+    private final String TILETYPE = "FloorTile";
+    private String imageLocation;
 
     /**
      * Check if the current tile can have a player move onto it
@@ -148,6 +152,18 @@ public abstract class FloorTile extends Tile {
     }
 
     /**
+     * Setter for image Location of the tile
+     * @param imageLocation
+     */
+
+    public void setImageLocation(String imageLocation) {
+
+        this.imageLocation = imageLocation;
+
+    }
+
+
+    /**
      * Getter for the boolean array of accessible sides of the tile.
      * @return boolean array accessibleSlides.
      */
@@ -191,5 +207,33 @@ public abstract class FloorTile extends Tile {
 
     }
 
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
+
+        return imageLocation;
+
+    }
+
+    public String getTILETYPE() {
+
+        return TILETYPE;
+
+    }
+
+    /**
+     * To String method for the Floor Tile classes
+     * @return String FloorTile
+     */
+
+    @Override
+    public String toString() {
+
+        return "Acessible Sides: " + getAccessibleSides() + "IsFrozen: " + getIsFrozen() + "IsOnFire: " + getIsOnFire()
+                + "Rotation: " + getRotation() + "Image Location: " + getImageLocation() + "Tile type: " + getTILETYPE();
+
+    }
 
 }

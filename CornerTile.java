@@ -8,6 +8,15 @@
 
 public class CornerTile extends FloorTile {
 
+    private final String TILETYPE = "CornerTile";
+
+    /**
+     * Constructor for CornerTile, inherits from FloorTile.
+     * Sets tilerotation and then uses default value for rest.
+     * @param tileRotation
+     * @throws Exception
+     */
+
     public CornerTile(int tileRotation) throws Exception {
         boolean[] sides  = {true,true,false,false};
         setAccessibleSides(sides);
@@ -15,6 +24,26 @@ public class CornerTile extends FloorTile {
         setIsFrozen(false);
         setIsFrozen(false);
         setTileFixed(false);
+        setImageLocation("");
+
+    }
+
+    /**
+     * Constructor for CornerTile, inherits from FloorTile.
+     * Sets tilerotation and ImageLocation, then uses default value for rest.
+     * @param tileRotation
+     * @throws Exception
+     */
+
+    public CornerTile (int tileRotation, String ImageLocation) throws Exception {
+
+        boolean[] sides  = {true,true,false,false};
+        setAccessibleSides(sides);
+        setRotation(tileRotation);
+        setIsFrozen(false);
+        setIsFrozen(false);
+        setTileFixed(false);
+        setImageLocation(ImageLocation);
 
     }
 
