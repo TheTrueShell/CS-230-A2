@@ -17,6 +17,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Label layoutX="225.0" layoutY="125.0" text="Pretend there's a game here" />
+      <Label fx:id="header" layoutX="225.0" layoutY="125.0" text="Pretend there's a game here" />
    </children>
 </AnchorPane>
