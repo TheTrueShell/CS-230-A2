@@ -18,6 +18,7 @@ import javafx.stage.Stage;
  * @version 0.2
  */
 public class Game extends Application {
+    private Bag gameBag;
 
     // GUI
     @Override
@@ -215,7 +216,7 @@ public class Game extends Application {
     public void deleteBoard(){
         //TODO: ask if they want to add game canceled
         //for (Player p : this.board.getPlayers()){
-        //  p.getProfile().gameCanceled();
+        //  p.getProfile().removeGamesPlayed();
         //}
         this.board = null;
     }
