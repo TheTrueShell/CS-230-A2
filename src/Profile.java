@@ -64,6 +64,10 @@ public class Profile {
         GamesPlayed++;
     }
 
+
+    /**
+     * Decrements GamesPlayed
+     */
     public void removeGamesPlayed() {
         GamesPlayed--;
     }
