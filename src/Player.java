@@ -28,7 +28,6 @@ public class Player {
      */
     private String currentProfile;
 
-
     /**
      * Contains the players turn int.
      */
