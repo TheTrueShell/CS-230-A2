@@ -1,11 +1,12 @@
 /**
  * This class controls the basics of the individual player profiles.
+ *
  * @author Rory Durrant, Joel Lawless
  * @version 0.0.1
  */
 public class Profile {
 
-    private String Name;
+    private final String Name;
 
     private int GamesPlayed;
 
@@ -15,20 +16,22 @@ public class Profile {
 
     /**
      * Create a new profile with the name given as parameter.
+     *
      * @param name the name of the profile
-     *  */
-    public Profile(String name){
+     */
+    public Profile(String name) {
         this.Name = name;
     }
 
     /**
      * Create a profile and populate all attributes
-     * @param name the name of the profile
+     *
+     * @param name        the name of the profile
      * @param gamesPlayed the number of games they have played
-     * @param gamesWon the number of games won
-     * @param gamesLost the number of games lost
+     * @param gamesWon    the number of games won
+     * @param gamesLost   the number of games lost
      */
-    public Profile(String name, int gamesPlayed, int gamesWon, int gamesLost){
+    public Profile(String name, int gamesPlayed, int gamesWon, int gamesLost) {
         this.Name = name;
         this.GamesPlayed = gamesPlayed;
         this.GamesWon = gamesWon;
@@ -57,11 +60,20 @@ public class Profile {
     /**
      * Increments each of the variables by 1.
      */
-    public void updateGamesPlayed() {GamesPlayed++ ;}
+    public void updateGamesPlayed() {
+        GamesPlayed++;
+    }
 
-    public void updateGamesLost() {GamesLost++ ;}
+    public void removeGamesPlayed() {
+        GamesPlayed--;
+    }
 
-    public void updateGamesWon() {GamesWon++ ;}
+    public void updateGamesLost() {
+        GamesLost++;
+    }
 
+    public void updateGamesWon() {
+        GamesWon++;
+    }
 
 }
