@@ -4,6 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+//GUI
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * This class is the main entry point to the game.
@@ -11,83 +17,96 @@ import java.util.Scanner;
  * @author Benjamin Rockley, Mohammed T
  * @version 0.2
  */
-public class Game {
+public class Game extends Application {
+
+    // GUI
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("MainMenuGUI.fxml"));
+        primaryStage.setTitle("Labyrinth");
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.show();
+    }
+
+
+
     private Board board;
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
 
     public static void main(String[] args){
-        Game test = new Game();
-        test.createProfile("Test");
-        test.saveProfiles();
+        launch(args); //starts GUI
+        //Game test = new Game();
+        //test.createProfile("Test");
+        //test.saveProfiles();
     }
 
     public Game(){
         loadProfiles();
     }
 
-    /**
-     * Saves the current game to gameInProgrees.txt
-     */
-    public void saveBoard(){
-        //TODO: save to file
-        String filename = "gameInProgress.txt";
-        try{
-            File file = new File(filename);
-            file.createNewFile();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        //write to the file
-        try {
-            FileWriter fileWriter = new FileWriter("profiles.txt");
-            fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
-            fileWriter.write(this.board.getNumberOfFixedtiles()+"\n");
-            //wrtie fixed tiles
-            //TODO: getFixed tiles not specified but is a pain to do here
-            for (FloorTile t : this.board.getFixedTiles()){
-                //TODO: maybe move to FloorTile.toString() Method
-                //x and y are in board not
-                //get tile type needs to be  new method
-                int x = this.board.getTileX(t);
-                int y = this.board.getTileY(t);
-                fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
-                        +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
-            }
-            //write non fixedTiles
-            //TODO: check that this is implemented in the board class
-            for (FloorTile t : this.board.getNonFixedTiles()){
-                //TODO: maybe move to FloorTile.toString() Method
-                int x = this.board.getTileX(t);
-                int y = this.board.getTileY(t);
-                fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
-                        +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
-            }
-            fileWriter.write(this.board.getPlayersInGame()+"\n");
-            //TODO: get turn doesn't exist
-            fileWriter.write(this.board.getTurn().getName());
-            //x,y,profile,numoftilesinhand
-            //write the players to the file
-            for (Player p : this.board.getPlayers()){
-                fileWriter.write(p.getX()+","+p.getY()+","+p.getProfile().getName()+","+p.getNumOfTiles()+"\n");
-                for (Tile t : p.getHand()){
-                    fileWriter.write(t.getTileType()+"\n");
-                }
-                //write previous positions
-                fileWriter.write(p.getPreviousPosition()[0]+","+p.getPreviousPosition()[1]+"\n");
-                fileWriter.write(p.getPreviousPosition2()[0]+","+p.getPreviousPosition2()[1]+"\n");
-            }
-            //TODO:Change this from a list of strings to a count of types
-            //eg. numStraight,numCorner,numT,numGoal,numIce,numFire,numDouble,numBacktrack
-            //TODO: bag doesn't have get tiles method
-            for (Tile t : this.board.getBag().getTiles()){
-                //TODO: ask if they can add this feature
-                fileWriter.write(t.getTileType()+"\n");
-            }
-            fileWriter.close();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+//    /**
+//     * Saves the current game to gameInProgrees.txt
+//     */
+//    public void saveBoard(){
+//        //TODO: save to file
+//        String filename = "gameInProgress.txt";
+//        try{
+//            File file = new File(filename);
+//            file.createNewFile();
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
+//        //write to the file
+//        try {
+//            FileWriter fileWriter = new FileWriter("profiles.txt");
+//            fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
+//            fileWriter.write(this.board.getNumberOfFixedtiles()+"\n");
+//            //wrtie fixed tiles
+//            //TODO: getFixed tiles not specified but is a pain to do here
+//            for (FloorTile t : this.board.getFixedTiles()){
+//                //TODO: maybe move to FloorTile.toString() Method
+//                //x and y are in board not
+//                //get tile type needs to be  new method
+//                int x = this.board.getTileX(t);
+//                int y = this.board.getTileY(t);
+//                fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
+//                        +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
+//            }
+//            //write non fixedTiles
+//            //TODO: check that this is implemented in the board class
+//            for (FloorTile t : this.board.getNonFixedTiles()){
+//                //TODO: maybe move to FloorTile.toString() Method
+//                int x = this.board.getTileX(t);
+//                int y = this.board.getTileY(t);
+//                fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
+//                        +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
+//            }
+//            fileWriter.write(this.board.getPlayersInGame()+"\n");
+//            //TODO: get turn doesn't exist
+//            fileWriter.write(this.board.getTurn().getName());
+//            //x,y,profile,numoftilesinhand
+//            //write the players to the file
+//            for (Player p : this.board.getPlayers()){
+//                fileWriter.write(p.getX()+","+p.getY()+","+p.getProfile().getName()+","+p.getNumOfTiles()+"\n");
+//                for (Tile t : p.getHand()){
+//                    fileWriter.write(t.getTileType()+"\n");
+//                }
+//                //write previous positions
+//                fileWriter.write(p.getPreviousPosition()[0]+","+p.getPreviousPosition()[1]+"\n");
+//                fileWriter.write(p.getPreviousPosition2()[0]+","+p.getPreviousPosition2()[1]+"\n");
+//            }
+//            //TODO:Change this from a list of strings to a count of types
+//            //eg. numStraight,numCorner,numT,numGoal,numIce,numFire,numDouble,numBacktrack
+//            //TODO: bag doesn't have get tiles method
+//            for (Tile t : this.board.getBag().getTiles()){
+//                //TODO: ask if they can add this feature
+//                fileWriter.write(t.getTileType()+"\n");
+//            }
+//            fileWriter.close();
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * load game in progress from file
@@ -153,7 +172,7 @@ public class Game {
             //issue exists as rotation is not guaranteed
             Tile t = fromType(myReader.next());
             //no get bag
-            this.board.getBag.insertTile(t);
+            //this.board.getBag.insertTile(t);
         }
         myReader.close();
     }
@@ -186,7 +205,7 @@ public class Game {
             int y = presetReader.nextInt();
             Player p = new Player(x,y,players.get(i));
             //TODO: board doesn't have players
-            board.addPlayer(p);
+            //board.addPlayer(p);
         }
     }
 
