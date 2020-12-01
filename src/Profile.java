@@ -64,7 +64,6 @@ public class Profile {
         GamesPlayed++;
     }
 
-
     /**
      * Decrements GamesPlayed
      */
