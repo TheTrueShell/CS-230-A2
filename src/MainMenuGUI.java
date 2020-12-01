@@ -1,8 +1,10 @@
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,6 +15,16 @@ import java.io.IOException;
  * @version 1.1
  */
 public class MainMenuGUI {
+    @FXML
+    private Label messageOfDay;
+
+    /**
+     * load the message of the day
+     */
+    @FXML
+    public void initialize() {
+        messageOfDay.setText(MessageOfTheDay.getMessage());
+    }
 
     /**
      * The method for when the 'Play' button is clicked.
