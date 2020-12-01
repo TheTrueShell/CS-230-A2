@@ -58,7 +58,7 @@ public class BoardGUI {
         //gc.fillRect(xPad+2,yPad+2,boxX-4,boxY-4);
         for (int i = 0; i < boardX; i++){
             for (int j = 0; j < boardY; j++){
-                if ((i == mouseX) && (j == mouseY)){
+                if ((i == mouseX-1) && (j == mouseY-1)){
                     gc.setFill(Color.RED);
                     gc.fillRect((boxX*i)+xPad+1,(boxY*j)+yPad+1,boxX-2,boxY-2);
                 }
@@ -73,9 +73,21 @@ public class BoardGUI {
         for (int i = 1; i < (boardX-1); i++){
             //TODO: add check for is usable
             //add down faceing triangle
+            if (i == mouseX-1 && 0 == mouseY){
+                gc.setFill(Color.RED);
+                gc.fillPolygon(new double[]{(boxX*i)+xPad,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad},
+                        new double[]{yPad-boxY,yPad,yPad-boxY}, 3);
+                gc.setFill(Color.YELLOW);
+            }
             gc.fillPolygon(new double[]{(boxX*i)+xPad+2,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad-2},
                     new double[]{yPad-boxY+2,yPad-2,yPad-boxY+2}, 3);
             //add up facing triangle
+            if (i == mouseX-1 && boardY+1 == mouseY){
+                gc.setFill(Color.RED);
+                gc.fillPolygon(new double[]{(boxX*i)+xPad,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad},
+                        new double[]{(boxY*(boardY+2)),(boxY*(boardY+1)),(boxY*(boardY+2))}, 3);
+                gc.setFill(Color.YELLOW);
+            }
             gc.fillPolygon(new double[]{(boxX*i)+xPad+2,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad-2},
                     new double[]{(boxY*(boardY+2))-2,(boxY*(boardY+1))+2,(boxY*(boardY+2))-2}, 3);
         }
@@ -83,9 +95,21 @@ public class BoardGUI {
         for (int i = 1; i < (boardY-1); i++){
             //TODO: add check for is usable
             //add right facing triangle
+            if (0 == mouseX && i == mouseY-1){
+                gc.setFill(Color.RED);
+                gc.fillPolygon(new double[]{xPad-boxX,xPad,xPad-boxX},
+                        new double[]{(boxY*i)+yPad,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad},3);
+                gc.setFill(Color.YELLOW);
+            }
             gc.fillPolygon(new double[]{xPad-boxX+2,xPad-2,xPad-boxX+2},
                     new double[]{(boxY*i)+yPad+2,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad-2},3);
             //add right facing triangle
+            if (boardX+1 == mouseX && i == mouseY-1){
+                gc.setFill(Color.RED);
+                gc.fillPolygon(new double[]{xPad+(boxX*(boardX+1)),xPad+(boxX*boardX),xPad+(boxX*(boardX+1))},
+                        new double[]{(boxY*i)+yPad,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad},3);
+                gc.setFill(Color.YELLOW);
+            }
             gc.fillPolygon(new double[]{xPad+(boxX*(boardX+1))-2,xPad+(boxX*boardX)+2,xPad+(boxX*(boardX+1))-2},
                     new double[]{(boxY*i)+yPad+2,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad-2},3);
         }
@@ -122,10 +146,10 @@ public class BoardGUI {
     public void canvasClickEventHandler(double x,double y){
         header.setText("Text generated at runtime");
         //check if in board range
-        if ((x > xPad) && (y > yPad)){
-            if ((x < (xPad+(boxX*boardX))) && (y < (yPad+(boxY*boardY)))){
-                x = x - xPad;
-                y = y - yPad;
+        if ((x > xPad-boxX) && (y > yPad-boxY)){
+            if ((x < (xPad+(boxX*(boardX+1)))) && (y < (yPad+(boxY*(boardY+1))))){
+                x = x - xPad+boxX;
+                y = y - yPad+boxY;
                 int xTimes = (int) (x / boxX);
                 int yTimes = (int) (y / boxY);
                 //System.out.println("x: "+xTimes+" y: "+yTimes);
