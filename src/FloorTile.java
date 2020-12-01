@@ -231,8 +231,7 @@ public abstract class FloorTile extends Tile {
     @Override
     public String toString() {
 
-        return "Acessible Sides: " + getAccessibleSides() + "IsFrozen: " + getIsFrozen() + "IsOnFire: " + getIsOnFire()
-                + "Rotation: " + getRotation() + "Image Location: " + getImageLocation() + "Tile type: " + getTILETYPE();
+        return getTILETYPE() + "\n" + getRotation() + "\n" + getIsOnFire() + "\n" + getIsFrozen() +"\n";
 
     }
 
