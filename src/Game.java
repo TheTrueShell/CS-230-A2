@@ -333,6 +333,20 @@ public class Game extends Application {
     }
 
     /**
+     * gets the board
+     */
+    public Board getBoard(){
+        return this.board;
+    }
+
+    /**
+     * gets the bag
+     */
+    public Bag getBag(){
+        return this.gameBag;
+    }
+
+    /**
      * Creates a tile from a type with defaults values and no rotation
      * @param type the type of tile
      * @return new tile of type
