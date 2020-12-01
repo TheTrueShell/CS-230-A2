@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 public class Game extends Application {
     private Bag gameBag;
     private ArrayList<Player> players;
+    private Board board;
+    private ArrayList<Profile> profiles = new ArrayList<Profile>();
 
     // GUI
     @Override
@@ -29,11 +31,6 @@ public class Game extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
-
-
-
-    private Board board;
-    private ArrayList<Profile> profiles = new ArrayList<Profile>();
 
     public static void main(String[] args){
         launch(args); //starts GUI
@@ -59,9 +56,9 @@ public class Game extends Application {
             e.printStackTrace();
         }
         //write to the file
-        //try {
-        //    FileWriter fileWriter = new FileWriter("profiles.txt");
-        //    fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
+        try {
+            FileWriter fileWriter = new FileWriter("gameInProgress.txt");
+            fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
         //    fileWriter.write(this.board.getNumberOfFixedtiles()+"\n");
         //    //wrtie fixed tiles
         //    //TODO: getFixed tiles not specified but is a pain to do here
@@ -80,7 +77,7 @@ public class Game extends Application {
                 //TODO: maybe move to FloorTile.toString() Method
         //        int x = this.board.getTileX(t);
         //        int y = this.board.getTileY(t);
-        //        fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
+        //        fileWriter.write(x+","+y+","+t.getTILETYPE+","+t.getRotation()+","
         //                +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
         //    }
         //    fileWriter.write(this.board.getPlayersInGame()+"\n");
@@ -88,26 +85,25 @@ public class Game extends Application {
         //    fileWriter.write(this.board.getTurn().getName());
             //x,y,profile,numoftilesinhand
             //write the players to the file
-        //    for (Player p : this.players){
-        //        fileWriter.write(p.getX()+","+p.getY()+","+this.player.getProfile(p.getProfile()).getName()+","+p.getNumOfTiles()+"\n");
-        //        for (Tile t : p.getHand()){
-        //            fileWriter.write(t.getTileType()+"\n");
-        //        }
+            for (Player p : this.players){
+                fileWriter.write(p.getX()+","+p.getY()+","+p.getProfile()+","+p.getNumOfTiles()+"\n");
+                for (Tile t : p.getHand()){
+                    fileWriter.write(t.getTILETYPE()+"\n");
+                }
                 //write previous positions
-        //        fileWriter.write(p.getPreviousPosition()[0]+","+p.getPreviousPosition()[1]+"\n");
-        //        fileWriter.write(p.getPreviousPosition2()[0]+","+p.getPreviousPosition2()[1]+"\n");
-        //    }
+                fileWriter.write(p.getPreviousPosition()[0]+","+p.getPreviousPosition()[1]+"\n");
+                fileWriter.write(p.getPreviousPosition2()[0]+","+p.getPreviousPosition2()[1]+"\n");
+            }
             //TODO:Change this from a list of strings to a count of types
             //eg. numStraight,numCorner,numT,numGoal,numIce,numFire,numDouble,numBacktrack
-            //TODO: bag doesn't have get tiles method
             for (Tile t : this.gameBag.getTiles()){
                 //TODO: ask if they can add this feature
-        //        fileWriter.write(t.getTileType()+"\n");
+                fileWriter.write(t.getTILETYPE()+"\n");
             }
-        //    fileWriter.close();
-        //} catch (IOException e){
-        //    e.printStackTrace();
-        //}
+            fileWriter.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -299,7 +295,6 @@ public class Game extends Application {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Creates a tile from a type with defaults values and no rotation
