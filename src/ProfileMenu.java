@@ -8,10 +8,14 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class ProfileMenu {
+    private Game game;
 
     @FXML
     public void initialize(){
         //get profiles
     }
 
+    public void setGame(Game game){
+        this.game = game;
+    }
 }

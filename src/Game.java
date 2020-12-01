@@ -29,9 +29,12 @@ public class Game extends Application {
     // GUI
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("MainMenuGUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        Parent root = (Parent)loader.load();
         primaryStage.setTitle("Labyrinth");
         primaryStage.setScene(new Scene(root, 600, 400));
+        MainMenuGUI controller = (MainMenuGUI)loader.getController();
+        controller.setGame(new Game());
         primaryStage.show();
     }
 
