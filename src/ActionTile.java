@@ -23,4 +23,11 @@ public abstract class ActionTile extends Tile {
 
     }
 
+    @Override
+    public String toString() {
+
+        return (getTILETYPE() + "\n" + getIsPlayable());
+
+    }
+
 }
