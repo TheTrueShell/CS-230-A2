@@ -41,6 +41,15 @@ public class MainMenuGUI {
         primaryStage.show();
     }
 
+    public void profilesButtonAction(ActionEvent actionEvent) throws IOException {
+        Parent boardGUIParent = FXMLLoader.load(getClass().getResource("ProfileMenu.fxml"));
+        Scene boardGUIScene = new Scene(boardGUIParent);
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(boardGUIScene);
+        primaryStage.show();
+    }
+
     public void settingsButtonAction(ActionEvent actionEvent) throws IOException {
         Parent boardGUIParent = FXMLLoader.load(getClass().getResource("SettingsMenu.fxml"));
         Scene boardGUIScene = new Scene(boardGUIParent);
