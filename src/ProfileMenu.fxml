@@ -9,15 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProfileMenu">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-image: url(&quot;mcbg.jpg&quot;);" fx:controller="ProfileMenu">
    <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="622.0">
          <children>
-            <ImageView fitHeight="420.0" fitWidth="653.0" layoutX="-14.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@mcbg.jpg" />
-               </image>
-            </ImageView>
             <Button layoutX="48.0" layoutY="80.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Add" />
             <Button layoutX="48.0" layoutY="186.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit" />
             <Button fx:id="Delete" layoutX="48.0" layoutY="296.0" mnemonicParsing="false" text="Delete" />
