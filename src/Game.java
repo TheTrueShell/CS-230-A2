@@ -120,7 +120,7 @@ public class Game extends Application {
         deleteBoard();
 
         File myObj = new File(GAME_SAVE_PATH);
-        Scanner myReader = new Scanner(myObj);
+        Scanner myReader = new Scanner(myObj).useDelimiter(",");
         //TODO: handle if the file isn't the correct length
         int boardX = myReader.nextInt();
         int boardY = myReader.nextInt();
@@ -189,7 +189,7 @@ public class Game extends Application {
      */
     public void loadPreset(String preset,ArrayList<String> players) throws Exception{
         File presetFile = new File(preset);
-        Scanner presetReader = new Scanner(presetFile);
+        Scanner presetReader = new Scanner(presetFile).useDelimiter(",");
         int width = presetReader.nextInt();
         int height = presetReader.nextInt();
         this.board = new Board(width,height);
@@ -240,7 +240,7 @@ public class Game extends Application {
         profileFile = new File(PROFILES_PATH);
         Scanner profileReader;
         try {
-            profileReader = new Scanner(profileFile);
+            profileReader = new Scanner(profileFile).useDelimiter(",");
             while (profileReader.hasNext()){
                 String name = profileReader.next();
                 int gamesPlayed = profileReader.nextInt();
