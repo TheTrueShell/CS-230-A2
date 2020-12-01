@@ -28,4 +28,11 @@ public class Bag {
     public void addTile(Tile tile) {
         tiles.add(tile);
     }
+
+    /**
+     * Gets all the tiles
+     */
+    public ArrayList<Tile> getTiles(){
+        return this.tiles;
+    }
 }

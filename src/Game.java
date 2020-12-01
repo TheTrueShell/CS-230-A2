@@ -18,7 +18,13 @@ import javafx.stage.Stage;
  * @version 0.2
  */
 public class Game extends Application {
+    private static final String PROFILES_PATH = "profiles.txt";
+    private static final String GAME_SAVE_PATH = "gameInProgress.txt";
+
     private Bag gameBag;
+    private ArrayList<Player> players;
+    private Board board;
+    private ArrayList<Profile> profiles = new ArrayList<Profile>();
 
     // GUI
     @Override
@@ -29,11 +35,6 @@ public class Game extends Application {
         primaryStage.show();
     }
 
-
-
-    private Board board;
-    private ArrayList<Profile> profiles = new ArrayList<Profile>();
-
     public static void main(String[] args){
         launch(args); //starts GUI
         //Game test = new Game();
@@ -43,71 +44,69 @@ public class Game extends Application {
 
     public Game(){
         loadProfiles();
+        this.players = new ArrayList<Player>();
+        this.gameBag = new Bag();
     }
 
-//    /**
-//     * Saves the current game to gameInProgrees.txt
-//     */
-//    public void saveBoard(){
-//        //TODO: save to file
-//        String filename = "gameInProgress.txt";
-//        try{
-//            File file = new File(filename);
-//            file.createNewFile();
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
-//        //write to the file
-//        try {
-//            FileWriter fileWriter = new FileWriter("profiles.txt");
-//            fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
-//            fileWriter.write(this.board.getNumberOfFixedtiles()+"\n");
-//            //wrtie fixed tiles
-//            //TODO: getFixed tiles not specified but is a pain to do here
-//            for (FloorTile t : this.board.getFixedTiles()){
-//                //TODO: maybe move to FloorTile.toString() Method
-//                //x and y are in board not
-//                //get tile type needs to be  new method
-//                int x = this.board.getTileX(t);
-//                int y = this.board.getTileY(t);
-//                fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
-//                        +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
-//            }
-//            //write non fixedTiles
-//            //TODO: check that this is implemented in the board class
-//            for (FloorTile t : this.board.getNonFixedTiles()){
-//                //TODO: maybe move to FloorTile.toString() Method
-//                int x = this.board.getTileX(t);
-//                int y = this.board.getTileY(t);
-//                fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
-//                        +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
-//            }
-//            fileWriter.write(this.board.getPlayersInGame()+"\n");
-//            //TODO: get turn doesn't exist
-//            fileWriter.write(this.board.getTurn().getName());
-//            //x,y,profile,numoftilesinhand
-//            //write the players to the file
-//            for (Player p : this.board.getPlayers()){
-//                fileWriter.write(p.getX()+","+p.getY()+","+p.getProfile().getName()+","+p.getNumOfTiles()+"\n");
-//                for (Tile t : p.getHand()){
-//                    fileWriter.write(t.getTileType()+"\n");
-//                }
-//                //write previous positions
-//                fileWriter.write(p.getPreviousPosition()[0]+","+p.getPreviousPosition()[1]+"\n");
-//                fileWriter.write(p.getPreviousPosition2()[0]+","+p.getPreviousPosition2()[1]+"\n");
-//            }
-//            //TODO:Change this from a list of strings to a count of types
-//            //eg. numStraight,numCorner,numT,numGoal,numIce,numFire,numDouble,numBacktrack
-//            //TODO: bag doesn't have get tiles method
-//            for (Tile t : this.board.getBag().getTiles()){
-//                //TODO: ask if they can add this feature
-//                fileWriter.write(t.getTileType()+"\n");
-//            }
-//            fileWriter.close();
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
+    /**
+     * Saves the current game to gameInProgrees.txt
+     */
+    public void saveBoard(){
+        try{
+            File file = new File(GAME_SAVE_PATH);
+            file.createNewFile();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        //write to the file
+        try {
+            FileWriter fileWriter = new FileWriter(GAME_SAVE_PATH);
+            fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
+        //    fileWriter.write(this.board.getNumberOfFixedtiles()+"\n");
+        //    //wrtie fixed tiles
+        //    //TODO: getFixed tiles not specified but is a pain to do here
+        //    for (FloorTile t : this.board.getFixedTiles()){
+                //TODO: maybe move to FloorTile.toString() Method
+                //x and y are in board not
+                //get tile type needs to be  new method
+        //        int x = this.board.getTileX(t);
+        //        int y = this.board.getTileY(t);
+        //        fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
+        //                +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
+        //    }
+            //write non fixedTiles
+            //TODO: check that this is implemented in the board class
+        //    for (FloorTile t : this.board.getNonFixedTiles()){
+                //TODO: maybe move to FloorTile.toString() Method
+        //        int x = this.board.getTileX(t);
+        //        int y = this.board.getTileY(t);
+        //        fileWriter.write(x+","+y+","+t.getTILETYPE+","+t.getRotation()+","
+        //                +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
+        //    }
+        //    fileWriter.write(this.board.getPlayersInGame()+"\n");
+            //TODO: get turn doesn't exist
+        //    fileWriter.write(this.board.getTurn().getName());
+            //x,y,profile,numoftilesinhand
+            //write the players to the file
+            for (Player p : this.players){
+                fileWriter.write(p.getX()+","+p.getY()+","+p.getProfile()+","+p.getNumOfTiles()+"\n");
+                for (Tile t : p.getHand()){
+                    fileWriter.write(t.getTILETYPE()+"\n");
+                }
+                //write previous positions
+                fileWriter.write(p.getPreviousPosition()[0]+","+p.getPreviousPosition()[1]+"\n");
+                fileWriter.write(p.getPreviousPosition2()[0]+","+p.getPreviousPosition2()[1]+"\n");
+            }
+            //TODO:Change this from a list of strings to a count of types
+            //eg. numStraight,numCorner,numT,numGoal,numIce,numFire,numDouble,numBacktrack
+            for (Tile t : this.gameBag.getTiles()){
+                fileWriter.write(t.getTILETYPE()+"\n");
+            }
+            fileWriter.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * load game in progress from file
@@ -117,9 +116,9 @@ public class Game extends Application {
         //remove board if there
         deleteBoard();
 
-        File myObj = new File("gameInProgress.txt");
+        File myObj = new File(GAME_SAVE_PATH);
         Scanner myReader = new Scanner(myObj);
-        //TODO: handle if the file isn't thr correct length
+        //TODO: handle if the file isn't the correct length
         int boardX = myReader.nextInt();
         int boardY = myReader.nextInt();
         this.board = new Board(boardX,boardY);
@@ -150,6 +149,8 @@ public class Game extends Application {
             t.setTileFixed(false);
             this.board.insertTile(t,x,y);
         }
+        //clear players
+        this.players = new ArrayList<Player>();
         //load players
         int playersInGame = myReader.nextInt();
         String turnName = myReader.next();
@@ -166,14 +167,13 @@ public class Game extends Application {
             }
             p.setPreviousPosition(myReader.nextInt(),myReader.nextInt());
             p.setPreviousPosition2(myReader.nextInt(),myReader.nextInt());
+            this.players.add(p);
         }
         //load bag
-        //TODO: change if we change how this is stored
         while (myReader.hasNext()){
             //issue exists as rotation is not guaranteed
             Tile t = fromType(myReader.next());
-            //no get bag
-            //this.board.getBag.insertTile(t);
+            this.gameBag.addTile(t);
         }
         myReader.close();
     }
@@ -185,7 +185,6 @@ public class Game extends Application {
      * @throws Exception If preset doesn't exist
      */
     public void loadPreset(String preset,ArrayList<String> players) throws Exception{
-        //TODO: Discuss, should it be in board not game?
         File presetFile = new File(preset);
         Scanner presetReader = new Scanner(presetFile);
         int width = presetReader.nextInt();
@@ -205,8 +204,7 @@ public class Game extends Application {
             int x = presetReader.nextInt();
             int y = presetReader.nextInt();
             Player p = new Player(x,y,players.get(i));
-            //TODO: board doesn't have players
-            //board.addPlayer(p);
+            this.players.add(p);
         }
     }
 
@@ -214,7 +212,6 @@ public class Game extends Application {
      * Deletes current game and updates the profiles to reflect this
      */
     public void deleteBoard(){
-        //TODO: ask if they want to add game canceled
         //for (Player p : this.board.getPlayers()){
         //  p.getProfile().removeGamesPlayed();
         //}
@@ -229,7 +226,7 @@ public class Game extends Application {
         boolean created = false;
         //try to create the file
         try{
-            profileFile = new File("profiles.txt");
+            profileFile = new File(PROFILES_PATH);
             created = profileFile.createNewFile();
         } catch (IOException e){
             e.printStackTrace();
@@ -237,7 +234,7 @@ public class Game extends Application {
         if (created){
             return;
         }
-        profileFile = new File("profiles.txt");
+        profileFile = new File(PROFILES_PATH);
         Scanner profileReader;
         try {
             profileReader = new Scanner(profileFile);
@@ -279,16 +276,15 @@ public class Game extends Application {
     public void saveProfiles(){
         //try to create file
         try{
-            File file = new File("profiles.txt");
+            File file = new File(PROFILES_PATH);
             boolean success = file.createNewFile();
         } catch (IOException e){
             e.printStackTrace();
         }
         //write to the file
         try {
-            FileWriter fileWriter = new FileWriter("profiles.txt");
+            FileWriter fileWriter = new FileWriter(PROFILES_PATH);
             for (Profile profile : this.profiles) {
-                //TODO:Test if this works once class exists
                 //should create a line in the form: name,gamesplayed,gamesWon,gamesLost
                 fileWriter.write(profile.getName()+","+profile.getGamesPlayed()+","
                         +profile.getGamesWon()+","+profile.getGamesLost()+"\n");
@@ -299,6 +295,56 @@ public class Game extends Application {
         }
     }
 
+    /**
+     * Get the profiles
+     */
+    public ArrayList<Profile> getProfiles(){
+        return this.profiles;
+    }
+
+    /**
+     * adds a new player with the profile name
+     * @param profile
+     */
+    public void addPlayer(String profile){
+        if (players.size() < 5) {
+            this.players.add(new Player(0, 0, profile));
+        }
+    }
+
+    /**
+     * Remove a player from game
+     * @param name the name of player profile
+     */
+    public void removePlayer(String name){
+        for (int i = 0; i < this.players.size(); i++){
+            if (this.players.get(i).getProfile().equals(name)){
+                this.players.remove(i);
+            }
+        }
+    }
+
+    /**
+     * get all the players currently in game
+     * @return
+     */
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    /**
+     * gets the board
+     */
+    public Board getBoard(){
+        return this.board;
+    }
+
+    /**
+     * gets the bag
+     */
+    public Bag getBag(){
+        return this.gameBag;
+    }
 
     /**
      * Creates a tile from a type with defaults values and no rotation
