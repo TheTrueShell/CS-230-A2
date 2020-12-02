@@ -60,7 +60,9 @@ public class CreateGameMenuGUI {
         String chosenNameTwo = (String) playerTwoProfile.getValue();
         String chosenNameThree = (String) playerThreeProfile.getValue();
         String chosenNameFour = (String) playerFourProfile.getValue();
-        //reload all profile names
+        System.out.println(chosenNameOne);
+        reloadProfileNames();
+        updateNames();
 
 
         for(int i = 0; i < names.size(); i++) {
@@ -100,8 +102,14 @@ public class CreateGameMenuGUI {
      */
     public void setGame(Game game){
         this.game = game;
+        reloadProfileNames();
+        updateNames();
+
+    }
+
+
+    public void reloadProfileNames() {
         Profiles = game.getProfiles();
-        ObservableList<String> names = FXCollections.observableArrayList();
 
         for(Profile p : Profiles ) {
 
@@ -110,16 +118,6 @@ public class CreateGameMenuGUI {
         }
 
         names.add("No Player");
-
-        addNames(names);
-        updateNames();
-
-    }
-
-
-    public void addNames(ObservableList<String> newNames) {
-
-        this.names = newNames;
 
     }
 
