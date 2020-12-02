@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <center><p align="center">
-  <a href="https://github.com/RoryDurrant/InfoPlus">
+  <a href="https://github.com/TheTrueShell/CS-230-A2/">
     <img src="https://i.imgur.com/8jJLpxO.png" alt="Logo">
   </a>
 
