@@ -10,8 +10,6 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class BoardGUI {
-    @FXML
-    private Label header;
     @FXML private Canvas canvas;
 
     private int boardX;
@@ -106,14 +104,6 @@ public class BoardGUI {
             gc.fillPolygon(new double[]{(boxX*i)+xPad+2,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad-2},
                     new double[]{(boxY*(boardY+2))-2,(boxY*(boardY+1))+2,(boxY*(boardY+2))-2}, 3);
         }
-        //draw players
-        ArrayList<Player> players = this.game.getPlayers();
-        for (int i = 0; i < players.size(); i++){
-            int x = players.get(i).getX();
-            int y = players.get(i).getY();
-            gc.setFill(Color.BLUE);
-            gc.fillRect((boxX*x)+xPad+((boxX/4)*i),(boxY*y)+yPad+2,boxX/4,boxY/4);
-        }
         //draw selectable rows with triangles
         for (int i = 1; i < (boardY-1); i++){
             //TODO: add check for is usable
@@ -137,6 +127,14 @@ public class BoardGUI {
             }
             gc.fillPolygon(new double[]{xPad+(boxX*(boardX+1))-2,xPad+(boxX*boardX)+2,xPad+(boxX*(boardX+1))-2},
                     new double[]{(boxY*i)+yPad+2,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad-2},3);
+        }
+        //draw players
+        ArrayList<Player> players = this.game.getPlayers();
+        for (int i = 0; i < players.size(); i++){
+            int x = players.get(i).getX();
+            int y = players.get(i).getY();
+            gc.setFill(Color.BLUE);
+            gc.fillRect((boxX*x)+xPad+((boxX/4)*i),(boxY*y)+yPad+2,boxX/4,boxY/4);
         }
     }
 
@@ -168,13 +166,18 @@ public class BoardGUI {
         boardY = y;
     }
 
+    public void setGame(Game game){
+        this.game = game;
+        this.boardX = game.getBoard().getWidth();
+        this.boardY = game.getBoard().getLength();
+    }
+
     /**
      * Checks if the mouse click was in range then updates mouseX and mouseY to the new values
      * @param x the x coord of the click event
      * @param y the y coord of the click event
      */
     public void canvasClickEventHandler(double x,double y){
-        header.setText("Text generated at runtime");
         //check if in board range
         if ((x > xPad-boxX) && (y > yPad-boxY)){
             if ((x < (xPad+(boxX*(boardX+1)))) && (y < (yPad+(boxY*(boardY+1))))){

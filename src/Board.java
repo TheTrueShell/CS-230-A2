@@ -5,7 +5,7 @@
  * @version 1.0
  */
 public class Board {
-    Tile[][] board;
+    FloorTile[][] board;
     private int playersInGame;
     private Player turn;
 
@@ -16,7 +16,7 @@ public class Board {
      * @param length length of Board to be made
      */
     public Board(int width, int length) {
-        this.board = new Tile[width - 1][length - 1];
+        this.board = new FloorTile[width][length];
     }
 
     /**
@@ -25,7 +25,7 @@ public class Board {
      * @return The length of the Board
      */
     public int getLength() {
-        return board[0].length + 1;
+        return board[0].length;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Board {
      * @return The width of the Board
      */
     public int getWidth() {
-        return board.length + 1;
+        return board.length;
     }
 
     /**
@@ -44,8 +44,8 @@ public class Board {
      * @param y y co-ord of the tile
      * @return the tile at (x,y)
      */
-    public Tile getTile(int x, int y) {
-        return board[x - 1][y - 1];
+    public FloorTile getTile(int x, int y) {
+        return board[x][y];
     }
 
     /**
@@ -55,8 +55,8 @@ public class Board {
      * @param x    The x coordinate for the Tile
      * @param y    The y coordinate for the Tile
      */
-    public void insertTile(Tile tile, int x, int y) {
-        board[x - 1][y - 1] = tile;
+    public void insertTile(FloorTile tile, int x, int y) {
+        board[x][y] = tile;
     }
 
 }

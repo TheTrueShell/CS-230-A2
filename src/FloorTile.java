@@ -15,7 +15,6 @@ public abstract class FloorTile extends Tile {
     private int tileRotation; //In 360 degrees
     private boolean[] accessibleSides = new boolean[4]; // Top. right, bottom, Left
     private final String TILETYPE = "FloorTile";
-    private String imageLocation;
 
     /**
      * Check if the current tile can have a player move onto it
@@ -151,17 +150,6 @@ public abstract class FloorTile extends Tile {
 
     }
 
-    /**
-     * Setter for image Location of the tile
-     * @param imageLocation
-     */
-
-    public void setImageLocation(String imageLocation) {
-
-        this.imageLocation = imageLocation;
-
-    }
-
 
     /**
      * Getter for the boolean array of accessible sides of the tile.
@@ -207,15 +195,6 @@ public abstract class FloorTile extends Tile {
 
     }
 
-    /**
-     * Getter for the Image location of the tile.
-     * @return String imageLocation
-     */
-    public String getImageLocation() {
-
-        return imageLocation;
-
-    }
 
     public String getTILETYPE() {
 

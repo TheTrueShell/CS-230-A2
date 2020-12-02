@@ -9,8 +9,30 @@ public abstract class Tile {
 
     protected int drawnOnTurn;
     private final String TILETYPE = "Tile";
+    private String imageLocation;
 
     public String getTILETYPE(){
         return TILETYPE;
+    }
+
+    /**
+     * Setter for image Location of the tile
+     * @param imageLocation
+     */
+
+    public void setImageLocation(String imageLocation) {
+
+        this.imageLocation = imageLocation;
+
+    }
+
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
+
+        return imageLocation;
+
     }
 }

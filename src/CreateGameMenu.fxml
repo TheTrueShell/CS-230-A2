@@ -76,7 +76,7 @@
          <children>
             <Label text="Choose Map Preset: " textFill="WHITE" />
             <ChoiceBox fx:id="mapPreset" prefWidth="150.0" />
-            <Button mnemonicParsing="false" text="Create New Game" textAlignment="RIGHT">
+            <Button mnemonicParsing="false" text="Create New Game" textAlignment="RIGHT" onAction="#newGameButtonAction">
             <HBox.margin>
                <Insets left="10.0" />
                <Insets right="10.0" />

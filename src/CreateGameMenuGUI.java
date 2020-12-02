@@ -29,9 +29,9 @@ public class CreateGameMenuGUI {
     private ArrayList<Profile> Profiles;
     private ArrayList<String> presets;
     @FXML
-    private ChoiceBox playerOneProfile;
+    private ChoiceBox<String> playerOneProfile;
     @FXML
-    private ChoiceBox mapPreset;
+    private ChoiceBox<String> mapPreset;
     @FXML
     private ChoiceBox playerTwoProfile;
     @FXML
@@ -94,6 +94,26 @@ public class CreateGameMenuGUI {
         primaryStage.show();
     }
 
+    @FXML
+    public void newGameButtonAction(ActionEvent actionEvent) throws IOException {
+        if (playerOneProfile.getSelectionModel().getSelectedItem() != null) {
+            this.game.addPlayer(playerOneProfile.getValue());
+        }
+        try {
+            this.game.loadPreset("presets/preset_" + mapPreset.getValue() + ".txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BoardGUI.fxml"));
+        Parent boardGUIFXMLParent = (Parent)loader.load();
+        Scene boardGUIFXMLScene = new Scene(boardGUIFXMLParent);
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(boardGUIFXMLScene);
+        BoardGUI controller = (BoardGUI)loader.getController();
+        controller.setGame(this.game);
+        primaryStage.show();
+    }
 
 
     /**
