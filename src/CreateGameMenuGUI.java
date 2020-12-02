@@ -35,7 +35,25 @@ public class CreateGameMenuGUI {
     private ObservableList<String> names = FXCollections.observableArrayList();
 
 
-    public void profilesActionMenu(ActionEvent actionEvent) throws IOException {
+    public void profilesActionMenuOne(ActionEvent actionEvent) throws IOException {
+
+        playerOneProfile.getValue();
+
+    }
+
+    public void profilesActionMenuTwo(ActionEvent actionEvent) throws IOException {
+
+
+
+    }
+
+    public void profilesActionMenuThree(ActionEvent actionEvent) throws IOException {
+
+
+
+    }
+
+    public void profilesActionMenuFour(ActionEvent actionEvent) throws IOException {
 
 
 
@@ -92,4 +110,6 @@ public class CreateGameMenuGUI {
         playerFourProfile.setItems(this.names);
 
     }
+
+
 }

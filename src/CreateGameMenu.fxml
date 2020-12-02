@@ -28,7 +28,7 @@
                   <Label text="Player 2" textFill="WHITE" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <ChoiceBox fx:id="playerTwoProfile" onContextMenuRequested="#profilesActionMenu" prefWidth="150.0" BorderPane.alignment="CENTER" />
+                  <ChoiceBox fx:id="playerTwoProfile" onContextMenuRequested="#profilesActionMenuOne" prefWidth="150.0" BorderPane.alignment="CENTER" />
 
                </center>
                <left>
@@ -40,7 +40,7 @@
                   <Label text="Player 1" textFill="WHITE" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <ChoiceBox fx:id="playerOneProfile" onContextMenuRequested="#profilesActionMenu" prefWidth="150.0" BorderPane.alignment="CENTER" />
+                  <ChoiceBox fx:id="playerOneProfile" onContextMenuRequested="#profilesActionMenuTwo" prefWidth="150.0" BorderPane.alignment="CENTER" />
                </center>
                <left>
                   <Label text="Choose profile:" textFill="WHITE" BorderPane.alignment="CENTER" />
@@ -51,13 +51,13 @@
                   <Label text="Player 3" textFill="WHITE" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <ChoiceBox fx:id="playerThreeProfile" onContextMenuRequested="#profilesActionMenu" prefWidth="150.0" BorderPane.alignment="CENTER" />
+                  <ChoiceBox fx:id="playerThreeProfile" onContextMenuRequested="#profilesActionMenuThree" prefWidth="150.0" BorderPane.alignment="CENTER" />
                </center>
                <left>
                   <Label text="Choose profile:" textFill="WHITE" BorderPane.alignment="CENTER" />
                </left>
             </BorderPane>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" onContextMenuRequested="#profilesActionMenuFour">
                <top>
                   <Label text="Player 4" textFill="WHITE" BorderPane.alignment="CENTER" />
                </top>
