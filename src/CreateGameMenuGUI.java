@@ -10,8 +10,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The Main Menu Scene's controller.
@@ -23,9 +27,22 @@ public class CreateGameMenuGUI {
 
     private Game game;
     private ArrayList<Profile> Profiles;
+    private ArrayList<String> presets;
     @FXML
     private ChoiceBox playerOneProfile;
+    @FXML
+    private ChoiceBox mapPreset;
 
+    @FXML
+    public void initialize(){
+        File dir = new File("presets");
+        this.presets = new ArrayList<String>(Arrays.asList(dir.list()));
+        List<String> presetList = this.presets.stream()
+                .map(s -> s.replaceFirst("^preset_","").replace(".txt",""))
+                .collect(Collectors.toList());
+        ObservableList<String> observablePresetList = FXCollections.observableArrayList(presetList);
+        mapPreset.setItems(observablePresetList);
+    }
 
     public void profilesActionMenu(ActionEvent actionEvent) throws IOException {
 
