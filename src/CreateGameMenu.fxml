@@ -62,7 +62,7 @@
                   <Label text="Player 4" textFill="WHITE" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <ChoiceBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+                  <ChoiceBox fx:id="playerFourProfile" prefWidth="150.0" BorderPane.alignment="CENTER" />
                </center>
                <left>
                   <Label text="Choose profile:" textFill="WHITE" BorderPane.alignment="CENTER" />

@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * The Main Menu Scene's controller.
- * @author Gus Rendle
+ * The Create Game Menu Scene's controller.
+ * @author William Aodan Telford
  * @version 1.1
  */
 public class CreateGameMenuGUI {
@@ -25,6 +25,14 @@ public class CreateGameMenuGUI {
     private ArrayList<Profile> Profiles;
     @FXML
     private ChoiceBox playerOneProfile;
+    @FXML
+    private ChoiceBox playerTwoProfile;
+    @FXML
+    private ChoiceBox playerThreeProfile;
+    @FXML
+    private ChoiceBox playerFourProfile;
+
+    private ObservableList<String> names = FXCollections.observableArrayList();
 
 
     public void profilesActionMenu(ActionEvent actionEvent) throws IOException {
@@ -55,7 +63,6 @@ public class CreateGameMenuGUI {
     public void setGame(Game game){
         this.game = game;
         Profiles = game.getProfiles();
-        ObservableList<String> names = FXCollections.observableArrayList();
 
         for(Profile p : Profiles ) {
 
@@ -63,8 +70,26 @@ public class CreateGameMenuGUI {
 
         }
 
-        System.out.println(Profiles.size());
-        playerOneProfile.setItems(names);
+        names.add("No Player");
+
+        addNames(names);
+        updateNames();
+
+    }
+
+
+    public void addNames(ObservableList<String> newNames) {
+
+        this.names = newNames;
+
+    }
+
+    public void updateNames() {
+
+        playerOneProfile.setItems(this.names);
+        playerTwoProfile.setItems(this.names);
+        playerThreeProfile.setItems(this.names);
+        playerFourProfile.setItems(this.names);
 
     }
 }
