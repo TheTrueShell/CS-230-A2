@@ -10,12 +10,16 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * The Create Game Menu Scene's controller.
- * @author William Aodan Telford
+ * The Main Menu Scene's controller.
+ * @author Gus Rendle
  * @version 1.1
  */
 public class CreateGameMenuGUI {
@@ -23,8 +27,11 @@ public class CreateGameMenuGUI {
 
     private Game game;
     private ArrayList<Profile> Profiles;
+    private ArrayList<String> presets;
     @FXML
     private ChoiceBox playerOneProfile;
+    @FXML
+    private ChoiceBox mapPreset;
     @FXML
     private ChoiceBox playerTwoProfile;
     @FXML
@@ -33,6 +40,18 @@ public class CreateGameMenuGUI {
     private ChoiceBox playerFourProfile;
 
     private ObservableList<String> names = FXCollections.observableArrayList();
+
+
+    @FXML
+    public void initialize(){
+        File dir = new File("presets");
+        this.presets = new ArrayList<String>(Arrays.asList(dir.list()));
+        List<String> presetList = this.presets.stream()
+                .map(s -> s.replaceFirst("^preset_","").replace(".txt",""))
+                .collect(Collectors.toList());
+        ObservableList<String> observablePresetList = FXCollections.observableArrayList(presetList);
+        mapPreset.setItems(observablePresetList);
+    }
 
 
     public void profilesActionMenuOne(ActionEvent actionEvent) throws IOException {
@@ -81,6 +100,7 @@ public class CreateGameMenuGUI {
     public void setGame(Game game){
         this.game = game;
         Profiles = game.getProfiles();
+        ObservableList<String> names = FXCollections.observableArrayList();
 
         for(Profile p : Profiles ) {
 
