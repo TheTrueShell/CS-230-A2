@@ -184,29 +184,34 @@ public class Game extends Application {
     /**
      * Load a preset from file
      * @param preset the preset file name
-     * @param players String of profile names
      * @throws Exception If preset doesn't exist
      */
-    public void loadPreset(String preset,ArrayList<String> players) throws Exception{
+    public void loadPreset(String preset) throws Exception{
         File presetFile = new File(preset);
-        Scanner presetReader = new Scanner(presetFile).useDelimiter(",");
-        int width = presetReader.nextInt();
-        int height = presetReader.nextInt();
+        Scanner presetReader = new Scanner(presetFile);
+        Scanner lineReader = new Scanner(presetReader.next()).useDelimiter(",");
+        int width = lineReader.nextInt();
+        int height = lineReader.nextInt();
         this.board = new Board(width,height);
-        for (int i = 0; i < presetReader.nextInt(); i++){
-            int x = presetReader.nextInt();
-            int y = presetReader.nextInt();
-            String type = presetReader.next();
-            int rotation = presetReader.nextInt();
+        lineReader = new Scanner(presetReader.next()).useDelimiter(",");
+        int numOfFixed = lineReader.nextInt();
+        for (int i = 0; i < numOfFixed; i++){
+            lineReader = new Scanner(presetReader.next()).useDelimiter(",");
+            int x = lineReader.nextInt();
+            int y = lineReader.nextInt();
+            String type = lineReader.next();
+            int rotation = lineReader.nextInt();
             FloorTile t = floorFromType(type,rotation);
-            t.setIsOnFire(presetReader.nextBoolean());
-            t.setIsFrozen(presetReader.nextBoolean());
+            t.setIsOnFire(lineReader.nextBoolean());
+            t.setIsFrozen(lineReader.nextBoolean());
+            t.setTileFixed(true);
             this.board.insertTile(t,x,y);
         }
         for (int i = 0; i < 4; i++){
-            int x = presetReader.nextInt();
-            int y = presetReader.nextInt();
-            Player p = new Player(x,y,players.get(i));
+            lineReader = new Scanner(presetReader.next()).useDelimiter(",");
+            int x = lineReader.nextInt();
+            int y = lineReader.nextInt();
+            Player p = new Player(x,y,this.players.get(i).getProfile());
             this.players.add(p);
         }
     }
@@ -240,12 +245,13 @@ public class Game extends Application {
         profileFile = new File(PROFILES_PATH);
         Scanner profileReader;
         try {
-            profileReader = new Scanner(profileFile).useDelimiter(",");
+            profileReader = new Scanner(profileFile);
             while (profileReader.hasNext()){
-                String name = profileReader.next();
-                int gamesPlayed = profileReader.nextInt();
-                int gamesWon = profileReader.nextInt();
-                int gamesLost = profileReader.nextInt();
+                Scanner lineReader = new Scanner(profileReader.next()).useDelimiter(",");
+                String name = lineReader.next();
+                int gamesPlayed = lineReader.nextInt();
+                int gamesWon = lineReader.nextInt();
+                int gamesLost = lineReader.nextInt();
                 profiles.add(new Profile(name,gamesPlayed,gamesWon,gamesLost));
             }
         } catch (FileNotFoundException e) {

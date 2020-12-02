@@ -7,6 +7,8 @@ import javafx.animation.KeyFrame;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 public class BoardGUI {
     @FXML
     private Label header;
@@ -15,6 +17,8 @@ public class BoardGUI {
     private int boardX;
     private int boardY;
     private String img;
+
+    private Game game;
 
     /**
      * The variables relating to the canvas resizing
@@ -101,6 +105,14 @@ public class BoardGUI {
             }
             gc.fillPolygon(new double[]{(boxX*i)+xPad+2,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad-2},
                     new double[]{(boxY*(boardY+2))-2,(boxY*(boardY+1))+2,(boxY*(boardY+2))-2}, 3);
+        }
+        //draw players
+        ArrayList<Player> players = this.game.getPlayers();
+        for (int i = 0; i < players.size(); i++){
+            int x = players.get(i).getX();
+            int y = players.get(i).getY();
+            gc.setFill(Color.BLUE);
+            gc.fillRect((boxX*x)+xPad+((boxX/4)*i),(boxY*y)+yPad+2,boxX/4,boxY/4);
         }
         //draw selectable rows with triangles
         for (int i = 1; i < (boardY-1); i++){

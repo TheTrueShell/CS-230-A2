@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <center><p align="center">
-  <a href="https://github.com/RoryDurrant/InfoPlus">
+  <a href="https://github.com/TheTrueShell/CS-230-A2/">
     <img src="https://i.imgur.com/8jJLpxO.png" alt="Logo">
   </a>
 
@@ -13,7 +13,7 @@
     <a href="https://github.com/TheTrueShell/CS-230-A2/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <!--<a href="https://github.com/RoryDurrant/InfoPlus">View Demo</a>-->
+    <!--<a href="https://github.com/TheTrueShell/CS-230-A2/">View Demo</a>-->
     <a href="https://github.com/TheTrueShell/CS-230-A2/issues">Report Bug</a>
     ·
     <a href="https://github.com/TheTrueShell/CS-230-A2/labels/enhancement">Request Feature</a>
