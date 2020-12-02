@@ -240,12 +240,13 @@ public class Game extends Application {
         profileFile = new File(PROFILES_PATH);
         Scanner profileReader;
         try {
-            profileReader = new Scanner(profileFile).useDelimiter(",");
+            profileReader = new Scanner(profileFile);
             while (profileReader.hasNext()){
-                String name = profileReader.next();
-                int gamesPlayed = profileReader.nextInt();
-                int gamesWon = profileReader.nextInt();
-                int gamesLost = profileReader.nextInt();
+                Scanner lineReader = new Scanner(profileReader.next()).useDelimiter(",");
+                String name = lineReader.next();
+                int gamesPlayed = lineReader.nextInt();
+                int gamesWon = lineReader.nextInt();
+                int gamesLost = lineReader.nextInt();
                 profiles.add(new Profile(name,gamesPlayed,gamesWon,gamesLost));
             }
         } catch (FileNotFoundException e) {
