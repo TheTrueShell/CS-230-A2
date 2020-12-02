@@ -1,13 +1,17 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * The Main Menu Scene's controller.
@@ -16,9 +20,11 @@ import java.io.IOException;
  */
 public class CreateGameMenuGUI {
     @FXML
-    private Label messageOfDay;
 
     private Game game;
+    private ArrayList<Profile> Profiles;
+    @FXML
+    private ChoiceBox playerOneProfile;
 
 
     public void profilesActionMenu(ActionEvent actionEvent) throws IOException {
@@ -48,5 +54,17 @@ public class CreateGameMenuGUI {
      */
     public void setGame(Game game){
         this.game = game;
+        Profiles = game.getProfiles();
+        ObservableList<String> names = FXCollections.observableArrayList();
+
+        for(Profile p : Profiles ) {
+
+            names.add(p.getName());
+
+        }
+
+        System.out.println(Profiles.size());
+        playerOneProfile.setItems(names);
+
     }
 }

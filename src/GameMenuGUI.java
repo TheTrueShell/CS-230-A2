@@ -22,7 +22,7 @@ public class GameMenuGUI {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(mainMenuFXMLScene);
-        MainMenuGUI controller = (MainMenuGUI)loader.getController();
+        CreateGameMenuGUI controller = (CreateGameMenuGUI)loader.getController();
         controller.setGame(this.game);
         primaryStage.show();
 

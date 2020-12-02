@@ -29,6 +29,7 @@
                </top>
                <center>
                   <ChoiceBox fx:id="playerTwoProfile" onContextMenuRequested="#profilesActionMenu" prefWidth="150.0" BorderPane.alignment="CENTER" />
+
                </center>
                <left>
                   <Label text="Choose profile:" textFill="WHITE" BorderPane.alignment="CENTER" />
