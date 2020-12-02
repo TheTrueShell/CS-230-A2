@@ -35,29 +35,38 @@ public class MainMenuGUI {
      * @throws IOException if the .fxml file cannot be found
      */
     public void playButtonAction(ActionEvent actionEvent) throws IOException {
-        Parent boardGUIParent = FXMLLoader.load(getClass().getResource("GameMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameMenu.fxml"));
+        Parent boardGUIParent = (Parent)loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(boardGUIScene);
+        GameMenuGUI controller = (GameMenuGUI)loader.getController();
+        controller.setGame(this.game);
         primaryStage.show();
     }
 
     public void profilesButtonAction(ActionEvent actionEvent) throws IOException {
-        Parent boardGUIParent = FXMLLoader.load(getClass().getResource("ProfileMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfileMenu.fxml"));
+        Parent boardGUIParent = (Parent)loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(boardGUIScene);
+        ProfileMenu controller = (ProfileMenu)loader.getController();
+        controller.setGame(this.game);
         primaryStage.show();
     }
 
     public void settingsButtonAction(ActionEvent actionEvent) throws IOException {
-        Parent boardGUIParent = FXMLLoader.load(getClass().getResource("SettingsMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SettingsMenu.fxml"));
+        Parent boardGUIParent = (Parent)loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(boardGUIScene);
+        SettingMenuGUI controller = (SettingMenuGUI)loader.getController();
+        controller.setGame(this.game);
         primaryStage.show();
     }
 
