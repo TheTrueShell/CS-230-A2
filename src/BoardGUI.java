@@ -1,18 +1,26 @@
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class BoardGUI {
+    @FXML public Button nextTurnBtn;
     @FXML private Canvas canvas;
+    @FXML public BorderPane baseBoarderPane;
 
     private int boardX;
     private int boardY;
@@ -208,5 +216,11 @@ public class BoardGUI {
                 mouseY = yTimes;
             }
         }
+    }
+
+    public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
+        Parent root = null;
+        root = FXMLLoader.load(getClass().getResource("NextTurnGUI.fxml"));
+        baseBoarderPane.setBottom(root);
     }
 }
