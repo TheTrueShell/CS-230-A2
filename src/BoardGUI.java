@@ -139,12 +139,17 @@ public class BoardGUI {
                     new double[]{(boxY*i)+yPad+2,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad-2},3);
         }
         //draw players
+        gc.setFill(Color.NAVY);
         ArrayList<Player> players = this.game.getPlayers();
         for (int i = 0; i < players.size(); i++){
             int x = players.get(i).getX();
             int y = players.get(i).getY();
-            gc.setFill(Color.BLUE);
-            gc.fillRect((boxX*x)+xPad+((boxX/4)*i),(boxY*y)+yPad+2,boxX/4,boxY/4);
+            int subx = i % 2;
+            int suby = 0;
+            if (i > 1){
+                suby = 1;
+            }
+            gc.fillRect((boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
         }
     }
 

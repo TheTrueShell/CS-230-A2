@@ -87,6 +87,8 @@ public class Game extends Application {
         //        fileWriter.write(x+","+y+","+t.getTILETYPE+","+t.getRotation()+","
         //                +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
         //    }
+            //TODO:Wait for this to be done
+            //fileWriter.write(this.board.toString());
             fileWriter.write(this.players.size()+"\n");
             fileWriter.write(this.board.getTurn().getProfile());
             //x,y,profile,numoftilesinhand
@@ -218,7 +220,7 @@ public class Game extends Application {
             int y = lineReader.nextInt();
             if (i < this.players.size()) {
                 Player p = new Player(x, y, this.players.get(i).getProfile());
-                this.players.add(p);
+                this.players.set(i,p);
             }
         }
         this.gameBag = new Bag();
