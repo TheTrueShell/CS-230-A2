@@ -67,29 +67,8 @@ public class Game extends Application {
         try {
             FileWriter fileWriter = new FileWriter(GAME_SAVE_PATH);
             fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
-        //    fileWriter.write(this.board.getNumberOfFixedtiles()+"\n");
-        //    //wrtie fixed tiles
-        //    //TODO: getFixed tiles not specified but is a pain to do here
-        //    for (FloorTile t : this.board.getFixedTiles()){
-                //TODO: maybe move to FloorTile.toString() Method
-                //x and y are in board not
-                //get tile type needs to be  new method
-        //        int x = this.board.getTileX(t);
-        //        int y = this.board.getTileY(t);
-        //        fileWriter.write(x+","+y+","+t.getTileType+","+t.getRotation()+","
-        //                +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
-        //    }
-            //write non fixedTiles
-            //TODO: check that this is implemented in the board class
-        //    for (FloorTile t : this.board.getNonFixedTiles()){
-                //TODO: maybe move to FloorTile.toString() Method
-        //        int x = this.board.getTileX(t);
-        //        int y = this.board.getTileY(t);
-        //        fileWriter.write(x+","+y+","+t.getTILETYPE+","+t.getRotation()+","
-        //                +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
-        //    }
             //TODO:Wait for this to be done
-            //fileWriter.write(this.board.toString());
+            fileWriter.write(this.board.toString());
             fileWriter.write(this.players.size()+"\n");
             fileWriter.write(this.turn.getProfile());
             //x,y,profile,numoftilesinhand
