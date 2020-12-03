@@ -4,7 +4,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -76,7 +78,16 @@ public class BoardGUI {
                 gc.setFill(Color.BLUE);
                 gc.fillRect((boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
                 //Tile tile = board.getTileAt(i,j);
-                //gc.drawImage(new Image(tile.getImagePath()),(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
+                if (i == 0 && j ==0) {
+                    FloorTile t = (FloorTile) this.game.getBoard().getTile(0,0);
+                    Image tileImage = new Image(t.getImageLocation());
+                    Rotate rotation = new Rotate(t.getRotation(),(boxX*(i+0.5))+xPad,(boxY*(j+0.5))+yPad);
+                    gc.save();
+                    gc.setTransform(rotation.getMxx(), rotation.getMyx(), rotation.getMxy(), rotation.getMyy(), rotation.getTx(), rotation.getTy());
+                    //gc.rotate(90);
+                    gc.drawImage(tileImage,(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
+                    gc.restore();
+                }
             }
         }
         gc.setFill(Color.YELLOW);

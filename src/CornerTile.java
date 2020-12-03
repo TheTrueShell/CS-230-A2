@@ -9,6 +9,7 @@
 public class CornerTile extends FloorTile {
 
     private final String TILETYPE = "CornerTile";
+    private static String imageLocation = "Corner.png";
 
     /**
      * Constructor for CornerTile, inherits from FloorTile.
@@ -24,7 +25,7 @@ public class CornerTile extends FloorTile {
         setIsFrozen(false);
         setIsFrozen(false);
         setTileFixed(false);
-        setImageLocation("");
+        //setImageLocation("");
 
     }
 
@@ -43,7 +44,16 @@ public class CornerTile extends FloorTile {
         setIsFrozen(false);
         setIsFrozen(false);
         setTileFixed(false);
-        setImageLocation(ImageLocation);
+        //setImageLocation(ImageLocation);
+
+    }
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
+
+        return imageLocation;
 
     }
 
