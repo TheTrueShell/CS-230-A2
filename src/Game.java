@@ -341,6 +341,21 @@ public class Game extends Application {
     }
 
     /**
+     * Get the profile with the matching name
+     * @param name
+     */
+    private Profile getProfile(String name){
+        for (Profile p : this.profiles){
+            if (p.getName().equals(name)){
+                return p;
+            }
+        }
+        //returns null if no profile matching it was found
+        //should never get here
+        return null;
+    }
+
+    /**
      * adds a new player with the profile name
      * @param profile
      */
