@@ -211,9 +211,12 @@ public class Game extends Application {
             lineReader = new Scanner(presetReader.next()).useDelimiter(",");
             int x = lineReader.nextInt();
             int y = lineReader.nextInt();
-            Player p = new Player(x,y,this.players.get(i).getProfile());
-            this.players.add(p);
+            if (i < this.players.size()) {
+                Player p = new Player(x, y, this.players.get(i).getProfile());
+                this.players.add(p);
+            }
         }
+        //TODO:load bag and populate board
     }
 
     /**
