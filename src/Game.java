@@ -87,7 +87,7 @@ public class Game extends Application {
         //        fileWriter.write(x+","+y+","+t.getTILETYPE+","+t.getRotation()+","
         //                +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
         //    }
-        //    fileWriter.write(this.board.getPlayersInGame()+"\n");
+            fileWriter.write(this.players.size()+"\n");
             fileWriter.write(this.board.getTurn().getProfile());
             //x,y,profile,numoftilesinhand
             //write the players to the file
