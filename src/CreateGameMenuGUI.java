@@ -257,7 +257,7 @@ public class CreateGameMenuGUI {
         playerTwoProfile.setItems(playerTwoNames);
         playerThreeProfile.setItems(playerThreeNames);
         playerFourProfile.setItems(playerFourNames);
-        System.out.println("PlayerOne Changed");
+        //System.out.println("PlayerOne Changed");
 
         addNoPlayerOption();
 
