@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -11,8 +12,16 @@
          <top>
             <HBox alignment="CENTER" prefHeight="53.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="playerTurnTag" text="Player 1's Turn" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Return to menu">
+               <HBox.margin>
+                  <Insets right="400.0" />
+               </HBox.margin>
+            </Button>
+                  <Label fx:id="playerTurnTag" text="Player 1's Turn" textFill="WHITE" />
                </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
             </HBox>
          </top>
    <bottom>
