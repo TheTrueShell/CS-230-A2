@@ -17,7 +17,7 @@ public class BoardGUI {
     private int boardX;
     private int boardY;
     private String img;
-    private String[] playerImages = {"","","",""};
+    private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
 
     private Game game;
 
@@ -76,10 +76,9 @@ public class BoardGUI {
                     gc.setFill(Color.RED);
                     gc.fillRect((boxX*i)+xPad+1,(boxY*j)+yPad+1,boxX-2,boxY-2);
                 }
-                gc.setFill(Color.BLUE);
-                gc.fillRect((boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
-                //Tile tile = board.getTileAt(i,j);
+                //get tile
                 FloorTile t = (FloorTile) this.game.getBoard().getTile(i,j);
+                //if tile isn't null draw it
                 if (t != null) {
                     Image tileImage = new Image(t.getImageLocation());
                     Rotate rotation = new Rotate(t.getRotation(),(boxX*(i+0.5))+xPad,(boxY*(j+0.5))+yPad);
@@ -87,6 +86,16 @@ public class BoardGUI {
                     gc.setTransform(rotation.getMxx(), rotation.getMyx(), rotation.getMxy(), rotation.getMyy(), rotation.getTx(), rotation.getTy());
                     gc.drawImage(tileImage,(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
                     gc.restore();
+                    //draw status effects
+                    if (t.getIsOnFire()){
+                        //gc.drawImage(fireEffect,(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
+                    } else if (t.getIsFrozen()){
+                        //gc.drawImage(iceEffect,(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
+                    }
+                } else {
+                    //if tile is null draw a blue square
+                    gc.setFill(Color.BLUE);
+                    gc.fillRect((boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
                 }
             }
         }
@@ -150,9 +159,9 @@ public class BoardGUI {
             if (i > 1){
                 suby = 1;
             }
-            //Image playerImage = new Image(playerImages[i]);
-            //gc.drawImage(playerImage,(boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
-            gc.fillRect((boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
+            Image playerImage = new Image(playerImages[i]);
+            gc.drawImage(playerImage,(boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
+            //gc.fillRect((boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
         }
     }
 
