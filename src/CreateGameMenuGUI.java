@@ -40,8 +40,8 @@ public class CreateGameMenuGUI {
     @FXML
     private ComboBox<String> playerFourProfile;
 
-    private String playerOneCurrentSelection = "No Player";
-    private String playerTwoCurrentSelection ="No Player";
+    private String playerOneCurrentSelection ="No Player";
+    private String playerTwoCurrentSelection = "No Player";
     private String playerThreeCurrentSelection = "No Player";
     private String playerFourCurrentSelection = "No Player";
 
@@ -175,7 +175,33 @@ public class CreateGameMenuGUI {
 
     }
 
+    public boolean isInPlayerXNames(ObservableList<String> playerNames, String checkName) {
+
+        for(String s : playerNames) {
+
+            if(s == checkName) {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+
     public void playerOneProfileAction(ActionEvent actionEvent) {
+
+        if(!isInPlayerXNames(playerTwoNames,playerOneCurrentSelection)
+                || !isInPlayerXNames(playerThreeNames,playerOneCurrentSelection)
+                || !isInPlayerXNames(playerFourNames,playerOneCurrentSelection) ) {
+
+            playerTwoNames.add(playerOneCurrentSelection);
+            playerThreeNames.add(playerOneCurrentSelection);
+            playerFourNames.add(playerOneCurrentSelection);
+
+        }
 
 
         playerOneCurrentSelection = playerOneProfile.getValue();
@@ -189,12 +215,47 @@ public class CreateGameMenuGUI {
         playerFourProfile.setItems(playerFourNames);
         System.out.println("PlayerOne Changed");
 
+        addNoPlayerOption();
 
+
+    }
+
+    public void addNoPlayerOption() {
+
+        if(!isInPlayerXNames(playerOneNames,"No Player")) {
+
+            playerOneNames.add("No Player");
+
+        }
+        if(!isInPlayerXNames(playerTwoNames,"No Player")) {
+
+            playerTwoNames.add("No Player");
+
+        }
+        if(!isInPlayerXNames(playerThreeNames,"No Player")) {
+
+            playerThreeNames.add("No Player");
+
+        }
+        if(!isInPlayerXNames(playerFourNames,"No Player")) {
+
+            playerFourNames.add("No Player");
+
+        }
 
     }
 
     public void playerTwoProfileAction(ActionEvent actionEvent) {
 
+        if(!isInPlayerXNames(playerOneNames,playerTwoCurrentSelection)
+                || !isInPlayerXNames(playerThreeNames,playerTwoCurrentSelection)
+                || !isInPlayerXNames(playerFourNames,playerTwoCurrentSelection) ) {
+
+            playerOneNames.add(playerTwoCurrentSelection);
+            playerThreeNames.add(playerTwoCurrentSelection);
+            playerFourNames.add(playerTwoCurrentSelection);
+
+        }
 
         playerTwoCurrentSelection = playerTwoProfile.getValue();
 
@@ -206,10 +267,22 @@ public class CreateGameMenuGUI {
         playerThreeProfile.setItems(playerThreeNames);
         playerFourProfile.setItems(playerFourNames);
 
+        addNoPlayerOption();
+
     }
 
 
     public void playerThreeProfileAction(ActionEvent actionEvent) {
+
+        if(!isInPlayerXNames(playerOneNames,playerThreeCurrentSelection)
+                || !isInPlayerXNames(playerTwoNames,playerThreeCurrentSelection)
+                || !isInPlayerXNames(playerFourNames,playerThreeCurrentSelection) ) {
+
+            playerOneNames.add(playerThreeCurrentSelection);
+            playerTwoNames.add(playerThreeCurrentSelection);
+            playerFourNames.add(playerThreeCurrentSelection);
+
+        }
 
         playerThreeCurrentSelection = playerThreeProfile.getValue();
 
@@ -221,9 +294,21 @@ public class CreateGameMenuGUI {
         playerTwoProfile.setItems(playerTwoNames);
         playerFourProfile.setItems(playerFourNames);
 
+        addNoPlayerOption();
+
     }
 
     public void playerFourProfileAction(ActionEvent actionEvent) {
+
+        if(!isInPlayerXNames(playerOneNames,playerFourCurrentSelection)
+                || !isInPlayerXNames(playerTwoNames,playerFourCurrentSelection)
+                || !isInPlayerXNames(playerThreeNames,playerFourCurrentSelection)) {
+
+            playerOneNames.add(playerFourCurrentSelection);
+            playerThreeNames.add(playerFourCurrentSelection);
+            playerTwoNames.add(playerFourCurrentSelection);
+
+        }
 
         playerFourCurrentSelection = playerFourProfile.getValue();
 
@@ -234,6 +319,8 @@ public class CreateGameMenuGUI {
         playerOneProfile.setItems(playerOneNames);
         playerThreeProfile.setItems(playerThreeNames);
         playerTwoProfile.setItems(playerTwoNames);
+
+        addNoPlayerOption();
 
     }
 
