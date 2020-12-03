@@ -99,7 +99,7 @@ public class ProfileMenu {
         Input2.setVisible(false);
 
         deleteClicked = true;
-        addClicked = true;
+        addClicked = false;
         editClicked = false;
     }
 
@@ -111,7 +111,6 @@ public class ProfileMenu {
         }
 
         if (deleteClicked == true) {
-            game.getProfiles().remove(game.getProfiles().size()-1);
             String deletedName = Input.getText();
             Profile p = null;
             for (Profile profile :game.getProfiles()) {
