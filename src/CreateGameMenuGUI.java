@@ -98,6 +98,19 @@ public class CreateGameMenuGUI {
         if (playerOneProfile.getSelectionModel().getSelectedItem() != null) {
             this.game.addPlayer(playerOneProfile.getValue());
         }
+        if (playerTwoProfile.getSelectionModel().getSelectedItem() != null) {
+            this.game.addPlayer(playerTwoProfile.getValue());
+        }
+        if (playerThreeProfile.getSelectionModel().getSelectedItem() != null
+                && playerThreeProfile.getValue() != "No Player") {
+            this.game.addPlayer(playerThreeProfile.getValue());
+        }
+        if (playerFourProfile.getSelectionModel().getSelectedItem() != null
+                && playerFourProfile.getValue() != "No Player") {
+            this.game.addPlayer(playerFourProfile.getValue());
+        }
+
+
         try {
             this.game.loadPreset("presets/preset_" + mapPreset.getValue() + ".txt");
         } catch (Exception e) {
