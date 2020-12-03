@@ -64,9 +64,9 @@ public class Board {
             for (int y = 0; y < getLength(); y++) {
                 if (((FloorTile) board[x][y]).getIsTileFixed()) {
                     fixedTiles++;
-                    sb.insert(0,x + "," + y + board[x][y].toString() + "\n" );
+                    sb.insert(0,x + "," + y + "," + board[x][y].toString() + "\n" );
                 } else {
-                    sb.append(x + "," + y + board[x][y].toString() + "\n");
+                    sb.append(x + "," + y + "," + board[x][y].toString() + "\n");
                 }
             }
         }
