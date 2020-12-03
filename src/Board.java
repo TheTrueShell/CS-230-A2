@@ -67,4 +67,12 @@ public class Board {
         return this.turn;
     }
 
+    /**
+     * Sets the turn to player
+     * Used to set the turn to the player whos turn it currently is
+     * @param player the current playing player
+     */
+    public void setTurn(Player player){
+        this.turn = player;
+    }
 }
