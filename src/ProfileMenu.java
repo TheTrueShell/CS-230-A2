@@ -156,7 +156,8 @@ public class ProfileMenu {
     public void setGame(Game game){
         this.game = game;
         for (Profile p : game.getProfiles()){
-            profilesList.getItems().add(p.getName());
+            String profileData = p.getName() + " W:" + p.getGamesWon() + " L:" + p.getGamesLost();
+            profilesList.getItems().add(profileData);
         }
 
         Ok.setVisible(false);

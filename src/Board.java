@@ -6,8 +6,6 @@
  */
 public class Board {
     FloorTile[][] board;
-    private int playersInGame;
-    private Player turn;
 
     /**
      * Create a new Board with a given width and length
@@ -59,20 +57,4 @@ public class Board {
         board[x][y] = tile;
     }
 
-    /**
-     * Get the player who's turn it currently is
-     * @return
-     */
-    public Player getTurn(){
-        return this.turn;
-    }
-
-    /**
-     * Sets the turn to player
-     * Used to set the turn to the player whos turn it currently is
-     * @param player the current playing player
-     */
-    public void setTurn(Player player){
-        this.turn = player;
-    }
 }
