@@ -7,7 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 /**
  * The Main Menu Scene's controller.
  * @author Gus Rendle
+ * @Co-authors William Aodan Telford, Ben Rockley
  * @version 1.1
  */
 public class CreateGameMenuGUI {
@@ -29,15 +30,25 @@ public class CreateGameMenuGUI {
     private ArrayList<Profile> Profiles;
     private ArrayList<String> presets;
     @FXML
-    private ChoiceBox<String> playerOneProfile;
+    private ComboBox<String> playerOneProfile;
     @FXML
     private ChoiceBox<String> mapPreset;
     @FXML
-    private ChoiceBox playerTwoProfile;
+    private ComboBox<String> playerTwoProfile;
     @FXML
-    private ChoiceBox playerThreeProfile;
+    private ComboBox<String> playerThreeProfile;
     @FXML
-    private ChoiceBox playerFourProfile;
+    private ComboBox<String> playerFourProfile;
+
+    private String playerOneCurrentSelection = "No Player";
+    private String playerTwoCurrentSelection ="No Player";
+    private String playerThreeCurrentSelection = "No Player";
+    private String playerFourCurrentSelection = "No Player";
+
+    private ObservableList<String> playerOneNames = FXCollections.observableArrayList();
+    private ObservableList<String> playerTwoNames = FXCollections.observableArrayList();
+    private ObservableList<String> playerThreeNames = FXCollections.observableArrayList();
+    private ObservableList<String> playerFourNames = FXCollections.observableArrayList();
 
     private ObservableList<String> names = FXCollections.observableArrayList();
 
@@ -123,7 +134,21 @@ public class CreateGameMenuGUI {
     public void setGame(Game game){
         this.game = game;
         reloadProfileNames();
+        initialiseNames();
         updateNames();
+
+    }
+
+    private void initialiseNames() {
+
+        for(String s : names) {
+
+            playerOneNames.add(s);
+            playerTwoNames.add(s);
+            playerThreeNames.add(s);
+            playerFourNames.add(s);
+
+        }
 
     }
 
@@ -143,10 +168,72 @@ public class CreateGameMenuGUI {
 
     public void updateNames() {
 
-        playerOneProfile.setItems(this.names);
-        playerTwoProfile.setItems(this.names);
-        playerThreeProfile.setItems(this.names);
-        playerFourProfile.setItems(this.names);
+        playerOneProfile.setItems(playerOneNames);
+        playerTwoProfile.setItems(playerTwoNames);
+        playerThreeProfile.setItems(playerThreeNames);
+        playerFourProfile.setItems(playerFourNames);
+
+    }
+
+    public void playerOneProfileAction(ActionEvent actionEvent) {
+
+
+        playerOneCurrentSelection = playerOneProfile.getValue();
+
+        playerTwoNames.remove(playerOneCurrentSelection);
+        playerThreeNames.remove(playerOneCurrentSelection);
+        playerFourNames.remove(playerOneCurrentSelection);
+
+        playerTwoProfile.setItems(playerTwoNames);
+        playerThreeProfile.setItems(playerThreeNames);
+        playerFourProfile.setItems(playerFourNames);
+        System.out.println("PlayerOne Changed");
+
+
+
+    }
+
+    public void playerTwoProfileAction(ActionEvent actionEvent) {
+
+
+        playerTwoCurrentSelection = playerTwoProfile.getValue();
+
+        playerOneNames.remove(playerTwoCurrentSelection);
+        playerThreeNames.remove(playerTwoCurrentSelection);
+        playerFourNames.remove(playerTwoCurrentSelection);
+
+        playerOneProfile.setItems(playerOneNames);
+        playerThreeProfile.setItems(playerThreeNames);
+        playerFourProfile.setItems(playerFourNames);
+
+    }
+
+
+    public void playerThreeProfileAction(ActionEvent actionEvent) {
+
+        playerThreeCurrentSelection = playerThreeProfile.getValue();
+
+        playerOneNames.remove(playerThreeCurrentSelection);
+        playerTwoNames.remove(playerThreeCurrentSelection);
+        playerFourNames.remove(playerThreeCurrentSelection);
+
+        playerOneProfile.setItems(playerOneNames);
+        playerTwoProfile.setItems(playerTwoNames);
+        playerFourProfile.setItems(playerFourNames);
+
+    }
+
+    public void playerFourProfileAction(ActionEvent actionEvent) {
+
+        playerFourCurrentSelection = playerFourProfile.getValue();
+
+        playerOneNames.remove(playerFourCurrentSelection);
+        playerThreeNames.remove(playerFourCurrentSelection);
+        playerTwoNames.remove(playerFourCurrentSelection);
+
+        playerOneProfile.setItems(playerOneNames);
+        playerThreeProfile.setItems(playerThreeNames);
+        playerTwoProfile.setItems(playerTwoNames);
 
     }
 
