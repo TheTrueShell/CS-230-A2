@@ -107,11 +107,13 @@ public class Profile {
     public void listProfiles() {
         String filePath = "profiles.txt";
 
-        try BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)))) {
-                reader.lines().forEach(System.out::println);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)));
+            reader.lines().forEach(System.out::println);
+
         }
         catch (IOException e) {
-            e.printsStackTrace();
+            e.printStackTrace();
         }
     }
 
