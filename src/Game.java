@@ -172,7 +172,6 @@ public class Game extends Application {
             p.setPreviousPosition2(myReader.nextInt(),myReader.nextInt());
             this.players.add(p);
         }
-        //TODO:Set turn
         for (int i = 0; i < this.players.size(); i++){
             if (this.players.get(i).getProfile().equals(turnName)){
                 this.board.setTurn(this.players.get(i));
