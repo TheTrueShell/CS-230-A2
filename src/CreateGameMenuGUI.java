@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
  */
 public class CreateGameMenuGUI {
     @FXML
-
     private Game game;
+
     private ArrayList<Profile> Profiles;
     private ArrayList<String> presets;
     @FXML
@@ -54,29 +54,32 @@ public class CreateGameMenuGUI {
     }
 
 
-    public void profilesActionMenuOne(ActionEvent actionEvent) throws IOException {
+    public void profilesActionMenu(ActionEvent actionEvent) throws IOException {
 
-        playerOneProfile.getValue();
+        String chosenNameOne = (String) playerOneProfile.getValue();
+        String chosenNameTwo = (String) playerTwoProfile.getValue();
+        String chosenNameThree = (String) playerThreeProfile.getValue();
+        String chosenNameFour = (String) playerFourProfile.getValue();
+        System.out.println(chosenNameOne);
+        reloadProfileNames();
+        updateNames();
+
+
+        for(int i = 0; i < names.size(); i++) {
+
+            if(names.get(i) == chosenNameOne || names.get(i) == chosenNameTwo || names.get(i)
+                            == chosenNameThree || names.get(i) == chosenNameFour) {
+
+                names.remove(i);
+                updateNames();
+
+            }
+
+        }
+
 
     }
 
-    public void profilesActionMenuTwo(ActionEvent actionEvent) throws IOException {
-
-
-
-    }
-
-    public void profilesActionMenuThree(ActionEvent actionEvent) throws IOException {
-
-
-
-    }
-
-    public void profilesActionMenuFour(ActionEvent actionEvent) throws IOException {
-
-
-
-    }
 
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -119,8 +122,14 @@ public class CreateGameMenuGUI {
      */
     public void setGame(Game game){
         this.game = game;
+        reloadProfileNames();
+        updateNames();
+
+    }
+
+
+    public void reloadProfileNames() {
         Profiles = game.getProfiles();
-        ObservableList<String> names = FXCollections.observableArrayList();
 
         for(Profile p : Profiles ) {
 
@@ -129,16 +138,6 @@ public class CreateGameMenuGUI {
         }
 
         names.add("No Player");
-
-        addNames(names);
-        updateNames();
-
-    }
-
-
-    public void addNames(ObservableList<String> newNames) {
-
-        this.names = newNames;
 
     }
 

@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.stream.Collectors;
 /**
  * This class controls the basics of the individual player profiles.
  *
@@ -64,13 +69,6 @@ public class Profile {
         GamesPlayed++;
     }
 
-    /**
-     * Decrements GamesPlayed
-     */
-    public void removeGamesPlayed() {
-        GamesPlayed--;
-    }
-
     public void updateGamesLost() {
         GamesLost++;
     }
@@ -78,5 +76,45 @@ public class Profile {
     public void updateGamesWon() {
         GamesWon++;
     }
+
+    /**
+     * Decrements GamesPlayed
+     */
+    public void removeGamesPlayed() {
+        GamesPlayed--;
+    }
+
+    /**
+     * edit each of the variables
+     */
+
+    public void editGamesWon(int wins) {
+        this.GamesWon = wins;
+    }
+
+    public void editGamesPlayed(int played) {
+        this.GamesWon = played;
+    }
+
+    public void editGamesLost (int lost) {
+        this.GamesWon = lost;
+    }
+
+    /**
+     * prints out the profiles
+     */
+
+    public void listProfiles() {
+        String filePath = "profiles.txt";
+
+        try BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)))) {
+                reader.lines().forEach(System.out::println);
+        }
+        catch (IOException e) {
+            e.printsStackTrace();
+        }
+    }
+
+
 
 }
