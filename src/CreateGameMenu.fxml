@@ -48,7 +48,7 @@
                   <ComboBox onAction="#playerThreeProfileAction" prefWidth="150.0" promptText="Choose a profile" BorderPane.alignment="CENTER" fx:id="playerThreeProfile" />
                </center>
             </BorderPane>
-            <BorderPane onContextMenuRequested="#profilesActionMenu" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <top>
                   <Label text="Player 4" textFill="WHITE" BorderPane.alignment="CENTER" />
                </top>

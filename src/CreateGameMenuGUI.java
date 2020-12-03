@@ -8,8 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,11 +21,14 @@ import java.util.stream.Collectors;
  * The Main Menu Scene's controller.
  * @author Gus Rendle
  * @Co-authors William Aodan Telford, Ben Rockley
- * @version 1.1
+ * @version 1.4
  */
 public class CreateGameMenuGUI {
     @FXML
     private Game game;
+
+    @FXML
+    private Label topOfScreenLabel;
 
     private ArrayList<Profile> Profiles;
     private ArrayList<String> presets;
@@ -40,16 +43,20 @@ public class CreateGameMenuGUI {
     @FXML
     private ComboBox<String> playerFourProfile;
 
+    // The current Profile that has been selected by each player
     private String playerOneCurrentSelection ="No Player";
     private String playerTwoCurrentSelection = "No Player";
     private String playerThreeCurrentSelection = "No Player";
     private String playerFourCurrentSelection = "No Player";
 
+
+    // The lists of profile names that can be used by each player
     private ObservableList<String> playerOneNames = FXCollections.observableArrayList();
     private ObservableList<String> playerTwoNames = FXCollections.observableArrayList();
     private ObservableList<String> playerThreeNames = FXCollections.observableArrayList();
     private ObservableList<String> playerFourNames = FXCollections.observableArrayList();
 
+    // Master list of all Profile Names
     private ObservableList<String> names = FXCollections.observableArrayList();
 
 
@@ -65,33 +72,11 @@ public class CreateGameMenuGUI {
     }
 
 
-    public void profilesActionMenu(ActionEvent actionEvent) throws IOException {
-
-        String chosenNameOne = (String) playerOneProfile.getValue();
-        String chosenNameTwo = (String) playerTwoProfile.getValue();
-        String chosenNameThree = (String) playerThreeProfile.getValue();
-        String chosenNameFour = (String) playerFourProfile.getValue();
-        System.out.println(chosenNameOne);
-        reloadProfileNames();
-        updateNames();
-
-
-        for(int i = 0; i < names.size(); i++) {
-
-            if(names.get(i) == chosenNameOne || names.get(i) == chosenNameTwo || names.get(i)
-                            == chosenNameThree || names.get(i) == chosenNameFour) {
-
-                names.remove(i);
-                updateNames();
-
-            }
-
-        }
-
-
-    }
-
-
+    /**
+     * Loads the main menu when the back button is clicked
+     * @param actionEvent
+     * @throws IOException
+     */
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
@@ -105,30 +90,60 @@ public class CreateGameMenuGUI {
         primaryStage.show();
     }
 
+    /**
+     * Creates a new Game using the profiles and preset selected
+     * @param actionEvent
+     * @throws IOException
+     */
+
     @FXML
     public void newGameButtonAction(ActionEvent actionEvent) throws IOException {
-        if (playerOneProfile.getSelectionModel().getSelectedItem() != null) {
-            this.game.addPlayer(playerOneProfile.getValue());
+        if ((mapPreset.getSelectionModel().getSelectedItem() != null)
+                && (playerOneProfile.getValue() != "No Player")
+                && (playerTwoProfile.getValue() != "No Player"))
+        {
+
+            if (playerOneProfile.getSelectionModel().getSelectedItem() != null) {
+                this.game.addPlayer(playerOneProfile.getValue());
+            }
+            if (playerTwoProfile.getSelectionModel().getSelectedItem() != null) {
+                this.game.addPlayer(playerTwoProfile.getValue());
+            }
+            if (playerThreeProfile.getSelectionModel().getSelectedItem() != null
+                    && playerThreeProfile.getValue() != "No Player") {
+                this.game.addPlayer(playerThreeProfile.getValue());
+            }
+            if (playerFourProfile.getSelectionModel().getSelectedItem() != null
+                    && playerFourProfile.getValue() != "No Player") {
+                this.game.addPlayer(playerFourProfile.getValue());
+            }
+
+
+            try {
+                this.game.loadPreset("presets/preset_" + mapPreset.getValue() + ".txt");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BoardGUI.fxml"));
+            Parent boardGUIFXMLParent = (Parent) loader.load();
+            Scene boardGUIFXMLScene = new Scene(boardGUIFXMLParent);
+            Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            // This line gets the stage the 'Play' button's action event came from
+            primaryStage.setScene(boardGUIFXMLScene);
+            BoardGUI controller = (BoardGUI) loader.getController();
+            controller.setGame(this.game);
+            primaryStage.show();
+        } else {
+
+            topOfScreenLabel.setText("Please choose a profile for player one and two." +
+                                     " Please also choose a board preset!");
+
         }
-        try {
-            this.game.loadPreset("presets/preset_" + mapPreset.getValue() + ".txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("BoardGUI.fxml"));
-        Parent boardGUIFXMLParent = (Parent)loader.load();
-        Scene boardGUIFXMLScene = new Scene(boardGUIFXMLParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        // This line gets the stage the 'Play' button's action event came from
-        primaryStage.setScene(boardGUIFXMLScene);
-        BoardGUI controller = (BoardGUI)loader.getController();
-        controller.setGame(this.game);
-        primaryStage.show();
     }
 
 
     /**
-     * Set the game to the passed one
+     * Set the game to the passed one and starts the combobuttons
      * @param game the game instance
      */
     public void setGame(Game game){
@@ -138,6 +153,10 @@ public class CreateGameMenuGUI {
         updateNames();
 
     }
+
+    /**
+     * Adds all the profile names from the profiles.txt to the lists of usable profiles.
+     */
 
     private void initialiseNames() {
 
@@ -152,6 +171,9 @@ public class CreateGameMenuGUI {
 
     }
 
+    /**
+     *  Reloads all the possible profile names into names.
+     */
 
     public void reloadProfileNames() {
         Profiles = game.getProfiles();
@@ -166,6 +188,10 @@ public class CreateGameMenuGUI {
 
     }
 
+    /**
+     * Updates the names available to each player
+     */
+
     public void updateNames() {
 
         playerOneProfile.setItems(playerOneNames);
@@ -174,6 +200,13 @@ public class CreateGameMenuGUI {
         playerFourProfile.setItems(playerFourNames);
 
     }
+
+    /**
+     * Checks that if checkName can be found within the given ObservableList
+     * @param playerNames
+     * @param checkName
+     * @return boolean true or false depending on if checkName can be found.
+     */
 
     public boolean isInPlayerXNames(ObservableList<String> playerNames, String checkName) {
 
@@ -190,6 +223,14 @@ public class CreateGameMenuGUI {
         return false;
 
     }
+
+    /**
+     * Activates when user selects new item from the player One combo box.
+     * First searches to see if the previous selection needs to be added back to the usable profiles
+     * Second gets the new Value and removes it from the usable profiles
+     * Third Checks that the "No Player" option hasn't been removed.
+     * @param actionEvent
+     */
 
     public void playerOneProfileAction(ActionEvent actionEvent) {
 
@@ -220,30 +261,13 @@ public class CreateGameMenuGUI {
 
     }
 
-    public void addNoPlayerOption() {
-
-        if(!isInPlayerXNames(playerOneNames,"No Player")) {
-
-            playerOneNames.add("No Player");
-
-        }
-        if(!isInPlayerXNames(playerTwoNames,"No Player")) {
-
-            playerTwoNames.add("No Player");
-
-        }
-        if(!isInPlayerXNames(playerThreeNames,"No Player")) {
-
-            playerThreeNames.add("No Player");
-
-        }
-        if(!isInPlayerXNames(playerFourNames,"No Player")) {
-
-            playerFourNames.add("No Player");
-
-        }
-
-    }
+    /**
+     * Activates when user selects new item from the player Two combo box.
+     * First searches to see if the previous selection needs to be added back to the usable profiles
+     * Second gets the new Value and removes it from the usable profiles
+     * Third Checks that the "No Player" option hasn't been removed.
+     * @param actionEvent
+     */
 
     public void playerTwoProfileAction(ActionEvent actionEvent) {
 
@@ -271,6 +295,13 @@ public class CreateGameMenuGUI {
 
     }
 
+    /**
+     * Activates when user selects new item from the player Three combo box.
+     * First searches to see if the previous selection needs to be added back to the usable profiles
+     * Second gets the new Value and removes it from the usable profiles
+     * Third Checks that the "No Player" option hasn't been removed.
+     * @param actionEvent
+     */
 
     public void playerThreeProfileAction(ActionEvent actionEvent) {
 
@@ -298,6 +329,14 @@ public class CreateGameMenuGUI {
 
     }
 
+    /**
+     * Activates when user selects new item from the player Four combo box.
+     * First searches to see if the previous selection needs to be added back to the usable profiles
+     * Second gets the new Value and removes it from the usable profiles
+     * Third Checks that the "No Player" option hasn't been removed.
+     * @param actionEvent
+     */
+
     public void playerFourProfileAction(ActionEvent actionEvent) {
 
         if(!isInPlayerXNames(playerOneNames,playerFourCurrentSelection)
@@ -321,6 +360,35 @@ public class CreateGameMenuGUI {
         playerTwoProfile.setItems(playerTwoNames);
 
         addNoPlayerOption();
+
+    }
+
+    /**
+     * Checks to see if the "No Player" option has been removed. If it has it readds it to the possible names list.
+     */
+
+    public void addNoPlayerOption() {
+
+        if(!isInPlayerXNames(playerOneNames,"No Player")) {
+
+            playerOneNames.add("No Player");
+
+        }
+        if(!isInPlayerXNames(playerTwoNames,"No Player")) {
+
+            playerTwoNames.add("No Player");
+
+        }
+        if(!isInPlayerXNames(playerThreeNames,"No Player")) {
+
+            playerThreeNames.add("No Player");
+
+        }
+        if(!isInPlayerXNames(playerFourNames,"No Player")) {
+
+            playerFourNames.add("No Player");
+
+        }
 
     }
 
