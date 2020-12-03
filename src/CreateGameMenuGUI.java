@@ -8,8 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +26,9 @@ import java.util.stream.Collectors;
 public class CreateGameMenuGUI {
     @FXML
     private Game game;
+
+    @FXML
+    private Label topOfScreenLabel;
 
     private ArrayList<Profile> Profiles;
     private ArrayList<String> presets;
@@ -95,36 +98,47 @@ public class CreateGameMenuGUI {
 
     @FXML
     public void newGameButtonAction(ActionEvent actionEvent) throws IOException {
-        if (playerOneProfile.getSelectionModel().getSelectedItem() != null) {
-            this.game.addPlayer(playerOneProfile.getValue());
-        }
-        if (playerTwoProfile.getSelectionModel().getSelectedItem() != null) {
-            this.game.addPlayer(playerTwoProfile.getValue());
-        }
-        if (playerThreeProfile.getSelectionModel().getSelectedItem() != null
-                && playerThreeProfile.getValue() != "No Player") {
-            this.game.addPlayer(playerThreeProfile.getValue());
-        }
-        if (playerFourProfile.getSelectionModel().getSelectedItem() != null
-                && playerFourProfile.getValue() != "No Player") {
-            this.game.addPlayer(playerFourProfile.getValue());
-        }
+        if ((mapPreset.getSelectionModel().getSelectedItem() != null)
+                && (playerOneProfile.getValue() != "No Player")
+                && (playerTwoProfile.getValue() != "No Player"))
+        {
+
+            if (playerOneProfile.getSelectionModel().getSelectedItem() != null) {
+                this.game.addPlayer(playerOneProfile.getValue());
+            }
+            if (playerTwoProfile.getSelectionModel().getSelectedItem() != null) {
+                this.game.addPlayer(playerTwoProfile.getValue());
+            }
+            if (playerThreeProfile.getSelectionModel().getSelectedItem() != null
+                    && playerThreeProfile.getValue() != "No Player") {
+                this.game.addPlayer(playerThreeProfile.getValue());
+            }
+            if (playerFourProfile.getSelectionModel().getSelectedItem() != null
+                    && playerFourProfile.getValue() != "No Player") {
+                this.game.addPlayer(playerFourProfile.getValue());
+            }
 
 
-        try {
-            this.game.loadPreset("presets/preset_" + mapPreset.getValue() + ".txt");
-        } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                this.game.loadPreset("presets/preset_" + mapPreset.getValue() + ".txt");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BoardGUI.fxml"));
+            Parent boardGUIFXMLParent = (Parent) loader.load();
+            Scene boardGUIFXMLScene = new Scene(boardGUIFXMLParent);
+            Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            // This line gets the stage the 'Play' button's action event came from
+            primaryStage.setScene(boardGUIFXMLScene);
+            BoardGUI controller = (BoardGUI) loader.getController();
+            controller.setGame(this.game);
+            primaryStage.show();
+        } else {
+
+            topOfScreenLabel.setText("Please choose a profile for player one and two." +
+                                     " Please also choose a board preset!");
+
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("BoardGUI.fxml"));
-        Parent boardGUIFXMLParent = (Parent)loader.load();
-        Scene boardGUIFXMLScene = new Scene(boardGUIFXMLParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        // This line gets the stage the 'Play' button's action event came from
-        primaryStage.setScene(boardGUIFXMLScene);
-        BoardGUI controller = (BoardGUI)loader.getController();
-        controller.setGame(this.game);
-        primaryStage.show();
     }
 
 
