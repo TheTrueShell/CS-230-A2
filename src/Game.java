@@ -25,6 +25,7 @@ public class Game extends Application {
     private Bag gameBag;
     private ArrayList<Player> players;
     private Board board;
+    private Player turn;
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
 
     // GUI
@@ -90,7 +91,7 @@ public class Game extends Application {
             //TODO:Wait for this to be done
             //fileWriter.write(this.board.toString());
             fileWriter.write(this.players.size()+"\n");
-            fileWriter.write(this.board.getTurn().getProfile());
+            fileWriter.write(this.turn.getProfile());
             //x,y,profile,numoftilesinhand
             //write the players to the file
             for (Player p : this.players){
@@ -176,7 +177,7 @@ public class Game extends Application {
         }
         for (int i = 0; i < this.players.size(); i++){
             if (this.players.get(i).getProfile().equals(turnName)){
-                this.board.setTurn(this.players.get(i));
+                this.turn = this.players.get(i);
             }
         }
         //load bag
@@ -390,6 +391,12 @@ public class Game extends Application {
         return players;
     }
 
+    /**
+     * Get the current players turn
+     */
+    public Player getTurn(){
+        return this.turn;
+    }
     /**
      * gets the board
      */
