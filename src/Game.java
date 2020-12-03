@@ -88,8 +88,7 @@ public class Game extends Application {
         //                +t.getIsOnFire()+","+t.getIsFrozen()+"\n");
         //    }
         //    fileWriter.write(this.board.getPlayersInGame()+"\n");
-            //TODO: get turn doesn't exist
-        //    fileWriter.write(this.board.getTurn().getName());
+            fileWriter.write(this.board.getTurn().getProfile());
             //x,y,profile,numoftilesinhand
             //write the players to the file
             for (Player p : this.players){

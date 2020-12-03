@@ -59,6 +59,12 @@ public class Board {
         board[x][y] = tile;
     }
 
-
+    /**
+     * Get the player who's turn it currently is
+     * @return
+     */
+    public Player getTurn(){
+        return this.turn;
+    }
 
 }
