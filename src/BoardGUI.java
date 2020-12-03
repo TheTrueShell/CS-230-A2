@@ -196,12 +196,6 @@ public class BoardGUI {
         });
     }
 
-    public void addReferences(String image,int x,int y){
-        img = image;
-        boardX = x;
-        boardY = y;
-    }
-
     public void setGame(Game game){
         this.game = game;
         this.boardX = game.getBoard().getWidth();
