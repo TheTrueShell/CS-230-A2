@@ -9,7 +9,7 @@ public abstract class Tile {
 
     protected int drawnOnTurn;
     private final String TILETYPE = "Tile";
-    private String imageLocation;
+    private static String imageLocation;
 
     public String getTILETYPE(){
         return TILETYPE;
