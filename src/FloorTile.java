@@ -202,6 +202,9 @@ public abstract class FloorTile extends Tile {
 
     }
 
+    public boolean getIsTileFixed() {
+        return isTileFixed;
+    }
     /**
      * To String method for the Floor Tile classes
      * @return String FloorTile
@@ -210,7 +213,7 @@ public abstract class FloorTile extends Tile {
     @Override
     public String toString() {
 
-        return getTILETYPE() + "\n" + getRotation() + "\n" + getIsOnFire() + "\n" + getIsFrozen() +"\n";
+        return getTILETYPE() + "," + getRotation() + "," + getIsOnFire() + "," + getIsFrozen();
 
     }
 
