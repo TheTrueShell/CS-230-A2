@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 //GUI
 import javafx.application.Application;
@@ -216,7 +217,46 @@ public class Game extends Application {
                 this.players.add(p);
             }
         }
-        //TODO:load bag and populate board
+        this.gameBag = new Bag();
+        lineReader = new Scanner(presetReader.next()).useDelimiter(",");
+        //corner,straight,tjunction,ice,fire,double,back
+        int cornerTiles = lineReader.nextInt();
+        int straightTiles = lineReader.nextInt();
+        int tjunctionTiles = lineReader.nextInt();
+        int iceTiles = lineReader.nextInt();
+        int fireTiles = lineReader.nextInt();
+        int doublemoveTiles = lineReader.nextInt();
+        int backtrackTiles = lineReader.nextInt();
+        for (int i = 0; i < cornerTiles; i++){
+            this.gameBag.addTile(new CornerTile(0));
+        }
+        for (int i = 0; i < straightTiles; i++){
+            this.gameBag.addTile(new StraightTile(0));
+        }
+        for (int i = 0; i < tjunctionTiles; i++){
+            this.gameBag.addTile(new TJunctionTile(0));
+        }
+        for (int i = 0; i < iceTiles; i++){
+            this.gameBag.addTile(new IceTile());
+        }
+        for (int i = 0; i < fireTiles; i++){
+            this.gameBag.addTile(new FireTile());
+        }
+        for (int i = 0; i < doublemoveTiles; i++){
+            this.gameBag.addTile(new DoubleMoveTile());
+        }
+        for (int i = 0; i < backtrackTiles; i++){
+            this.gameBag.addTile(new BackTrackTile());
+        }
+        //populate board this is the only added randomness to the board
+        for (int i = 0; i < width; i++){
+            for (int j = 0; j < height; j++){
+                if (this.board.getTile(i,j) == null){
+                    FloorTile t = randomFloorTile();
+                    this.board.insertTile(t,i,j);
+                }
+            }
+        }
     }
 
     /**
@@ -458,6 +498,41 @@ public class Game extends Application {
             e.printStackTrace();
         }
         //it will never reach here
+        return null;
+    }
+
+    /**
+     * generates a random floor tile with random rotation
+     * used for populating a new board
+     * @return the floor tile
+     */
+    private FloorTile randomFloorTile(){
+        int rotation = new Random().nextInt(3) * 90;
+        int type = new Random().nextInt(3);
+        FloorTile out;
+        if (type == 0){
+            try {
+                out = new CornerTile(rotation);
+                return out;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } if (type == 1){
+            try {
+                out = new StraightTile(rotation);
+                return out;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                out = new TJunctionTile(rotation);
+                return out;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //should never get here as we make sure to generate correct parameters
         return null;
     }
 }
