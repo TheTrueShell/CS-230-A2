@@ -78,13 +78,12 @@ public class BoardGUI {
                 gc.setFill(Color.BLUE);
                 gc.fillRect((boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
                 //Tile tile = board.getTileAt(i,j);
-                if (i == 0 && j ==0) {
-                    FloorTile t = (FloorTile) this.game.getBoard().getTile(0,0);
+                FloorTile t = (FloorTile) this.game.getBoard().getTile(i,j);
+                if (t != null) {
                     Image tileImage = new Image(t.getImageLocation());
                     Rotate rotation = new Rotate(t.getRotation(),(boxX*(i+0.5))+xPad,(boxY*(j+0.5))+yPad);
                     gc.save();
                     gc.setTransform(rotation.getMxx(), rotation.getMyx(), rotation.getMxy(), rotation.getMyy(), rotation.getTx(), rotation.getTy());
-                    //gc.rotate(90);
                     gc.drawImage(tileImage,(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
                     gc.restore();
                 }
