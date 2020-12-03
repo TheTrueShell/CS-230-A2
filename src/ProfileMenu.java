@@ -136,6 +136,11 @@ public class ProfileMenu {
             }
             p.setName(newName);
             game.saveProfiles();
+            for (int i = 0; i < game.getProfiles().size(); i++){
+                Profile profile = game.getProfiles().get(i);
+                String profileData = profile.getName() + " W:" + profile.getGamesWon() + " L:" + profile.getGamesLost();
+                profilesList.getItems().set(i,profileData);
+            }
         }
 
 
