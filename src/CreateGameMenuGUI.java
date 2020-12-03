@@ -24,6 +24,9 @@ import java.util.stream.Collectors;
  * @version 1.4
  */
 public class CreateGameMenuGUI {
+
+    String NOPLAYERDISPLAYSTRING = "No Player";
+
     @FXML
     private Game game;
 
@@ -44,10 +47,10 @@ public class CreateGameMenuGUI {
     private ComboBox<String> playerFourProfile;
 
     // The current Profile that has been selected by each player
-    private String playerOneCurrentSelection ="No Player";
-    private String playerTwoCurrentSelection = "No Player";
-    private String playerThreeCurrentSelection = "No Player";
-    private String playerFourCurrentSelection = "No Player";
+    private String playerOneCurrentSelection =NOPLAYERDISPLAYSTRING;
+    private String playerTwoCurrentSelection = NOPLAYERDISPLAYSTRING;
+    private String playerThreeCurrentSelection = NOPLAYERDISPLAYSTRING;
+    private String playerFourCurrentSelection = NOPLAYERDISPLAYSTRING;
 
 
     // The lists of profile names that can be used by each player
@@ -99,8 +102,8 @@ public class CreateGameMenuGUI {
     @FXML
     public void newGameButtonAction(ActionEvent actionEvent) throws IOException {
         if ((mapPreset.getSelectionModel().getSelectedItem() != null)
-                && (playerOneProfile.getValue() != "No Player")
-                && (playerTwoProfile.getValue() != "No Player"))
+                && (playerOneProfile.getValue() != NOPLAYERDISPLAYSTRING)
+                && (playerTwoProfile.getValue() != NOPLAYERDISPLAYSTRING))
         {
 
             if (playerOneProfile.getSelectionModel().getSelectedItem() != null) {
@@ -110,11 +113,11 @@ public class CreateGameMenuGUI {
                 this.game.addPlayer(playerTwoProfile.getValue());
             }
             if (playerThreeProfile.getSelectionModel().getSelectedItem() != null
-                    && playerThreeProfile.getValue() != "No Player") {
+                    && playerThreeProfile.getValue() != NOPLAYERDISPLAYSTRING) {
                 this.game.addPlayer(playerThreeProfile.getValue());
             }
             if (playerFourProfile.getSelectionModel().getSelectedItem() != null
-                    && playerFourProfile.getValue() != "No Player") {
+                    && playerFourProfile.getValue() != NOPLAYERDISPLAYSTRING) {
                 this.game.addPlayer(playerFourProfile.getValue());
             }
 
@@ -184,7 +187,7 @@ public class CreateGameMenuGUI {
 
         }
 
-        names.add("No Player");
+        names.add(NOPLAYERDISPLAYSTRING);
 
     }
 
@@ -228,7 +231,7 @@ public class CreateGameMenuGUI {
      * Activates when user selects new item from the player One combo box.
      * First searches to see if the previous selection needs to be added back to the usable profiles
      * Second gets the new Value and removes it from the usable profiles
-     * Third Checks that the "No Player" option hasn't been removed.
+     * Third Checks that the NOPLAYERDISPLAYSTRING option hasn't been removed.
      * @param actionEvent
      */
 
@@ -265,7 +268,7 @@ public class CreateGameMenuGUI {
      * Activates when user selects new item from the player Two combo box.
      * First searches to see if the previous selection needs to be added back to the usable profiles
      * Second gets the new Value and removes it from the usable profiles
-     * Third Checks that the "No Player" option hasn't been removed.
+     * Third Checks that the NOPLAYERDISPLAYSTRING option hasn't been removed.
      * @param actionEvent
      */
 
@@ -299,7 +302,7 @@ public class CreateGameMenuGUI {
      * Activates when user selects new item from the player Three combo box.
      * First searches to see if the previous selection needs to be added back to the usable profiles
      * Second gets the new Value and removes it from the usable profiles
-     * Third Checks that the "No Player" option hasn't been removed.
+     * Third Checks that the NOPLAYERDISPLAYSTRING option hasn't been removed.
      * @param actionEvent
      */
 
@@ -333,7 +336,7 @@ public class CreateGameMenuGUI {
      * Activates when user selects new item from the player Four combo box.
      * First searches to see if the previous selection needs to be added back to the usable profiles
      * Second gets the new Value and removes it from the usable profiles
-     * Third Checks that the "No Player" option hasn't been removed.
+     * Third Checks that the NOPLAYERDISPLAYSTRING option hasn't been removed.
      * @param actionEvent
      */
 
@@ -364,29 +367,29 @@ public class CreateGameMenuGUI {
     }
 
     /**
-     * Checks to see if the "No Player" option has been removed. If it has it readds it to the possible names list.
+     * Checks to see if the NOPLAYERDISPLAYSTRING option has been removed. If it has it readds it to the possible names list.
      */
 
     public void addNoPlayerOption() {
 
-        if(!isInPlayerXNames(playerOneNames,"No Player")) {
+        if(!isInPlayerXNames(playerOneNames,NOPLAYERDISPLAYSTRING)) {
 
-            playerOneNames.add("No Player");
-
-        }
-        if(!isInPlayerXNames(playerTwoNames,"No Player")) {
-
-            playerTwoNames.add("No Player");
+            playerOneNames.add(NOPLAYERDISPLAYSTRING);
 
         }
-        if(!isInPlayerXNames(playerThreeNames,"No Player")) {
+        if(!isInPlayerXNames(playerTwoNames,NOPLAYERDISPLAYSTRING)) {
 
-            playerThreeNames.add("No Player");
+            playerTwoNames.add(NOPLAYERDISPLAYSTRING);
 
         }
-        if(!isInPlayerXNames(playerFourNames,"No Player")) {
+        if(!isInPlayerXNames(playerThreeNames,NOPLAYERDISPLAYSTRING)) {
 
-            playerFourNames.add("No Player");
+            playerThreeNames.add(NOPLAYERDISPLAYSTRING);
+
+        }
+        if(!isInPlayerXNames(playerFourNames,NOPLAYERDISPLAYSTRING)) {
+
+            playerFourNames.add(NOPLAYERDISPLAYSTRING);
 
         }
 
