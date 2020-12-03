@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="450.0" prefWidth="600.0" style="-fx-background-image: url(&quot;mcbg.jpg&quot;);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameMenuGUI">
+<BorderPane prefHeight="450.0" prefWidth="600.0" style="-fx-background-image: url(&quot;mcbg.jpg&quot;);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameMenuGUI">
          <center>
             <VBox alignment="CENTER" prefHeight="551.0" prefWidth="894.0" style="-fx-spacing: 10px;" BorderPane.alignment="CENTER">
                <children>
