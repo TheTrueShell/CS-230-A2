@@ -17,6 +17,7 @@ public class BoardGUI {
     private int boardX;
     private int boardY;
     private String img;
+    private String[] playerImages = {"","","",""};
 
     private Game game;
 
@@ -149,6 +150,8 @@ public class BoardGUI {
             if (i > 1){
                 suby = 1;
             }
+            //Image playerImage = new Image(playerImages[i]);
+            //gc.drawImage(playerImage,(boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
             gc.fillRect((boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
         }
     }
