@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * This class is the main entry point to the game.
  * It creates and runs the game.
  * @author Benjamin Rockley, Mohammed T
- * @version 0.2
+ * @version 0.9
  */
 public class Game extends Application {
     private static final String PROFILES_PATH = "profiles.txt";
