@@ -170,7 +170,6 @@ public class BoardGUI {
             }
             Image playerImage = new Image(playerImages[i]);
             gc.drawImage(playerImage,(boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
-            //gc.fillRect((boxX*x)+xPad+((boxX/4)*(subx+1)),(boxY*y)+yPad+((boxY/4)*(suby+1)),boxX/4,boxY/4);
         }
     }
 
