@@ -9,6 +9,7 @@
 public class GoalTile extends FloorTile {
 
     private final String TILETYPE = "GoalTile";
+    private static final String imageLocation = "Goal.png";
 
 
     /**
@@ -29,4 +30,13 @@ public class GoalTile extends FloorTile {
 
     }
 
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
+
+        return imageLocation;
+
+    }
 }

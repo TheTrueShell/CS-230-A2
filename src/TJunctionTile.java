@@ -9,6 +9,7 @@
 public class TJunctionTile extends FloorTile {
 
     private final String TILETYPE = "TJunctionTile";
+    private static final String imageLocation = "T-Junction.png";
 
     /**
      * Constructor for TJuctionTile. Inherits from FloorTile.java.
@@ -27,5 +28,13 @@ public class TJunctionTile extends FloorTile {
         setTileFixed(false);
 
     }
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
 
+        return imageLocation;
+
+    }
 }

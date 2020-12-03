@@ -9,6 +9,7 @@
 public class StraightTile extends FloorTile {
 
     private final String TILETYPE = "StraightTile";
+    private static final String imageLocation = "Straight.png";
 
     /**
      * Constructor for StraightTile. Inherits most of implementation for FloorTile.java.
@@ -26,5 +27,13 @@ public class StraightTile extends FloorTile {
         setTileFixed(false);
 
     }
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
 
+        return imageLocation;
+
+    }
 }
