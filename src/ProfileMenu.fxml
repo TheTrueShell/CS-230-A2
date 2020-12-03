@@ -2,26 +2,26 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<?import javafx.scene.control.ListView?>
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-image: url(&quot;mcbg.jpg&quot;);" fx:controller="ProfileMenu">
-   <center>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="622.0">
+<BorderPane style="-fx-background-image: url(&quot;mcbg.jpg&quot;);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProfileMenu">
+   <bottom>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="622.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="48.0" layoutY="80.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Add" />
-            <Button layoutX="48.0" layoutY="186.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit" />
-            <Button fx:id="Delete" layoutX="48.0" layoutY="296.0" mnemonicParsing="false" text="Delete" />
-            <ListView fx:id="profilesList" layoutX="206.0" layoutY="21.0" prefHeight="357.0" prefWidth="194.0"/>
-            <TextField layoutX="449.0" layoutY="80.0" prefHeight="26.0" prefWidth="136.0" />
-            <Label layoutX="449.0" layoutY="39.0" prefHeight="18.0" prefWidth="85.0" text="Name:" textFill="#fdfbfb" />
-            <Button fx:id="Back" onAction="#backButtonAction" layoutX="509.0" layoutY="296.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" text="Back" />
+            <Button fx:id="Add" layoutX="48.0" layoutY="80.0" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="26.0" prefWidth="50.0" text="Add" />
+            <Button fx:id="Edit" layoutX="48.0" layoutY="186.0" mnemonicParsing="false" onAction="#editButtonAction" prefHeight="26.0" prefWidth="50.0" text="Edit" />
+            <Button fx:id="Delete" layoutX="48.0" layoutY="296.0" mnemonicParsing="false" onAction="#deleteButtonAction" text="Delete" />
+            <ListView fx:id="profilesList" layoutX="206.0" layoutY="21.0" prefHeight="357.0" prefWidth="194.0" />
+            <TextField fx:id="Input" layoutX="449.0" layoutY="80.0" prefHeight="26.0" prefWidth="136.0" />
+            <Label fx:id="Label" layoutX="449.0" layoutY="39.0" prefHeight="18.0" prefWidth="85.0" text="Name:" textFill="#fdfbfb" />
+            <Button fx:id="Ok" layoutX="449.0" layoutY="246.0" mnemonicParsing="false" onAction="#okButtonAction" prefHeight="26.0" prefWidth="52.0" text="Ok" />
+            <Button fx:id="Back" layoutX="449.0" layoutY="295.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="26.0" prefWidth="70.0" text="Back" />
+            <TextField fx:id="Input2" layoutX="450.0" layoutY="161.0" prefHeight="26.0" prefWidth="139.0" />
+            <Label fx:id="Label2" layoutX="450.0" layoutY="134.0" text="New Name:" textFill="WHITE" />
          </children>
       </AnchorPane>
-   </center>
+   </bottom>
 </BorderPane>

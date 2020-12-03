@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public class Profile {
 
-    private final String Name;
+    private String Name;
 
     private int GamesPlayed;
 
@@ -61,6 +61,8 @@ public class Profile {
     public String getName() {
         return Name;
     }
+
+    public void setName(String name){this.Name = name;}
 
     /**
      * Increments each of the variables by 1.
@@ -116,6 +118,7 @@ public class Profile {
             e.printStackTrace();
         }
     }
+
 
 
 
