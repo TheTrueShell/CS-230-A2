@@ -18,6 +18,7 @@ public class SettingMenuGUI {
 
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent mainMenuFXMLParent = (Parent)loader.load();
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);

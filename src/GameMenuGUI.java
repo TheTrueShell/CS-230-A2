@@ -15,6 +15,7 @@ public class GameMenuGUI {
 
     @FXML
     public void newGameButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         Board newGame = new Board(10,10);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateGameMenu.fxml"));
         Parent mainMenuFXMLParent = (Parent)loader.load();
@@ -36,6 +37,7 @@ public class GameMenuGUI {
 
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent mainMenuFXMLParent = (Parent)loader.load();
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);

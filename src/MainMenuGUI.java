@@ -35,6 +35,7 @@ public class MainMenuGUI {
      * @throws IOException if the .fxml file cannot be found
      */
     public void playButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameMenu.fxml"));
         Parent boardGUIParent = (Parent)loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
@@ -47,6 +48,7 @@ public class MainMenuGUI {
     }
 
     public void profilesButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfileMenu.fxml"));
         Parent boardGUIParent = (Parent)loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
@@ -59,6 +61,7 @@ public class MainMenuGUI {
     }
 
     public void settingsButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SettingsMenu.fxml"));
         Parent boardGUIParent = (Parent)loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
@@ -71,6 +74,7 @@ public class MainMenuGUI {
     }
 
     public void quitButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         System.exit(0);
     }
 

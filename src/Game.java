@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -24,6 +25,8 @@ public class Game extends Application {
     private static final String PROFILES_PATH = "profiles.txt";
     private static final String GAME_SAVE_PATH = "gameInProgress.txt";
     private static final String MUSIC_FILE_PATH = "theme3.mp3";
+    private static final String MENU_SOUND_FILE_PATH = "menuSound.mp3";
+
 
     private Bag gameBag;
     private ArrayList<Player> players;
@@ -32,6 +35,8 @@ public class Game extends Application {
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
     private static double musicVolume = 0.5;
     private static MediaPlayer mediaPlayer;
+    private static MediaPlayer menuSound;
+
 
     // GUI
     @Override
@@ -62,6 +67,15 @@ public class Game extends Application {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(musicVolume);
         mediaPlayer.setAutoPlay(true);
+
+    }
+
+    public static void playMenuSound() {
+        Media menuMedia = new Media(new File(MENU_SOUND_FILE_PATH).toURI().toString());
+        //Instantiating MediaPlayer class
+        menuSound = new MediaPlayer(menuMedia);
+        menuSound.setVolume(musicVolume);
+        menuSound.play();
 
     }
 
