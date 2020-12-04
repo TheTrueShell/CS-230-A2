@@ -9,8 +9,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
@@ -33,6 +38,9 @@ public class BoardGUI {
     private int handIndex = -1;
 
     private Game game;
+
+    private HBox nextTurnHBox = new HBox();
+    private HBox tileHandHBox = new HBox();
 
     /**
      * The variables relating to the canvas resizing
@@ -210,13 +218,10 @@ public class BoardGUI {
         this.boardY = game.getBoard().getLength();
 
         startTurn();
-
-        FXMLLoader loader = loadFXML("CardHandGUI");
-        Parent root = loader.load();
-        CardHandGUI controller = loader.getController();
-        controller.setCards(game.getTurn().getHand());
-        baseBoarderPane.setBottom(root);
         //TODO: handle if current player can't move update the turn progression
+
+        setCards(game.getTurn().getHand());
+        //TODO: actually move this to somewhere good
     }
 
     /**
@@ -327,23 +332,16 @@ public class BoardGUI {
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = loadFXML("NextTurnGUI");
-        Parent root = loader.load();
-        NextTurnGUI controller = loader.getController();
-        controller.setNextTurnText(game.getTurn().getProfile() + "'s Turn");
-        baseBoarderPane.setBottom(root);
+        Text nextPlayer = new Text(game.getTurn().getProfile() + "'s Turn");
+        nextPlayer.setStyle("-fx-font-size: 32px; -fx-fill: white;");
+        nextTurnHBox.setStyle("-fx-background-color: #303030;");
+        nextTurnHBox.getChildren().add(nextPlayer);
+        baseBoarderPane.setBottom(nextTurnHBox);
     }
 
     public Game getGame() {
         return game;
     }
-
-    private FXMLLoader loadFXML (String fxml) throws IOException {
-        Parent root = null;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml + ".fxml"));
-        return loader;
-    }
-    
 
     public void leftRotateButtonAction(ActionEvent actionEvent) {
 
@@ -381,5 +379,19 @@ public class BoardGUI {
             }
         }
 
+    }
+
+    public void setCards(ArrayList<Tile> deck)  {
+        for(Tile card : deck) {
+            Image cardImage = new Image(card.getImageLocation(), 40,40,true,true);
+            Image borderImage = new Image("invSlot.png", 64,64,true,true);
+            StackPane cardStack = new StackPane();
+            cardStack.getChildren().addAll(new ImageView(borderImage), new ImageView(cardImage));
+            cardStack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                handClicked((int) (cardStack.getBoundsInParent().getMinX())/64);
+            });
+            tileHandHBox.getChildren().add(cardStack);
+            baseBoarderPane.setBottom(tileHandHBox);
+        }
     }
 }
