@@ -226,21 +226,13 @@ public class BoardGUI {
                 mouseX = xTimes;
                 mouseY = yTimes;
                 if (turnProgression == 0){
-                    playerMove();
+                    playerPlayAction();
                 } if (turnProgression == 1){
                     playerPushInTile();
                 } if (turnProgression == 2){
-                    playerPlayAction();
+                    playerMove();
                 }
             }
-        }
-    }
-
-    public void playerMove(){
-        Player p = this.game.getTurn();
-        int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
-        if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
-            p.movePlayer(newPos);
         }
     }
 
@@ -258,6 +250,14 @@ public class BoardGUI {
         //get selected action tile
 
         //play selected tile at mouseX-1 and mouseY-1
+    }
+
+    public void playerMove(){
+        Player p = this.game.getTurn();
+        int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
+        if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
+            p.movePlayer(newPos);
+        }
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
