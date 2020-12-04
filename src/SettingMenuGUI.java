@@ -13,11 +13,14 @@ public class SettingMenuGUI {
 
     @FXML
     Slider musicSlider;
+    @FXML
+    Slider soundsSlider;
 
     private Game game;
 
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent mainMenuFXMLParent = (Parent)loader.load();
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
@@ -37,6 +40,12 @@ public class SettingMenuGUI {
 
         double musicVolume = (musicSlider.getValue() / 100);
         Game.setMusicVolume(musicVolume);
+
+    }
+
+    public void menuVolumeButtonAction(ActionEvent actionEvent) {
+        double menuVolume = (soundsSlider.getValue() / 100);
+        Game.setMenuSoundVolume(menuVolume);
 
     }
 }
