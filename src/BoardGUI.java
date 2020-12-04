@@ -208,13 +208,14 @@ public class BoardGUI {
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
 
+        startTurn();
+
         FXMLLoader loader = loadFXML("CardHandGUI");
         Parent root = loader.load();
         CardHandGUI controller = loader.getController();
         controller.setCards(game.getTurn().getHand());
         baseBoarderPane.setBottom(root);
         //TODO: handle if current player can't move update the turn progression
-        startTurn();
     }
 
     /**
@@ -240,6 +241,7 @@ public class BoardGUI {
                 } if (turnProgression == 2){
                     playerMove();
                 }
+                drawCanvas();
             }
         }
     }
@@ -264,12 +266,15 @@ public class BoardGUI {
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
         p.addToHand(drawnTile);
+        //System.out.println(p.getHand().size());
         try {
             ActionTile actionTile = (ActionTile)drawnTile;
             //choose to play it
+            playerTurnTag.setText("Do you want to play the action Tile");
         } catch (Exception e){
             FloorTile floorTile = (FloorTile)drawnTile;
             //must play this now
+            playerTurnTag.setText("You must place the floor Tile");
         }
     }
 
