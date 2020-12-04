@@ -21,13 +21,15 @@ public class BoardGUI {
     @FXML public Button nextTurnBtn;
     @FXML private Canvas canvas;
     @FXML public BorderPane baseBoarderPane;
+    @FXML public Label playerTurnTag;
 
     private int boardX;
     private int boardY;
     private String img;
     private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
-    private int turnProgression = 0;
+    private Image fixedImage = new Image("F.png");
+    private int turnProgression = 2;
 
     private Game game;
 
@@ -102,6 +104,9 @@ public class BoardGUI {
                     } else if (t.getIsFrozen()){
                         gc.drawImage(statusEffects[1],(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
                     }
+                    if (t.getIsTileFixed()){
+                        gc.drawImage(fixedImage,(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
+                    }
                 } else {
                     //if tile is null draw a blue square
                     gc.setFill(Color.BLUE);
@@ -111,52 +116,54 @@ public class BoardGUI {
         }
         gc.setFill(Color.YELLOW);
         //draw selectable columns with triangle buttons
-        for (int i = 1; i < (boardX-1); i++){
-            //TODO: add check for is usable
-            //add down facing triangle
-            //check if selected
-            if (i == mouseX-1 && 0 == mouseY){
-                gc.setFill(Color.RED);
-                gc.fillPolygon(new double[]{(boxX*i)+xPad,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad},
-                        new double[]{yPad-boxY,yPad,yPad-boxY}, 3);
-                gc.setFill(Color.YELLOW);
+        for (int i = 0; i < (boardX); i++){
+            if (this.game.getBoard().isColumnPushable(i)) {
+                //add down facing triangle
+                //check if selected
+                if (i == mouseX - 1 && 0 == mouseY) {
+                    gc.setFill(Color.RED);
+                    gc.fillPolygon(new double[]{(boxX * i) + xPad, (boxX * i) + xPad + (boxX / 2), (boxX * (i + 1)) + xPad},
+                            new double[]{yPad - boxY, yPad, yPad - boxY}, 3);
+                    gc.setFill(Color.YELLOW);
+                }
+                gc.fillPolygon(new double[]{(boxX * i) + xPad + 2, (boxX * i) + xPad + (boxX / 2), (boxX * (i + 1)) + xPad - 2},
+                        new double[]{yPad - boxY + 2, yPad - 2, yPad - boxY + 2}, 3);
+                //add up facing triangle
+                //check if selected
+                if (i == mouseX - 1 && boardY + 1 == mouseY) {
+                    gc.setFill(Color.RED);
+                    gc.fillPolygon(new double[]{(boxX * i) + xPad, (boxX * i) + xPad + (boxX / 2), (boxX * (i + 1)) + xPad},
+                            new double[]{(boxY * (boardY + 2)), (boxY * (boardY + 1)), (boxY * (boardY + 2))}, 3);
+                    gc.setFill(Color.YELLOW);
+                }
+                gc.fillPolygon(new double[]{(boxX * i) + xPad + 2, (boxX * i) + xPad + (boxX / 2), (boxX * (i + 1)) + xPad - 2},
+                        new double[]{(boxY * (boardY + 2)) - 2, (boxY * (boardY + 1)) + 2, (boxY * (boardY + 2)) - 2}, 3);
             }
-            gc.fillPolygon(new double[]{(boxX*i)+xPad+2,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad-2},
-                    new double[]{yPad-boxY+2,yPad-2,yPad-boxY+2}, 3);
-            //add up facing triangle
-            //check if selected
-            if (i == mouseX-1 && boardY+1 == mouseY){
-                gc.setFill(Color.RED);
-                gc.fillPolygon(new double[]{(boxX*i)+xPad,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad},
-                        new double[]{(boxY*(boardY+2)),(boxY*(boardY+1)),(boxY*(boardY+2))}, 3);
-                gc.setFill(Color.YELLOW);
-            }
-            gc.fillPolygon(new double[]{(boxX*i)+xPad+2,(boxX*i)+xPad+(boxX/2),(boxX*(i+1))+xPad-2},
-                    new double[]{(boxY*(boardY+2))-2,(boxY*(boardY+1))+2,(boxY*(boardY+2))-2}, 3);
         }
         //draw selectable rows with triangles
-        for (int i = 1; i < (boardY-1); i++){
-            //TODO: add check for is usable
-            //add right facing triangle
-            //check if selected
-            if (0 == mouseX && i == mouseY-1){
-                gc.setFill(Color.RED);
-                gc.fillPolygon(new double[]{xPad-boxX,xPad,xPad-boxX},
-                        new double[]{(boxY*i)+yPad,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad},3);
-                gc.setFill(Color.YELLOW);
+        for (int i = 0; i < (boardY); i++){
+            if (this.game.getBoard().isRowPushable(i)) {
+                //add right facing triangle
+                //check if selected
+                if (0 == mouseX && i == mouseY - 1) {
+                    gc.setFill(Color.RED);
+                    gc.fillPolygon(new double[]{xPad - boxX, xPad, xPad - boxX},
+                            new double[]{(boxY * i) + yPad, (boxY * i) + yPad + (boxY / 2), (boxY * (i + 1)) + yPad}, 3);
+                    gc.setFill(Color.YELLOW);
+                }
+                gc.fillPolygon(new double[]{xPad - boxX + 2, xPad - 2, xPad - boxX + 2},
+                        new double[]{(boxY * i) + yPad + 2, (boxY * i) + yPad + (boxY / 2), (boxY * (i + 1)) + yPad - 2}, 3);
+                //add right facing triangle#
+                //check if selected
+                if (boardX + 1 == mouseX && i == mouseY - 1) {
+                    gc.setFill(Color.RED);
+                    gc.fillPolygon(new double[]{xPad + (boxX * (boardX + 1)), xPad + (boxX * boardX), xPad + (boxX * (boardX + 1))},
+                            new double[]{(boxY * i) + yPad, (boxY * i) + yPad + (boxY / 2), (boxY * (i + 1)) + yPad}, 3);
+                    gc.setFill(Color.YELLOW);
+                }
+                gc.fillPolygon(new double[]{xPad + (boxX * (boardX + 1)) - 2, xPad + (boxX * boardX) + 2, xPad + (boxX * (boardX + 1)) - 2},
+                        new double[]{(boxY * i) + yPad + 2, (boxY * i) + yPad + (boxY / 2), (boxY * (i + 1)) + yPad - 2}, 3);
             }
-            gc.fillPolygon(new double[]{xPad-boxX+2,xPad-2,xPad-boxX+2},
-                    new double[]{(boxY*i)+yPad+2,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad-2},3);
-            //add right facing triangle#
-            //check if selected
-            if (boardX+1 == mouseX && i == mouseY-1){
-                gc.setFill(Color.RED);
-                gc.fillPolygon(new double[]{xPad+(boxX*(boardX+1)),xPad+(boxX*boardX),xPad+(boxX*(boardX+1))},
-                        new double[]{(boxY*i)+yPad,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad},3);
-                gc.setFill(Color.YELLOW);
-            }
-            gc.fillPolygon(new double[]{xPad+(boxX*(boardX+1))-2,xPad+(boxX*boardX)+2,xPad+(boxX*(boardX+1))-2},
-                    new double[]{(boxY*i)+yPad+2,(boxY*i)+yPad+(boxY/2),(boxY*(i+1))+yPad-2},3);
         }
         //draw players
         gc.setFill(Color.NAVY);
@@ -207,6 +214,7 @@ public class BoardGUI {
         controller.setCards(game.getTurn().getHand());
         baseBoarderPane.setBottom(root);
         //TODO: handle if current player can't move update the turn progression
+        startTurn();
     }
 
     /**
@@ -252,9 +260,23 @@ public class BoardGUI {
         //play selected tile at mouseX-1 and mouseY-1
     }
 
+    public void startTurn(){
+        Player p = game.getTurn();
+        Tile drawnTile = game.getBag().getRandomTile();
+        p.addToHand(drawnTile);
+        try {
+            ActionTile actionTile = (ActionTile)drawnTile;
+            //choose to play it
+        } catch (Exception e){
+            FloorTile floorTile = (FloorTile)drawnTile;
+            //must play this now
+        }
+    }
+
     public void playerMove(){
         Player p = this.game.getTurn();
         int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
+        if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1)
         if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
             p.movePlayer(newPos);
         }

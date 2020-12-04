@@ -262,7 +262,7 @@ public class Game extends Application {
                 }
             }
         }
-        //populate hands
+        //TODO: remove
         for (Player p : this.players){
             for (int i = 0; i < 6; i++) {
                 p.addToHand(this.gameBag.getRandomTile());

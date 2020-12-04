@@ -85,12 +85,6 @@ public class Board {
     public boolean isAccessibleFrom(int currentX,int currentY,int newX,int newY){
         boolean[] currrentAccessibleSides = board[currentX][currentY].getAccessibleSides();
         boolean[] targetAccessibleSides = board[newX][newY].getAccessibleSides();
-        for (boolean b : currrentAccessibleSides){
-            System.out.println(b);
-        }
-        for (boolean b : targetAccessibleSides){
-            System.out.println(b);
-        }
         //check that it is an adjacent tile
         if (currentX - newX > -2 && currentX - newX < 2){
             if (currentY - newY > -2 && currentY - newY < 2){
@@ -124,7 +118,12 @@ public class Board {
      * @param index the row index
      * @return true if you can push in a tile
      */
-    public boolean isRowPushable(int index){
+    public boolean isRowPushable(int index)
+    { for(int i=0;i<this.getLength();i++){
+        if (board[index][i].getIsFrozen() == true || board[index][i].getIsTileFixed()) {
+            return false;
+        }
+    }
         return true;
     }
 
@@ -133,8 +132,15 @@ public class Board {
      * @param index the column index
      * @return true if you can push in a tile
      */
-    public boolean isColumnPushable(int index){
+    public boolean isColumnPushable(int index)
+    { for (int i=0;i<this.getWidth();i++) {
+        if (board[i][index].getIsFrozen() == true || board[i][index].getIsTileFixed() == true) {
+            return false;
+        }
+    }
         return true;
     }
 
+
 }
+
