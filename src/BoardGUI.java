@@ -237,11 +237,19 @@ public class BoardGUI {
     }
 
     public void playerPushInTile(){
+        //check if tile can be pushed in
+        //get selected tile
 
+        //get selected rotation
+
+        //push in the tile
     }
 
     public void playerPlayAction(){
+        //if action tile can be played
+        //get selected action tile
 
+        //play selected tile at mouseX-1 and mouseY-1
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
