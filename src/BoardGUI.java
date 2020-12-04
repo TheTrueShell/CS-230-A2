@@ -319,4 +319,43 @@ public class BoardGUI {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml + ".fxml"));
         return loader;
     }
+    
+
+    public void leftRotateButtonAction(ActionEvent actionEvent) {
+
+        //TODO: Connect to currently selected tile
+        FloorTile tempTile = null;
+
+        try {
+
+            tempTile.setRotation(tempTile.getRotation() - 90);
+
+        } catch (Exception e) {
+            try {
+                tempTile.setRotation(0);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
+    }
+
+    public void rightRotateButtonAction(ActionEvent actionEvent) {
+
+        FloorTile tempTile = null;
+        //TODO: Connect to currently selected tile
+
+        try {
+
+            tempTile.setRotation(tempTile.getRotation() + 90);
+
+        } catch (Exception e) {
+            try {
+                tempTile.setRotation(360);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
+    }
 }
