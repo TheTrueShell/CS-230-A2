@@ -208,13 +208,14 @@ public class BoardGUI {
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
 
+        startTurn();
+
         FXMLLoader loader = loadFXML("CardHandGUI");
         Parent root = loader.load();
         CardHandGUI controller = loader.getController();
         controller.setCards(game.getTurn().getHand());
         baseBoarderPane.setBottom(root);
         //TODO: handle if current player can't move update the turn progression
-        startTurn();
     }
 
     /**
@@ -240,6 +241,7 @@ public class BoardGUI {
                 } if (turnProgression == 2){
                     playerMove();
                 }
+                drawCanvas();
             }
         }
     }
@@ -260,16 +262,34 @@ public class BoardGUI {
         //play selected tile at mouseX-1 and mouseY-1
     }
 
+    //used at the start of a players turn
     public void startTurn(){
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
         p.addToHand(drawnTile);
+        //System.out.println(p.getHand().size());
         try {
             ActionTile actionTile = (ActionTile)drawnTile;
             //choose to play it
+            playerTurnTag.setText("Do you want to play the action Tile");
         } catch (Exception e){
             FloorTile floorTile = (FloorTile)drawnTile;
             //must play this now
+            playerTurnTag.setText("You must place the floor Tile");
+        }
+    }
+
+    public void handClicked(int index){
+        Player p = game.getTurn();
+        Tile selectedTile = p.getHand().get(index);
+        try {
+            ActionTile actionTile = (ActionTile)selectedTile;
+            //choose to play it
+            playerTurnTag.setText("Click on a tile to play this on");
+        } catch (Exception e){
+            FloorTile floorTile = (FloorTile)selectedTile;
+            //must play this now
+            playerTurnTag.setText("Set the rotation and click a triangle to push in from");
         }
     }
 

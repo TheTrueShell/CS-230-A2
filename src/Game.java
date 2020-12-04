@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -17,13 +18,15 @@ import javafx.stage.Stage;
 /**
  * This class is the main entry point to the game.
  * It creates and runs the game.
- * @author Benjamin Rockley, Mohammed T
+ * @author Benjamin Rockley, Mohammed T, Music Implementation William Aodan Telford
  * @version 0.9
  */
 public class Game extends Application {
     private static final String PROFILES_PATH = "profiles.txt";
     private static final String GAME_SAVE_PATH = "gameInProgress.txt";
     private static final String MUSIC_FILE_PATH = "theme3.mp3";
+    private static final String MENU_SOUND_FILE_PATH = "menuSound.mp3";
+
 
     private Bag gameBag;
     private ArrayList<Player> players;
@@ -31,6 +34,9 @@ public class Game extends Application {
     private Player turn;
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
     private static double musicVolume = 0.5;
+    private static MediaPlayer mediaPlayer;
+    private static MediaPlayer menuSound;
+
 
     // GUI
     @Override
@@ -38,6 +44,7 @@ public class Game extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent root = (Parent)loader.load();
+
         playMusic();
         primaryStage.setTitle("Labyrinth");
         primaryStage.setScene(new Scene(root, 600, 400));
@@ -47,14 +54,28 @@ public class Game extends Application {
 
     }
 
+    /**
+     * Reads the final music file path and creates a mediaplayer. Setting it to autoplay
+     */
+
     public static void playMusic() {
 
         //Instantiating Media class
         Media media = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
+
         //Instantiating MediaPlayer class
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(musicVolume);
         mediaPlayer.setAutoPlay(true);
+
+    }
+
+    public static void playMenuSound() {
+        Media menuMedia = new Media(new File(MENU_SOUND_FILE_PATH).toURI().toString());
+        //Instantiating MediaPlayer class
+        menuSound = new MediaPlayer(menuMedia);
+        menuSound.setVolume(musicVolume);
+        menuSound.play();
 
     }
 
@@ -263,11 +284,11 @@ public class Game extends Application {
             }
         }
         //TODO: remove
-        for (Player p : this.players){
-            for (int i = 0; i < 6; i++) {
-                p.addToHand(this.gameBag.getRandomTile());
-            }
-        }
+//        for (Player p : this.players){
+//            for (int i = 0; i < 6; i++) {
+//                p.addToHand(this.gameBag.getRandomTile());
+//            }
+//        }
     }
 
     /**
@@ -568,9 +589,14 @@ public class Game extends Application {
         return null;
     }
 
+    /**
+     * Sets the music's volume
+     * @param newMusicVolume
+     */
     public static void setMusicVolume(double newMusicVolume) {
 
         musicVolume = newMusicVolume;
+        mediaPlayer.setVolume(musicVolume);
 
     }
 }

@@ -51,6 +51,7 @@ public class ProfileMenu {
 
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent mainMenuFXMLParent = (Parent)loader.load();
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
@@ -64,6 +65,7 @@ public class ProfileMenu {
 
     @FXML
     public void addButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
 
         Ok.setVisible(true);
         Input.setVisible(true);
@@ -78,6 +80,7 @@ public class ProfileMenu {
 
     @FXML
     public void editButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
 
         Ok.setVisible(true);
         Input.setVisible(true);
@@ -92,6 +95,7 @@ public class ProfileMenu {
 
     @FXML
     public void deleteButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         Ok.setVisible(true);
         Input.setVisible(true);
         Label.setVisible(true);
@@ -105,6 +109,7 @@ public class ProfileMenu {
 
     @FXML
     public void okButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         if (addClicked == true) {
             String name = Input.getText();
             game.createProfile(name);
