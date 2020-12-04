@@ -200,6 +200,7 @@ public class BoardGUI {
         this.game = game;
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
+        //TODO: handle if current player can't move update the turn progression
     }
 
     /**
