@@ -10,7 +10,7 @@ public class CardHandGUI {
 
     public void setCards(ArrayList<Tile> deck) {
         for(Tile card : deck) {
-            Image cardImage = new Image("T-Junction.png"); //card.getImageLocation()
+            Image cardImage = new Image(card.getImageLocation(), 64,64,true,true);
             deckHBox.getChildren().add(new ImageView(cardImage));
         }
     }
