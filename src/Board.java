@@ -124,7 +124,12 @@ public class Board {
      * @param index the row index
      * @return true if you can push in a tile
      */
-    public boolean isRowPushable(int index){
+    public boolean isRowPushable(int index)
+    { for(int i=0;i<this.getLength();i++){
+        if (board[index][i].getIsFrozen() == true || board[index][i].getIsTileFixed()) {
+            return false;
+        }
+    }
         return true;
     }
 
@@ -133,8 +138,15 @@ public class Board {
      * @param index the column index
      * @return true if you can push in a tile
      */
-    public boolean isColumnPushable(int index){
+    public boolean isColumnPushable(int index)
+    { for (int i=0;i<this.getWidth();i++) {
+        if (board[i][index].getIsFrozen() == true || board[i][index].getIsTileFixed() == true) {
+            return false;
+        }
+    }
         return true;
     }
 
+
 }
+
