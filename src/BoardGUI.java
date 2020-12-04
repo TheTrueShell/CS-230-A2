@@ -208,6 +208,8 @@ public class BoardGUI {
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
 
+        startTurn();
+
         FXMLLoader loader = loadFXML("CardHandGUI");
         Parent root = loader.load();
         CardHandGUI controller = loader.getController();
@@ -239,6 +241,7 @@ public class BoardGUI {
                 } if (turnProgression == 2){
                     playerMove();
                 }
+                drawCanvas();
             }
         }
     }
@@ -262,18 +265,27 @@ public class BoardGUI {
     public void startTurn(){
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
+        p.addToHand(drawnTile);
+        //System.out.println(p.getHand().size());
         try {
             ActionTile actionTile = (ActionTile)drawnTile;
             //choose to play it
+            playerTurnTag.setText("Do you want to play the action Tile");
         } catch (Exception e){
             FloorTile floorTile = (FloorTile)drawnTile;
             //must play this now
+            playerTurnTag.setText("You must place the floor Tile");
         }
+    }
+
+    public void handClicked(int index){
+
     }
 
     public void playerMove(){
         Player p = this.game.getTurn();
         int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
+        if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1)
         if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
             p.movePlayer(newPos);
         }

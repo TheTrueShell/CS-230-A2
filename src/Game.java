@@ -10,6 +10,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -21,23 +23,48 @@ import javafx.stage.Stage;
 public class Game extends Application {
     private static final String PROFILES_PATH = "profiles.txt";
     private static final String GAME_SAVE_PATH = "gameInProgress.txt";
+    private static final String MUSIC_FILE_PATH = "theme3.mp3";
 
     private Bag gameBag;
     private ArrayList<Player> players;
     private Board board;
     private Player turn;
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
+    private static double musicVolume = 0.5;
+    private static MediaPlayer mediaPlayer;
 
     // GUI
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent root = (Parent)loader.load();
+
+        playMusic();
         primaryStage.setTitle("Labyrinth");
         primaryStage.setScene(new Scene(root, 600, 400));
         MainMenuGUI controller = (MainMenuGUI)loader.getController();
         controller.setGame(new Game());
         primaryStage.show();
+
+    }
+
+    public static void playMusic() {
+
+        //Instantiating Media class
+        Media media = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
+
+        //Instantiating MediaPlayer class
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(musicVolume);
+        boolean playing = mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
+        if(playing = true) {
+
+            mediaPlayer.stop();
+
+        }
+        mediaPlayer.setAutoPlay(true);
+
     }
 
     public static void main(String[] args){
@@ -245,11 +272,11 @@ public class Game extends Application {
             }
         }
         //TODO: remove
-        for (Player p : this.players){
-            for (int i = 0; i < 6; i++) {
-                p.addToHand(this.gameBag.getRandomTile());
-            }
-        }
+//        for (Player p : this.players){
+//            for (int i = 0; i < 6; i++) {
+//                p.addToHand(this.gameBag.getRandomTile());
+//            }
+//        }
     }
 
     /**
@@ -548,5 +575,11 @@ public class Game extends Application {
         }
         //should never get here as we make sure to generate correct parameters
         return null;
+    }
+
+    public static void setMusicVolume(double newMusicVolume) {
+
+        musicVolume = newMusicVolume;
+
     }
 }
