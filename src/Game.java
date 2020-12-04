@@ -31,6 +31,7 @@ public class Game extends Application {
     private Player turn;
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
     private static double musicVolume = 0.5;
+    private static MediaPlayer mediaPlayer;
 
     // GUI
     @Override
@@ -38,6 +39,7 @@ public class Game extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent root = (Parent)loader.load();
+
         playMusic();
         primaryStage.setTitle("Labyrinth");
         primaryStage.setScene(new Scene(root, 600, 400));
@@ -51,9 +53,16 @@ public class Game extends Application {
 
         //Instantiating Media class
         Media media = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
+
         //Instantiating MediaPlayer class
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(musicVolume);
+        boolean playing = mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
+        if(playing = true) {
+
+            mediaPlayer.stop();
+
+        }
         mediaPlayer.setAutoPlay(true);
 
     }
