@@ -9,6 +9,7 @@
 public class FireTile extends ActionTileFloor {
 
     private final String TILETYPE = "FireTile";
+    private static String imageLocation = "Fire.png";
 
     public FireTile() {
 
@@ -30,4 +31,13 @@ public class FireTile extends ActionTileFloor {
 
     }
 
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
+
+        return imageLocation;
+
+    }
 }

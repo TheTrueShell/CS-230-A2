@@ -9,6 +9,7 @@
 public class BackTrackTile extends ActionTile {
 
     private final String TILETYPE = "BackTrackTile";
+    private static String imageLocation = "BackTrack.png";
 
     public void action(Player player) {
 
@@ -16,4 +17,13 @@ public class BackTrackTile extends ActionTile {
 
     }
 
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
+
+        return imageLocation;
+
+    }
 }

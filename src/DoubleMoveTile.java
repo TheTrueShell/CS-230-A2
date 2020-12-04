@@ -9,6 +9,7 @@
 public class DoubleMoveTile extends ActionTile {
 
     private final String TILETYPE = "DoubleMoveTile";
+    private static String imageLocation = "DoubleMove.png";
 
     public void action(Player player) {
 
@@ -16,4 +17,13 @@ public class DoubleMoveTile extends ActionTile {
 
     }
 
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
+
+        return imageLocation;
+
+    }
 }
