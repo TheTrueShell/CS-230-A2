@@ -30,6 +30,7 @@ public class BoardGUI {
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
     private Image fixedImage = new Image("F.png");
     private int turnProgression = 2;
+    private int handIndex = -1;
 
     private Game game;
 
@@ -268,8 +269,7 @@ public class BoardGUI {
         //play selected tile at mouseX-1 and mouseY-1
         try {
             ActionTileFloor tile = (ActionTileFloor)t;
-            //TODO: wait for action floor tile to be redone
-            //tile.action(this.game.getBoard().board, mouseX, mouseY);
+            tile.action(this.game.getBoard(), (int)mouseX, (int)mouseY);
         } catch (Exception e){
             //not a action floor tile
             if (t.getTILETYPE().equals("DoubleMoveTile")){
@@ -302,6 +302,7 @@ public class BoardGUI {
 
     public void handClicked(int index){
         Player p = game.getTurn();
+        this.handIndex = index;
         Tile selectedTile = p.getHand().get(index);
         try {
             ActionTile actionTile = (ActionTile)selectedTile;
