@@ -278,6 +278,10 @@ public class BoardGUI {
         }
     }
 
+    public void handClicked(int index){
+
+    }
+
     public void playerMove(){
         Player p = this.game.getTurn();
         int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
