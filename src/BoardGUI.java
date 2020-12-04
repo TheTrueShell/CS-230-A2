@@ -233,7 +233,7 @@ public class BoardGUI {
     public void playerMove(){
         Player p = this.game.getTurn();
         int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
-        if(this.game.getBoard().isAccessibleFrom(newPos[0],newPos[1],p.getX(),p.getY())) {
+        if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
             p.movePlayer(newPos);
         }
     }

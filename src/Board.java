@@ -85,13 +85,19 @@ public class Board {
     public boolean isAccessibleFrom(int currentX,int currentY,int newX,int newY){
         boolean[] currrentAccessibleSides = board[currentX][currentY].getAccessibleSides();
         boolean[] targetAccessibleSides = board[newX][newY].getAccessibleSides();
+        for (boolean b : currrentAccessibleSides){
+            System.out.println(b);
+        }
+        for (boolean b : targetAccessibleSides){
+            System.out.println(b);
+        }
         //check that it is an adjacent tile
         if (currentX - newX > -2 && currentX - newX < 2){
             if (currentY - newY > -2 && currentY - newY < 2){
                 //check that it isn't diagonal
                 if (currentX == newX){
                     //if above
-                    if (currentY - newY == -1){
+                    if (currentY - newY == 1){
                         if (currrentAccessibleSides[0] && targetAccessibleSides[2]) {
                             return true;
                         }
@@ -100,7 +106,7 @@ public class Board {
                     }
                 }else if (currentY == newY){
                     //if to the left
-                    if (currentX - newX == -1){
+                    if (currentX - newX == 1){
                         if (currrentAccessibleSides[3] && targetAccessibleSides[1]) {
                             return true;
                         }
