@@ -141,6 +141,16 @@ public class Board {
         return true;
     }
 
+    /**
+     * inserts a given floorTile onto the board in the position: x,y
+     * @param tile tile to be inserted
+     * @param x x coordinate of tile
+     * @param y y coordinate of tile
+     */
+    public void push(FloorTile tile,int x, int y)
+    {
+        this.insertTile(tile,x,y);
+    }
 
 }
 
