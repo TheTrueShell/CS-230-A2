@@ -107,7 +107,6 @@ public class Game extends Application {
         try {
             FileWriter fileWriter = new FileWriter(GAME_SAVE_PATH);
             fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
-            //TODO:Wait for this to be done
             fileWriter.write(this.board.toString());
             fileWriter.write(this.players.size()+"\n");
             fileWriter.write(this.turn.getProfile());
@@ -122,8 +121,6 @@ public class Game extends Application {
                 fileWriter.write(p.getPreviousPosition()[0]+","+p.getPreviousPosition()[1]+"\n");
                 fileWriter.write(p.getPreviousPosition2()[0]+","+p.getPreviousPosition2()[1]+"\n");
             }
-            //TODO:Change this from a list of strings to a count of types
-            //eg. numStraight,numCorner,numT,numGoal,numIce,numFire,numDouble,numBacktrack
             for (Tile t : this.gameBag.getTiles()){
                 fileWriter.write(t.getTILETYPE()+"\n");
             }
