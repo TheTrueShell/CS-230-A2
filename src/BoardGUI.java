@@ -30,6 +30,7 @@ public class BoardGUI {
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
     private Image fixedImage = new Image("F.png");
     private int turnProgression = 2;
+    private int handIndex = -1;
 
     private Game game;
 
@@ -249,17 +250,37 @@ public class BoardGUI {
     public void playerPushInTile(){
         //check if tile can be pushed in
         //get selected tile
-
+        FloorTile t = null;
         //get selected rotation
-
+        int rotation = 0;
         //push in the tile
+        int index = 1;
+        boolean forward = true;
+        //TODO: wait for implementation
+        //this.game.getBoard().pushInRow(t,1,forward);
+
+        this.turnProgression = 2;
     }
 
     public void playerPlayAction(){
         //if action tile can be played
         //get selected action tile
-
+        ActionTile t = null;
         //play selected tile at mouseX-1 and mouseY-1
+        try {
+            ActionTileFloor tile = (ActionTileFloor)t;
+            tile.action(this.game.getBoard(), (int)mouseX, (int)mouseY);
+        } catch (Exception e){
+            //not a action floor tile
+            if (t.getTILETYPE().equals("DoubleMoveTile")){
+                DoubleMoveTile tile = (DoubleMoveTile)t;
+                tile.action(this.game.getTurn());
+            } else {
+                BackTrackTile tile = (BackTrackTile)t;
+                //TODO: implement this
+            }
+        }
+        this.turnProgression = 2;
     }
 
     //used at the start of a players turn
@@ -281,15 +302,18 @@ public class BoardGUI {
 
     public void handClicked(int index){
         Player p = game.getTurn();
+        this.handIndex = index;
         Tile selectedTile = p.getHand().get(index);
         try {
             ActionTile actionTile = (ActionTile)selectedTile;
             //choose to play it
             playerTurnTag.setText("Click on a tile to play this on");
+            this.turnProgression = 1;
         } catch (Exception e){
             FloorTile floorTile = (FloorTile)selectedTile;
             //must play this now
             playerTurnTag.setText("Set the rotation and click a triangle to push in from");
+            this.turnProgression = 0;
         }
     }
 
