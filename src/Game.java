@@ -203,6 +203,7 @@ public class Game extends Application {
                 this.players.set(i,p);
             }
         }
+        this.turn = this.players.get(0);
         this.gameBag = new Bag();
         lineReader = new Scanner(presetReader.next()).useDelimiter(",");
         //corner,straight,tjunction,ice,fire,double,back
