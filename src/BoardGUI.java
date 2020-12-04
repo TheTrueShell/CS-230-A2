@@ -262,6 +262,7 @@ public class BoardGUI {
         //play selected tile at mouseX-1 and mouseY-1
     }
 
+    //used at the start of a players turn
     public void startTurn(){
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
@@ -279,7 +280,17 @@ public class BoardGUI {
     }
 
     public void handClicked(int index){
-
+        Player p = game.getTurn();
+        Tile selectedTile = p.getHand().get(index);
+        try {
+            ActionTile actionTile = (ActionTile)selectedTile;
+            //choose to play it
+            playerTurnTag.setText("Click on a tile to play this on");
+        } catch (Exception e){
+            FloorTile floorTile = (FloorTile)selectedTile;
+            //must play this now
+            playerTurnTag.setText("Set the rotation and click a triangle to push in from");
+        }
     }
 
     public void playerMove(){
