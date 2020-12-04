@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 /**
  * This class is the main entry point to the game.
  * It creates and runs the game.
- * @author Benjamin Rockley, Mohammed T
+ * @author Benjamin Rockley, Mohammed T, Music Implementation William Aodan Telford
  * @version 0.9
  */
 public class Game extends Application {
@@ -48,6 +48,10 @@ public class Game extends Application {
         primaryStage.show();
 
     }
+
+    /**
+     * Reads the final music file path and creates a mediaplayer. Setting it to autoplay
+     */
 
     public static void playMusic() {
 
