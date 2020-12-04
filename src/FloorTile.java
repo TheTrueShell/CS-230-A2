@@ -158,7 +158,7 @@ public abstract class FloorTile extends Tile {
 
     public boolean[] getAccessibleSides() {
 
-        return this.accessibleSides;
+        return accessibleSides;
 
     }
 

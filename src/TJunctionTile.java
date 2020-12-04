@@ -20,7 +20,7 @@ public class TJunctionTile extends FloorTile {
 
     public TJunctionTile(int tileRotation) throws Exception {
 
-        boolean[] sides  = {false,true,true,true};
+        boolean[] sides  = {true,true,true,false};
         setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);

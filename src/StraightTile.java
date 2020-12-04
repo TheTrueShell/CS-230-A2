@@ -19,7 +19,7 @@ public class StraightTile extends FloorTile {
      */
 
     public StraightTile(int tileRotation) throws Exception {
-        boolean[] sides  = {true,false,false,true};
+        boolean[] sides  = {true,false,true,false};
         setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);
