@@ -21,6 +21,7 @@ public class BoardGUI {
     @FXML public Button nextTurnBtn;
     @FXML private Canvas canvas;
     @FXML public BorderPane baseBoarderPane;
+    @FXML public Label playerTurnTag;
 
     private int boardX;
     private int boardY;
@@ -250,6 +251,18 @@ public class BoardGUI {
         //get selected action tile
 
         //play selected tile at mouseX-1 and mouseY-1
+    }
+
+    public void startTurn(){
+        Player p = game.getTurn();
+        Tile drawnTile = game.getBag().getRandomTile();
+        try {
+            ActionTile actionTile = (ActionTile)drawnTile;
+            //choose to play it
+        } catch (Exception e){
+            FloorTile floorTile = (FloorTile)drawnTile;
+            //must play this now
+        }
     }
 
     public void playerMove(){
