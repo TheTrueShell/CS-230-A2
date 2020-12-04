@@ -57,12 +57,6 @@ public class Game extends Application {
         //Instantiating MediaPlayer class
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(musicVolume);
-        boolean playing = mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
-        if(playing = true) {
-
-            mediaPlayer.stop();
-
-        }
         mediaPlayer.setAutoPlay(true);
 
     }
@@ -577,9 +571,14 @@ public class Game extends Application {
         return null;
     }
 
+    /**
+     * Sets the music's volume
+     * @param newMusicVolume
+     */
     public static void setMusicVolume(double newMusicVolume) {
 
         musicVolume = newMusicVolume;
+        mediaPlayer.setVolume(musicVolume);
 
     }
 }

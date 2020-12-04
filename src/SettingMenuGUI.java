@@ -37,7 +37,6 @@ public class SettingMenuGUI {
 
         double musicVolume = (musicSlider.getValue() / 100);
         Game.setMusicVolume(musicVolume);
-        Game.playMusic();
 
     }
 }
