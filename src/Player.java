@@ -22,7 +22,7 @@ public class Player {
     /**
      * Contains a hand of cards
      */
-    private ArrayList<Tile> HandOfCards;
+    private ArrayList<Tile> HandOfCards = new ArrayList<Tile>();
     /**
      * Contains the current profile
      */
