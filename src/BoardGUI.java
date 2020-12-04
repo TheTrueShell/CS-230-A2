@@ -214,6 +214,7 @@ public class BoardGUI {
         controller.setCards(game.getTurn().getHand());
         baseBoarderPane.setBottom(root);
         //TODO: handle if current player can't move update the turn progression
+        startTurn();
     }
 
     /**
@@ -262,6 +263,7 @@ public class BoardGUI {
     public void startTurn(){
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
+        p.addToHand(drawnTile);
         try {
             ActionTile actionTile = (ActionTile)drawnTile;
             //choose to play it
@@ -274,6 +276,7 @@ public class BoardGUI {
     public void playerMove(){
         Player p = this.game.getTurn();
         int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
+        if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1)
         if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
             p.movePlayer(newPos);
         }
