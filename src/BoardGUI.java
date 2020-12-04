@@ -27,6 +27,7 @@ public class BoardGUI {
     private String img;
     private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
+    private int turnProgression = 0;
 
     private Game game;
 
@@ -217,8 +218,30 @@ public class BoardGUI {
                 //System.out.println("x: "+xTimes+" y: "+yTimes);
                 mouseX = xTimes;
                 mouseY = yTimes;
+                if (turnProgression == 0){
+                    playerMove();
+                } if (turnProgression == 1){
+                    playerPushInTile();
+                } if (turnProgression == 2){
+                    playerPlayAction();
+                }
             }
         }
+    }
+
+    public void playerMove(){
+        Player p = this.game.getTurn();
+        //this.game.getBoard().isAccessable(mouseX-1,mouseY-1,p.getX(),p.getY());
+        int[] newPos = {(int)mouseX-1,(int)mouseY-1};
+        p.movePlayer(newPos);
+    }
+
+    public void playerPushInTile(){
+
+    }
+
+    public void playerPlayAction(){
+
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
