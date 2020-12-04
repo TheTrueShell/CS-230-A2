@@ -196,10 +196,16 @@ public class BoardGUI {
         });
     }
 
-    public void setGame(Game game){
+    public void setGame(Game game) throws IOException {
         this.game = game;
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
+
+        FXMLLoader loader = loadFXML("CardHandGUI");
+        Parent root = loader.load();
+        CardHandGUI controller = loader.getController();
+        controller.setCards(game.getTurn().getHand());
+        baseBoarderPane.setBottom(root);
         //TODO: handle if current player can't move update the turn progression
     }
 
@@ -220,21 +226,13 @@ public class BoardGUI {
                 mouseX = xTimes;
                 mouseY = yTimes;
                 if (turnProgression == 0){
-                    playerMove();
-                } if (turnProgression == 1){
                     playerPushInTile();
-                } if (turnProgression == 2){
+                } if (turnProgression == 1){
                     playerPlayAction();
+                } if (turnProgression == 2){
+                    playerMove();
                 }
             }
-        }
-    }
-
-    public void playerMove(){
-        Player p = this.game.getTurn();
-        int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
-        if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
-            p.movePlayer(newPos);
         }
     }
 
@@ -254,9 +252,29 @@ public class BoardGUI {
         //play selected tile at mouseX-1 and mouseY-1
     }
 
+    public void playerMove(){
+        Player p = this.game.getTurn();
+        int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
+        if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
+            p.movePlayer(newPos);
+        }
+    }
+
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
-        Parent root = null;
-        root = FXMLLoader.load(getClass().getResource("NextTurnGUI.fxml"));
+        FXMLLoader loader = loadFXML("NextTurnGUI");
+        Parent root = loader.load();
+        NextTurnGUI controller = loader.getController();
+        controller.setNextTurnText(game.getTurn().getProfile() + "'s Turn");
         baseBoarderPane.setBottom(root);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    private FXMLLoader loadFXML (String fxml) throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml + ".fxml"));
+        return loader;
     }
 }
