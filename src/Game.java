@@ -604,4 +604,16 @@ public class Game extends Application {
         menuSound.setVolume(menuSoundVolume);
 
     }
+
+    public static double getMusicVolume() {
+
+        return musicVolume;
+
+    }
+
+    public static double getMenuSoundVolume() {
+
+        return menuSoundVolume;
+
+    }
 }
