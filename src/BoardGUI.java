@@ -196,10 +196,16 @@ public class BoardGUI {
         });
     }
 
-    public void setGame(Game game){
+    public void setGame(Game game) throws IOException {
         this.game = game;
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
+
+        FXMLLoader loader = loadFXML("CardHandGUI");
+        Parent root = loader.load();
+        CardHandGUI controller = loader.getController();
+        controller.setCards(game.getTurn().getHand());
+        baseBoarderPane.setBottom(root);
         //TODO: handle if current player can't move update the turn progression
     }
 
@@ -255,8 +261,20 @@ public class BoardGUI {
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
-        Parent root = null;
-        root = FXMLLoader.load(getClass().getResource("NextTurnGUI.fxml"));
+        FXMLLoader loader = loadFXML("NextTurnGUI");
+        Parent root = loader.load();
+        NextTurnGUI controller = loader.getController();
+        controller.setNextTurnText(game.getTurn().getProfile() + "'s Turn");
         baseBoarderPane.setBottom(root);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    private FXMLLoader loadFXML (String fxml) throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml + ".fxml"));
+        return loader;
     }
 }
