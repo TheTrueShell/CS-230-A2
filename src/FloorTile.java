@@ -97,6 +97,12 @@ public abstract class FloorTile extends Tile {
 
         } else {
 
+            if(rotation == 360){
+
+                rotation = 0;
+
+            }
+
             this.tileRotation = rotation;
             int x = rotation / 90;
             for (int i = 0; i < x; i++) {
@@ -114,39 +120,40 @@ public abstract class FloorTile extends Tile {
 
     public void setRotateAccessibleSides() {
 
-        for(int i = 0; i < accessibleSides.length; i++) {
+        boolean[] newacessiblesides = new boolean[4];
 
-           boolean[] accessibleSidestemp =  accessibleSides;
+        for (int i = 0; i < accessibleSides.length; i++) {
 
-            if (accessibleSides[i] == true) {
+            if(accessibleSides[i] == true) {
 
-                accessibleSidestemp[i] = false;
+                try {
 
-                // If we have reached the end of the array we still want to rotate the first spot.
-                //The whole tile will rotate clockwise in increments of 90 degrees
+                    newacessiblesides[i + 1] = true;
 
-                try { accessibleSidestemp[i+1] = true; }
-                catch (ArrayIndexOutOfBoundsException ex) {
+                } catch (ArrayIndexOutOfBoundsException ex) {
 
-                    accessibleSidestemp[0] = true;
+                    newacessiblesides[0] = true;
 
                 }
 
-            } else {
 
-                accessibleSidestemp[i] = true;
+            } else if (accessibleSides[i] == false) {
 
-                try { accessibleSidestemp[i+1] = false; }
-                catch (ArrayIndexOutOfBoundsException ex) {
+                try {
 
-                    accessibleSidestemp[0] = false;
+                    newacessiblesides[i + 1] = false;
+
+                } catch (ArrayIndexOutOfBoundsException ex) {
+
+                    newacessiblesides[0] = false;
 
                 }
+
             }
 
-            accessibleSides = accessibleSidestemp;
-
         }
+
+        accessibleSides = newacessiblesides;
 
     }
 
