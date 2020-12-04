@@ -74,4 +74,35 @@ public class Board {
         return sb.toString();
     }
 
+    public boolean isAccessibleFrom(int currentX,int currentY,int newX,int newY){
+        boolean[] currrentAccessibleSides = board[currentX][currentY].getAccessibleSides();
+        boolean[] targetAccessibleSides = board[newX][newY].getAccessibleSides();
+        //check that it is an adjacent tile
+        if (currentX - newX > -2 && currentX - newX < 2){
+            if (currentY - newY > -2 && currentY - newY < 2){
+                //check that it isn't diagonal
+                if (currentX == newX){
+                    //if above
+                    if (currentY - newY == -1){
+                        if (currrentAccessibleSides[0] && targetAccessibleSides[2]) {
+                            return true;
+                        }
+                    } else if (currrentAccessibleSides[2] && targetAccessibleSides[0]){
+                        return true;
+                    }
+                }else if (currentY == newY){
+                    //if to the left
+                    if (currentX - newX == -1){
+                        if (currrentAccessibleSides[3] && targetAccessibleSides[1]) {
+                            return true;
+                        }
+                    } else if (currrentAccessibleSides[1] && targetAccessibleSides[3]){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

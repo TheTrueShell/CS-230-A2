@@ -231,9 +231,10 @@ public class BoardGUI {
 
     public void playerMove(){
         Player p = this.game.getTurn();
-        //this.game.getBoard().isAccessable(mouseX-1,mouseY-1,p.getX(),p.getY());
-        int[] newPos = {(int)mouseX-1,(int)mouseY-1};
-        p.movePlayer(newPos);
+        int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
+        if(this.game.getBoard().isAccessibleFrom(newPos[0],newPos[1],p.getX(),p.getY())) {
+            p.movePlayer(newPos);
+        }
     }
 
     public void playerPushInTile(){
