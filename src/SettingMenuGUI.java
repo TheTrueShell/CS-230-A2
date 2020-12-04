@@ -4,11 +4,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class SettingMenuGUI {
+
+    @FXML
+    Slider musicSlider;
 
     private Game game;
 
@@ -29,4 +33,11 @@ public class SettingMenuGUI {
         this.game = game;
     }
 
+    public void volumeButtonAction(ActionEvent actionEvent) {
+
+        double musicVolume = (musicSlider.getValue() / 100);
+        Game.setMusicVolume(musicVolume);
+        Game.playMusic();
+
+    }
 }
