@@ -226,9 +226,9 @@ public class BoardGUI {
                 mouseX = xTimes;
                 mouseY = yTimes;
                 if (turnProgression == 0){
-                    playerPlayAction();
-                } if (turnProgression == 1){
                     playerPushInTile();
+                } if (turnProgression == 1){
+                    playerPlayAction();
                 } if (turnProgression == 2){
                     playerMove();
                 }
