@@ -256,8 +256,12 @@ public class BoardGUI {
         //push in the tile
         int index = 1;
         boolean forward = true;
-        //TODO: wait for implementation
-        //this.game.getBoard().pushInRow(t,1,forward);
+        //if row
+        if (mouseX == 0 || mouseX == boardX+1) {
+            this.game.getBoard().pushInRow(t, 1, forward);
+        } else if (mouseY == 0 || mouseY == boardY+1) {
+            this.game.getBoard().pushInColumn(t, 1, forward);
+        }
 
         this.turnProgression = 2;
     }
