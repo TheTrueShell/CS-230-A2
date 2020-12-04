@@ -249,17 +249,38 @@ public class BoardGUI {
     public void playerPushInTile(){
         //check if tile can be pushed in
         //get selected tile
-
+        FloorTile t = null;
         //get selected rotation
-
+        int rotation = 0;
         //push in the tile
+        int index = 1;
+        boolean forward = true;
+        //TODO: wait for implementation
+        //this.game.getBoard().pushInRow(t,1,forward);
+
+        this.turnProgression = 2;
     }
 
     public void playerPlayAction(){
         //if action tile can be played
         //get selected action tile
-
+        ActionTile t = null;
         //play selected tile at mouseX-1 and mouseY-1
+        try {
+            ActionTileFloor tile = (ActionTileFloor)t;
+            //TODO: wait for action floor tile to be redone
+            //tile.action(this.game.getBoard().board, mouseX, mouseY);
+        } catch (Exception e){
+            //not a action floor tile
+            if (t.getTILETYPE().equals("DoubleMoveTile")){
+                DoubleMoveTile tile = (DoubleMoveTile)t;
+                tile.action(this.game.getTurn());
+            } else {
+                BackTrackTile tile = (BackTrackTile)t;
+                //TODO: implement this
+            }
+        }
+        this.turnProgression = 2;
     }
 
     //used at the start of a players turn
@@ -286,10 +307,12 @@ public class BoardGUI {
             ActionTile actionTile = (ActionTile)selectedTile;
             //choose to play it
             playerTurnTag.setText("Click on a tile to play this on");
+            this.turnProgression = 1;
         } catch (Exception e){
             FloorTile floorTile = (FloorTile)selectedTile;
             //must play this now
             playerTurnTag.setText("Set the rotation and click a triangle to push in from");
+            this.turnProgression = 0;
         }
     }
 

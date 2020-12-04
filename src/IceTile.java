@@ -17,14 +17,24 @@ public class IceTile extends ActionTileFloor {
     }
 
     @Override
-    public void action(FloorTile tile) throws Exception {
+    public void action(Board board, int x, int y) throws Exception {
 
-        if (super.getIsPlayable()) {
-            tile.setIsFrozen(true);
-            System.out.println("Set " + tile.toString() + " to frozen");
-        } else {
+        for( int i = -1; i < x + 1; i++) {
 
-            throw new Exception("Cannot use this freeze card yet");
+            for( int z = -1; z < y + 1; z++) {
+
+                try {
+
+                    board.getTile(i,z).setIsFrozen(true);
+
+                } catch (ArrayIndexOutOfBoundsException ex) {
+
+                    System.out.println("Ice outside of array");
+
+                }
+
+
+            }
 
         }
 
