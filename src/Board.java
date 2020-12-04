@@ -74,6 +74,14 @@ public class Board {
         return sb.toString();
     }
 
+    /**
+     * Checks if a tile is accessible from another tile
+     * @param currentX the starting tiles x
+     * @param currentY the starting tiles y
+     * @param newX the tile we want to get tos x
+     * @param newY the tile we want to get tos y
+     * @return
+     */
     public boolean isAccessibleFrom(int currentX,int currentY,int newX,int newY){
         boolean[] currrentAccessibleSides = board[currentX][currentY].getAccessibleSides();
         boolean[] targetAccessibleSides = board[newX][newY].getAccessibleSides();
@@ -103,6 +111,24 @@ public class Board {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if a tile can be pushed in on that row
+     * @param index the row index
+     * @return true if you can push in a tile
+     */
+    public boolean isRowPushable(int index){
+        return true;
+    }
+
+    /**
+     * Returns true if a tile can be pushed in on that column
+     * @param index the column index
+     * @return true if you can push in a tile
+     */
+    public boolean isColumnPushable(int index){
+        return true;
     }
 
 }
