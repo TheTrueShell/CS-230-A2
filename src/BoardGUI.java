@@ -29,7 +29,7 @@ public class BoardGUI {
     private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
     private Image fixedImage = new Image("F.png");
-    private int turnProgression = 0;
+    private int turnProgression = 2;
 
     private Game game;
 
@@ -116,7 +116,7 @@ public class BoardGUI {
         }
         gc.setFill(Color.YELLOW);
         //draw selectable columns with triangle buttons
-        for (int i = 1; i < (boardX-1); i++){
+        for (int i = 0; i < (boardX); i++){
             if (this.game.getBoard().isColumnPushable(i)) {
                 //add down facing triangle
                 //check if selected
@@ -141,7 +141,7 @@ public class BoardGUI {
             }
         }
         //draw selectable rows with triangles
-        for (int i = 1; i < (boardY-1); i++){
+        for (int i = 0; i < (boardY); i++){
             if (this.game.getBoard().isRowPushable(i)) {
                 //add right facing triangle
                 //check if selected
