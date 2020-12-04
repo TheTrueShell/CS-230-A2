@@ -28,6 +28,7 @@ public class BoardGUI {
     private String img;
     private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
+    private Image fixedImage = new Image("F.png");
     private int turnProgression = 0;
 
     private Game game;
@@ -102,6 +103,9 @@ public class BoardGUI {
                         gc.drawImage(statusEffects[0],(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
                     } else if (t.getIsFrozen()){
                         gc.drawImage(statusEffects[1],(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
+                    }
+                    if (t.getIsTileFixed()){
+                        gc.drawImage(fixedImage,(boxX*i)+xPad+2,(boxY*j)+yPad+2,boxX-4,boxY-4);
                     }
                 } else {
                     //if tile is null draw a blue square
