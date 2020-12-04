@@ -8,6 +8,7 @@
 public class IceTile extends ActionTileFloor {
 
     private final String TILETYPE = "IceTile";
+    private static String imageLocation = "Ice.png";
 
     public IceTile() {
 
@@ -29,5 +30,13 @@ public class IceTile extends ActionTileFloor {
 
     }
 
+    /**
+     * Getter for the Image location of the tile.
+     * @return String imageLocation
+     */
+    public String getImageLocation() {
 
+        return imageLocation;
+
+    }
 }
