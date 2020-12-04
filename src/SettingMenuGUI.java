@@ -13,6 +13,8 @@ public class SettingMenuGUI {
 
     @FXML
     Slider musicSlider;
+    @FXML
+    Slider soundsSlider;
 
     private Game game;
 
@@ -38,6 +40,12 @@ public class SettingMenuGUI {
 
         double musicVolume = (musicSlider.getValue() / 100);
         Game.setMusicVolume(musicVolume);
+
+    }
+
+    public void menuVolumeButtonAction(ActionEvent actionEvent) {
+        double menuVolume = (soundsSlider.getValue() / 100);
+        Game.setMenuSoundVolume(menuVolume);
 
     }
 }
