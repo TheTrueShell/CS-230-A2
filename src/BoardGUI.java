@@ -328,9 +328,9 @@ public class BoardGUI {
                 BackTrackTile tile = (BackTrackTile)t;
                 //TODO: implement this
                 //need to select player (on board ?)
-
+                Player selectedPlayer = null;
                 //set selected player to position two moves ago
-
+                selectedPlayer.movePlayer(selectedPlayer.getPreviousPosition2());
             }
         }
         isAbleToMove(this.game.getTurn());
