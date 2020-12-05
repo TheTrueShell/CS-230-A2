@@ -49,7 +49,7 @@ public class BoardGUI {
      * 3: turn is finished waiting on end turn
      */
     private int turnProgression = -1;
-    //-1 is not started, 0 is place floor tile, 1 is play action til,e 2 is move, 3 is turn ended
+    //-1 is not selected
     private int handIndex = -1;
 
     private Game game;
