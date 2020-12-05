@@ -411,11 +411,27 @@ public class BoardGUI {
         }
     }
 
+    /**
+     * Decrements the number of status turns remaining
+     */
+    public void reduceStatusTurns(){
+        for (int i = 0; i < boardX; i++){
+            for (int j = 0; j < boardY; j++){
+                FloorTile t = this.game.getBoard().getTile(i,j);
+                if (t.getIsOnFire() || t.getIsFrozen()){
+                    int turns = t.getStatusTurnsRemaining();
+                    t.setStatusTurnsRemaining(turns-1);
+                }
+            }
+        }
+    }
+
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
         System.out.println(turnProgression);
         if (turnProgression == -1){
             //Then the turn has not started, but the cards should be shown.
             startTurn();
+            reduceStatusTurns();
             setCards(this.game.getTurn().getHand());
             nextTurnButton.setText("End Turn");
         } else if (turnProgression == 3) {
