@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane style="-fx-background-image: url(&quot;mcbg.jpg&quot;);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProfileMenu">
-   <bottom>
+   <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="622.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="Add" layoutX="48.0" layoutY="80.0" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="26.0" prefWidth="50.0" text="Add" />
@@ -23,5 +23,5 @@
             <Label fx:id="Label2" layoutX="450.0" layoutY="134.0" text="New Name:" textFill="WHITE" />
          </children>
       </AnchorPane>
-   </bottom>
+   </center>
 </BorderPane>
