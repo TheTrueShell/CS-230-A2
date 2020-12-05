@@ -410,7 +410,6 @@ public class BoardGUI {
             nextTurnButton.setText("End Turn");
         } else if (turnProgression == 3) {
             //The turn has ended
-            RotationImage.setImage(null);
             RotationImage.setRotate(0);
             this.turnProgression = -1;
             this.handIndex = -1;
@@ -426,7 +425,8 @@ public class BoardGUI {
             }
         }
 
-    }
+
+        RotationImage.setImage(null);    }
 
     public void hideCards() {
         baseBoarderPane.setBottom(null);
