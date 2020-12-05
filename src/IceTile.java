@@ -19,9 +19,9 @@ public class IceTile extends ActionTileFloor {
     @Override
     public void action(Board board, int x, int y) throws Exception {
 
-        for( int i = -1; i < x + 1; i++) {
+        for( int i = x-2; i < x + 1; i++) {
 
-            for( int z = -1; z < y + 1; z++) {
+            for( int z = y-2; z < y + 1; z++) {
 
                 try {
 
@@ -37,6 +37,7 @@ public class IceTile extends ActionTileFloor {
             }
 
         }
+
 
     }
 
