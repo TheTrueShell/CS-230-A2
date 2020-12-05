@@ -17,7 +17,7 @@ public class IceTile extends ActionTileFloor {
     }
 
     @Override
-    public void action(Board board, int x, int y) throws Exception {
+    public void action(Board board, int x, int y, int numOfPlayers) throws Exception {
 
         for( int i = x-2; i < x + 1; i++) {
 
@@ -26,6 +26,8 @@ public class IceTile extends ActionTileFloor {
                 try {
 
                     board.getTile(i,z).setIsFrozen(true);
+                    //melts at the start of your next turn
+                    board.getTile(i,z).setStatusTurnsRemaining(numOfPlayers);
 
                 } catch (ArrayIndexOutOfBoundsException ex) {
 

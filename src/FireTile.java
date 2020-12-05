@@ -18,7 +18,7 @@ public class FireTile extends ActionTileFloor {
     }
 
     @Override
-    public void action(Board board, int x, int y) throws Exception {
+    public void action(Board board, int x, int y,int numOfPlayers) throws Exception {
 
         for( int i = x-2; i < x + 1; i++) {
 
@@ -27,6 +27,8 @@ public class FireTile extends ActionTileFloor {
                 try {
 
                     board.getTile(i,z).setIsOnFire(true);
+                    //goes out after the end of your next turn
+                    board.getTile(i,z).setStatusTurnsRemaining(numOfPlayers+1);
 
                 } catch (ArrayIndexOutOfBoundsException ex) {
 

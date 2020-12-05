@@ -311,7 +311,7 @@ public class BoardGUI {
         //play selected tile at mouseX-1 and mouseY-1
         try {
             ActionTileFloor tile = (ActionTileFloor)t;
-            tile.action(this.game.getBoard(), (int)mouseX, (int)mouseY);
+            tile.action(this.game.getBoard(), (int)mouseX, (int)mouseY, this.game.getPlayers().size());
         } catch (Exception e){
             //not a action floor tile
             if (t instanceof DoubleMoveTile){
