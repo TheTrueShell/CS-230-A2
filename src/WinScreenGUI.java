@@ -24,7 +24,7 @@ import java.util.Observable;
  * @author Mohammed T, Aryan Dusi
  * @version 0.0.1
  */
-public class WinScreen{
+public class WinScreenGUI {
     @FXML
     private Label playerWin;
 
@@ -38,7 +38,7 @@ public class WinScreen{
      * @param winner the player who won
      * @param losers an arraylist of the player(s) that lost
      */
-    public WinScreen(Player winner,ArrayList<Player> losers) {
+    public WinScreenGUI(Player winner, ArrayList<Player> losers) {
         String winnerProfile = winner.getProfile();
         playerWin.setText(winnerProfile);
 
@@ -65,4 +65,23 @@ public class WinScreen{
 
     }
 
+    public void mainMenuButtonAction(ActionEvent actionEvent) {
+
+        Game.playMenuSound();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        Parent mainMenuFXMLParent = null;
+        try {
+            mainMenuFXMLParent = (Parent)loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(mainMenuFXMLScene);
+        MainMenuGUI controller = (MainMenuGUI)loader.getController();
+        controller.setGame(this.game);
+        primaryStage.show();
+
+    }
 }
