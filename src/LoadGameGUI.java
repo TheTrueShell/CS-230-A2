@@ -4,9 +4,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author William Aodan Telford
@@ -15,7 +22,35 @@ import java.io.IOException;
 
 public class LoadGameGUI {
 
+    private final String PATH_TO_SAVE_GAMES = "saves";
+
+    @FXML
+    private ListView gameList;
     private Game game;
+    private ArrayList<String> games;
+
+    @FXML
+    public void initialize(){
+
+        //Getting the folder saves
+        File directoryPath = new File(PATH_TO_SAVE_GAMES);
+        //List of all files and directories
+        File filesList[] = directoryPath.listFiles();
+        System.out.println("List of files and directories in the specified directory:");
+
+
+        for(File file : filesList) {
+
+            try {
+                game.loadBoard(file.getPath());
+            } catch (FileNotFoundException e) {
+                System.out.println("No files found");
+            }
+
+        }
+
+
+    }
 
     public void setGame(Game game){
         this.game = game;

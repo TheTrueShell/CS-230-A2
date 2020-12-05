@@ -16,7 +16,7 @@
         </ScrollBar>
     </right>
     <center>
-        <ListView prefHeight="394.0" prefWidth="381.0" BorderPane.alignment="CENTER">
+        <ListView prefHeight="394.0" prefWidth="381.0" BorderPane.alignment="CENTER" fx:id="gameList">
             <BorderPane.margin>
                 <Insets bottom="20.0" left="20.0" top="20.0" />
             </BorderPane.margin>
