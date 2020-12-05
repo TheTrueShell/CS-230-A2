@@ -243,9 +243,9 @@ public class BoardGUI {
                 mouseY = yTimes;
                 if (turnProgression == 0){
                     playerPushInTile();
-                } if (turnProgression == 1){
+                } if (turnProgression == 1 && handIndex != -1){
                     playerPlayAction();
-                } if (turnProgression == 2){
+                } if (turnProgression == 2 || turnProgression == 1){
                     playerMove();
                 }
                 drawCanvas();
@@ -307,10 +307,12 @@ public class BoardGUI {
             ActionTile actionTile = (ActionTile)drawnTile;
             //choose to play it
             playerTurnTag.setText("Do you want to play the action Tile");
+            turnProgression = 1;
         } catch (Exception e){
             FloorTile floorTile = (FloorTile)drawnTile;
             //must play this now
             playerTurnTag.setText("You must place the floor Tile");
+            turnProgression = 0;
         }
     }
 
@@ -343,11 +345,27 @@ public class BoardGUI {
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
-        Text nextPlayer = new Text(game.getTurn().getProfile() + "'s Turn");
-        nextPlayer.setStyle("-fx-font-size: 32px; -fx-fill: white;");
-        nextTurnHBox.setStyle("-fx-background-color: #303030;");
-        nextTurnHBox.getChildren().add(nextPlayer);
-        baseBoarderPane.setBottom(nextTurnHBox);
+        if (turnProgression != 3){
+            //set next player
+            System.out.println(this.game.getTurn().getProfile());
+            this.game.nextTurn();
+            System.out.println(this.game.getTurn().getProfile());
+            //set as blank display
+            Text nextPlayer = new Text(game.getTurn().getProfile() + "'s Turn");
+            nextPlayer.setStyle("-fx-font-size: 32px; -fx-fill: white;");
+            nextTurnHBox.setStyle("-fx-background-color: #303030;");
+            nextTurnHBox.getChildren().add(nextPlayer);
+            baseBoarderPane.setBottom(nextTurnHBox);
+            turnProgression = 3;
+        } else if (turnProgression == 3) {
+            //reset display
+            RotationImage.setImage(null);
+            this.turnProgression = -1;
+            this.handIndex = -1;
+
+            startTurn();
+            setCards(this.game.getTurn().getHand());
+        }
     }
 
     public Game getGame() {
