@@ -327,6 +327,10 @@ public class BoardGUI {
             } else {
                 BackTrackTile tile = (BackTrackTile)t;
                 //TODO: implement this
+                //need to select player (on board ?)
+
+                //set selected player to position two moves ago
+
             }
         }
         isAbleToMove(this.game.getTurn());
@@ -387,7 +391,7 @@ public class BoardGUI {
 
     public int[] canMoveTo(Player p, double x, double y){
         int[] newPos = {(int) x, (int) y};
-        if (x >= 0 && x != boardX+1 && y >= 0 && y != boardY+1) {
+        if (x >= 0 && x < boardX && y >= 0 && y < boardY) {
             if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
                 return newPos;
             }
