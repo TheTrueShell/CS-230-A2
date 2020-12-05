@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane style="-fx-background-image: url(&quot;mcbg.jpg&quot;);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WinScreen">
+   <top>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="622.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="45.0" layoutY="47.0" prefHeight="66.0" prefWidth="146.0" text="Player:" textFill="#f5eeee">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+            <Label layoutX="368.0" layoutY="29.0" text="Loser(s):" textFill="#f8f3f3" />
+            <TextField fx:id="playerLost" layoutX="451.0" layoutY="80.0" prefHeight="26.0" prefWidth="166.0" />
+            <Label fx:id="playerWin" layoutX="227.0" layoutY="145.0" text="X" textFill="#fdfbfb">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+            <Label layoutX="305.0" layoutY="236.0" prefHeight="66.0" prefWidth="146.0" text="WINS!" textFill="#f2efef">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+            <Label layoutX="451.0" layoutY="4.0" prefHeight="66.0" prefWidth="165.0" text="Loser(s):" textFill="#fdf9f9">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+         </children>
+        </AnchorPane>
+   </top>
+</BorderPane>

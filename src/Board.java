@@ -174,6 +174,12 @@ public class Board {
         }
     }
 
+    /**
+     * inserts a given floorTile onto the board in the position: x,y
+     * @param tile tile to be inserted
+     * @param index of tile to be inserted from the left
+     * @param left determines whether the tile is inserted form the left side or right side.
+     */
     public FloorTile pushInRow(FloorTile tile,int index,boolean left)
     {
         if (left) {
