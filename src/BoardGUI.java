@@ -305,7 +305,7 @@ public class BoardGUI {
                 }
             }
         }
-        isAbleToMove(this.game.getTurn());
+        turnProgression = 1;
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
     }
@@ -419,7 +419,13 @@ public class BoardGUI {
             this.game.nextTurn();
             System.out.println(this.game.getTurn().getProfile());
             hideCards();
+        } else if(turnProgression != 0) {
+            isAbleToMove(this.game.getTurn());
+            if (turnProgression == 3) {
+                nextTurnButtonAction(actionEvent);
+            }
         }
+
     }
 
     public void hideCards() {
