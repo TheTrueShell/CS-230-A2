@@ -314,7 +314,7 @@ public class BoardGUI {
             tile.action(this.game.getBoard(), (int)mouseX, (int)mouseY);
         } catch (Exception e){
             //not a action floor tile
-            if (t.getTILETYPE().equals("DoubleMoveTile")){
+            if (t instanceof DoubleMoveTile){
                 DoubleMoveTile tile = (DoubleMoveTile)t;
                 this.doubleMove = true;
             } else {
@@ -383,6 +383,10 @@ public class BoardGUI {
                 this.doubleMove = false;
             }
         }
+        //check if player on the Goal tile
+        if (this.game.getBoard().getTile(p.getX(),p.getY()) instanceof GoalTile){
+            System.out.println("Winner: " + p.getProfile());
+        }
         drawCanvas();
     }
 
@@ -448,6 +452,10 @@ public class BoardGUI {
         return game;
     }
 
+    /**
+     * Rotate the selected tile left 90 degrees
+     * @param actionEvent the button click
+     */
     public void leftRotateButtonAction(ActionEvent actionEvent) {
         if (turnProgression == 0) {
             FloorTile tempTile = (FloorTile) this.game.getTurn().getHand().get(this.handIndex);
@@ -467,6 +475,10 @@ public class BoardGUI {
         }
     }
 
+    /**
+     * Rotate the tile right 90 degrees
+     * @param actionEvent the button click
+     */
     public void rightRotateButtonAction(ActionEvent actionEvent) {
         if (turnProgression == 0) {
             FloorTile tempTile = (FloorTile) this.game.getTurn().getHand().get(this.handIndex);
