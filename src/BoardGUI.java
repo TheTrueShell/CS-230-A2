@@ -1,7 +1,5 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.canvas.Canvas;
@@ -30,14 +28,26 @@ public class BoardGUI {
     @FXML public Label playerTurnTag;
     @FXML ImageView RotationImage;
 
+    /**
+     * BoardX is the board width
+     * BoardY is the height of the board
+     */
     private int boardX;
     private int boardY;
     private String img;
     private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
     private Image fixedImage = new Image("F.png");
+    /**
+     * Turnprogression means
+     * -1: turn not started
+     * 0: push in tile
+     * 1: play action tile
+     * 2: move player
+     * 3: turn is finished waiting on end turn
+     */
     private int turnProgression = -1;
-    //-1 is not started, 0 is place floor tile, 1 is play action til,e 2 is move, 3 is turn ended
+    //-1 is not selected
     private int handIndex = -1;
 
     private Game game;
@@ -217,7 +227,11 @@ public class BoardGUI {
         });
     }
 
-    public void setGame(Game game) throws IOException {
+    /**
+     * Sets the references in this class to correct values
+     * @param game the current game instance
+     */
+    public void setGame(Game game) {
         this.game = game;
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
@@ -291,7 +305,7 @@ public class BoardGUI {
                 }
             }
         }
-        isAbletoMove(this.game.getTurn());
+        isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
     }
@@ -314,7 +328,7 @@ public class BoardGUI {
                 //TODO: implement this
             }
         }
-        isAbletoMove(this.game.getTurn());
+        isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
     }
@@ -359,14 +373,14 @@ public class BoardGUI {
 
     public void playerMove(){
         Player p = this.game.getTurn();
-        int[] newPos = canMoveto(p, mouseX, mouseY);
+        int[] newPos = canMoveTo(p, mouseX, mouseY);
         if (newPos != null) {
             p.movePlayer(newPos);
             turnProgression = 3;
         }
     }
 
-    public int[] canMoveto(Player p, double x, double y){
+    public int[] canMoveTo(Player p, double x, double y){
         int[] newPos = {(int) x - 1, (int) y - 1};
         if (x > 0 && x != boardX+1 && y > 0 && y != boardY+1) {
             if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
@@ -376,14 +390,15 @@ public class BoardGUI {
         return null;
     }
 
-    public void isAbletoMove(Player p) {
-        if (canMoveto(p, p.getX() + 1, p.getY()) != null
-        || canMoveto(p, p.getX() - 1, p.getY()) != null
-        || canMoveto(p, p.getX(), p.getY() + 1) != null
-        || canMoveto(p, p.getX(), p.getY() - 1) != null) {
+    public void isAbleToMove(Player p) {
+        if (canMoveTo(p, p.getX() + 1, p.getY()) != null
+        || canMoveTo(p, p.getX() - 1, p.getY()) != null
+        || canMoveTo(p, p.getX(), p.getY() + 1) != null
+        || canMoveTo(p, p.getX(), p.getY() - 1) != null) {
             turnProgression = 2;
+        } else {
+            turnProgression = 3;
         }
-        turnProgression = 3;
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
