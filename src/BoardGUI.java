@@ -49,7 +49,8 @@ public class BoardGUI {
     private int turnProgression = -1;
     //-1 is not selected
     private int handIndex = -1;
-
+    //double move holder
+    private boolean doubleMove = false;
     private Game game;
 
     private HBox nextTurnHBox = new HBox();
@@ -322,7 +323,7 @@ public class BoardGUI {
             //not a action floor tile
             if (t.getTILETYPE().equals("DoubleMoveTile")){
                 DoubleMoveTile tile = (DoubleMoveTile)t;
-                tile.action(this.game.getTurn());
+                this.doubleMove = true;
             } else {
                 BackTrackTile tile = (BackTrackTile)t;
                 //TODO: implement this
@@ -376,7 +377,11 @@ public class BoardGUI {
         int[] newPos = canMoveTo(p, mouseX-1, mouseY-1);
         if (newPos != null) {
             p.movePlayer(newPos);
-            turnProgression = 3;
+            if (!this.doubleMove) {
+                turnProgression = 3;
+            } else {
+                this.doubleMove = false;
+            }
         }
     }
 
