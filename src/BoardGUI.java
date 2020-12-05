@@ -392,8 +392,9 @@ public class BoardGUI {
         || canMoveTo(p, p.getX(), p.getY() + 1) != null
         || canMoveTo(p, p.getX(), p.getY() - 1) != null) {
             turnProgression = 2;
+        } else {
+            turnProgression = 3;
         }
-        turnProgression = 3;
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
