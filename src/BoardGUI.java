@@ -1,5 +1,9 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.canvas.Canvas;
@@ -15,6 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -524,7 +529,20 @@ public class BoardGUI {
 
     public void saveGameButtonAction(ActionEvent actionEvent) {
 
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SaveMenu.fxml"));
+        Parent SaveMenuFXMLParent = null;
+        try {
+            SaveMenuFXMLParent = (Parent) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene SaveMenuFXMLScene = new Scene(SaveMenuFXMLParent);
+        Stage primaryStage = new Stage();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(SaveMenuFXMLScene);
+        SaveMenuGUI controller = (SaveMenuGUI) loader.getController();
+        controller.setGame(this.game);
+        primaryStage.show();
 
     }
 
