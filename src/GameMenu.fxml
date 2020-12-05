@@ -7,7 +7,6 @@
          <center>
             <VBox alignment="CENTER" prefHeight="551.0" prefWidth="894.0" style="-fx-spacing: 10px;" BorderPane.alignment="CENTER">
                <children>
-            <Button mnemonicParsing="false" text="Continue Game" />
                   <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#newGameButtonAction" prefHeight="25.0" prefWidth="99.0" text="New Game" textAlignment="CENTER" />
                   <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadGameButtonAction" prefHeight="25.0" prefWidth="99.0" text="Load Game" textAlignment="CENTER" />
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="99.0" text="Back" textAlignment="CENTER" />

@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @Author William Aodan Telford
+ * @Version 0.1
+ */
+
 public class LoadGameGUI {
 
     private Game game;
