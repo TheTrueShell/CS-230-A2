@@ -212,16 +212,8 @@ public class BoardGUI {
      */
     @FXML
     public void initialize(){
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(100),
-                        (event) -> {
-                            drawCanvas();
-                        })
-        );
         boardX = 5;
         boardY = 5;
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
         canvas.setOnMouseClicked(event -> {
             canvasClickEventHandler(event.getX(),event.getY());
             drawCanvas();
@@ -241,7 +233,7 @@ public class BoardGUI {
         //TODO: handle if current player can't move update the turn progression
 
         setCards(game.getTurn().getHand());
-        //TODO: actually move this to somewhere good
+        drawCanvas();
     }
 
     /**
@@ -268,10 +260,10 @@ public class BoardGUI {
                 } if (turnProgression == 2 || turnProgression == 1){
                     playerMove();
                 }
-                drawCanvas();
 
             }
         }
+        drawCanvas();
         setCards(this.game.getTurn().getHand());
     }
 
@@ -306,6 +298,7 @@ public class BoardGUI {
                 }
             }
         }
+        drawCanvas();
         turnProgression = 1;
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
@@ -333,6 +326,7 @@ public class BoardGUI {
 
             }
         }
+        drawCanvas();
         isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
@@ -343,6 +337,7 @@ public class BoardGUI {
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
         p.addToHand(drawnTile);
+        drawCanvas();
         //System.out.println(p.getHand().size());
         try {
             ActionTile actionTile = (ActionTile)drawnTile;
@@ -372,6 +367,7 @@ public class BoardGUI {
             playerTurnTag.setText("Set the rotation and click a triangle to push in from");
             RotationImage.setImage(new Image(floorTile.getImageLocation()));
             this.turnProgression = 0;
+            drawCanvas();
         }
         setCards(this.game.getTurn().getHand());
     }
@@ -387,6 +383,7 @@ public class BoardGUI {
                 this.doubleMove = false;
             }
         }
+        drawCanvas();
     }
 
     public int[] canMoveTo(Player p, double x, double y){
@@ -486,6 +483,7 @@ public class BoardGUI {
                 }
             }
             RotationImage.setRotate(tempTile.getRotation());
+
         }
     }
 
