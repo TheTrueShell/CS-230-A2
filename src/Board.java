@@ -85,6 +85,9 @@ public class Board {
     public boolean isAccessibleFrom(int currentX,int currentY,int newX,int newY){
         boolean[] currrentAccessibleSides = board[currentX][currentY].getAccessibleSides();
         boolean[] targetAccessibleSides = board[newX][newY].getAccessibleSides();
+        if (board[newX][newY].getIsOnFire()){
+            return false;
+        }
         //check that it is an adjacent tile
         if (currentX - newX > -2 && currentX - newX < 2){
             if (currentY - newY > -2 && currentY - newY < 2){
