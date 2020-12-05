@@ -33,6 +33,17 @@ public class GameMenuGUI {
     @FXML
     public void loadGameButtonAction(ActionEvent actionEvent) throws IOException {
 
+        Game.playMenuSound();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        Parent selectMenuFXMLParent = (Parent)loader.load();
+        Scene selectMenuFXMLScene = new Scene(selectMenuFXMLParent);
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(selectMenuFXMLScene);
+        SettingMenuGUI controller = (SettingMenuGUI)loader.getController();
+        controller.setGame(this.game);
+        primaryStage.show();
+
     }
 
     @FXML
