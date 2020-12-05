@@ -269,11 +269,19 @@ public class BoardGUI {
         //if row
         if (mouseX == 0 || mouseX == boardX+1) {
             if (mouseY > 0 && mouseY < boardY+1) {
-                this.game.getBoard().pushInRow(t, (int)mouseY-1, forward);
+                if (mouseX == boardX+1){
+                    forward = false;
+                }
+                FloorTile tile = game.getBoard().pushInRow(t, (int)mouseY-1, forward);
+                this.game.getBag().addTile(tile);
             }
         } else if (mouseY == 0 || mouseY == boardY+1) {
             if (mouseX > 0 && mouseX < boardX+1) {
-                this.game.getBoard().pushInColumn(t, (int)mouseX-1, forward);
+                if (mouseY == boardY+1){
+                    forward = false;
+                }
+                FloorTile tile = this.game.getBoard().pushInColumn(t, (int)mouseX-1, forward);
+                this.game.getBag().addTile(tile);
             }
         }
         this.turnProgression = 2;
@@ -345,10 +353,11 @@ public class BoardGUI {
     public void playerMove(){
         Player p = this.game.getTurn();
         int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
-        if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1)
-        if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
-            p.movePlayer(newPos);
-            turnProgression = 3;
+        if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1) {
+            if (this.game.getBoard().isAccessibleFrom(p.getX(), p.getY(), newPos[0], newPos[1])) {
+                p.movePlayer(newPos);
+                turnProgression = 3;
+            }
         }
     }
 
@@ -362,6 +371,7 @@ public class BoardGUI {
         } else if (turnProgression == 3) {
             //The turn has ended
             RotationImage.setImage(null);
+            RotationImage.setRotate(0);
             this.turnProgression = -1;
             this.handIndex = -1;
             nextTurnButton.setText("Show Cards");
