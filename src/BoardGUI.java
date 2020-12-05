@@ -27,6 +27,7 @@ public class BoardGUI {
     @FXML private Canvas canvas;
     @FXML public BorderPane baseBoarderPane;
     @FXML public Label playerTurnTag;
+    @FXML ImageView RotationImage;
 
     private int boardX;
     private int boardY;
@@ -34,7 +35,7 @@ public class BoardGUI {
     private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
     private Image fixedImage = new Image("F.png");
-    private int turnProgression = 2;
+    private int turnProgression = -1;
     private int handIndex = -1;
 
     private Game game;
@@ -326,6 +327,7 @@ public class BoardGUI {
             FloorTile floorTile = (FloorTile)selectedTile;
             //must play this now
             playerTurnTag.setText("Set the rotation and click a triangle to push in from");
+            RotationImage.setImage(new Image(floorTile.getImageLocation()));
             this.turnProgression = 0;
         }
     }
@@ -336,6 +338,7 @@ public class BoardGUI {
         if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1)
         if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
             p.movePlayer(newPos);
+            turnProgression ++;
         }
     }
 
@@ -352,41 +355,41 @@ public class BoardGUI {
     }
 
     public void leftRotateButtonAction(ActionEvent actionEvent) {
+        if (turnProgression == 0) {
+            FloorTile tempTile = (FloorTile) this.game.getTurn().getHand().get(this.handIndex);
 
-        //TODO: Connect to currently selected tile
-        FloorTile tempTile = null;
-
-        try {
-
-            tempTile.setRotation(tempTile.getRotation() - 90);
-
-        } catch (Exception e) {
             try {
-                tempTile.setRotation(0);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
 
+                tempTile.setRotation((tempTile.getRotation() + 270) % 360);
+
+            } catch (Exception e) {
+                try {
+                    tempTile.setRotation(0);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            RotationImage.setRotate(tempTile.getRotation());
+        }
     }
 
     public void rightRotateButtonAction(ActionEvent actionEvent) {
+        if (turnProgression == 0) {
+            FloorTile tempTile = (FloorTile) this.game.getTurn().getHand().get(this.handIndex);
 
-        FloorTile tempTile = null;
-        //TODO: Connect to currently selected tile
-
-        try {
-
-            tempTile.setRotation(tempTile.getRotation() + 90);
-
-        } catch (Exception e) {
             try {
-                tempTile.setRotation(360);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
 
+                tempTile.setRotation((tempTile.getRotation() + 90) % 360);
+
+            } catch (Exception e) {
+                try {
+                    tempTile.setRotation(0);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            RotationImage.setRotate(tempTile.getRotation());
+        }
     }
 
     public void setCards(ArrayList<Tile> deck)  {
