@@ -227,7 +227,11 @@ public class BoardGUI {
         });
     }
 
-    public void setGame(Game game) throws IOException {
+    /**
+     * Sets the references in this class to correct values
+     * @param game the current game instance
+     */
+    public void setGame(Game game) {
         this.game = game;
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
