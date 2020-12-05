@@ -434,7 +434,7 @@ public class Game extends Application {
      */
     public void nextTurn() {
         int index = this.players.indexOf(this.turn);
-        turn = this.players.get(index + 1 % this.players.size());
+        turn = this.players.get((index + 1) % this.players.size());
     }
 
     /**
