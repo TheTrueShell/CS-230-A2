@@ -33,10 +33,14 @@ public class Game extends Application {
     private Board board;
     private Player turn;
     private ArrayList<Profile> profiles = new ArrayList<Profile>();
-    private static double musicVolume = 0.3;
-    private static double menuSoundVolume = 1.0;
-    private static MediaPlayer mediaPlayer;
-    private static MediaPlayer menuSound;
+    private static double musicVolume = 0.1;
+    private static double menuSoundVolume = 0.5;
+
+    //Instantiating Media class
+    private static Media media = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
+    private static Media menuMedia = new Media(new File(MENU_SOUND_FILE_PATH).toURI().toString());
+    private static MediaPlayer mediaPlayer  = new MediaPlayer(media);;
+    private static MediaPlayer menuSound = new MediaPlayer(menuMedia);
 
 
     // GUI
@@ -61,20 +65,15 @@ public class Game extends Application {
 
     public static void playMusic() {
 
-        //Instantiating Media class
-        Media media = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
-
         //Instantiating MediaPlayer class
-        mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(musicVolume);
         mediaPlayer.setAutoPlay(true);
 
     }
 
     public static void playMenuSound() {
-        Media menuMedia = new Media(new File(MENU_SOUND_FILE_PATH).toURI().toString());
+
         //Instantiating MediaPlayer class
-        menuSound = new MediaPlayer(menuMedia);
         menuSound.setVolume(menuSoundVolume);
         menuSound.play();
 
