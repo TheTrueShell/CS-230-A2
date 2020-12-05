@@ -18,6 +18,12 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.Observable;
 
+/**
+ * This class is a menu screen is used to manage profiles
+ *
+ * @author Aryan Dusi
+ * @version 0.0.1
+ */
 public class ProfileMenu {
     private Game game;
 
@@ -49,6 +55,11 @@ public class ProfileMenu {
         //get profiles
     }
 
+    /**
+     * Used to go back to main menu of the game
+     * @param actionEvent event of the back button pressed
+     * @throws IOException if the mainMenu fxml can't be found
+     */
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
@@ -63,6 +74,11 @@ public class ProfileMenu {
         primaryStage.show();
     }
 
+    /**
+     * When the add profile button is clicked
+     * @param actionEvent event of the add button being clicked
+     * @throws IOException if the add button hasn't been used for some reason
+     */
     @FXML
     public void addButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
@@ -78,6 +94,11 @@ public class ProfileMenu {
         editClicked = false;
     }
 
+    /**
+     * When the edit profile button is clicked
+     * @param actionEvent the event of clicking edit
+     * @throws IOException if the add button hasn't been used for some reason
+     */
     @FXML
     public void editButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
@@ -93,6 +114,11 @@ public class ProfileMenu {
         deleteClicked = false;
     }
 
+    /**
+     * When the delete button has been clickec
+     * @param actionEvent the event of clicking delete
+     * @throws IOException if the delete button hasn't been clicked for some reason
+     */
     @FXML
     public void deleteButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
@@ -107,6 +133,11 @@ public class ProfileMenu {
         editClicked = false;
     }
 
+    /**
+     * When the ok button has been clicked, it does the corresponding action to the previous button click
+     * @param actionEvent the event of clicking the ok button
+     * @throws IOException
+     */
     @FXML
     public void okButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
@@ -161,6 +192,10 @@ public class ProfileMenu {
         editClicked = false;
     }
 
+    /**
+     * calls the setGame menu to preset the profile menu to have an invisible form and the profiles list to be preloaded
+     * @param game calls object game to set the game
+     */
     @FXML
     public void setGame(Game game){
         this.game = game;

@@ -123,7 +123,7 @@ public class Board {
      */
     public boolean isRowPushable(int index)
     { for(int i=0;i<this.getLength();i++){
-        if (board[index][i].getIsFrozen() == true || board[index][i].getIsTileFixed()) {
+        if (board[index][i].getIsFrozen() == true || board[index][i].getIsTileFixed()==true) {
             return false;
         }
     }
