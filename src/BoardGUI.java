@@ -233,6 +233,7 @@ public class BoardGUI {
      * @param y the y coord of the click event
      */
     public void canvasClickEventHandler(double x,double y){
+        //TODO: handle if click triangle before they can
         //check if in board range
         if ((x > xPad-boxX) && (y > yPad-boxY)){
             if ((x < (xPad+(boxX*(boardX+1)))) && (y < (yPad+(boxY*(boardY+1))))){
@@ -365,9 +366,9 @@ public class BoardGUI {
         System.out.println(turnProgression);
         if (turnProgression == -1){
             //Then the turn has not started, but the cards should be shown.
+            startTurn();
             setCards(this.game.getTurn().getHand());
             nextTurnButton.setText("End Turn");
-            startTurn();
         } else if (turnProgression == 3) {
             //The turn has ended
             RotationImage.setImage(null);
