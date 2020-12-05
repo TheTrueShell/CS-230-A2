@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class BoardGUI {
     @FXML public Button nextTurnBtn;
+    @FXML public Button nextTurnButton;
     @FXML private Canvas canvas;
     @FXML public BorderPane baseBoarderPane;
     @FXML public Label playerTurnTag;
@@ -36,6 +37,7 @@ public class BoardGUI {
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
     private Image fixedImage = new Image("F.png");
     private int turnProgression = -1;
+    //-1 is not started, 0 is place floor tile, 1 is play action til,e 2 is move, 3 is turn ended
     private int handIndex = -1;
 
     private Game game;
@@ -249,8 +251,10 @@ public class BoardGUI {
                     playerMove();
                 }
                 drawCanvas();
+
             }
         }
+        setCards(this.game.getTurn().getHand());
     }
 
     public void playerPushInTile(){
@@ -272,8 +276,9 @@ public class BoardGUI {
                 this.game.getBoard().pushInColumn(t, (int)mouseX-1, forward);
             }
         }
-        this.game.getTurn().getHand().remove(this.handIndex);
         this.turnProgression = 2;
+        this.game.getTurn().getHand().remove(this.handIndex);
+        handIndex = -1;
     }
 
     public void playerPlayAction(){
@@ -295,10 +300,12 @@ public class BoardGUI {
             }
         }
         this.turnProgression = 2;
+        this.game.getTurn().getHand().remove(this.handIndex);
+        handIndex = -1;
     }
 
     //used at the start of a players turn
-    public void startTurn(){
+        public void startTurn(){
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
         p.addToHand(drawnTile);
@@ -332,6 +339,7 @@ public class BoardGUI {
             RotationImage.setImage(new Image(floorTile.getImageLocation()));
             this.turnProgression = 0;
         }
+        setCards(this.game.getTurn().getHand());
     }
 
     public void playerMove(){
@@ -340,32 +348,38 @@ public class BoardGUI {
         if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1)
         if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
             p.movePlayer(newPos);
-            turnProgression ++;
+            turnProgression = 3;
         }
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
-        if (turnProgression != 3){
-            //set next player
-            System.out.println(this.game.getTurn().getProfile());
-            this.game.nextTurn();
-            System.out.println(this.game.getTurn().getProfile());
-            //set as blank display
-            Text nextPlayer = new Text(game.getTurn().getProfile() + "'s Turn");
-            nextPlayer.setStyle("-fx-font-size: 32px; -fx-fill: white;");
-            nextTurnHBox.setStyle("-fx-background-color: #303030;");
-            nextTurnHBox.getChildren().add(nextPlayer);
-            baseBoarderPane.setBottom(nextTurnHBox);
-            turnProgression = 3;
+        System.out.println(turnProgression);
+        if (turnProgression == -1){
+            //Then the turn has not started, but the cards should be shown.
+            setCards(this.game.getTurn().getHand());
+            nextTurnButton.setText("End Turn");
+            startTurn();
         } else if (turnProgression == 3) {
-            //reset display
+            //The turn has ended
             RotationImage.setImage(null);
             this.turnProgression = -1;
             this.handIndex = -1;
-
-            startTurn();
-            setCards(this.game.getTurn().getHand());
+            nextTurnButton.setText("Show Cards");
+            System.out.println(this.game.getTurn().getProfile());
+            this.game.nextTurn();
+            System.out.println(this.game.getTurn().getProfile());
+            hideCards();
         }
+    }
+
+    public void hideCards() {
+        baseBoarderPane.setBottom(null);
+        nextTurnHBox = new HBox();
+        Text nextPlayer = new Text(game.getTurn().getProfile() + "'s Turn");
+        nextPlayer.setStyle("-fx-font-size: 32px; -fx-fill: white;");
+        nextTurnHBox.setStyle("-fx-background-color: #303030;");
+        nextTurnHBox.getChildren().add(nextPlayer);
+        baseBoarderPane.setBottom(nextTurnHBox);
     }
 
     public Game getGame() {
@@ -411,16 +425,25 @@ public class BoardGUI {
     }
 
     public void setCards(ArrayList<Tile> deck)  {
-        for(Tile card : deck) {
-            Image cardImage = new Image(card.getImageLocation(), 40,40,true,true);
+        baseBoarderPane.setBottom(null);
+        tileHandHBox = new HBox();
+        if (deck.size() == 0) {
             Image borderImage = new Image("invSlot.png", 64,64,true,true);
-            StackPane cardStack = new StackPane();
-            cardStack.getChildren().addAll(new ImageView(borderImage), new ImageView(cardImage));
-            cardStack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                handClicked((int) (cardStack.getBoundsInParent().getMinX())/64);
-            });
-            tileHandHBox.getChildren().add(cardStack);
+            tileHandHBox.getChildren().add(new ImageView(borderImage));
             baseBoarderPane.setBottom(tileHandHBox);
+        } else {
+            for(Tile card : deck) {
+                Image cardImage = new Image(card.getImageLocation(), 40,40,true,true);
+                Image borderImage = new Image("invSlot.png", 64,64,true,true);
+                StackPane cardStack = new StackPane();
+                cardStack.getChildren().addAll(new ImageView(borderImage), new ImageView(cardImage));
+                cardStack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    handClicked((int) (cardStack.getBoundsInParent().getMinX())/64);
+                });
+                tileHandHBox.getChildren().add(cardStack);
+                baseBoarderPane.setBottom(tileHandHBox);
+            }
         }
+
     }
 }
