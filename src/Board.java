@@ -147,7 +147,7 @@ public class Board {
      * @param index of tile to be inserted from the left
      * @param top determines whether the tile is inserted from the top or bottom
      */
-    public Tile pushInColumn(FloorTile tile,int index, boolean top) {
+    public FloorTile pushInColumn(FloorTile tile,int index, boolean top) {
         if (top) {
             for(int i=this.getLength()-1;i>0;i--)
             {
@@ -171,7 +171,7 @@ public class Board {
         }
     }
 
-    public Tile pushInRow(FloorTile tile,int index,boolean left)
+    public FloorTile pushInRow(FloorTile tile,int index,boolean left)
     {
         if (left) {
             for(int i=this.getWidth()-1;i>0;i--)
