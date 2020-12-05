@@ -49,7 +49,8 @@ public class BoardGUI {
     private int turnProgression = -1;
     //-1 is not selected
     private int handIndex = -1;
-
+    //double move holder
+    private boolean doubleMove = false;
     private Game game;
 
     private HBox nextTurnHBox = new HBox();
@@ -211,16 +212,8 @@ public class BoardGUI {
      */
     @FXML
     public void initialize(){
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(100),
-                        (event) -> {
-                            drawCanvas();
-                        })
-        );
         boardX = 5;
         boardY = 5;
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
         canvas.setOnMouseClicked(event -> {
             canvasClickEventHandler(event.getX(),event.getY());
             drawCanvas();
@@ -240,7 +233,7 @@ public class BoardGUI {
         //TODO: handle if current player can't move update the turn progression
 
         setCards(game.getTurn().getHand());
-        //TODO: actually move this to somewhere good
+        drawCanvas();
     }
 
     /**
@@ -260,17 +253,17 @@ public class BoardGUI {
                 //System.out.println("x: "+xTimes+" y: "+yTimes);
                 mouseX = xTimes;
                 mouseY = yTimes;
-                if (turnProgression == 0){
+                if (turnProgression == 0 && handIndex != -1){
                     playerPushInTile();
                 } if (turnProgression == 1 && handIndex != -1){
                     playerPlayAction();
                 } if (turnProgression == 2 || turnProgression == 1){
                     playerMove();
                 }
-                drawCanvas();
 
             }
         }
+        drawCanvas();
         setCards(this.game.getTurn().getHand());
     }
 
@@ -305,6 +298,7 @@ public class BoardGUI {
                 }
             }
         }
+        drawCanvas();
         turnProgression = 1;
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
@@ -322,12 +316,17 @@ public class BoardGUI {
             //not a action floor tile
             if (t.getTILETYPE().equals("DoubleMoveTile")){
                 DoubleMoveTile tile = (DoubleMoveTile)t;
-                tile.action(this.game.getTurn());
+                this.doubleMove = true;
             } else {
                 BackTrackTile tile = (BackTrackTile)t;
                 //TODO: implement this
+                //need to select player (on board ?)
+                Player selectedPlayer = null;
+                //set selected player to position two moves ago
+                selectedPlayer.movePlayer(selectedPlayer.getPreviousPosition2());
             }
         }
+        drawCanvas();
         isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
@@ -338,6 +337,7 @@ public class BoardGUI {
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
         p.addToHand(drawnTile);
+        drawCanvas();
         //System.out.println(p.getHand().size());
         try {
             ActionTile actionTile = (ActionTile)drawnTile;
@@ -367,22 +367,28 @@ public class BoardGUI {
             playerTurnTag.setText("Set the rotation and click a triangle to push in from");
             RotationImage.setImage(new Image(floorTile.getImageLocation()));
             this.turnProgression = 0;
+            drawCanvas();
         }
         setCards(this.game.getTurn().getHand());
     }
 
     public void playerMove(){
         Player p = this.game.getTurn();
-        int[] newPos = canMoveTo(p, mouseX, mouseY);
+        int[] newPos = canMoveTo(p, mouseX-1, mouseY-1);
         if (newPos != null) {
             p.movePlayer(newPos);
-            turnProgression = 3;
+            if (!this.doubleMove) {
+                turnProgression = 3;
+            } else {
+                this.doubleMove = false;
+            }
         }
+        drawCanvas();
     }
 
     public int[] canMoveTo(Player p, double x, double y){
-        int[] newPos = {(int) x - 1, (int) y - 1};
-        if (x > 0 && x != boardX+1 && y > 0 && y != boardY+1) {
+        int[] newPos = {(int) x, (int) y};
+        if (x >= 0 && x < boardX && y >= 0 && y < boardY) {
             if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
                 return newPos;
             }
@@ -410,7 +416,6 @@ public class BoardGUI {
             nextTurnButton.setText("End Turn");
         } else if (turnProgression == 3) {
             //The turn has ended
-            RotationImage.setImage(null);
             RotationImage.setRotate(0);
             this.turnProgression = -1;
             this.handIndex = -1;
@@ -426,7 +431,8 @@ public class BoardGUI {
             }
         }
 
-    }
+
+        RotationImage.setImage(null);    }
 
     public void hideCards() {
         baseBoarderPane.setBottom(null);
@@ -477,6 +483,7 @@ public class BoardGUI {
                 }
             }
             RotationImage.setRotate(tempTile.getRotation());
+
         }
     }
 

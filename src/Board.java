@@ -123,7 +123,7 @@ public class Board {
      */
     public boolean isRowPushable(int index)
     { for(int i=0;i<this.getLength();i++){
-        if (board[index][i].getIsFrozen() == true || board[index][i].getIsTileFixed()) {
+        if (board[i][index].getIsFrozen() == true || board[i][index].getIsTileFixed()==true) {
             return false;
         }
     }
@@ -137,7 +137,7 @@ public class Board {
      */
     public boolean isColumnPushable(int index)
     { for (int i=0;i<this.getWidth();i++) {
-        if (board[i][index].getIsFrozen() == true || board[i][index].getIsTileFixed() == true) {
+        if (board[index][i].getIsFrozen() == true || board[index][i].getIsTileFixed() == true) {
             return false;
         }
     }
@@ -190,8 +190,8 @@ public class Board {
             for(int i=0;i<this.getWidth()-1;i++)
             {
                 FloorTile temp = board[i][index];
-                board[i][index]=board[i-1][index];
-                board[i-1][index] = temp;
+                board[i][index]=board[i+1][index];
+                board[i+1][index] = temp;
             }
             FloorTile returnTile = board[this.getLength()-1][index];
             this.insertTile(tile,this.getLength()-1,index);
