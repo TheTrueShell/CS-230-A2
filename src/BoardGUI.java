@@ -255,7 +255,7 @@ public class BoardGUI {
     public void playerPushInTile(){
         //check if tile can be pushed in
         //get selected tile
-        FloorTile t = null;
+        FloorTile t = (FloorTile) this.game.getTurn().getHand().get(this.handIndex);
         //get selected rotation
         int rotation = 0;
         //push in the tile
@@ -263,18 +263,22 @@ public class BoardGUI {
         boolean forward = true;
         //if row
         if (mouseX == 0 || mouseX == boardX+1) {
-            this.game.getBoard().pushInRow(t, 1, forward);
+            if (mouseY > 0 && mouseY < boardY+1) {
+                this.game.getBoard().pushInRow(t, (int)mouseY-1, forward);
+            }
         } else if (mouseY == 0 || mouseY == boardY+1) {
-            this.game.getBoard().pushInColumn(t, 1, forward);
+            if (mouseX > 0 && mouseX < boardX+1) {
+                this.game.getBoard().pushInColumn(t, (int)mouseX-1, forward);
+            }
         }
-
+        this.game.getTurn().getHand().remove(this.handIndex);
         this.turnProgression = 2;
     }
 
     public void playerPlayAction(){
         //if action tile can be played
         //get selected action tile
-        ActionTile t = null;
+        ActionTile t = (ActionTile)this.game.getTurn().getHand().get(this.handIndex);
         //play selected tile at mouseX-1 and mouseY-1
         try {
             ActionTileFloor tile = (ActionTileFloor)t;

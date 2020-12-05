@@ -145,43 +145,58 @@ public class Board {
      * inserts a given floorTile onto the board in the position: x,y
      * @param tile tile to be inserted
      * @param index of tile to be inserted from the left
-     * @param top determines whether the tile is inserted from the tom left or bottom left
+     * @param top determines whether the tile is inserted from the top or bottom
      */
-    public Tile pushInRow(FloorTile tile,int index, boolean top) {
-        if (top == true) {
-            for(int i=index;i<this.getLength()-1;i++)
+    public Tile pushInColumn(FloorTile tile,int index, boolean top) {
+        if (top) {
+            for(int i=this.getLength()-1;i>0;i--)
             {
-                board[i][this.getWidth()-1]=board[i+1][this.getWidth()-1];
+                FloorTile temp = board[index][i];
+                board[index][i]=board[index][i-1];
+                board[index][i-1] = temp;
             }
-            this.insertTile(tile,index,getWidth()-1);
-            return board[this.getWidth()-1][this.getLength()-1];
-        } else {
-            for(int i=index;i<this.getLength()-1;i++) {
-            board[i][0] = board[i+1][0];
-            }
+            FloorTile returnTile = board[index][0];
             this.insertTile(tile,index,0);
-            return board[0][this.getLength()-1];
+            return returnTile;
+        } else {
+            for(int i=0;i<this.getLength()-1;i++)
+            {
+                FloorTile temp = board[index][i];
+                board[index][i]=board[index][i+1];
+                board[index][i+1] = temp;
+            }
+            FloorTile returnTile = board[index][this.getLength()-1];
+            this.insertTile(tile,index,this.getLength()-1);
+            return returnTile;
         }
     }
 
-    public Tile pushInColumn(FloorTile Tile,int index,boolean top)
+    public Tile pushInRow(FloorTile tile,int index,boolean left)
     {
-        if(top== true) {
-            for(int i=index;i<this.getWidth()-1;i++) {
-                board[this.getLength()-1][i] = board[this.getLength()-1][i+1];
+        if (left) {
+            for(int i=this.getWidth()-1;i>0;i--)
+            {
+                FloorTile temp = board[i][index];
+                board[i][index]=board[i-1][index];
+                board[i-1][index] = temp;
             }
-            this.insertTile(Tile,this.getLength()-1,index);
-            return board[this.getLength() - 1][this.getWidth() - 1];
-        }else{
-            for(int i=index;i<this.getWidth()-1;i++){
-                board[0][i]=board[0][i+1];
+            FloorTile returnTile = board[0][index];
+            this.insertTile(tile,0,index);
+            return returnTile;
+        } else {
+            for(int i=0;i<this.getWidth()-1;i++)
+            {
+                FloorTile temp = board[i][index];
+                board[i][index]=board[i-1][index];
+                board[i-1][index] = temp;
             }
-            this.insertTile(Tile,0,index);
-            return board[0][this.getWidth()-1];
+            FloorTile returnTile = board[this.getLength()-1][index];
+            this.insertTile(tile,this.getLength()-1,index);
+            return returnTile;
         }
 
     }
-        }
+}
 
 
 
