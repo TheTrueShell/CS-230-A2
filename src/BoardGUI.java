@@ -30,12 +30,24 @@ public class BoardGUI {
     @FXML public Label playerTurnTag;
     @FXML ImageView RotationImage;
 
+    /**
+     * BoardX is the board width
+     * BoardY is the height of the board
+     */
     private int boardX;
     private int boardY;
     private String img;
     private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
     private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
     private Image fixedImage = new Image("F.png");
+    /**
+     * Turnprogression means
+     * -1: turn not started
+     * 0: push in tile
+     * 1: play action tile
+     * 2: move player
+     * 3: turn is finished waiting on end turn
+     */
     private int turnProgression = -1;
     //-1 is not started, 0 is place floor tile, 1 is play action til,e 2 is move, 3 is turn ended
     private int handIndex = -1;
