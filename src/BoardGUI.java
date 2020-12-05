@@ -4,8 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.animation.Timeline;
@@ -32,6 +31,7 @@ public class BoardGUI {
     @FXML public BorderPane baseBoarderPane;
     @FXML public Label playerTurnTag;
     @FXML ImageView RotationImage;
+    @FXML private MenuBar menuButton;
 
     /**
      * BoardX is the board width
@@ -564,7 +564,23 @@ public class BoardGUI {
 
     public void exitButtonAction(ActionEvent actionEvent) {
 
+        //TODO: Fix null pointer given by a bug in getting the stage from the menuButton
 
+        Game.playMenuSound();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        Parent mainMenuFXMLParent = null;
+        try {
+            mainMenuFXMLParent = (Parent)loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
+        Stage primaryStage = (Stage) menuButton.getScene().getWindow();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(mainMenuFXMLScene);
+        MainMenuGUI controller = (MainMenuGUI)loader.getController();
+        controller.setGame(this.game);
+        primaryStage.show();
 
     }
 }
