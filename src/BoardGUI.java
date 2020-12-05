@@ -373,7 +373,7 @@ public class BoardGUI {
 
     public void playerMove(){
         Player p = this.game.getTurn();
-        int[] newPos = canMoveTo(p, mouseX, mouseY);
+        int[] newPos = canMoveTo(p, mouseX-1, mouseY-1);
         if (newPos != null) {
             p.movePlayer(newPos);
             turnProgression = 3;
