@@ -95,9 +95,9 @@ public class Game extends Application {
     /**
      * Saves the current game to gameInProgrees.txt
      */
-    public void saveBoard(){
+    public void saveBoard(String filePath){
         try{
-            File file = new File(GAME_SAVE_PATH);
+            File file = new File(filePath);
             file.createNewFile();
         } catch (IOException e){
             e.printStackTrace();
@@ -133,11 +133,11 @@ public class Game extends Application {
      * load game in progress from file
      * @throws FileNotFoundException if board doesn't exist
      */
-    public void loadBoard() throws FileNotFoundException {
+    public void loadBoard(String filePath) throws FileNotFoundException {
         //remove board if there
         deleteBoard();
 
-        File myObj = new File(GAME_SAVE_PATH);
+        File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj).useDelimiter(",");
         //TODO: handle if the file isn't the correct length
         int boardX = myReader.nextInt();
