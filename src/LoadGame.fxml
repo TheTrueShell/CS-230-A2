@@ -23,7 +23,7 @@
         </ListView>
     </center>
     <bottom>
-        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Back" BorderPane.alignment="CENTER" fx:id="backButtonAction">
+        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Back" BorderPane.alignment="CENTER" fx:id="backButtonAction" onAction="#backButtonAction">
             <BorderPane.margin>
                 <Insets bottom="10.0" />
             </BorderPane.margin>
