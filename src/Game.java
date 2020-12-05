@@ -281,12 +281,6 @@ public class Game extends Application {
                 }
             }
         }
-        //TODO: remove
-//        for (Player p : this.players){
-//            for (int i = 0; i < 6; i++) {
-//                p.addToHand(this.gameBag.getRandomTile());
-//            }
-//        }
     }
 
     /**
@@ -435,6 +429,15 @@ public class Game extends Application {
     public Player getTurn(){
         return this.turn;
     }
+
+    /**
+     * Sets the turn to the next player
+     */
+    public void nextTurn() {
+        int index = this.players.indexOf(this.turn);
+        turn = this.players.get(index % this.players.size());
+    }
+
     /**
      * gets the board
      */
