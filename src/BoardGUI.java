@@ -381,7 +381,7 @@ public class BoardGUI {
     }
 
     public int[] canMoveTo(Player p, double x, double y){
-        int[] newPos = {(int) x - 1, (int) y - 1};
+        int[] newPos = {(int) x, (int) y};
         if (x > 0 && x != boardX+1 && y > 0 && y != boardY+1) {
             if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
                 return newPos;
