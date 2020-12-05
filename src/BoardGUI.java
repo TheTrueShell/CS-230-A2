@@ -1,7 +1,5 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.canvas.Canvas;
@@ -303,7 +301,7 @@ public class BoardGUI {
                 }
             }
         }
-        isAbletoMove(this.game.getTurn());
+        isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
     }
@@ -326,7 +324,7 @@ public class BoardGUI {
                 //TODO: implement this
             }
         }
-        isAbletoMove(this.game.getTurn());
+        isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
     }
@@ -371,14 +369,14 @@ public class BoardGUI {
 
     public void playerMove(){
         Player p = this.game.getTurn();
-        int[] newPos = canMoveto(p, mouseX, mouseY);
+        int[] newPos = canMoveTo(p, mouseX, mouseY);
         if (newPos != null) {
             p.movePlayer(newPos);
             turnProgression = 3;
         }
     }
 
-    public int[] canMoveto(Player p, double x, double y){
+    public int[] canMoveTo(Player p, double x, double y){
         int[] newPos = {(int) x - 1, (int) y - 1};
         if (x > 0 && x != boardX+1 && y > 0 && y != boardY+1) {
             if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
@@ -388,11 +386,11 @@ public class BoardGUI {
         return null;
     }
 
-    public void isAbletoMove(Player p) {
-        if (canMoveto(p, p.getX() + 1, p.getY()) != null
-        || canMoveto(p, p.getX() - 1, p.getY()) != null
-        || canMoveto(p, p.getX(), p.getY() + 1) != null
-        || canMoveto(p, p.getX(), p.getY() - 1) != null) {
+    public void isAbleToMove(Player p) {
+        if (canMoveTo(p, p.getX() + 1, p.getY()) != null
+        || canMoveTo(p, p.getX() - 1, p.getY()) != null
+        || canMoveTo(p, p.getX(), p.getY() + 1) != null
+        || canMoveTo(p, p.getX(), p.getY() - 1) != null) {
             turnProgression = 2;
         }
         turnProgression = 3;
