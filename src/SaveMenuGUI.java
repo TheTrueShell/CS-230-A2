@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -16,14 +17,19 @@ import java.io.IOException;
  */
 
 public class SaveMenuGUI {
+    private static final String FILE_SAVED_TEXT = "The game was saved";
     private Game game;
 
     @FXML
     TextField saveFile;
 
+    @FXML
+    Label saveGameLabel;
+
     public void saveButtonAction(ActionEvent actionEvent) {
 
         game.saveBoard("saves/" + saveFile.getText() + ".txt");
+        saveGameLabel.setText(FILE_SAVED_TEXT);
 
     }
 

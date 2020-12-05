@@ -22,6 +22,6 @@
       </VBox>
    </center>
    <top>
-      <Label fx:id="SaveGameLabel" text="Save Game" BorderPane.alignment="CENTER" />
+      <Label fx:id="saveGameLabel" text="Save Game" BorderPane.alignment="CENTER" />
    </top>
 </BorderPane>
