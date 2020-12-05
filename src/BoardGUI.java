@@ -303,7 +303,7 @@ public class BoardGUI {
                 }
             }
         }
-        this.turnProgression = 2;
+        isAbletoMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
     }
@@ -326,7 +326,7 @@ public class BoardGUI {
                 //TODO: implement this
             }
         }
-        this.turnProgression = 2;
+        isAbletoMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
     }
@@ -371,13 +371,31 @@ public class BoardGUI {
 
     public void playerMove(){
         Player p = this.game.getTurn();
-        int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
-        if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1) {
-            if (this.game.getBoard().isAccessibleFrom(p.getX(), p.getY(), newPos[0], newPos[1])) {
-                p.movePlayer(newPos);
-                turnProgression = 3;
+        int[] newPos = canMoveto(p, mouseX, mouseY);
+        if (newPos != null) {
+            p.movePlayer(newPos);
+            turnProgression = 3;
+        }
+    }
+
+    public int[] canMoveto(Player p, double x, double y){
+        int[] newPos = {(int) x - 1, (int) y - 1};
+        if (x > 0 && x != boardX+1 && y > 0 && y != boardY+1) {
+            if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
+                return newPos;
             }
         }
+        return null;
+    }
+
+    public void isAbletoMove(Player p) {
+        if (canMoveto(p, p.getX() + 1, p.getY()) != null
+        || canMoveto(p, p.getX() - 1, p.getY()) != null
+        || canMoveto(p, p.getX(), p.getY() + 1) != null
+        || canMoveto(p, p.getX(), p.getY() - 1) != null) {
+            turnProgression = 2;
+        }
+        turnProgression = 3;
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
