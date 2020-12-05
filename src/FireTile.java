@@ -28,7 +28,7 @@ public class FireTile extends ActionTileFloor {
 
                     board.getTile(i,z).setIsOnFire(true);
                     //goes out after the end of your next turn
-                    board.getTile(i,z).setStatusTurnsRemaining(numOfPlayers+1);
+                    board.getTile(i,z).setStatusTurnsRemaining(numOfPlayers+2);
 
                 } catch (ArrayIndexOutOfBoundsException ex) {
 
