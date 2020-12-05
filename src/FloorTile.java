@@ -16,6 +16,8 @@ public abstract class FloorTile extends Tile {
     private boolean[] accessibleSides = new boolean[4]; // Top. right, bottom, Left
     private final String TILETYPE = "FloorTile";
 
+    private int statusTurnsRemaining = 0;
+
     /**
      * Check if the current tile can have a player move onto it
      * @return boolean true if the tile can be moved onto, false if the tile cannot be moved onto
@@ -222,6 +224,26 @@ public abstract class FloorTile extends Tile {
 
         return getTILETYPE() + "," + getRotation() + "," + getIsOnFire() + "," + getIsFrozen();
 
+    }
+
+    /**
+     * Sets the number of turns that that the tile is on fire for
+     * @param turns
+     */
+    public void setStatusTurnsRemaining(int turns){
+        if (turns == 0) {
+            this.isOnFire = false;
+            this.isFrozen = false;
+        }
+        this.statusTurnsRemaining = turns;
+    }
+
+    /**
+     * Gets the number of turns remaining
+     * @return
+     */
+    public int getStatusTurnsRemaining(){
+        return this.statusTurnsRemaining;
     }
 
 }

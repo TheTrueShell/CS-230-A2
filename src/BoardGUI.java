@@ -316,7 +316,7 @@ public class BoardGUI {
         //play selected tile at mouseX-1 and mouseY-1
         try {
             ActionTileFloor tile = (ActionTileFloor)t;
-            tile.action(this.game.getBoard(), (int)mouseX, (int)mouseY);
+            tile.action(this.game.getBoard(), (int)mouseX, (int)mouseY, this.game.getPlayers().size());
         } catch (Exception e){
             //not a action floor tile
             if (t instanceof DoubleMoveTile){
@@ -416,11 +416,27 @@ public class BoardGUI {
         }
     }
 
+    /**
+     * Decrements the number of status turns remaining
+     */
+    public void reduceStatusTurns(){
+        for (int i = 0; i < boardX; i++){
+            for (int j = 0; j < boardY; j++){
+                FloorTile t = this.game.getBoard().getTile(i,j);
+                if (t.getIsOnFire() || t.getIsFrozen()){
+                    int turns = t.getStatusTurnsRemaining();
+                    t.setStatusTurnsRemaining(turns-1);
+                }
+            }
+        }
+    }
+
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
         System.out.println(turnProgression);
         if (turnProgression == -1){
             //Then the turn has not started, but the cards should be shown.
             startTurn();
+            reduceStatusTurns();
             setCards(this.game.getTurn().getHand());
             nextTurnButton.setText("End Turn");
         } else if (turnProgression == 3) {
