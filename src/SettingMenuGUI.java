@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @Author William Aodan Telford
+ * Version 1.0
+ */
+
 public class SettingMenuGUI {
 
     @FXML
