@@ -260,7 +260,7 @@ public class BoardGUI {
                 //System.out.println("x: "+xTimes+" y: "+yTimes);
                 mouseX = xTimes;
                 mouseY = yTimes;
-                if (turnProgression == 0){
+                if (turnProgression == 0 && handIndex != -1){
                     playerPushInTile();
                 } if (turnProgression == 1 && handIndex != -1){
                     playerPlayAction();
