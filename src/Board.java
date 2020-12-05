@@ -85,6 +85,9 @@ public class Board {
     public boolean isAccessibleFrom(int currentX,int currentY,int newX,int newY){
         boolean[] currrentAccessibleSides = board[currentX][currentY].getAccessibleSides();
         boolean[] targetAccessibleSides = board[newX][newY].getAccessibleSides();
+        if (board[newX][newY].getIsOnFire()){
+            return false;
+        }
         //check that it is an adjacent tile
         if (currentX - newX > -2 && currentX - newX < 2){
             if (currentY - newY > -2 && currentY - newY < 2){
@@ -147,7 +150,7 @@ public class Board {
      * @param index of tile to be inserted from the left
      * @param top determines whether the tile is inserted from the top or bottom
      */
-    public Tile pushInColumn(FloorTile tile,int index, boolean top) {
+    public FloorTile pushInColumn(FloorTile tile,int index, boolean top) {
         if (top) {
             for(int i=this.getLength()-1;i>0;i--)
             {
@@ -171,7 +174,7 @@ public class Board {
         }
     }
 
-    public Tile pushInRow(FloorTile tile,int index,boolean left)
+    public FloorTile pushInRow(FloorTile tile,int index,boolean left)
     {
         if (left) {
             for(int i=this.getWidth()-1;i>0;i--)

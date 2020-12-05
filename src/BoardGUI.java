@@ -233,6 +233,7 @@ public class BoardGUI {
      * @param y the y coord of the click event
      */
     public void canvasClickEventHandler(double x,double y){
+        //TODO: handle if click triangle before they can
         //check if in board range
         if ((x > xPad-boxX) && (y > yPad-boxY)){
             if ((x < (xPad+(boxX*(boardX+1)))) && (y < (yPad+(boxY*(boardY+1))))){
@@ -269,11 +270,19 @@ public class BoardGUI {
         //if row
         if (mouseX == 0 || mouseX == boardX+1) {
             if (mouseY > 0 && mouseY < boardY+1) {
-                this.game.getBoard().pushInRow(t, (int)mouseY-1, forward);
+                if (mouseX == boardX+1){
+                    forward = false;
+                }
+                FloorTile tile = game.getBoard().pushInRow(t, (int)mouseY-1, forward);
+                this.game.getBag().addTile(tile);
             }
         } else if (mouseY == 0 || mouseY == boardY+1) {
             if (mouseX > 0 && mouseX < boardX+1) {
-                this.game.getBoard().pushInColumn(t, (int)mouseX-1, forward);
+                if (mouseY == boardY+1){
+                    forward = false;
+                }
+                FloorTile tile = this.game.getBoard().pushInColumn(t, (int)mouseX-1, forward);
+                this.game.getBag().addTile(tile);
             }
         }
         this.turnProgression = 2;
@@ -345,10 +354,11 @@ public class BoardGUI {
     public void playerMove(){
         Player p = this.game.getTurn();
         int[] newPos = {(int) mouseX - 1, (int) mouseY - 1};
-        if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1)
-        if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
-            p.movePlayer(newPos);
-            turnProgression = 3;
+        if (mouseX != 0 && mouseX != boardX+1 && mouseY !=0 && mouseY != boardY+1) {
+            if (this.game.getBoard().isAccessibleFrom(p.getX(), p.getY(), newPos[0], newPos[1])) {
+                p.movePlayer(newPos);
+                turnProgression = 3;
+            }
         }
     }
 
@@ -356,12 +366,13 @@ public class BoardGUI {
         System.out.println(turnProgression);
         if (turnProgression == -1){
             //Then the turn has not started, but the cards should be shown.
+            startTurn();
             setCards(this.game.getTurn().getHand());
             nextTurnButton.setText("End Turn");
-            startTurn();
         } else if (turnProgression == 3) {
             //The turn has ended
             RotationImage.setImage(null);
+            RotationImage.setRotate(0);
             this.turnProgression = -1;
             this.handIndex = -1;
             nextTurnButton.setText("Show Cards");
