@@ -4,15 +4,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -26,6 +25,10 @@ public class LoadGameGUI {
 
     @FXML
     private ListView gameList;
+    @FXML
+    private Label loadGameLabel;
+
+
     private Game game;
     private ArrayList<String> games;
 
@@ -41,16 +44,14 @@ public class LoadGameGUI {
 
         for(File file : filesList) {
 
-            try {
-                game.loadBoard(file.getPath());
-            } catch (FileNotFoundException e) {
-                System.out.println("No files found");
-            }
+            gameList.getItems().add(file);
 
         }
 
 
     }
+
+
 
     public void setGame(Game game){
         this.game = game;
@@ -70,4 +71,52 @@ public class LoadGameGUI {
         primaryStage.show();
     }
 
+    /**
+     * Loads the selected Game
+     * @param actionEvent
+     */
+
+    public void loadGameButtonAction(ActionEvent actionEvent) {
+
+        File selectedGame = (File) gameList.getSelectionModel().getSelectedItem();
+        System.out.println(selectedGame);
+        boolean loadLevel = false;
+
+        //TODO: Catch error when a file is selected that isn't in a save game format.
+
+        if(selectedGame != null) {
+
+            try {
+                game.loadBoard(selectedGame.getPath());
+                loadLevel = true;
+
+            } catch (FileNotFoundException e) {
+                loadGameLabel.setText("Invalid save game. Please choose another.");
+            }
+        } else {
+
+            loadGameLabel.setText("Invalid save game. Please choose another.");
+
+        }
+
+        if(loadLevel) {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BoardGUI.fxml"));
+            Parent boardGUIFXMLParent = null;
+            try {
+                boardGUIFXMLParent = (Parent) loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene boardGUIFXMLScene = new Scene(boardGUIFXMLParent);
+            Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            // This line gets the stage the 'Play' button's action event came from
+            primaryStage.setScene(boardGUIFXMLScene);
+            BoardGUI controller = (BoardGUI) loader.getController();
+            controller.setGame(this.game);
+            primaryStage.show();
+
+        }
+
+    }
 }
