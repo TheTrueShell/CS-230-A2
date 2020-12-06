@@ -24,6 +24,12 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class is the main game display
+ * It handles player input and player turns
+ * @author Benjamin Rockley, Gus Rendle, William Aodan Telford
+ * @version 1.0
+ */
 public class BoardGUI {
     @FXML public Button nextTurnBtn;
     @FXML public Button nextTurnButton;
