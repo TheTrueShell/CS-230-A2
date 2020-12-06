@@ -23,6 +23,10 @@ public class SettingMenuGUI {
 
     private Game game;
 
+    /**
+     * Initializes the sliders to make sure they are in the same place as the music volume
+     */
+
     @FXML
     public void initialize(){
 
@@ -30,6 +34,12 @@ public class SettingMenuGUI {
         soundsSlider.setValue(Game.getMenuSoundVolume() * 100);
 
     }
+
+    /**
+     * Called when the back button is pressed. loads the main menu
+     * @param actionEvent
+     * @throws IOException
+     */
 
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -45,9 +55,19 @@ public class SettingMenuGUI {
         primaryStage.show();
     }
 
+    /**
+     * Sets the game
+     * @param game
+     */
+
     public void setGame(Game game){
         this.game = game;
     }
+
+    /**
+     * Called when the Volume button is pressed. Sets the music volume to the value of the slider
+     * @param actionEvent
+     */
 
     public void volumeButtonAction(ActionEvent actionEvent) {
 
@@ -57,6 +77,11 @@ public class SettingMenuGUI {
         Game.setMusicVolume(musicVolume);
 
     }
+
+    /**
+     * Called when the sounds effect button is pressed. Sets the sounds volume to the value of the slider.
+     * @param actionEvent
+     */
 
     public void menuVolumeButtonAction(ActionEvent actionEvent) {
 

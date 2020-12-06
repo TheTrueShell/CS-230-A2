@@ -28,6 +28,7 @@ public class StraightTile extends FloorTile {
         setTileFixed(false);
 
     }
+
     /**
      * Getter for the Image location of the tile.
      * @return String imageLocation
