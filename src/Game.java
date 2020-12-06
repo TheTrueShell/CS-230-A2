@@ -24,9 +24,10 @@ import javafx.stage.Stage;
  */
 public class Game extends Application {
     private static final String PROFILES_PATH = "profiles.txt";
-    private static final String GAME_SAVE_PATH = "gameInProgress.txt";
     private static final String MUSIC_FILE_PATH = "theme3.mp3";
     private static final String MENU_SOUND_FILE_PATH = "menuSound.mp3";
+    private static final String FIRE_SOUND_FILE_PATH = "fireSound.mp3";
+    private static final String ICE_SOUND_FILE_PATH = "iceSound.mp3";
 
 
     private Bag gameBag;
@@ -84,14 +85,14 @@ public class Game extends Application {
 
         if(tileType.equals("FireTile")) {
 
-            AudioClip fire = new AudioClip(Paths.get("fireSound.mp3").toUri().toString());
+            AudioClip fire = new AudioClip(Paths.get(FIRE_SOUND_FILE_PATH).toUri().toString());
             fire.setVolume(menuSoundVolume);
             fire.play();
 
         } else if(tileType.equals("IceTile")) {
 
 
-            AudioClip ice = new AudioClip(Paths.get("iceSound.mp3").toUri().toString());
+            AudioClip ice = new AudioClip(Paths.get(ICE_SOUND_FILE_PATH).toUri().toString());
             ice.setVolume(menuSoundVolume);
             ice.play();
 
