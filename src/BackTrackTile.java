@@ -8,8 +8,13 @@
 
 public class BackTrackTile extends ActionTile {
 
-    private final String TILETYPE = "BackTrackTile";
     private static String imageLocation = "BackTrack.png";
+
+    public BackTrackTile() {
+
+        super.setTileType("BackTrackTile");
+
+    }
 
     public void action(Player player) {
 

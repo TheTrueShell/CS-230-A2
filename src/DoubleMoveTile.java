@@ -8,8 +8,13 @@
 
 public class DoubleMoveTile extends ActionTile {
 
-    private final String TILETYPE = "DoubleMoveTile";
     private static String imageLocation = "DoubleMove.png";
+
+    public DoubleMoveTile() {
+
+        super.setTileType("DoubleMoveTile");
+
+    }
 
     public void action(Player player) {
 

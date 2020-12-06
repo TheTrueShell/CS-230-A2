@@ -7,8 +7,7 @@
  */
 
 public class GoalTile extends FloorTile {
-
-    private final String TILETYPE = "GoalTile";
+    
     private static final String imageLocation = "Goal.png";
 
 
@@ -20,6 +19,8 @@ public class GoalTile extends FloorTile {
      */
 
     public GoalTile(int tileRotation) throws Exception {
+
+        setTileType("GoalTile");
 
         boolean[] sides  = {true,true,true,true};
         setAccessibleSides(sides);

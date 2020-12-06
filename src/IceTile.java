@@ -7,12 +7,12 @@
  */
 public class IceTile extends ActionTileFloor {
 
-    private final String TILETYPE = "IceTile";
     private static String imageLocation = "Ice.png";
 
     public IceTile() {
 
         super.setPlayable(false);
+        super.setTileType("IceTile");
 
     }
 

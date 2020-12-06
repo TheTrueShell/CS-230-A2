@@ -391,6 +391,20 @@ public class BoardGUI {
         //check if player on the Goal tile
         if (this.game.getBoard().getTile(p.getX(),p.getY()) instanceof GoalTile){
             System.out.println("Winner: " + p.getProfile());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+            Parent mainMenuFXMLParent = null;
+            try {
+                mainMenuFXMLParent = (Parent)loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
+            Stage primaryStage = (Stage) ( playerTurnTag.getScene().getWindow());
+            // This line gets the stage the 'Play' button's action event came from
+            primaryStage.setScene(mainMenuFXMLScene);
+            MainMenuGUI controller = (MainMenuGUI)loader.getController();
+            controller.setGame(this.game);
+            primaryStage.show();
         }
         drawCanvas();
     }

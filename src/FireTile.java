@@ -8,12 +8,12 @@
 
 public class FireTile extends ActionTileFloor {
 
-    private final String TILETYPE = "FireTile";
     private static String imageLocation = "Fire.png";
 
     public FireTile() {
 
         super.setPlayable(false);
+        super.setTileType("FireTile");
 
     }
 

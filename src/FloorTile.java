@@ -14,7 +14,7 @@ public abstract class FloorTile extends Tile {
     private boolean isOnFire;
     private int tileRotation; //In 360 degrees
     private boolean[] accessibleSides = new boolean[4]; // Top. right, bottom, Left
-    private final String TILETYPE = "FloorTile";
+    private String tileType = "FloorTile";
 
     private int statusTurnsRemaining = 0;
 
@@ -34,6 +34,7 @@ public abstract class FloorTile extends Tile {
         }
 
     }
+
 
     /**
      * Setter for the boolean determining whether or not the tile can be moved.
@@ -201,13 +202,6 @@ public abstract class FloorTile extends Tile {
     public int getRotation() {
 
         return this.tileRotation;
-
-    }
-
-
-    public String getTILETYPE() {
-
-        return TILETYPE;
 
     }
 
