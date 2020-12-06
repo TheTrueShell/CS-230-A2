@@ -340,7 +340,7 @@ public class BoardGUI {
      */
     private void pushPlayersOnColumn(int index, boolean top){
         for (Player p : this.game.getPlayers()){
-            if (p.getY() == index){
+            if (p.getX() == index){
                 int newY;
                 if (top) {
                     newY = (p.getX() + 1) % boardY;
