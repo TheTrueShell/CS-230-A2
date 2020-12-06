@@ -26,6 +26,11 @@ public class SaveMenuGUI {
     @FXML
     Label saveGameLabel;
 
+    /**
+     * Called when save button is pushed. Saves the file using the string given in the input box.
+     * @param actionEvent
+     */
+
     public void saveButtonAction(ActionEvent actionEvent) {
 
         Game.playMenuSound();
@@ -48,6 +53,11 @@ public class SaveMenuGUI {
         primaryStage.close();
 
     }
+
+    /**
+     * Sets the Game to allow the saveBoard implementation.
+     * @param game
+     */
 
     public void setGame(Game game){
         this.game = game;

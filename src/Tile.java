@@ -11,13 +11,21 @@ public abstract class Tile {
     private static String imageLocation;
     private String tileType = "Tile";
 
-
+    /**
+     * sets the tile type to the inputted string
+     * @param tileType
+     */
 
     public void setTileType(String tileType) {
 
         this.tileType = tileType;
 
     }
+
+    /**
+     * returns the tileType var
+     * @return String tileType
+     */
 
     public String getTILETYPE(){
         return tileType;

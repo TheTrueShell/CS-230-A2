@@ -32,6 +32,10 @@ public class LoadGameGUI {
     private Game game;
     private ArrayList<String> games;
 
+    /**
+     * Initializer for JavaFx getting the save game files and inserting them into the gameList
+     */
+
     @FXML
     public void initialize(){
 
@@ -55,6 +59,12 @@ public class LoadGameGUI {
     public void setGame(Game game){
         this.game = game;
     }
+
+    /**
+     * Called when the back button is pushed. Loads the main menu.
+     * @param actionEvent
+     * @throws IOException
+     */
 
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {

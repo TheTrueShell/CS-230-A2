@@ -47,6 +47,12 @@ public class MainMenuGUI {
         primaryStage.show();
     }
 
+    /**
+     * Called when the profiles button is pushed. Loads ProfileMenu.fxml
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void profilesButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfileMenu.fxml"));
@@ -60,6 +66,12 @@ public class MainMenuGUI {
         primaryStage.show();
     }
 
+    /**
+     * Called when the settings button is pushed. Loads SettingsMenu.fxml
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void settingsButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SettingsMenu.fxml"));
@@ -72,6 +84,12 @@ public class MainMenuGUI {
         controller.setGame(this.game);
         primaryStage.show();
     }
+
+    /**
+     * Called when the quit button is pushed. exits the game.
+     * @param actionEvent
+     * @throws IOException
+     */
 
     public void quitButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
