@@ -56,6 +56,7 @@ public class BoardGUI {
     private int handIndex = -1;
     //double move holder
     private boolean doubleMove = false;
+    private boolean backTrack = false;
     private Game game;
 
     private HBox nextTurnHBox = new HBox();
@@ -260,9 +261,11 @@ public class BoardGUI {
                 mouseY = yTimes;
                 if (turnProgression == 0 && handIndex != -1){
                     playerPushInTile();
-                } if (turnProgression == 1 && handIndex != -1){
+                } else if (backTrack){
+                    playerPlayBackTrack();
+                } else if (turnProgression == 1 && handIndex != -1){
                     playerPlayAction();
-                } if (turnProgression == 2 || turnProgression == 1){
+                } else if (turnProgression == 2 || turnProgression == 1){
                     playerMove();
                 }
 
@@ -324,17 +327,22 @@ public class BoardGUI {
                 this.doubleMove = true;
             } else {
                 BackTrackTile tile = (BackTrackTile)t;
-                //TODO: implement this
-                //need to select player (on board ?)
-                Player selectedPlayer = null;
-                //set selected player to position two moves ago
-                selectedPlayer.movePlayer(selectedPlayer.getPreviousPosition2());
+                this.backTrack = true;
             }
         }
         drawCanvas();
         isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
+    }
+
+    private  void playerPlayBackTrack(){
+        for (Player p : this.game.getPlayers()){
+            //TODO: check if they can be sent back
+            if (p.getX() == mouseX -1 && p.getY() == mouseY -1){
+                p.movePlayer(p.getPreviousPosition2());
+            }
+        }
     }
 
     //used at the start of a players turn
