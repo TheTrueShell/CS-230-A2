@@ -79,6 +79,7 @@ public class MessageOfTheDay {
         return result;
     }
 
+    /**
     public static void main(String[] args) throws Exception{
         String puzzle = querySite(PUZZLE_URL);
         String code = decode(puzzle);
@@ -86,4 +87,5 @@ public class MessageOfTheDay {
         System.out.println(puzzle);
         System.out.println(getMessage());
     }
+     */
 }
