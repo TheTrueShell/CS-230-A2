@@ -41,7 +41,7 @@ public class Game extends Application {
     private static Media media = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
     private static Media menuMedia = new Media(new File(MENU_SOUND_FILE_PATH).toURI().toString());
     private static MediaPlayer mediaPlayer  = new MediaPlayer(media);;
-    private static MediaPlayer menuSound = new MediaPlayer(menuMedia);
+    private static AudioClip menuSound = new AudioClip(Paths.get("menuSound.mp3").toUri().toString());
 
 
     // GUI
@@ -77,6 +77,25 @@ public class Game extends Application {
         //Instantiating MediaPlayer class
         menuSound.setVolume(menuSoundVolume);
         menuSound.play();
+
+    }
+
+    public void playActionSound(String tileType) {
+
+        if(tileType.equals("FireTile")) {
+
+            AudioClip fire = new AudioClip(Paths.get("fireSound.mp3").toUri().toString());
+            fire.setVolume(menuSoundVolume);
+            fire.play();
+
+        } else if(tileType.equals("IceTile")) {
+
+
+            AudioClip ice = new AudioClip(Paths.get("iceSound.mp3").toUri().toString());
+            ice.setVolume(menuSoundVolume);
+            ice.play();
+
+        }
 
     }
 
@@ -635,20 +654,5 @@ public class Game extends Application {
 
     }
 
-    public void playActionSound(String tileType) {
 
-        if(tileType.equals("FireTile")) {
-
-            AudioClip fire = new AudioClip(Paths.get("fireSound.mp3").toUri().toString());
-            fire.play();
-
-        } else if(tileType.equals("IceTile")) {
-
-
-            AudioClip ice = new AudioClip(Paths.get("iceSound.mp3").toUri().toString());
-            ice.play();
-
-        }
-
-    }
 }

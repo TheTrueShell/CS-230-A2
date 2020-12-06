@@ -23,7 +23,7 @@
                   <Button fx:id="SetVolume" mnemonicParsing="false" onAction="#volumeButtonAction" prefHeight="25.0" prefWidth="85.0" text="Set Volume" textAlignment="CENTER" />
                </children>
             </HBox>
-            <Label text="Menu Sounds Volume" textFill="WHITE">
+            <Label text="Sounds Volume" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
