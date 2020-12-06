@@ -111,7 +111,7 @@ public class Game extends Application {
             fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
             fileWriter.write(this.board.toString());
             fileWriter.write(this.players.size()+"\n");
-            fileWriter.write(this.turn.getProfile());
+            fileWriter.write(this.turn.getProfile()+"\n");
             //x,y,profile,numoftilesinhand
             //write the players to the file
             for (Player p : this.players){
@@ -141,56 +141,66 @@ public class Game extends Application {
         deleteBoard();
 
         File myObj = new File(filePath);
-        Scanner myReader = new Scanner(myObj).useDelimiter(",");
+        Scanner myReader = new Scanner(myObj);
         //TODO: handle if the file isn't the correct length
-        int boardX = myReader.nextInt();
-        int boardY = myReader.nextInt();
+        Scanner lineReader = new Scanner(myReader.next()).useDelimiter(",");
+        int boardX = lineReader.nextInt();
+        int boardY = lineReader.nextInt();
         this.board = new Board(boardX,boardY);
-        int fixedNum = myReader.nextInt();
+        lineReader = new Scanner(myReader.next()).useDelimiter(",");
+        int fixedNum = lineReader.nextInt();
         //load fixed tiles
         for (int i = 0; i < fixedNum; i++){
-            int x = myReader.nextInt();
-            int y = myReader.nextInt();
-            String type = myReader.next();
+            lineReader = new Scanner(myReader.next()).useDelimiter(",");
+            int x = lineReader.nextInt();
+            int y = lineReader.nextInt();
+            String type = lineReader.next();
             //rotation
-            int r = myReader.nextInt();
+            int r = lineReader.nextInt();
             FloorTile t = floorFromType(type,r);
-            t.setIsOnFire(myReader.nextBoolean());
-            t.setIsFrozen(myReader.nextBoolean());
+            t.setIsOnFire(lineReader.nextBoolean());
+            t.setIsFrozen(lineReader.nextBoolean());
             t.setTileFixed(true);
             this.board.insertTile(t,x,y);
         }
         //load non fixed tiles
         for (int i = 0; i < ((boardX * boardY) - fixedNum); i++){
-            int x = myReader.nextInt();
-            int y = myReader.nextInt();
-            String type = myReader.next();
+            lineReader = new Scanner(myReader.next()).useDelimiter(",");
+            int x = lineReader.nextInt();
+            int y = lineReader.nextInt();
+            String type = lineReader.next();
             //rotation
-            int r = myReader.nextInt();
+            int r = lineReader.nextInt();
             FloorTile t = floorFromType(type,r);
-            t.setIsOnFire(myReader.nextBoolean());
-            t.setIsFrozen(myReader.nextBoolean());
+            t.setIsOnFire(lineReader.nextBoolean());
+            t.setIsFrozen(lineReader.nextBoolean());
             t.setTileFixed(false);
             this.board.insertTile(t,x,y);
         }
         //clear players
         this.players = new ArrayList<Player>();
         //load players
-        int playersInGame = myReader.nextInt();
-        String turnName = myReader.next();
+        lineReader = new Scanner(myReader.next()).useDelimiter(",");
+        int playersInGame = lineReader.nextInt();
+        lineReader = new Scanner(myReader.next()).useDelimiter(",");
+        String turnName = lineReader.next();
         for (int i = 0; i < playersInGame; i++){
-            int x = myReader.nextInt();
-            int y = myReader.nextInt();
-            String name = myReader.next();
+            lineReader = new Scanner(myReader.next()).useDelimiter(",");
+            int x = lineReader.nextInt();
+            int y = lineReader.nextInt();
+            String name = lineReader.next();
             Player p = new Player(x,y,name);
-            int numOfTiles = myReader.nextInt();
+            int numOfTiles = lineReader.nextInt();
             for (int j = 0; j < numOfTiles; j++){
+                lineReader = new Scanner(myReader.next()).useDelimiter(",");
                 //creates with roation 0 if floor tile
-                Tile t = fromType(myReader.next());
+                Tile t = fromType(lineReader.next());
                 p.addToHand(t);
             }
-            p.setPreviousPosition(myReader.nextInt(),myReader.nextInt());
-            p.setPreviousPosition2(myReader.nextInt(),myReader.nextInt());
+            lineReader = new Scanner(myReader.next()).useDelimiter(",");
+            p.setPreviousPosition(lineReader.nextInt(),lineReader.nextInt());
+            lineReader = new Scanner(myReader.next()).useDelimiter(",");
+            p.setPreviousPosition2(lineReader.nextInt(),lineReader.nextInt());
             this.players.add(p);
         }
         for (int i = 0; i < this.players.size(); i++){
@@ -200,11 +210,13 @@ public class Game extends Application {
         }
         //load bag
         while (myReader.hasNext()){
+            lineReader = new Scanner(myReader.next()).useDelimiter(",");
             //issue exists as rotation is not guaranteed
-            Tile t = fromType(myReader.next());
+            Tile t = fromType(lineReader.next());
             this.gameBag.addTile(t);
         }
         myReader.close();
+        lineReader.close();
     }
 
     /**
@@ -460,30 +472,30 @@ public class Game extends Application {
      * @return new tile of type
      */
     private Tile fromType(String type){
-        if (type.equals("ICE")){
+        if (type.equals("IceTile")){
             return new IceTile();
-        }if (type.equals("FIRE")){
+        }if (type.equals("FireTile")){
             return new FireTile();
         }
-        if (type.equals("DOUBLEMOVE")){
+        if (type.equals("DoubleMoveTile")){
         //abstacrt and can't be called
             return new DoubleMoveTile();
         }
-        if (type.equals("BACKTARCK")){
+        if (type.equals("BackTrackTile")){
             return new BackTrackTile();
-        }if (type.equals("CORNER")){
+        }if (type.equals("CornerTile")){
             try {
                 return new CornerTile(0);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }if (type.equals("TJUNCTION")){
+        }if (type.equals("TJunctionTile")){
             try {
                 return new TJunctionTile(0);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }if (type.equals("STRAIGTH")){
+        }if (type.equals("StraightTile")){
             try {
                 return new StraightTile(0);
             } catch (Exception e) {
@@ -528,19 +540,19 @@ public class Game extends Application {
         if (rotation % 90 != 0){
             rotation = 0;
         }
-        if (type.equals("CORNER")){
+        if (type.equals("CornerTile")){
             try {
                 return new CornerTile(rotation);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }if (type.equals("TJUNCTION")){
+        }if (type.equals("TJunctionTile")){
             try {
                 return new TJunctionTile(rotation);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }if (type.equals("STRAIGTH")){
+        }if (type.equals("StraightTile")){
             try {
                 return new StraightTile(rotation);
             } catch (Exception e) {

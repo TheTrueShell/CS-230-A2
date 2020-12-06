@@ -1,10 +1,10 @@
 5,5
 5
-0,0,CORNER,90,false,false
-0,4,CORNER,0,false,false
-4,0,CORNER,180,false,false
-4,4,CORNER,270,false,false
-3,3,GOAL,0,false,false
+0,0,CornerTile,90,false,false
+0,4,CornerTile,0,false,false
+4,0,CornerTile,180,false,false
+4,4,CornerTile,270,false,false
+3,3,GoalTile,0,false,false
 0,1
 0,3
 4,1
