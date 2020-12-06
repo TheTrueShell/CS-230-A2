@@ -248,7 +248,6 @@ public class BoardGUI {
      * @param y the y coord of the click event
      */
     public void canvasClickEventHandler(double x,double y){
-        //TODO: handle if click triangle before they can
         //check if in board range
         if ((x > xPad-boxX) && (y > yPad-boxY)){
             if ((x < (xPad+(boxX*(boardX+1)))) && (y < (yPad+(boxY*(boardY+1))))){
@@ -275,6 +274,9 @@ public class BoardGUI {
         setCards(this.game.getTurn().getHand());
     }
 
+    /**
+     * Handles when a player pushes in a tile
+     */
     public void playerPushInTile(){
         //check if tile can be pushed in
         //get selected tile
@@ -352,6 +354,9 @@ public class BoardGUI {
         }
     }
 
+    /**
+     * Handles the player playing an action tile
+     */
     public void playerPlayAction(){
         //if action tile can be played
         //get selected action tile
@@ -377,6 +382,9 @@ public class BoardGUI {
         handIndex = -1;
     }
 
+    /**
+     * Handles when the player plays a backtrack meeting
+     */
     private  void playerPlayBackTrack(){
         for (Player p : this.game.getPlayers()){
             //TODO: check if they can be sent back
@@ -386,13 +394,14 @@ public class BoardGUI {
         }
     }
 
-    //used at the start of a players turn
-        public void startTurn(){
+    /**
+     * Handles the start of a player's turn give them the card
+     */
+    public void startTurn(){
         Player p = game.getTurn();
         Tile drawnTile = game.getBag().getRandomTile();
         p.addToHand(drawnTile);
         drawCanvas();
-        //System.out.println(p.getHand().size());
         try {
             ActionTile actionTile = (ActionTile)drawnTile;
             //choose to play it
@@ -442,6 +451,10 @@ public class BoardGUI {
         return false;
     }
 
+    /**
+     * Handle when the player selects the
+     * @param index
+     */
     public void handClicked(int index){
         Player p = game.getTurn();
         this.handIndex = index;
@@ -462,6 +475,9 @@ public class BoardGUI {
         setCards(this.game.getTurn().getHand());
     }
 
+    /**
+     * handles when the player move on the board
+     */
     public void playerMove(){
         Player p = this.game.getTurn();
         int[] newPos = canMoveTo(p, mouseX-1, mouseY-1);
@@ -531,6 +547,10 @@ public class BoardGUI {
         return true;
     }
 
+    /**
+     * checks if the player is able to move then sets the turn progression appropriately
+     * @param p the player that we are checking
+     */
     public void isAbleToMove(Player p) {
         if (canMoveTo(p, p.getX() + 1, p.getY()) != null
         || canMoveTo(p, p.getX() - 1, p.getY()) != null
@@ -557,6 +577,11 @@ public class BoardGUI {
         }
     }
 
+    /**
+     * Event handler for next turn button
+     * @param actionEvent
+     * @throws IOException
+     */
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
         System.out.println(turnProgression);
@@ -583,9 +608,13 @@ public class BoardGUI {
             }
         }
 
+        //reset image rotation
+        RotationImage.setImage(null);
+    }
 
-        RotationImage.setImage(null);    }
-
+    /**
+     * Hides the cards at then end of the turn
+     */
     public void hideCards() {
         Game.playMenuSound();
         baseBoarderPane.setBottom(null);
@@ -597,6 +626,10 @@ public class BoardGUI {
         baseBoarderPane.setBottom(nextTurnHBox);
     }
 
+    /**
+     * Gets the game
+     * @return the current game instance
+     */
     public Game getGame() {
         return game;
     }
@@ -650,6 +683,10 @@ public class BoardGUI {
         }
     }
 
+    /**
+     * Sets the hand to the current players hand
+     * @param deck the current players hand
+     */
     public void setCards(ArrayList<Tile> deck)  {
         baseBoarderPane.setBottom(null);
         tileHandHBox = new HBox();
