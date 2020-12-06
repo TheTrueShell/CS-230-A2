@@ -62,6 +62,9 @@ public class CreateGameMenuGUI {
     // Master list of all Profile Names
     private ObservableList<String> names = FXCollections.observableArrayList();
 
+    /**
+     * Initialized the presets list once the FXML has been loaded.
+     */
 
     @FXML
     public void initialize(){

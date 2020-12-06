@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  * This class is the main entry point to the game.
  * It creates and runs the game.
  * @author Benjamin Rockley, Mohammed T, Music Implementation William Aodan Telford
- * @version 0.9
+ * @version 1.0
  */
 public class Game extends Application {
     private static final String PROFILES_PATH = "profiles.txt";
@@ -635,6 +635,11 @@ public class Game extends Application {
 
     }
 
+    /**
+     * Sets the sound effect volume
+     * @param newMenuVolume
+     */
+
     public static void setMenuSoundVolume(double newMenuVolume) {
 
         menuSoundVolume = newMenuVolume;
@@ -642,11 +647,21 @@ public class Game extends Application {
 
     }
 
+    /**
+     * Gets the current music volume
+     * @return
+     */
+
     public static double getMusicVolume() {
 
         return musicVolume;
 
     }
+
+    /**
+     * Gets the current sound effect volume
+     * @return
+     */
 
     public static double getMenuSoundVolume() {
 

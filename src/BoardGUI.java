@@ -673,6 +673,12 @@ public class BoardGUI {
 
     }
 
+    /**
+     * called when the user clicks the save game button. First plays the menu sound and then checks if the player is at
+     * the end of their turn. If so it will load the save game option. If not it'll tell the user to finish their turn.
+     * @param actionEvent
+     */
+
     public void saveGameButtonAction(ActionEvent actionEvent) {
 
         Game.playMenuSound();
@@ -702,9 +708,13 @@ public class BoardGUI {
 
     }
 
+    /**
+     * Exits the user from the game and puts them on the main menu
+     * @param actionEvent
+     */
+
     public void exitButtonAction(ActionEvent actionEvent) {
 
-        //TODO: Fix null pointer given by a bug in getting the stage from the menuButton
 
         Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
