@@ -28,6 +28,8 @@ public class SaveMenuGUI {
 
     public void saveButtonAction(ActionEvent actionEvent) {
 
+        Game.playMenuSound();
+
         game.saveBoard("saves/" + saveFile.getText() + ".txt");
         saveGameLabel.setText(FILE_SAVED_TEXT);
 
@@ -39,6 +41,8 @@ public class SaveMenuGUI {
      */
 
     public void backButtonAction(ActionEvent actionEvent) {
+
+        Game.playMenuSound();
 
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         primaryStage.close();

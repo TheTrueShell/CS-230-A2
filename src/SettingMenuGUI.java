@@ -51,12 +51,16 @@ public class SettingMenuGUI {
 
     public void volumeButtonAction(ActionEvent actionEvent) {
 
+        Game.playMenuSound();
+
         double musicVolume = (musicSlider.getValue() / 100);
         Game.setMusicVolume(musicVolume);
 
     }
 
     public void menuVolumeButtonAction(ActionEvent actionEvent) {
+
+        Game.playMenuSound();
         double menuVolume = (soundsSlider.getValue() / 100);
         Game.setMenuSoundVolume(menuVolume);
 

@@ -39,7 +39,6 @@ public class LoadGameGUI {
         File directoryPath = new File(PATH_TO_SAVE_GAMES);
         //List of all files and directories
         File filesList[] = directoryPath.listFiles();
-        System.out.println("List of files and directories in the specified directory:");
 
 
         for(File file : filesList) {
@@ -77,6 +76,8 @@ public class LoadGameGUI {
      */
 
     public void loadGameButtonAction(ActionEvent actionEvent) {
+
+        Game.playMenuSound();
 
         File selectedGame = (File) gameList.getSelectionModel().getSelectedItem();
         System.out.println(selectedGame);

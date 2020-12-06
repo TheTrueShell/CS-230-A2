@@ -522,6 +522,7 @@ public class BoardGUI {
     }
 
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
+        Game.playMenuSound();
         System.out.println(turnProgression);
         if (turnProgression == -1){
             //Then the turn has not started, but the cards should be shown.
@@ -550,6 +551,7 @@ public class BoardGUI {
         RotationImage.setImage(null);    }
 
     public void hideCards() {
+        Game.playMenuSound();
         baseBoarderPane.setBottom(null);
         nextTurnHBox = new HBox();
         Text nextPlayer = new Text(game.getTurn().getProfile() + "'s Turn");
@@ -568,6 +570,7 @@ public class BoardGUI {
      * @param actionEvent the button click
      */
     public void leftRotateButtonAction(ActionEvent actionEvent) {
+        Game.playMenuSound();
         if (turnProgression == 0) {
             FloorTile tempTile = (FloorTile) this.game.getTurn().getHand().get(this.handIndex);
 
@@ -591,6 +594,7 @@ public class BoardGUI {
      * @param actionEvent the button click
      */
     public void rightRotateButtonAction(ActionEvent actionEvent) {
+        Game.playMenuSound();
         if (turnProgression == 0) {
             FloorTile tempTile = (FloorTile) this.game.getTurn().getHand().get(this.handIndex);
 
@@ -634,6 +638,8 @@ public class BoardGUI {
     }
 
     public void saveGameButtonAction(ActionEvent actionEvent) {
+
+        Game.playMenuSound();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SaveMenu.fxml"));
         Parent SaveMenuFXMLParent = null;
