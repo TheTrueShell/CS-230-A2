@@ -340,7 +340,7 @@ public class BoardGUI {
      */
     private void pushPlayersOnColumn(int index, boolean top){
         for (Player p : this.game.getPlayers()){
-            if (p.getY() == index){
+            if (p.getX() == index){
                 int newY;
                 if (top) {
                     newY = (p.getX() + 1) % boardY;
@@ -401,9 +401,45 @@ public class BoardGUI {
         } catch (Exception e){
             FloorTile floorTile = (FloorTile)drawnTile;
             //must play this now
-            playerTurnTag.setText("You must place the floor Tile");
-            turnProgression = 0;
+            if (canPlaceTile()) {
+                playerTurnTag.setText("You must place the floor Tile");
+                turnProgression = 0;
+            } else {
+                if (p.getHand().size() > 1){
+                    playerTurnTag.setText("Do you want to play the action Tile");
+                    turnProgression = 1;
+                } else {
+                    //allow them to move
+                    isAbleToMove(p);
+                    if (turnProgression == 2) {
+                        playerTurnTag.setText("You can move");
+                    } else {
+                        playerTurnTag.setText("You can't move, end your turn");
+                    }
+                }
+                //remove tile from hand
+                this.game.getBag().addTile(floorTile);
+                p.getHand().remove(floorTile);
+            }
         }
+    }
+
+    /**
+     * Checks if the player can push in a tile
+     * @return true if they can
+     */
+    private boolean canPlaceTile(){
+        for (int i = 0; i < boardX; i++){
+            if(this.game.getBoard().isColumnPushable(i)){
+                return true;
+            }
+        }
+        for (int i = 0; i < boardY; i++){
+            if(this.game.getBoard().isRowPushable(i)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void handClicked(int index){
@@ -637,30 +673,48 @@ public class BoardGUI {
 
     }
 
+    /**
+     * called when the user clicks the save game button. First plays the menu sound and then checks if the player is at
+     * the end of their turn. If so it will load the save game option. If not it'll tell the user to finish their turn.
+     * @param actionEvent
+     */
+
     public void saveGameButtonAction(ActionEvent actionEvent) {
 
         Game.playMenuSound();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SaveMenu.fxml"));
-        Parent SaveMenuFXMLParent = null;
-        try {
-            SaveMenuFXMLParent = (Parent) loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(turnProgression == -1) {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SaveMenu.fxml"));
+            Parent SaveMenuFXMLParent = null;
+            try {
+                SaveMenuFXMLParent = (Parent) loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene SaveMenuFXMLScene = new Scene(SaveMenuFXMLParent);
+            Stage primaryStage = new Stage();
+            // This line gets the stage the 'Play' button's action event came from
+            primaryStage.setScene(SaveMenuFXMLScene);
+            SaveMenuGUI controller = (SaveMenuGUI) loader.getController();
+            controller.setGame(this.game);
+            primaryStage.show();
+
+        } else {
+
+            playerTurnTag.setText("Please Finish your turn before you save");
+
         }
-        Scene SaveMenuFXMLScene = new Scene(SaveMenuFXMLParent);
-        Stage primaryStage = new Stage();
-        // This line gets the stage the 'Play' button's action event came from
-        primaryStage.setScene(SaveMenuFXMLScene);
-        SaveMenuGUI controller = (SaveMenuGUI) loader.getController();
-        controller.setGame(this.game);
-        primaryStage.show();
 
     }
 
+    /**
+     * Exits the user from the game and puts them on the main menu
+     * @param actionEvent
+     */
+
     public void exitButtonAction(ActionEvent actionEvent) {
 
-        //TODO: Fix null pointer given by a bug in getting the stage from the menuButton
 
         Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));

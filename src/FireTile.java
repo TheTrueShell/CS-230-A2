@@ -10,6 +10,10 @@ public class FireTile extends ActionTileFloor {
 
     private static String imageLocation = "Fire.png";
 
+    /**
+     * FireTile constructor. Creates the object and sets the playable state to false and the tile type to "FireTile"
+     */
+
     public FireTile() {
 
         super.setPlayable(false);

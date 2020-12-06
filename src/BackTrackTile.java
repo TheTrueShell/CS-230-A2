@@ -10,15 +10,13 @@ public class BackTrackTile extends ActionTile {
 
     private static String imageLocation = "BackTrack.png";
 
+    /**
+     * Constructor for BacktrackTile, setting the tiletype to BackTrackTile
+     */
+
     public BackTrackTile() {
 
         super.setTileType("BackTrackTile");
-
-    }
-
-    public void action(Player player) {
-
-        player.movePlayer(player.getPreviousPosition2()); //May need try catch around it at somepoint
 
     }
 

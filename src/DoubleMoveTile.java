@@ -10,15 +10,13 @@ public class DoubleMoveTile extends ActionTile {
 
     private static String imageLocation = "DoubleMove.png";
 
+    /**
+     * Constructor for doubleMoveTile. creates the object and sets the tileType to DoubleMoveTile
+     */
+
     public DoubleMoveTile() {
 
         super.setTileType("DoubleMoveTile");
-
-    }
-
-    public void action(Player player) {
-
-        player.getPreviousPosition();
 
     }
 
