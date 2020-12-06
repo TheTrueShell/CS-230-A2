@@ -401,9 +401,45 @@ public class BoardGUI {
         } catch (Exception e){
             FloorTile floorTile = (FloorTile)drawnTile;
             //must play this now
-            playerTurnTag.setText("You must place the floor Tile");
-            turnProgression = 0;
+            if (canPlaceTile()) {
+                playerTurnTag.setText("You must place the floor Tile");
+                turnProgression = 0;
+            } else {
+                if (p.getHand().size() > 1){
+                    playerTurnTag.setText("Do you want to play the action Tile");
+                    turnProgression = 1;
+                } else {
+                    //allow them to move
+                    isAbleToMove(p);
+                    if (turnProgression == 2) {
+                        playerTurnTag.setText("You can move");
+                    } else {
+                        playerTurnTag.setText("You can't move, end your turn");
+                    }
+                }
+                //remove tile from hand
+                this.game.getBag().addTile(floorTile);
+                p.getHand().remove(floorTile);
+            }
         }
+    }
+
+    /**
+     * Checks if the player can push in a tile
+     * @return true if they can
+     */
+    private boolean canPlaceTile(){
+        for (int i = 0; i < boardX; i++){
+            if(this.game.getBoard().isColumnPushable(i)){
+                return true;
+            }
+        }
+        for (int i = 0; i < boardY; i++){
+            if(this.game.getBoard().isRowPushable(i)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void handClicked(int index){
