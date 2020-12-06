@@ -28,6 +28,10 @@ public class LeaderBoardGUI {
 
     private static Game game;
     @FXML
+
+    /**
+     * Loads the profiles into the leaderBoard
+     */
     public void initialize() {
 
         ArrayList<Profile> profiles = game.getProfiles();

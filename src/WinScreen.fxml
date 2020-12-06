@@ -9,7 +9,7 @@
 
 <BorderPane style="-fx-background-image: url(&quot;mcbg.jpg&quot;);" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WinScreenGUI">
     <left>
-        <Label text="LeaderBoard:" BorderPane.alignment="CENTER">
+        <Label text="LeaderBoard:" BorderPane.alignment="CENTER" textFill="WHITE">
             <BorderPane.margin>
                 <Insets left="10.0" right="10.0" />
             </BorderPane.margin>
@@ -26,7 +26,7 @@
         </Button>
     </bottom>
     <top>
-        <Label fx:id="playerWin" text="Player X Wins!" BorderPane.alignment="CENTER">
+        <Label fx:id="playerWin" text="Player X Wins!" BorderPane.alignment="CENTER" textFill="WHITE">
             <BorderPane.margin>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </BorderPane.margin>
