@@ -489,21 +489,23 @@ public class BoardGUI {
         if (this.game.getBoard().getTile(p.getX(),p.getY()) instanceof GoalTile){
 
             //TODO: Test this works, works different to clicking a button. Maybe get Gus to look at since he designed scene changing system?
-
+            WinScreenGUI.setGame(game);
             System.out.println("Winner: " + p.getProfile());
+            game.setWinner(p.getProfile());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("WinScreen.fxml"));
+
             Parent winningMenuFXMLParent = null;
             try {
                 winningMenuFXMLParent = (Parent)loader.load();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Hey THIS ERRORED");
             }
             Scene winningMenuFXMLScene = new Scene(winningMenuFXMLParent);
-            Stage primaryStage = (Stage) ( playerTurnTag.getScene().getWindow());
+            Stage primaryStage = (Stage) ( baseBoarderPane.getScene().getWindow());
             // This line gets the stage the 'Play' button's action event came from
             primaryStage.setScene(winningMenuFXMLScene);
             WinScreenGUI controller = (WinScreenGUI)loader.getController();
-            controller.setGame(this.game);
+            controller.setGame(game);
             primaryStage.show();
         }
         drawCanvas();

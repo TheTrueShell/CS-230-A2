@@ -42,6 +42,7 @@ public class Game extends Application {
     private static Media media = new Media(new File(MUSIC_FILE_PATH.toString()).toURI().toString());
     private static MediaPlayer mediaPlayer  = new MediaPlayer(media);;
     private static AudioClip menuSound = new AudioClip(Paths.get(MENU_SOUND_FILE_PATH.toString()).toUri().toString());
+    private static String winner;
 
 
     // GUI
@@ -686,5 +687,25 @@ public class Game extends Application {
 
     }
 
+    /**
+     * sets the winner of the game
+     * @param profile
+     */
 
+    public static void setWinner(String profile) {
+
+        winner = profile;
+
+    }
+
+    /**
+     * Returns the winner of the game
+     * @return
+     */
+
+    public static String getWinner() {
+
+        return winner;
+
+    }
 }

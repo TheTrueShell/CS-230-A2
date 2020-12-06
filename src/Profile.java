@@ -71,9 +71,17 @@ public class Profile {
         GamesPlayed++;
     }
 
+    /**
+     * Increments games lost by 1
+     */
+
     public void updateGamesLost() {
         GamesLost++;
     }
+
+    /**
+     * Increments games won by 1
+     */
 
     public void updateGamesWon() {
         GamesWon++;
@@ -94,12 +102,22 @@ public class Profile {
         this.GamesWon = wins;
     }
 
+    /**
+     * sets the amount of games played
+     * @param played
+     */
+
     public void editGamesPlayed(int played) {
-        this.GamesWon = played;
+        this.GamesPlayed = played;
     }
 
+    /**
+     * Sets the games lost
+     * @param lost
+     */
+
     public void editGamesLost (int lost) {
-        this.GamesWon = lost;
+        this.GamesLost = lost;
     }
 
     /**

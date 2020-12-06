@@ -1,4 +1,5 @@
 import com.sun.xml.internal.ws.api.server.EndpointReferenceExtensionContributor;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,57 +22,58 @@ import java.util.Observable;
 /**
  * This class controls the win screen
  *
- * @author Mohammed T, Aryan Dusi
+ * @author William Aodan Telford
+ * @Co-Author Mohammed T, Aryan Dusi
  * @version 0.0.1
  */
 public class WinScreenGUI {
     @FXML
     private Label playerWin;
-
     @FXML
-    private TextField playerLost;
-
-    private Game game;
-
-    /**
-     * upon creation of the winScreen form, the stats of the players are updated and the outcome is displayed
-     * @param winner the player who won
-     * @param losers an arraylist of the player(s) that lost
-     */
-    public WinScreenGUI(Player winner, ArrayList<Player> losers) {
-        String winnerProfile = winner.getProfile();
-        playerWin.setText(winnerProfile);
-
-        String losersOutput ="";
-        for (int i=0;i<losers.size();i++) {
-            losersOutput =losersOutput+ losers.get(i).toString()+", ";
-        }
-        playerLost.setText(losersOutput);
+    private ListView leaderBoard;
 
 
+    private static Game game;
+    @FXML
+    public void initialize() {
+
+        String winnerProfile = game.getWinner();
+        playerWin.setText("Player " + winnerProfile + " has won!!!");
         ArrayList<Profile> profiles = game.getProfiles();
+
+        ObservableList<String> displayProfiles = FXCollections.observableArrayList();
+        for(Profile p : profiles ) {
+
+            displayProfiles.add(p.getName() + ": " + " Games played: " + p.getGamesPlayed() + " Games Won: " + p.getGamesWon() + " Games Lost: " + p.getGamesLost() );
+
+        }
+
+        leaderBoard.setItems(displayProfiles);
+
+
         for(int i =0;i<profiles.size();i++){
-        if(profiles.get(i).getName() == winnerProfile) {
-        profiles.get(i).updateGamesPlayed();
-        profiles.get(i).updateGamesWon();
-        game.saveProfiles();
-        }
-        else{
-        profiles.get(i).updateGamesPlayed();
-        profiles.get(i).updateGamesLost();
-        game.saveProfiles();
-        }
+            if(profiles.get(i).getName() == winnerProfile) {
+                profiles.get(i).updateGamesPlayed();
+                profiles.get(i).updateGamesWon();
+                game.saveProfiles();
+            }
+            else{
+                profiles.get(i).updateGamesPlayed();
+                profiles.get(i).updateGamesLost();
+                game.saveProfiles();
+            }
         }
 
     }
 
+
     /**
      * Sets the game
-     * @param game
+     * @param newgame
      */
 
-    public void setGame(Game game){
-        this.game = game;
+    public static void setGame(Game newgame){
+        game = newgame;
     }
 
     public void mainMenuButtonAction(ActionEvent actionEvent) {
