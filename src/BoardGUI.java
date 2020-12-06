@@ -479,18 +479,18 @@ public class BoardGUI {
             //TODO: Test this works, works different to clicking a button. Maybe get Gus to look at since he designed scene changing system?
 
             System.out.println("Winner: " + p.getProfile());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
-            Parent mainMenuFXMLParent = null;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("WinScreen.fxml"));
+            Parent winningMenuFXMLParent = null;
             try {
-                mainMenuFXMLParent = (Parent)loader.load();
+                winningMenuFXMLParent = (Parent)loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
+            Scene winningMenuFXMLScene = new Scene(winningMenuFXMLParent);
             Stage primaryStage = (Stage) ( playerTurnTag.getScene().getWindow());
             // This line gets the stage the 'Play' button's action event came from
-            primaryStage.setScene(mainMenuFXMLScene);
-            MainMenuGUI controller = (MainMenuGUI)loader.getController();
+            primaryStage.setScene(winningMenuFXMLScene);
+            WinScreenGUI controller = (WinScreenGUI)loader.getController();
             controller.setGame(this.game);
             primaryStage.show();
         }
