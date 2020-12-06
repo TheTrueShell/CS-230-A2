@@ -8,7 +8,6 @@
 
 public class StraightTile extends FloorTile {
 
-    private final String TILETYPE = "StraightTile";
     private static final String imageLocation = "Straight.png";
 
     /**
@@ -19,6 +18,8 @@ public class StraightTile extends FloorTile {
      */
 
     public StraightTile(int tileRotation) throws Exception {
+
+        setTileType("StraightTile");
         boolean[] sides  = {true,false,true,false};
         setAccessibleSides(sides);
         setRotation(tileRotation);

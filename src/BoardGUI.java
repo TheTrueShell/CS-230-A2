@@ -1,7 +1,10 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.animation.Timeline;
@@ -15,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -27,6 +31,7 @@ public class BoardGUI {
     @FXML public BorderPane baseBoarderPane;
     @FXML public Label playerTurnTag;
     @FXML ImageView RotationImage;
+    @FXML private MenuBar menuButton;
 
     /**
      * BoardX is the board width
@@ -385,7 +390,24 @@ public class BoardGUI {
         }
         //check if player on the Goal tile
         if (this.game.getBoard().getTile(p.getX(),p.getY()) instanceof GoalTile){
+
+            //TODO: Test this works, works different to clicking a button. Maybe get Gus to look at since he designed scene changing system?
+
             System.out.println("Winner: " + p.getProfile());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+            Parent mainMenuFXMLParent = null;
+            try {
+                mainMenuFXMLParent = (Parent)loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
+            Stage primaryStage = (Stage) ( playerTurnTag.getScene().getWindow());
+            // This line gets the stage the 'Play' button's action event came from
+            primaryStage.setScene(mainMenuFXMLScene);
+            MainMenuGUI controller = (MainMenuGUI)loader.getController();
+            controller.setGame(this.game);
+            primaryStage.show();
         }
         drawCanvas();
     }
@@ -563,8 +585,43 @@ public class BoardGUI {
     }
 
     public void saveGameButtonAction(ActionEvent actionEvent) {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SaveMenu.fxml"));
+        Parent SaveMenuFXMLParent = null;
+        try {
+            SaveMenuFXMLParent = (Parent) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene SaveMenuFXMLScene = new Scene(SaveMenuFXMLParent);
+        Stage primaryStage = new Stage();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(SaveMenuFXMLScene);
+        SaveMenuGUI controller = (SaveMenuGUI) loader.getController();
+        controller.setGame(this.game);
+        primaryStage.show();
+
     }
 
     public void exitButtonAction(ActionEvent actionEvent) {
+
+        //TODO: Fix null pointer given by a bug in getting the stage from the menuButton
+
+        Game.playMenuSound();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        Parent mainMenuFXMLParent = null;
+        try {
+            mainMenuFXMLParent = (Parent)loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
+        Stage primaryStage = (Stage) menuButton.getScene().getWindow();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(mainMenuFXMLScene);
+        MainMenuGUI controller = (MainMenuGUI)loader.getController();
+        controller.setGame(this.game);
+        primaryStage.show();
+
     }
 }

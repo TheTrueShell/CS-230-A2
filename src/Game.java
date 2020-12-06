@@ -96,15 +96,18 @@ public class Game extends Application {
      * Saves the current game to gameInProgrees.txt
      */
     public void saveBoard(String filePath){
+
+        File file = null;
+
         try{
-            File file = new File(filePath);
+            file = new File(filePath);
             file.createNewFile();
         } catch (IOException e){
             e.printStackTrace();
         }
         //write to the file
         try {
-            FileWriter fileWriter = new FileWriter(GAME_SAVE_PATH);
+            FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(this.board.getLength()+","+this.board.getWidth()+"\n");
             fileWriter.write(this.board.toString());
             fileWriter.write(this.players.size()+"\n");

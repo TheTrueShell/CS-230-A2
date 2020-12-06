@@ -8,7 +8,6 @@
 
 public class TJunctionTile extends FloorTile {
 
-    private final String TILETYPE = "TJunctionTile";
     private static final String imageLocation = "T-Junction.png";
 
     /**
@@ -20,6 +19,8 @@ public class TJunctionTile extends FloorTile {
 
     public TJunctionTile(int tileRotation) throws Exception {
 
+        setTileType("TJunctionTile");
+
         boolean[] sides  = {true,true,true,false};
         setAccessibleSides(sides);
         setRotation(tileRotation);
@@ -28,6 +29,7 @@ public class TJunctionTile extends FloorTile {
         setTileFixed(false);
 
     }
+
     /**
      * Getter for the Image location of the tile.
      * @return String imageLocation

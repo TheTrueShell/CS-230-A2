@@ -8,11 +8,19 @@
 public abstract class Tile {
 
     protected int drawnOnTurn;
-    private final String TILETYPE = "Tile";
     private static String imageLocation;
+    private String tileType = "Tile";
+
+
+
+    public void setTileType(String tileType) {
+
+        this.tileType = tileType;
+
+    }
 
     public String getTILETYPE(){
-        return TILETYPE;
+        return tileType;
     }
 
     /**

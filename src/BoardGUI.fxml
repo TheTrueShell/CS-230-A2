@@ -22,12 +22,12 @@
                 <Label fx:id="playerTurnTag" text="Player 1's Turn" textFill="WHITE" />
             </center>
             <left>
-                <MenuBar BorderPane.alignment="CENTER">
+                <MenuBar BorderPane.alignment="CENTER" fx:id="menuButtons">
                     <menus>
                         <Menu mnemonicParsing="false" text="Menu">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#saveGameButtonAction" text="Save Game" />
-                                <MenuItem mnemonicParsing="false" onAction="#exitButtonAction" text="Exit" />
+                                <MenuItem mnemonicParsing="false" onAction="#exitButtonAction" text="Exit"/>
                                 <MenuItem mnemonicParsing="false" text="Close" />
                             </items>
                         </Menu>

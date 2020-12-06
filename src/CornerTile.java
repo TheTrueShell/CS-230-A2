@@ -8,7 +8,6 @@
 
 public class CornerTile extends FloorTile {
 
-    private final String TILETYPE = "CornerTile";
     private static String imageLocation = "Corner.png";
 
     /**
@@ -19,6 +18,7 @@ public class CornerTile extends FloorTile {
      */
 
     public CornerTile(int tileRotation) throws Exception {
+        setTileType("CornerTile");
         boolean[] sides  = {true,true,false,false};
         setAccessibleSides(sides);
         setRotation(tileRotation);
