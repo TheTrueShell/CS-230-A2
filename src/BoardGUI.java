@@ -293,6 +293,7 @@ public class BoardGUI {
                 if (this.game.getBoard().isRowPushable((int)mouseY -1)) {
                     FloorTile tile = game.getBoard().pushInRow(t, (int) mouseY - 1, forward);
                     this.game.getBag().addTile(tile);
+                    pushPlayersOnRow((int)mouseY - 1, forward);
                 }
             }
         } else if (mouseY == 0 || mouseY == boardY+1) {
@@ -303,6 +304,7 @@ public class BoardGUI {
                 if (this.game.getBoard().isColumnPushable((int)mouseX-1)) {
                     FloorTile tile = this.game.getBoard().pushInColumn(t, (int) mouseX - 1, forward);
                     this.game.getBag().addTile(tile);
+                    pushPlayersOnColumn((int)mouseX - 1, forward);
                 }
             }
         }
@@ -310,6 +312,44 @@ public class BoardGUI {
         turnProgression = 1;
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
+    }
+
+    /**
+     * move all players on row and loop them if they get pushed off
+     * @param index the row index starts at 0
+     * @param left true if pushing from the left
+     */
+    private void pushPlayersOnRow(int index, boolean left){
+        for (Player p : this.game.getPlayers()){
+            if (p.getY() == index){
+                int newX;
+                if (left) {
+                    newX = (p.getX() + 1) % boardX;
+                } else {
+                    newX = (p.getX() +(boardX - 1) % boardX);
+                }
+                p.movePlayer(new int[]{newX,p.getY()});
+            }
+        }
+    }
+
+    /**
+     * Move all players on column and loop them if they get pushed off
+     * @param index the column index starts at 0
+     * @param top true if pushing from the top
+     */
+    private void pushPlayersOnColumn(int index, boolean top){
+        for (Player p : this.game.getPlayers()){
+            if (p.getY() == index){
+                int newY;
+                if (top) {
+                    newY = (p.getX() + 1) % boardY;
+                } else {
+                    newY = (p.getX() +(boardY - 1) % boardY);
+                }
+                p.movePlayer(new int[]{p.getX(),newY});
+            }
+        }
     }
 
     public void playerPlayAction(){
