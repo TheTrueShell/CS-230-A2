@@ -27,13 +27,11 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class BoardGUI {
-    @FXML public Button nextTurnBtn;
     @FXML public Button nextTurnButton;
     @FXML private Canvas canvas;
     @FXML public BorderPane baseBoarderPane;
     @FXML public Label playerTurnTag;
     @FXML ImageView RotationImage;
-    @FXML private MenuBar menuButton;
 
     /**
      * BoardX is the board width
@@ -41,12 +39,11 @@ public class BoardGUI {
      */
     private int boardX;
     private int boardY;
-    private String img;
-    private String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
-    private Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
-    private Image fixedImage = new Image("F.png");
+    private final String[] playerImages = {"head1.png","head2.png","head3.png","head4.png"};
+    private final Image[] statusEffects = {new Image("fireEffect.png"), new Image("iceEffect.png")};
+    private final Image fixedImage = new Image("F.png");
     /**
-     * Turnprogression means
+     * Turn Progression means
      * -1: turn not started
      * 0: push in tile
      * 1: play action tile
@@ -99,7 +96,7 @@ public class BoardGUI {
         boxY = (height-(yPad*2)) / (boardY + 2);
         xPad += boxX;
         yPad += boxY;
-        //draw verticle lines for grid
+        //draw vertical lines for grid
         for (int i = 1; i < boardX; i++){
             gc.moveTo((boxX*i)+xPad,yPad);
             gc.lineTo((boxX*i)+xPad,height-yPad);
@@ -120,7 +117,7 @@ public class BoardGUI {
                     gc.fillRect((boxX*i)+xPad+1,(boxY*j)+yPad+1,boxX-2,boxY-2);
                 }
                 //get tile
-                FloorTile t = (FloorTile) this.game.getBoard().getTile(i,j);
+                FloorTile t = this.game.getBoard().getTile(i,j);
                 //if tile isn't null draw it
                 if (t != null) {
                     Image tileImage = new Image(t.getImageLocation());
@@ -283,10 +280,7 @@ public class BoardGUI {
         //check if tile can be pushed in
         //get selected tile
         FloorTile t = (FloorTile) this.game.getTurn().getHand().get(this.handIndex);
-        //get selected rotation
-        int rotation = 0;
         //push in the tile
-        int index = 1;
         boolean forward = true;
         //if row
         if (mouseX == 0 || mouseX == boardX+1) {
@@ -370,10 +364,8 @@ public class BoardGUI {
         } catch (Exception e){
             //not a action floor tile
             if (t instanceof DoubleMoveTile){
-                DoubleMoveTile tile = (DoubleMoveTile)t;
                 this.doubleMove = true;
             } else {
-                BackTrackTile tile = (BackTrackTile)t;
                 this.backTrack = true;
             }
         }
@@ -581,7 +573,7 @@ public class BoardGUI {
 
     /**
      * Event handler for next turn button
-     * @param actionEvent
+     * @param actionEvent button click event
      * @throws IOException
      */
     public void nextTurnButtonAction(ActionEvent actionEvent) throws IOException {
@@ -715,7 +707,7 @@ public class BoardGUI {
     /**
      * called when the user clicks the save game button. First plays the menu sound and then checks if the player is at
      * the end of their turn. If so it will load the save game option. If not it'll tell the user to finish their turn.
-     * @param actionEvent
+     * @param actionEvent the button click event
      */
 
     public void saveGameButtonAction(ActionEvent actionEvent) {
@@ -749,7 +741,7 @@ public class BoardGUI {
 
     /**
      * Exits the user from the game and puts them on the main menu
-     * @param actionEvent
+     * @param actionEvent the button click event
      */
 
     public void exitButtonAction(ActionEvent actionEvent) {
