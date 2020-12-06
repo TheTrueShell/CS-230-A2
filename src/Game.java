@@ -24,10 +24,10 @@ import javafx.stage.Stage;
  */
 public class Game extends Application {
     private static final String PROFILES_PATH = "profiles.txt";
-    private static final String MUSIC_FILE_PATH = "theme3.mp3";
-    private static final String MENU_SOUND_FILE_PATH = "menuSound.mp3";
-    private static final String FIRE_SOUND_FILE_PATH = "fireSound.mp3";
-    private static final String ICE_SOUND_FILE_PATH = "iceSound.mp3";
+    private static final String MUSIC_FILE_PATH = "sounds/theme3.mp3";
+    private static final String MENU_SOUND_FILE_PATH = "sounds/menuSound.mp3";
+    private static final String FIRE_SOUND_FILE_PATH = "sounds/fireSound.mp3";
+    private static final String ICE_SOUND_FILE_PATH = "sounds/iceSound.mp3";
 
 
     private Bag gameBag;
