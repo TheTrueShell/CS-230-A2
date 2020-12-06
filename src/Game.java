@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -631,6 +632,23 @@ public class Game extends Application {
     public static double getMenuSoundVolume() {
 
         return menuSoundVolume;
+
+    }
+
+    public void playActionSound(String tileType) {
+
+        if(tileType.equals("FireTile")) {
+
+            AudioClip fire = new AudioClip(Paths.get("fireSound.mp3").toUri().toString());
+            fire.play();
+
+        } else if(tileType.equals("IceTile")) {
+
+
+            AudioClip ice = new AudioClip(Paths.get("iceSound.mp3").toUri().toString());
+            ice.play();
+
+        }
 
     }
 }

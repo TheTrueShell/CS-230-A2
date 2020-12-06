@@ -370,6 +370,7 @@ public class BoardGUI {
                 this.backTrack = true;
             }
         }
+        game.playActionSound(t.getTILETYPE());
         drawCanvas();
         isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
