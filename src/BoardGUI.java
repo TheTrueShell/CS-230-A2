@@ -488,7 +488,7 @@ public class BoardGUI {
         //check if player on the Goal tile
         if (this.game.getBoard().getTile(p.getX(),p.getY()) instanceof GoalTile){
 
-            //TODO: Test this works, works different to clicking a button. Maybe get Gus to look at since he designed scene changing system?
+            //TODO: works different to clicking a button. Maybe get Gus to look at since he designed scene changing system?
             WinScreenGUI.setGame(game);
             System.out.println("Winner: " + p.getProfile());
             game.setWinner(p.getProfile());

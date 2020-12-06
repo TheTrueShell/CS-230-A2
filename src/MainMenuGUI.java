@@ -104,4 +104,27 @@ public class MainMenuGUI {
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public void leaderBoardButtonAction(ActionEvent actionEvent) {
+
+        Game.playMenuSound();
+        LeaderBoardGUI.setGame(game);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaderBoard.fxml"));
+        Parent leaderBoardFXMLParent = null;
+        try {
+            leaderBoardFXMLParent = (Parent)loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene leaderBoardFXMLScene = new Scene(leaderBoardFXMLParent);
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        // This line gets the stage the 'Play' button's action event came from
+        primaryStage.setScene(leaderBoardFXMLScene);
+        LeaderBoardGUI controller = (LeaderBoardGUI)loader.getController();
+        controller.setGame(this.game);
+        primaryStage.show();
+
+
+
+    }
 }

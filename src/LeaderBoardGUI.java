@@ -1,4 +1,3 @@
-import com.sun.xml.internal.ws.api.server.EndpointReferenceExtensionContributor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,22 +9,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import java.util.ArrayList;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.util.Observable;
+import java.util.ArrayList;
 
 /**
  * This class controls the win screen
  *
- * @author Mohammed T, Aryan Dusi, William Aodan Telford
+ * @author William Aodan Telford
  * @version 0.0.1
  */
-public class WinScreenGUI {
+public class LeaderBoardGUI {
     @FXML
     private Label playerWin;
     @FXML
@@ -36,8 +30,6 @@ public class WinScreenGUI {
     @FXML
     public void initialize() {
 
-        String winnerProfile = game.getWinner();
-        playerWin.setText("Player " + winnerProfile + " has won!!!");
         ArrayList<Profile> profiles = game.getProfiles();
 
         ObservableList<String> displayProfiles = FXCollections.observableArrayList();
@@ -49,19 +41,6 @@ public class WinScreenGUI {
 
         leaderBoard.setItems(displayProfiles);
 
-
-        for(int i =0;i<profiles.size();i++){
-            if(profiles.get(i).getName() == winnerProfile) {
-                profiles.get(i).updateGamesPlayed();
-                profiles.get(i).updateGamesWon();
-                game.saveProfiles();
-            }
-            else{
-                profiles.get(i).updateGamesPlayed();
-                profiles.get(i).updateGamesLost();
-                game.saveProfiles();
-            }
-        }
 
     }
 
@@ -76,7 +55,6 @@ public class WinScreenGUI {
     }
 
     public void mainMenuButtonAction(ActionEvent actionEvent) {
-        game.resetPlayers();
         Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent mainMenuFXMLParent = null;

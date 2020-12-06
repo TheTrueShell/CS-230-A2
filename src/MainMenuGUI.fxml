@@ -15,6 +15,7 @@
          <children>
             <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonAction" prefHeight="25.0" prefWidth="85.0" text="Play" textAlignment="CENTER" />
             <Button fx:id="profileButton" mnemonicParsing="false"  onAction="#profilesButtonAction" prefHeight="25.0" prefWidth="85.0" text="Profiles" textAlignment="CENTER" />
+            <Button fx:id="leaderBoardButton" mnemonicParsing="false" onAction="#leaderBoardButtonAction" prefHeight="25.0" prefWidth="85.0" text="LeaderBoard" textAlignment="CENTER" />
             <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#settingsButtonAction"  prefHeight="25.0" prefWidth="85.0" text="Settings" textAlignment="CENTER" />
             <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonAction" prefHeight="25.0" prefWidth="85.0" text="Quit" textAlignment="CENTER" />
          </children>
