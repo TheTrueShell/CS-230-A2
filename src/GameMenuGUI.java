@@ -10,9 +10,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GameMenuGUI {
-    private Game game;
-    @FXML public AnchorPane mainMenuPanel;
 
+    private Game game;
+
+    /**
+     * Runs when the user clicks new Game. It loads the javafx for the new Game menu
+     * @param actionEvent
+     * @throws IOException
+     */
     @FXML
     public void newGameButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
@@ -30,6 +35,12 @@ public class GameMenuGUI {
 
     }
 
+    /**
+     * Runs When the load game is clicked. It loads the javafx for loading game menu
+     * @param actionEvent
+     * @throws IOException
+     */
+
     @FXML
     public void loadGameButtonAction(ActionEvent actionEvent) throws IOException {
 
@@ -45,6 +56,12 @@ public class GameMenuGUI {
         primaryStage.show();
 
     }
+
+    /**
+     * Runs when the back button is clicked. loads the javafx for the main menu
+     * @param actionEvent
+     * @throws IOException
+     */
 
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
