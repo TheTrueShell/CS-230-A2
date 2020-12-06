@@ -41,6 +41,8 @@ public class Player {
     public Player(int x, int y, String name) {
         CurrentPosition[0] = x;
         CurrentPosition[1] = y;
+        PreviousPosition = new int[] {x,y};
+        PreviousPosition2 = new int[] {x,y};
         currentProfile = name;
     }
 
@@ -55,6 +57,8 @@ public class Player {
      * @param coords the coords of the player on the board.
      */
     public void movePlayer(int[] coords){
+        this.PreviousPosition2 = this.PreviousPosition;
+        this.PreviousPosition = CurrentPosition;
         CurrentPosition = coords;
     }
 
