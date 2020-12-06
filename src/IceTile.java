@@ -9,12 +9,25 @@ public class IceTile extends ActionTileFloor {
 
     private static String imageLocation = "Ice.png";
 
+    /**
+     * Constructor for IceTile. Sets playable to false and sets the tile type to IceTile
+     */
+
     public IceTile() {
 
         super.setPlayable(false);
         super.setTileType("IceTile");
 
     }
+
+    /**
+     * Recursively goes through the 3x3 grid setting the isFrozen to true for those tiles.
+     * @param board
+     * @param x
+     * @param y
+     * @param numOfPlayers
+     * @throws Exception
+     */
 
     @Override
     public void action(Board board, int x, int y, int numOfPlayers) throws Exception {
