@@ -452,7 +452,7 @@ public class Game extends Application {
     /**
      * Reset Players
      */
-    public void resetPlayer(){
+    public void resetPlayers(){
         this.players = new ArrayList<Player>();
     }
 

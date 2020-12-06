@@ -75,7 +75,7 @@ public class WinScreenGUI {
     }
 
     public void mainMenuButtonAction(ActionEvent actionEvent) {
-
+        game.resetPlayers();
         Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent mainMenuFXMLParent = null;

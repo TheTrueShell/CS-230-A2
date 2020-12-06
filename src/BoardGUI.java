@@ -751,8 +751,7 @@ public class BoardGUI {
      */
 
     public void exitButtonAction(ActionEvent actionEvent) {
-
-
+        game.resetPlayers();
         Game.playMenuSound();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent mainMenuFXMLParent = null;
