@@ -384,6 +384,7 @@ public class BoardGUI {
             //TODO: check if they can be sent back
             if (p.getX() == mouseX -1 && p.getY() == mouseY -1){
                 p.movePlayer(p.getPreviousPosition2());
+                isAbleToMove(this.game.getTurn());
             }
         }
     }
