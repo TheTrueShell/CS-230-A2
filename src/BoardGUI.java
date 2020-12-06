@@ -664,7 +664,7 @@ public class BoardGUI {
             e.printStackTrace();
         }
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
-        Stage primaryStage = (Stage) menuButton.getScene().getWindow();
+        Stage primaryStage = (Stage) baseBoarderPane.getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(mainMenuFXMLScene);
         MainMenuGUI controller = (MainMenuGUI)loader.getController();
