@@ -38,7 +38,7 @@ public class Game extends Application {
     private static double musicVolume = 0.1;
     private static double menuSoundVolume = 0.5;
 
-    //Instantiating Media class
+    //Instantiating Sounds
     private static Media media = new Media(new File(MUSIC_FILE_PATH.toString()).toURI().toString());
     private static MediaPlayer mediaPlayer  = new MediaPlayer(media);;
     private static AudioClip menuSound = new AudioClip(Paths.get(MENU_SOUND_FILE_PATH.toString()).toUri().toString());
@@ -72,6 +72,10 @@ public class Game extends Application {
 
     }
 
+    /**
+     * Sets the music volume and then plays the background music
+     */
+
     public static void playMenuSound() {
 
         //Instantiating MediaPlayer class
@@ -79,6 +83,11 @@ public class Game extends Application {
         menuSound.play();
 
     }
+
+    /**
+     * Determines the action tile and then plays the associated sound.
+     * @param tileType
+     */
 
     public void playActionSound(String tileType) {
 
