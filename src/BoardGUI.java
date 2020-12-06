@@ -641,20 +641,28 @@ public class BoardGUI {
 
         Game.playMenuSound();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SaveMenu.fxml"));
-        Parent SaveMenuFXMLParent = null;
-        try {
-            SaveMenuFXMLParent = (Parent) loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(turnProgression == -1) {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SaveMenu.fxml"));
+            Parent SaveMenuFXMLParent = null;
+            try {
+                SaveMenuFXMLParent = (Parent) loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene SaveMenuFXMLScene = new Scene(SaveMenuFXMLParent);
+            Stage primaryStage = new Stage();
+            // This line gets the stage the 'Play' button's action event came from
+            primaryStage.setScene(SaveMenuFXMLScene);
+            SaveMenuGUI controller = (SaveMenuGUI) loader.getController();
+            controller.setGame(this.game);
+            primaryStage.show();
+
+        } else {
+
+            playerTurnTag.setText("Please Finish your turn before you save");
+
         }
-        Scene SaveMenuFXMLScene = new Scene(SaveMenuFXMLParent);
-        Stage primaryStage = new Stage();
-        // This line gets the stage the 'Play' button's action event came from
-        primaryStage.setScene(SaveMenuFXMLScene);
-        SaveMenuGUI controller = (SaveMenuGUI) loader.getController();
-        controller.setGame(this.game);
-        primaryStage.show();
 
     }
 
