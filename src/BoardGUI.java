@@ -390,14 +390,38 @@ public class BoardGUI {
         drawCanvas();
     }
 
+    /**
+     * Check if the tile is accessible and that it isn't currently occupied
+     * @param p the player we want to move
+     * @param x the new x coordinate starts at 0
+     * @param y the new y coordinate starts at 0
+     * @return returns the position if they can move to it
+     */
     public int[] canMoveTo(Player p, double x, double y){
         int[] newPos = {(int) x, (int) y};
         if (x >= 0 && x < boardX && y >= 0 && y < boardY) {
             if(this.game.getBoard().isAccessibleFrom(p.getX(),p.getY(),newPos[0],newPos[1])) {
-                return newPos;
+                if (isNotOccupied(newPos[0],newPos[1])) {
+                    return newPos;
+                }
             }
         }
         return null;
+    }
+
+    /**
+     * Checks if player is on that tile
+     * @param x the X coordinate starts at 0
+     * @param y the Y coordinate starts at 0
+     * @return true if no player on tile
+     */
+    private boolean isNotOccupied(int x, int y){
+        for (Player p : this.game.getPlayers()){
+            if (p.getX() == x && p.getY() == y){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void isAbleToMove(Player p) {
