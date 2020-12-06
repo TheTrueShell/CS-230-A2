@@ -25,9 +25,9 @@ import javafx.stage.Stage;
 public class Game extends Application {
     private static final String PROFILES_PATH = "profiles.txt";
     private static final String MUSIC_FILE_PATH = "sounds/theme3.mp3";
-    private static final String MENU_SOUND_FILE_PATH = "sounds/menuSound.mp3";
-    private static final String FIRE_SOUND_FILE_PATH = "sounds/fireSound.mp3";
-    private static final String ICE_SOUND_FILE_PATH = "sounds/iceSound.mp3";
+    private static final File MENU_SOUND_FILE_PATH = new File("sounds/menuSound.mp3");
+    private static final File FIRE_SOUND_FILE_PATH = new File("sounds/fireSound.mp3");
+    private static final File ICE_SOUND_FILE_PATH = new File("sounds/iceSound.mp3");
 
 
     private Bag gameBag;
@@ -39,10 +39,9 @@ public class Game extends Application {
     private static double menuSoundVolume = 0.5;
 
     //Instantiating Media class
-    private static Media media = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
-    private static Media menuMedia = new Media(new File(MENU_SOUND_FILE_PATH).toURI().toString());
+    private static Media media = new Media(new File(MUSIC_FILE_PATH.toString()).toURI().toString());
     private static MediaPlayer mediaPlayer  = new MediaPlayer(media);;
-    private static AudioClip menuSound = new AudioClip(Paths.get("menuSound.mp3").toUri().toString());
+    private static AudioClip menuSound = new AudioClip(Paths.get(MENU_SOUND_FILE_PATH.toString()).toUri().toString());
 
 
     // GUI
@@ -85,14 +84,14 @@ public class Game extends Application {
 
         if(tileType.equals("FireTile")) {
 
-            AudioClip fire = new AudioClip(Paths.get(FIRE_SOUND_FILE_PATH).toUri().toString());
+            AudioClip fire = new AudioClip(Paths.get(FIRE_SOUND_FILE_PATH.getPath()).toUri().toString());
             fire.setVolume(menuSoundVolume);
             fire.play();
 
         } else if(tileType.equals("IceTile")) {
 
 
-            AudioClip ice = new AudioClip(Paths.get(ICE_SOUND_FILE_PATH).toUri().toString());
+            AudioClip ice = new AudioClip(Paths.get(ICE_SOUND_FILE_PATH.getPath()).toUri().toString());
             ice.setVolume(menuSoundVolume);
             ice.play();
 
