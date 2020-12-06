@@ -450,6 +450,13 @@ public class Game extends Application {
     }
 
     /**
+     * Reset Players
+     */
+    public void resetPlayer(){
+        this.players = new ArrayList<Player>();
+    }
+
+    /**
      * get all the players currently in game
      * @return
      */
