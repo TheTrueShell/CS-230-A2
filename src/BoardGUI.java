@@ -324,7 +324,7 @@ public class BoardGUI {
                 if (left) {
                     newX = (p.getX() + 1) % boardX;
                 } else {
-                    newX = (p.getX() +(boardX - 1) % boardX);
+                    newX = ((p.getX() +(boardX - 1)) % boardX);
                 }
                 p.movePlayer(new int[]{newX,p.getY()});
             }
@@ -341,9 +341,9 @@ public class BoardGUI {
             if (p.getX() == index){
                 int newY;
                 if (top) {
-                    newY = (p.getX() + 1) % boardY;
+                    newY = (p.getY() + 1) % boardY;
                 } else {
-                    newY = (p.getX() +(boardY - 1) % boardY);
+                    newY = ((p.getY() +(boardY - 1)) % boardY);
                 }
                 p.movePlayer(new int[]{p.getX(),newY});
             }
