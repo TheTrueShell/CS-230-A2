@@ -1,22 +1,16 @@
-import com.sun.xml.internal.ws.api.server.EndpointReferenceExtensionContributor;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import java.util.ArrayList;
+import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.util.Observable;
 
 /**
  * This class is a menu screen is used to manage profiles
@@ -51,31 +45,35 @@ public class ProfileMenu {
     private ListView profilesList;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         //get profiles
     }
 
     /**
      * Used to go back to main menu of the game
+     *
      * @param actionEvent event of the back button pressed
      * @throws IOException if the mainMenu fxml can't be found
      */
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
-        Parent mainMenuFXMLParent = (Parent)loader.load();
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        Parent mainMenuFXMLParent = loader.load();
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(mainMenuFXMLScene);
-        MainMenuGUI controller = (MainMenuGUI)loader.getController();
+        MainMenuGUI controller = loader.getController();
         controller.setGame(this.game);
         primaryStage.show();
     }
 
     /**
      * When the add profile button is clicked
+     *
      * @param actionEvent event of the add button being clicked
      * @throws IOException if the add button hasn't been used for some reason
      */
@@ -96,6 +94,7 @@ public class ProfileMenu {
 
     /**
      * When the edit profile button is clicked
+     *
      * @param actionEvent the event of clicking edit
      * @throws IOException if the add button hasn't been used for some reason
      */
@@ -116,6 +115,7 @@ public class ProfileMenu {
 
     /**
      * When the delete button has been clickec
+     *
      * @param actionEvent the event of clicking delete
      * @throws IOException if the delete button hasn't been clicked for some reason
      */
@@ -135,6 +135,7 @@ public class ProfileMenu {
 
     /**
      * When the ok button has been clicked, it does the corresponding action to the previous button click
+     *
      * @param actionEvent the event of clicking the ok button
      * @throws IOException
      */
@@ -149,9 +150,9 @@ public class ProfileMenu {
         if (deleteClicked == true) {
             String deletedName = Input.getText();
             Profile p = null;
-            for (Profile profile :game.getProfiles()) {
-                if(profile.getName().equals(deletedName)) {
-                    p  = profile;
+            for (Profile profile : game.getProfiles()) {
+                if (profile.getName().equals(deletedName)) {
+                    p = profile;
                     break;
                 }
             }
@@ -159,12 +160,12 @@ public class ProfileMenu {
         }
 
 
-        if(editClicked == true) {
+        if (editClicked == true) {
             String currentName = Input.getText();
             String newName = Input2.getText();
             Profile p = null;
-            for (Profile profile: game.getProfiles()) {
-                if(profile.getName().equals(currentName)) {
+            for (Profile profile : game.getProfiles()) {
+                if (profile.getName().equals(currentName)) {
                     p = profile;
                     break;
                 }
@@ -172,13 +173,14 @@ public class ProfileMenu {
             }
             p.setName(newName);
             game.saveProfiles();
-            for (int i = 0; i < game.getProfiles().size(); i++){
+            for (int i = 0; i < game.getProfiles().size(); i++) {
                 Profile profile = game.getProfiles().get(i);
-                String profileData = profile.getName() + " W:" + profile.getGamesWon() + " L:" + profile.getGamesLost();
-                profilesList.getItems().set(i,profileData);
+                String profileData =
+                        profile.getName() + " W:" + profile.getGamesWon() +
+                                " L:" + profile.getGamesLost();
+                profilesList.getItems().set(i, profileData);
             }
         }
-
 
 
         Ok.setVisible(false);
@@ -194,13 +196,15 @@ public class ProfileMenu {
 
     /**
      * calls the setGame menu to preset the profile menu to have an invisible form and the profiles list to be preloaded
+     *
      * @param game calls object game to set the game
      */
     @FXML
-    public void setGame(Game game){
+    public void setGame(Game game) {
         this.game = game;
-        for (Profile p : game.getProfiles()){
-            String profileData = p.getName() + " W:" + p.getGamesWon() + " L:" + p.getGamesLost();
+        for (Profile p : game.getProfiles()) {
+            String profileData = p.getName() + " W:" + p.getGamesWon() + " L:" +
+                    p.getGamesLost();
             profilesList.getItems().add(profileData);
         }
 

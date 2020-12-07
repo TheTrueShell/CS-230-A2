@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * The Main Menu Scene's controller.
+ *
  * @author Gus Rendle
  * @version 1.1
  */
@@ -36,57 +37,68 @@ public class MainMenuGUI {
      */
     public void playButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameMenu.fxml"));
-        Parent boardGUIParent = (Parent)loader.load();
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("GameMenu.fxml"));
+        Parent boardGUIParent = loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(boardGUIScene);
-        GameMenuGUI controller = (GameMenuGUI)loader.getController();
+        GameMenuGUI controller = loader.getController();
         controller.setGame(this.game);
         primaryStage.show();
     }
 
     /**
      * Called when the profiles button is pushed. Loads ProfileMenu.fxml
+     *
      * @param actionEvent
      * @throws IOException
      */
 
-    public void profilesButtonAction(ActionEvent actionEvent) throws IOException {
+    public void profilesButtonAction(ActionEvent actionEvent)
+            throws IOException {
         Game.playMenuSound();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfileMenu.fxml"));
-        Parent boardGUIParent = (Parent)loader.load();
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("ProfileMenu.fxml"));
+        Parent boardGUIParent = loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(boardGUIScene);
-        ProfileMenu controller = (ProfileMenu)loader.getController();
+        ProfileMenu controller = loader.getController();
         controller.setGame(this.game);
         primaryStage.show();
     }
 
     /**
      * Called when the settings button is pushed. Loads SettingsMenu.fxml
+     *
      * @param actionEvent
      * @throws IOException
      */
 
-    public void settingsButtonAction(ActionEvent actionEvent) throws IOException {
+    public void settingsButtonAction(ActionEvent actionEvent)
+            throws IOException {
         Game.playMenuSound();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SettingsMenu.fxml"));
-        Parent boardGUIParent = (Parent)loader.load();
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("SettingsMenu.fxml"));
+        Parent boardGUIParent = loader.load();
         Scene boardGUIScene = new Scene(boardGUIParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(boardGUIScene);
-        SettingMenuGUI controller = (SettingMenuGUI)loader.getController();
+        SettingMenuGUI controller = loader.getController();
         controller.setGame(this.game);
         primaryStage.show();
     }
 
     /**
      * Called when the quit button is pushed. exits the game.
+     *
      * @param actionEvent
      * @throws IOException
      */
@@ -109,21 +121,22 @@ public class MainMenuGUI {
 
         Game.playMenuSound();
         LeaderBoardGUI.setGame(game);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaderBoard.fxml"));
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("LeaderBoard.fxml"));
         Parent leaderBoardFXMLParent = null;
         try {
-            leaderBoardFXMLParent = (Parent)loader.load();
+            leaderBoardFXMLParent = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
         Scene leaderBoardFXMLScene = new Scene(leaderBoardFXMLParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(leaderBoardFXMLScene);
-        LeaderBoardGUI controller = (LeaderBoardGUI)loader.getController();
-        controller.setGame(this.game);
+        LeaderBoardGUI controller = loader.getController();
+        LeaderBoardGUI.setGame(this.game);
         primaryStage.show();
-
 
 
     }

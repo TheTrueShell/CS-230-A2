@@ -1,15 +1,9 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * @author William Aodan Telford
@@ -18,16 +12,15 @@ import java.io.IOException;
 
 public class SaveMenuGUI {
     private static final String FILE_SAVED_TEXT = "The game was saved";
-    private Game game;
-
     @FXML
     TextField saveFile;
-
     @FXML
     Label saveGameLabel;
+    private Game game;
 
     /**
      * Called when save button is pushed. Saves the file using the string given in the input box.
+     *
      * @param actionEvent
      */
 
@@ -42,6 +35,7 @@ public class SaveMenuGUI {
 
     /**
      * Loads the board back for the user.
+     *
      * @param actionEvent
      */
 
@@ -49,17 +43,19 @@ public class SaveMenuGUI {
 
         Game.playMenuSound();
 
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         primaryStage.close();
 
     }
 
     /**
      * Sets the Game to allow the saveBoard implementation.
+     *
      * @param game
      */
 
-    public void setGame(Game game){
+    public void setGame(Game game) {
         this.game = game;
     }
 }

@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.stream.Collectors;
+
 /**
  * This class controls the basics of the individual player profiles.
  *
@@ -62,7 +62,9 @@ public class Profile {
         return Name;
     }
 
-    public void setName(String name){this.Name = name;}
+    public void setName(String name) {
+        this.Name = name;
+    }
 
     /**
      * Increments each of the variables by 1.
@@ -104,6 +106,7 @@ public class Profile {
 
     /**
      * sets the amount of games played
+     *
      * @param played
      */
 
@@ -113,10 +116,11 @@ public class Profile {
 
     /**
      * Sets the games lost
+     *
      * @param lost
      */
 
-    public void editGamesLost (int lost) {
+    public void editGamesLost(int lost) {
         this.GamesLost = lost;
     }
 
@@ -128,16 +132,14 @@ public class Profile {
         String filePath = "profiles.txt";
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)));
+            BufferedReader reader =
+                    new BufferedReader(new FileReader(new File(filePath)));
             reader.lines().forEach(System.out::println);
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 
 
 }

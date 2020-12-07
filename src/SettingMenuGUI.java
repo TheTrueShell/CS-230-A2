@@ -28,7 +28,7 @@ public class SettingMenuGUI {
      */
 
     @FXML
-    public void initialize(){
+    public void initialize() {
 
         musicSlider.setValue(Game.getMusicVolume() * 100);
         soundsSlider.setValue(Game.getMenuSoundVolume() * 100);
@@ -37,6 +37,7 @@ public class SettingMenuGUI {
 
     /**
      * Called when the back button is pressed. loads the main menu
+     *
      * @param actionEvent
      * @throws IOException
      */
@@ -44,28 +45,32 @@ public class SettingMenuGUI {
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
-        Parent mainMenuFXMLParent = (Parent)loader.load();
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        Parent mainMenuFXMLParent = loader.load();
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(mainMenuFXMLScene);
-        MainMenuGUI controller = (MainMenuGUI)loader.getController();
+        MainMenuGUI controller = loader.getController();
         controller.setGame(this.game);
         primaryStage.show();
     }
 
     /**
      * Sets the game
+     *
      * @param game
      */
 
-    public void setGame(Game game){
+    public void setGame(Game game) {
         this.game = game;
     }
 
     /**
      * Called when the Volume button is pressed. Sets the music volume to the value of the slider
+     *
      * @param actionEvent
      */
 
@@ -80,6 +85,7 @@ public class SettingMenuGUI {
 
     /**
      * Called when the sounds effect button is pressed. Sets the sounds volume to the value of the slider.
+     *
      * @param actionEvent
      */
 

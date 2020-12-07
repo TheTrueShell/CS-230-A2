@@ -7,12 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * @Author William Aodan Telford
@@ -37,15 +36,15 @@ public class LoadGameGUI {
      */
 
     @FXML
-    public void initialize(){
+    public void initialize() {
 
         //Getting the folder saves
         File directoryPath = new File(PATH_TO_SAVE_GAMES);
         //List of all files and directories
-        File filesList[] = directoryPath.listFiles();
+        File[] filesList = directoryPath.listFiles();
 
 
-        for(File file : filesList) {
+        for (File file : filesList) {
 
             gameList.getItems().add(file);
 
@@ -55,13 +54,13 @@ public class LoadGameGUI {
     }
 
 
-
-    public void setGame(Game game){
+    public void setGame(Game game) {
         this.game = game;
     }
 
     /**
      * Called when the back button is pushed. Loads the main menu.
+     *
      * @param actionEvent
      * @throws IOException
      */
@@ -69,19 +68,22 @@ public class LoadGameGUI {
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
         Game.playMenuSound();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
-        Parent mainMenuFXMLParent = (Parent)loader.load();
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        Parent mainMenuFXMLParent = loader.load();
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(mainMenuFXMLScene);
-        MainMenuGUI controller = (MainMenuGUI)loader.getController();
+        MainMenuGUI controller = loader.getController();
         controller.setGame(this.game);
         primaryStage.show();
     }
 
     /**
      * Loads the selected Game
+     *
      * @param actionEvent
      */
 
@@ -89,20 +91,22 @@ public class LoadGameGUI {
 
         Game.playMenuSound();
 
-        File selectedGame = (File) gameList.getSelectionModel().getSelectedItem();
+        File selectedGame =
+                (File) gameList.getSelectionModel().getSelectedItem();
         System.out.println(selectedGame);
         boolean loadLevel = false;
 
         //TODO: Catch error when a file is selected that isn't in a save game format.
 
-        if(selectedGame != null) {
+        if (selectedGame != null) {
 
             try {
                 game.loadBoard(selectedGame.getPath());
                 loadLevel = true;
 
             } catch (FileNotFoundException e) {
-                loadGameLabel.setText("Invalid save game. Please choose another.");
+                loadGameLabel
+                        .setText("Invalid save game. Please choose another.");
             }
         } else {
 
@@ -110,20 +114,23 @@ public class LoadGameGUI {
 
         }
 
-        if(loadLevel) {
+        if (loadLevel) {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("BoardGUI.fxml"));
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource("BoardGUI.fxml"));
             Parent boardGUIFXMLParent = null;
             try {
-                boardGUIFXMLParent = (Parent) loader.load();
+                boardGUIFXMLParent = loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             Scene boardGUIFXMLScene = new Scene(boardGUIFXMLParent);
-            Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Stage primaryStage =
+                    (Stage) ((Node) actionEvent.getSource()).getScene()
+                            .getWindow();
             // This line gets the stage the 'Play' button's action event came from
             primaryStage.setScene(boardGUIFXMLScene);
-            BoardGUI controller = (BoardGUI) loader.getController();
+            BoardGUI controller = loader.getController();
             controller.setGame(this.game);
             primaryStage.show();
 
