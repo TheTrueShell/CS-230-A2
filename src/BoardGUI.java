@@ -358,17 +358,22 @@ public class BoardGUI {
         //get selected action tile
         ActionTile t = (ActionTile)this.game.getTurn().getHand().get(this.handIndex);
         //play selected tile at mouseX-1 and mouseY-1
-        try {
-            ActionTileFloor tile = (ActionTileFloor)t;
-            tile.action(this.game.getBoard(), (int)mouseX, (int)mouseY, this.game.getPlayers().size());
-        } catch (Exception e){
-            //not a action floor tile
-            if (t instanceof DoubleMoveTile){
-                this.doubleMove = true;
-            } else {
-                this.backTrack = true;
+        if (t instanceof ActionTileFloor) {
+            ActionTileFloor tile = (ActionTileFloor) t;
+            try {
+                tile.action(this.game.getBoard(), (int) mouseX, (int) mouseY, this.game.getPlayers().size());
+            } catch (Exception e){
+                //action tile can throw an exception if the passed parameters are null
+                e.printStackTrace();
             }
+            //} catch (Exception e){
+        } else if (t instanceof DoubleMoveTile){
+            //not a action floor tile
+            this.doubleMove = true;
+        } else {
+            this.backTrack = true;
         }
+
         game.playActionSound(t.getTILETYPE());
         drawCanvas();
         isAbleToMove(this.game.getTurn());
@@ -399,12 +404,12 @@ public class BoardGUI {
         Tile drawnTile = game.getBag().getRandomTile();
         p.addToHand(drawnTile);
         drawCanvas();
-        try {
+        if (drawnTile instanceof ActionTile) {
             ActionTile actionTile = (ActionTile)drawnTile;
             //choose to play it
             playerTurnTag.setText("Do you want to play the action Tile");
             turnProgression = 1;
-        } catch (Exception e){
+        } else if (drawnTile instanceof FloorTile){
             FloorTile floorTile = (FloorTile)drawnTile;
             //must play this now
             if (canPlaceTile()) {
