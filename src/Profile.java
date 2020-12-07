@@ -45,6 +45,7 @@ public class Profile {
 
     /**
      * returns each of the variables.
+     * @return the games played
      */
     public int getGamesPlayed() {
         return GamesPlayed;
@@ -98,6 +99,7 @@ public class Profile {
 
     /**
      * edit each of the variables
+     * @param wins the amount of games won
      */
 
     public void editGamesWon(int wins) {

@@ -21,9 +21,8 @@ import java.util.stream.Collectors;
 /**
  * The Main Menu Scene's controller.
  *
- * @author Gus Rendle
+ * @author Gus Rendle, William Aodan Telford, Ben Rockley
  * @version 1.4
- * @Co-authors William Aodan Telford, Ben Rockley
  */
 public class CreateGameMenuGUI {
 

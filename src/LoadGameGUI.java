@@ -14,10 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * @Author William Aodan Telford
- * @Version 0.1
+ * @author William Aodan Telford
+ * @version 0.1
  */
-
 public class LoadGameGUI {
 
     @FXML

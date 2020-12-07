@@ -120,6 +120,7 @@ public class Player {
 
     /**
      * Draws a random card from the bag.
+     * @param t the tile to add
      */
     public void addToHand(Tile t) {
         HandOfCards.add(t);

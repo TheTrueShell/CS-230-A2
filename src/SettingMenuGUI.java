@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * @Author William Aodan Telford
+ * @author William Aodan Telford
  * Version 1.0
  */
 
