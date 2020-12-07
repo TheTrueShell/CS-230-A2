@@ -45,12 +45,12 @@ public class Game extends Application {
     private ArrayList<Player> players;
     private Board board;
     private Player turn;
-    private final ArrayList<Profile> profiles = new ArrayList<Profile>();
+    private final ArrayList<Profile> profiles = new ArrayList<>();
 
 
     public Game() {
         loadProfiles();
-        this.players = new ArrayList<Player>();
+        this.players = new ArrayList<>();
         this.gameBag = new Bag();
     }
 
@@ -259,7 +259,6 @@ public class Game extends Application {
 
         File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj);
-        //TODO: handle if the file isn't the correct length
         Scanner lineReader = new Scanner(myReader.next()).useDelimiter(",");
         int boardX = lineReader.nextInt();
         int boardY = lineReader.nextInt();
@@ -295,7 +294,7 @@ public class Game extends Application {
             this.board.insertTile(t, x, y);
         }
         //clear players
-        this.players = new ArrayList<Player>();
+        this.players = new ArrayList<>();
         //load players
         lineReader = new Scanner(myReader.next()).useDelimiter(",");
         int playersInGame = lineReader.nextInt();

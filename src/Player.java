@@ -14,15 +14,15 @@ public class Player {
     /**
      * Contains x and y of the previous position
      */
-    private int[] PreviousPosition = new int[2];
+    private int[] PreviousPosition ;
     /**
      * Contains x and y of the second previous position
      */
-    private int[] PreviousPosition2 = new int[2];
+    private int[] PreviousPosition2;
     /**
      * Contains a hand of cards
      */
-    private final ArrayList<Tile> HandOfCards = new ArrayList<Tile>();
+    private final ArrayList<Tile> HandOfCards = new ArrayList<>();
     /**
      * Contains the current profile
      */
@@ -60,13 +60,6 @@ public class Player {
         this.PreviousPosition2 = this.PreviousPosition;
         this.PreviousPosition = CurrentPosition;
         CurrentPosition = coords;
-    }
-
-    /**
-     * Increases the turn counter by 1
-     */
-    public void increaseTurn() {
-        currentTurn++;
     }
 
     /**
@@ -144,10 +137,4 @@ public class Player {
         HandOfCards.add(t);
     }
 
-    /**
-     * Clears the hand of the player.
-     */
-    public void clearHand() {
-        HandOfCards.clear();
-    }
 }

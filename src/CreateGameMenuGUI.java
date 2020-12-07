@@ -35,8 +35,6 @@ public class CreateGameMenuGUI {
     @FXML
     private Label topOfScreenLabel;
 
-    private ArrayList<Profile> Profiles;
-    private ArrayList<String> presets;
     @FXML
     private ComboBox<String> playerOneProfile;
     @FXML
@@ -75,8 +73,9 @@ public class CreateGameMenuGUI {
     @FXML
     public void initialize() {
         File dir = new File("presets");
-        this.presets = new ArrayList<String>(Arrays.asList(dir.list()));
-        List<String> presetList = this.presets.stream()
+        ArrayList<String> presets =
+                new ArrayList<>(Arrays.asList(dir.list()));
+        List<String> presetList = presets.stream()
                 .map(s -> s.replaceFirst("^preset_", "").replace(".txt", ""))
                 .collect(Collectors.toList());
         ObservableList<String> observablePresetList =
@@ -119,8 +118,8 @@ public class CreateGameMenuGUI {
             throws IOException {
         Game.playMenuSound();
         if ((mapPreset.getSelectionModel().getSelectedItem() != null)
-                && (playerOneProfile.getValue() != NOPLAYERDISPLAYSTRING)
-                && (playerTwoProfile.getValue() != NOPLAYERDISPLAYSTRING)) {
+                && (!playerOneProfile.getValue().equals(NOPLAYERDISPLAYSTRING))
+                && (!playerTwoProfile.getValue().equals(NOPLAYERDISPLAYSTRING))) {
 
             if (playerOneProfile.getSelectionModel().getSelectedItem() !=
                     null) {
@@ -131,11 +130,14 @@ public class CreateGameMenuGUI {
                 this.game.addPlayer(playerTwoProfile.getValue());
             }
             if (playerThreeProfile.getSelectionModel().getSelectedItem() != null
-                    && playerThreeProfile.getValue() != NOPLAYERDISPLAYSTRING) {
+                    &&
+                    !playerThreeProfile.getValue()
+                            .equals(NOPLAYERDISPLAYSTRING)) {
                 this.game.addPlayer(playerThreeProfile.getValue());
             }
             if (playerFourProfile.getSelectionModel().getSelectedItem() != null
-                    && playerFourProfile.getValue() != NOPLAYERDISPLAYSTRING) {
+                    &&
+                    !playerFourProfile.getValue().equals(NOPLAYERDISPLAYSTRING)) {
                 this.game.addPlayer(playerFourProfile.getValue());
             }
 
@@ -203,9 +205,9 @@ public class CreateGameMenuGUI {
      */
 
     public void reloadProfileNames() {
-        Profiles = game.getProfiles();
+        ArrayList<Profile> profiles = game.getProfiles();
 
-        for (Profile p : Profiles) {
+        for (Profile p : profiles) {
 
             names.add(p.getName());
 
@@ -231,8 +233,8 @@ public class CreateGameMenuGUI {
     /**
      * Checks that if checkName can be found within the given ObservableList
      *
-     * @param playerNames
-     * @param checkName
+     * @param playerNames The names of the players
+     * @param checkName The name to find
      * @return boolean true or false depending on if checkName can be found.
      */
 
@@ -241,15 +243,15 @@ public class CreateGameMenuGUI {
 
         for (String s : playerNames) {
 
-            if (s == checkName) {
+            if (s.equals(checkName)) {
 
-                return true;
+                return false;
 
             }
 
         }
 
-        return false;
+        return true;
 
     }
 
@@ -264,11 +266,11 @@ public class CreateGameMenuGUI {
 
     public void playerOneProfileAction(ActionEvent actionEvent) {
 
-        if (!isInPlayerXNames(playerTwoNames, playerOneCurrentSelection)
+        if (isInPlayerXNames(playerTwoNames, playerOneCurrentSelection)
                 ||
-                !isInPlayerXNames(playerThreeNames, playerOneCurrentSelection)
+                isInPlayerXNames(playerThreeNames, playerOneCurrentSelection)
                 ||
-                !isInPlayerXNames(playerFourNames, playerOneCurrentSelection)) {
+                isInPlayerXNames(playerFourNames, playerOneCurrentSelection)) {
 
             playerTwoNames.add(playerOneCurrentSelection);
             playerThreeNames.add(playerOneCurrentSelection);
@@ -304,11 +306,11 @@ public class CreateGameMenuGUI {
 
     public void playerTwoProfileAction(ActionEvent actionEvent) {
 
-        if (!isInPlayerXNames(playerOneNames, playerTwoCurrentSelection)
+        if (isInPlayerXNames(playerOneNames, playerTwoCurrentSelection)
                 ||
-                !isInPlayerXNames(playerThreeNames, playerTwoCurrentSelection)
+                isInPlayerXNames(playerThreeNames, playerTwoCurrentSelection)
                 ||
-                !isInPlayerXNames(playerFourNames, playerTwoCurrentSelection)) {
+                isInPlayerXNames(playerFourNames, playerTwoCurrentSelection)) {
 
             playerOneNames.add(playerTwoCurrentSelection);
             playerThreeNames.add(playerTwoCurrentSelection);
@@ -341,10 +343,10 @@ public class CreateGameMenuGUI {
 
     public void playerThreeProfileAction(ActionEvent actionEvent) {
 
-        if (!isInPlayerXNames(playerOneNames, playerThreeCurrentSelection)
+        if (isInPlayerXNames(playerOneNames, playerThreeCurrentSelection)
                 ||
-                !isInPlayerXNames(playerTwoNames, playerThreeCurrentSelection)
-                || !isInPlayerXNames(playerFourNames,
+                isInPlayerXNames(playerTwoNames, playerThreeCurrentSelection)
+                || isInPlayerXNames(playerFourNames,
                 playerThreeCurrentSelection)) {
 
             playerOneNames.add(playerThreeCurrentSelection);
@@ -378,9 +380,9 @@ public class CreateGameMenuGUI {
 
     public void playerFourProfileAction(ActionEvent actionEvent) {
 
-        if (!isInPlayerXNames(playerOneNames, playerFourCurrentSelection)
-                || !isInPlayerXNames(playerTwoNames, playerFourCurrentSelection)
-                || !isInPlayerXNames(playerThreeNames,
+        if (isInPlayerXNames(playerOneNames, playerFourCurrentSelection)
+                || isInPlayerXNames(playerTwoNames, playerFourCurrentSelection)
+                || isInPlayerXNames(playerThreeNames,
                 playerFourCurrentSelection)) {
 
             playerOneNames.add(playerFourCurrentSelection);
@@ -404,27 +406,27 @@ public class CreateGameMenuGUI {
     }
 
     /**
-     * Checks to see if the NOPLAYERDISPLAYSTRING option has been removed. If it has it readds it to the possible names list.
+     * Checks to see if the NOPLAYERDISPLAYSTRING option has been removed. If it has it reads it to the possible names list.
      */
 
     public void addNoPlayerOption() {
 
-        if (!isInPlayerXNames(playerOneNames, NOPLAYERDISPLAYSTRING)) {
+        if (isInPlayerXNames(playerOneNames, NOPLAYERDISPLAYSTRING)) {
 
             playerOneNames.add(NOPLAYERDISPLAYSTRING);
 
         }
-        if (!isInPlayerXNames(playerTwoNames, NOPLAYERDISPLAYSTRING)) {
+        if (isInPlayerXNames(playerTwoNames, NOPLAYERDISPLAYSTRING)) {
 
             playerTwoNames.add(NOPLAYERDISPLAYSTRING);
 
         }
-        if (!isInPlayerXNames(playerThreeNames, NOPLAYERDISPLAYSTRING)) {
+        if (isInPlayerXNames(playerThreeNames, NOPLAYERDISPLAYSTRING)) {
 
             playerThreeNames.add(NOPLAYERDISPLAYSTRING);
 
         }
-        if (!isInPlayerXNames(playerFourNames, NOPLAYERDISPLAYSTRING)) {
+        if (isInPlayerXNames(playerFourNames, NOPLAYERDISPLAYSTRING)) {
 
             playerFourNames.add(NOPLAYERDISPLAYSTRING);
 

@@ -10,7 +10,6 @@
 public abstract class ActionTile extends Tile {
 
     private boolean isPlayable = false;
-    private final String tileType = "ActionTile";
 
     /**
      * Returns the current state of isPlayable which dictates if the action can be played.
@@ -27,7 +26,7 @@ public abstract class ActionTile extends Tile {
     /**
      * Sets the stat of isPlayable which dictates if the action can be played
      *
-     * @param playable
+     * @param playable is it playable
      */
 
     public void setPlayable(boolean playable) {
@@ -37,7 +36,7 @@ public abstract class ActionTile extends Tile {
     }
 
     /**
-     * Returns the string version of the action tile. first displaying the tiletype then the isPlayable state.
+     * Returns the string version of the action tile. first displaying the tile type then the isPlayable state.
      *
      * @return String tileType + newline + isPlayable
      */

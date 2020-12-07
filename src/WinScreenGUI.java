@@ -56,14 +56,14 @@ public class WinScreenGUI {
         leaderBoard.setItems(displayProfiles);
 
 
-        for (int i = 0; i < profiles.size(); i++) {
-            if (profiles.get(i).getName() == winnerProfile) {
-                profiles.get(i).updateGamesPlayed();
-                profiles.get(i).updateGamesWon();
+        for (Profile profile : profiles) {
+            if (profile.getName().equals(winnerProfile)) {
+                profile.updateGamesPlayed();
+                profile.updateGamesWon();
                 game.saveProfiles();
             } else {
-                profiles.get(i).updateGamesPlayed();
-                profiles.get(i).updateGamesLost();
+                profile.updateGamesPlayed();
+                profile.updateGamesLost();
                 game.saveProfiles();
             }
         }

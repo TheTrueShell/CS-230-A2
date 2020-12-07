@@ -66,9 +66,6 @@ public class BoardGUI {
     private boolean backTrack = false;
     private Game game;
 
-    private HBox nextTurnHBox = new HBox();
-    private HBox tileHandHBox = new HBox();
-
     /**
      * The variables relating to the canvas resizing
      * the padding changes to make the boxX=boxY but they could be not equal until updated
@@ -431,7 +428,6 @@ public class BoardGUI {
      */
     private void playerPlayBackTrack() {
         for (Player p : this.game.getPlayers()) {
-            //TODO: check if they can be sent back
             if (p.getX() == mouseX - 1 && p.getY() == mouseY - 1) {
                 p.movePlayer(p.getPreviousPosition2());
                 isAbleToMove(this.game.getTurn());
@@ -449,7 +445,6 @@ public class BoardGUI {
         p.addToHand(drawnTile);
         drawCanvas();
         if (drawnTile instanceof ActionTile) {
-            ActionTile actionTile = (ActionTile) drawnTile;
             //choose to play it
             playerTurnTag.setText("Do you want to play the action Tile");
             turnProgression = 1;
@@ -502,15 +497,13 @@ public class BoardGUI {
     /**
      * Handle when the player selects the
      *
-     * @param index
+     * @param index the index of the card clicked
      */
     public void handClicked(int index) {
         Player p = game.getTurn();
         this.handIndex = index;
         Tile selectedTile = p.getHand().get(index);
         if (selectedTile instanceof ActionTile && turnProgression == 1) {
-            ActionTile actionTile = (ActionTile) selectedTile;
-            //choose to play it
             playerTurnTag.setText("Click on a tile to play this on");
         } else if (selectedTile instanceof FloorTile) {
             FloorTile floorTile = (FloorTile) selectedTile;
@@ -540,8 +533,6 @@ public class BoardGUI {
         //check if player on the Goal tile
         if (this.game.getBoard()
                 .getTile(p.getX(), p.getY()) instanceof GoalTile) {
-
-            //TODO: works different to clicking a button. Maybe get Gus to look at since he designed scene changing system?
             WinScreenGUI.setGame(game);
             System.out.println("Winner: " + p.getProfile());
             Game.setWinner(p.getProfile());
@@ -559,7 +550,6 @@ public class BoardGUI {
                     (Stage) (baseBoarderPane.getScene().getWindow());
             // This line gets the stage the 'Play' button's action event came from
             primaryStage.setScene(winningMenuFXMLScene);
-            WinScreenGUI controller = loader.getController();
             WinScreenGUI.setGame(game);
             primaryStage.show();
         }
@@ -639,10 +629,8 @@ public class BoardGUI {
      * Event handler for next turn button
      *
      * @param actionEvent button click event
-     * @throws IOException
      */
-    public void nextTurnButtonAction(ActionEvent actionEvent)
-            throws IOException {
+    public void nextTurnButtonAction(ActionEvent actionEvent) {
         Game.playMenuSound();
         System.out.println(turnProgression);
         if (turnProgression == -1) {
@@ -678,7 +666,7 @@ public class BoardGUI {
     public void hideCards() {
         Game.playMenuSound();
         baseBoarderPane.setBottom(null);
-        nextTurnHBox = new HBox();
+        HBox nextTurnHBox = new HBox();
         Text nextPlayer = new Text(game.getTurn().getProfile() + "'s Turn");
         nextPlayer.setStyle("-fx-font-size: 32px; -fx-fill: white;");
         nextTurnHBox.setStyle("-fx-background-color: #303030;");
@@ -704,10 +692,7 @@ public class BoardGUI {
         this.game = game;
         this.boardX = game.getBoard().getWidth();
         this.boardY = game.getBoard().getLength();
-
         startTurn();
-        //TODO: handle if current player can't move update the turn progression
-
         setCards(game.getTurn().getHand());
         drawCanvas();
     }
@@ -772,7 +757,7 @@ public class BoardGUI {
      */
     public void setCards(ArrayList<Tile> deck) {
         baseBoarderPane.setBottom(null);
-        tileHandHBox = new HBox();
+        HBox tileHandHBox = new HBox();
         if (deck.size() == 0) {
             Image borderImage = new Image("invSlot.png", 64, 64, true, true);
             tileHandHBox.getChildren().add(new ImageView(borderImage));
@@ -786,11 +771,9 @@ public class BoardGUI {
                 StackPane cardStack = new StackPane();
                 cardStack.getChildren().addAll(new ImageView(borderImage),
                         new ImageView(cardImage));
-                cardStack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    handClicked(
-                            (int) (cardStack.getBoundsInParent().getMinX()) /
-                                    64);
-                });
+                cardStack.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handClicked(
+                        (int) (cardStack.getBoundsInParent().getMinX()) /
+                                64));
                 tileHandHBox.getChildren().add(cardStack);
                 baseBoarderPane.setBottom(tileHandHBox);
             }

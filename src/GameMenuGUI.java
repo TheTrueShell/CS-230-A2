@@ -15,14 +15,13 @@ public class GameMenuGUI {
     /**
      * Runs when the user clicks new Game. It loads the javafx for the new Game menu
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event for the class
+     * @throws IOException if can't find the fxml file
      */
     @FXML
     public void newGameButtonAction(ActionEvent actionEvent)
             throws IOException {
         Game.playMenuSound();
-        Board newGame = new Board(10, 10);
         FXMLLoader loader =
                 new FXMLLoader(getClass().getResource("CreateGameMenu.fxml"));
         Parent mainMenuFXMLParent = loader.load();
@@ -42,8 +41,8 @@ public class GameMenuGUI {
     /**
      * Runs When the load game is clicked. It loads the javafx for loading game menu
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event for the class
+     * @throws IOException if can't find the fxml file
      */
 
     @FXML
@@ -68,8 +67,8 @@ public class GameMenuGUI {
     /**
      * Runs when the back button is clicked. loads the javafx for the main menu
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event for the class
+     * @throws IOException if can't find the fxml file
      */
 
     @FXML

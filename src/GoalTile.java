@@ -16,7 +16,7 @@ public class GoalTile extends FloorTile {
      * Constructor for GoalTile. Inherits from FloorTile.
      * sets the rotation, and sets default values for rest.
      *
-     * @param tileRotation
+     * @param tileRotation the rotation of the tile
      * @throws Exception
      */
 

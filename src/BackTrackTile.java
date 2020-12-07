@@ -12,7 +12,7 @@ public class BackTrackTile extends ActionTile {
     private static final String imageLocation = "BackTrack.png";
 
     /**
-     * Constructor for BacktrackTile, setting the tiletype to BackTrackTile
+     * Constructor for BacktrackTile, setting the tile type to BackTrackTile
      */
 
     public BackTrackTile() {

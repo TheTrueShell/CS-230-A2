@@ -83,11 +83,11 @@ public class Board {
      * @param currentY the starting tiles y
      * @param newX     the tile we want to get tos x
      * @param newY     the tile we want to get tos y
-     * @return
+     * @return true if accessible
      */
     public boolean isAccessibleFrom(int currentX, int currentY, int newX,
                                     int newY) {
-        boolean[] currrentAccessibleSides =
+        boolean[] currentAccessibleSides =
                 board[currentX][currentY].getAccessibleSides();
         boolean[] targetAccessibleSides =
                 board[newX][newY].getAccessibleSides();
@@ -101,16 +101,16 @@ public class Board {
                 if (currentX == newX) {
                     //if above
                     if (currentY - newY == 1) {
-                        return currrentAccessibleSides[0] &&
+                        return currentAccessibleSides[0] &&
                                 targetAccessibleSides[2];
-                    } else return currrentAccessibleSides[2] &&
+                    } else return currentAccessibleSides[2] &&
                             targetAccessibleSides[0];
                 } else if (currentY == newY) {
                     //if to the left
                     if (currentX - newX == 1) {
-                        return currrentAccessibleSides[3] &&
+                        return currentAccessibleSides[3] &&
                                 targetAccessibleSides[1];
-                    } else return currrentAccessibleSides[1] &&
+                    } else return currentAccessibleSides[1] &&
                             targetAccessibleSides[3];
                 }
             }
@@ -126,8 +126,8 @@ public class Board {
      */
     public boolean isRowPushable(int index) {
         for (int i = 0; i < this.getLength(); i++) {
-            if (board[i][index].getIsFrozen() == true ||
-                    board[i][index].getIsTileFixed() == true) {
+            if (board[i][index].getIsFrozen() ||
+                    board[i][index].getIsTileFixed()) {
                 return false;
             }
         }
@@ -142,8 +142,8 @@ public class Board {
      */
     public boolean isColumnPushable(int index) {
         for (int i = 0; i < this.getWidth(); i++) {
-            if (board[index][i].getIsFrozen() == true ||
-                    board[index][i].getIsTileFixed() == true) {
+            if (board[index][i].getIsFrozen() ||
+                    board[index][i].getIsTileFixed()) {
                 return false;
             }
         }

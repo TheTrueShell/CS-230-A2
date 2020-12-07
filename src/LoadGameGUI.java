@@ -96,8 +96,6 @@ public class LoadGameGUI {
         System.out.println(selectedGame);
         boolean loadLevel = false;
 
-        //TODO: Catch error when a file is selected that isn't in a save game format.
-
         if (selectedGame != null) {
 
             try {
