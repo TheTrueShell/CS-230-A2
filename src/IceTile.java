@@ -1,13 +1,14 @@
 /**
  * IceTile.java
+ *
  * @author William Aodan Telford and Deividas Prokopovicius
  * @version 0.1.0
- *  - no copyright
- *  This class implements the IceTile class. This tile freezes floor tiles
+ * - no copyright
+ * This class implements the IceTile class. This tile freezes floor tiles
  */
 public class IceTile extends ActionTileFloor {
 
-    private static String imageLocation = "Ice.png";
+    private static final String imageLocation = "Ice.png";
 
     /**
      * Constructor for IceTile. Sets playable to false and sets the tile type to IceTile
@@ -22,6 +23,7 @@ public class IceTile extends ActionTileFloor {
 
     /**
      * Recursively goes through the 3x3 grid setting the isFrozen to true for those tiles.
+     *
      * @param board
      * @param x
      * @param y
@@ -30,17 +32,18 @@ public class IceTile extends ActionTileFloor {
      */
 
     @Override
-    public void action(Board board, int x, int y, int numOfPlayers) throws Exception {
+    public void action(Board board, int x, int y, int numOfPlayers)
+            throws Exception {
 
-        for( int i = x-2; i < x + 1; i++) {
+        for (int i = x - 2; i < x + 1; i++) {
 
-            for( int z = y-2; z < y + 1; z++) {
+            for (int z = y - 2; z < y + 1; z++) {
 
                 try {
 
-                    board.getTile(i,z).setIsFrozen(true);
+                    board.getTile(i, z).setIsFrozen(true);
                     //melts at the start of your next turn
-                    board.getTile(i,z).setStatusTurnsRemaining(numOfPlayers);
+                    board.getTile(i, z).setStatusTurnsRemaining(numOfPlayers);
 
                 } catch (ArrayIndexOutOfBoundsException ex) {
 
@@ -58,6 +61,7 @@ public class IceTile extends ActionTileFloor {
 
     /**
      * Getter for the Image location of the tile.
+     *
      * @return String imageLocation
      */
     public String getImageLocation() {

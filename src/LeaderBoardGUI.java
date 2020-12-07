@@ -20,13 +20,22 @@ import java.util.ArrayList;
  * @version 0.0.1
  */
 public class LeaderBoardGUI {
+    private static Game game;
     @FXML
     private Label playerWin;
     @FXML
     private ListView leaderBoard;
 
+    /**
+     * Sets the game
+     *
+     * @param newgame
+     */
 
-    private static Game game;
+    public static void setGame(Game newgame) {
+        game = newgame;
+    }
+
     @FXML
 
     /**
@@ -36,10 +45,13 @@ public class LeaderBoardGUI {
 
         ArrayList<Profile> profiles = game.getProfiles();
 
-        ObservableList<String> displayProfiles = FXCollections.observableArrayList();
-        for(Profile p : profiles ) {
+        ObservableList<String> displayProfiles =
+                FXCollections.observableArrayList();
+        for (Profile p : profiles) {
 
-            displayProfiles.add(p.getName() + ": " + " Games played: " + p.getGamesPlayed() + " Games Won: " + p.getGamesWon() + " Games Lost: " + p.getGamesLost() );
+            displayProfiles.add(p.getName() + ": " + " Games played: " +
+                    p.getGamesPlayed() + " Games Won: " + p.getGamesWon() +
+                    " Games Lost: " + p.getGamesLost());
 
         }
 
@@ -48,31 +60,23 @@ public class LeaderBoardGUI {
 
     }
 
-
-    /**
-     * Sets the game
-     * @param newgame
-     */
-
-    public static void setGame(Game newgame){
-        game = newgame;
-    }
-
     public void mainMenuButtonAction(ActionEvent actionEvent) {
         Game.playMenuSound();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("MainMenuGUI.fxml"));
         Parent mainMenuFXMLParent = null;
         try {
-            mainMenuFXMLParent = (Parent)loader.load();
+            mainMenuFXMLParent = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
         Scene mainMenuFXMLScene = new Scene(mainMenuFXMLParent);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage =
+                (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         // This line gets the stage the 'Play' button's action event came from
         primaryStage.setScene(mainMenuFXMLScene);
-        MainMenuGUI controller = (MainMenuGUI)loader.getController();
-        controller.setGame(this.game);
+        MainMenuGUI controller = loader.getController();
+        controller.setGame(game);
         primaryStage.show();
 
     }

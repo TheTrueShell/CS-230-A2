@@ -1,9 +1,10 @@
 /**
  * ActionTile.java
+ *
  * @author William Aodan Telford and Deividas Prokopovicius
  * @version 0.1.0
- *  - no copyright
- *  This class implements the ActionTile superclass.
+ * - no copyright
+ * This class implements the ActionTile superclass.
  */
 
 public class StraightTile extends FloorTile {
@@ -13,6 +14,7 @@ public class StraightTile extends FloorTile {
     /**
      * Constructor for StraightTile. Inherits most of implementation for FloorTile.java.
      * Sets the rotation and then uses default for rest of values
+     *
      * @param tileRotation
      * @throws Exception
      */
@@ -20,7 +22,7 @@ public class StraightTile extends FloorTile {
     public StraightTile(int tileRotation) throws Exception {
 
         setTileType("StraightTile");
-        boolean[] sides  = {true,false,true,false};
+        boolean[] sides = {true, false, true, false};
         setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);
@@ -31,6 +33,7 @@ public class StraightTile extends FloorTile {
 
     /**
      * Getter for the Image location of the tile.
+     *
      * @return String imageLocation
      */
     public String getImageLocation() {

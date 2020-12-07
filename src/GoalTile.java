@@ -1,19 +1,21 @@
 /**
  * ActionTile.java
+ *
  * @author William Aodan Telford and Deividas Prokopovicius
  * @version 0.1.0
- *  - no copyright
- *  This class implements the ActionTile superclass.
+ * - no copyright
+ * This class implements the ActionTile superclass.
  */
 
 public class GoalTile extends FloorTile {
-    
+
     private static final String imageLocation = "Goal.png";
 
 
     /**
      * Constructor for GoalTile. Inherits from FloorTile.
      * sets the rotation, and sets default values for rest.
+     *
      * @param tileRotation
      * @throws Exception
      */
@@ -22,7 +24,7 @@ public class GoalTile extends FloorTile {
 
         setTileType("GoalTile");
 
-        boolean[] sides  = {true,true,true,true};
+        boolean[] sides = {true, true, true, true};
         setAccessibleSides(sides);
         setRotation(tileRotation);
         setIsFrozen(false);
@@ -33,6 +35,7 @@ public class GoalTile extends FloorTile {
 
     /**
      * Getter for the Image location of the tile.
+     *
      * @return String imageLocation
      */
     public String getImageLocation() {

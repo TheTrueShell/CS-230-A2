@@ -22,11 +22,11 @@ public class Player {
     /**
      * Contains a hand of cards
      */
-    private ArrayList<Tile> HandOfCards = new ArrayList<Tile>();
+    private final ArrayList<Tile> HandOfCards = new ArrayList<Tile>();
     /**
      * Contains the current profile
      */
-    private String currentProfile;
+    private final String currentProfile;
 
     /**
      * Contains the players turn int.
@@ -34,15 +34,15 @@ public class Player {
     private int currentTurn = 0;
 
     /**
-     * @param x Represents the X coordinate of the player.
-     * @param y Represents the Y coordinate of the player
+     * @param x    Represents the X coordinate of the player.
+     * @param y    Represents the Y coordinate of the player
      * @param name Represents the name of the profile the player is linked to.
      */
     public Player(int x, int y, String name) {
         CurrentPosition[0] = x;
         CurrentPosition[1] = y;
-        PreviousPosition = new int[] {x,y};
-        PreviousPosition2 = new int[] {x,y};
+        PreviousPosition = new int[] {x, y};
+        PreviousPosition2 = new int[] {x, y};
         currentProfile = name;
     }
 
@@ -56,7 +56,7 @@ public class Player {
     /**
      * @param coords the coords of the player on the board.
      */
-    public void movePlayer(int[] coords){
+    public void movePlayer(int[] coords) {
         this.PreviousPosition2 = this.PreviousPosition;
         this.PreviousPosition = CurrentPosition;
         CurrentPosition = coords;
@@ -65,14 +65,14 @@ public class Player {
     /**
      * Increases the turn counter by 1
      */
-    public void increaseTurn(){
+    public void increaseTurn() {
         currentTurn++;
     }
 
     /**
      * @param turn The turn you wish the player to be on [May be removed]
      */
-    public void setTurn(int turn){
+    public void setTurn(int turn) {
         currentTurn = turn;
     }
 

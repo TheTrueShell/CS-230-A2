@@ -32,7 +32,7 @@ public class Bag {
     /**
      * Gets all the tiles
      */
-    public ArrayList<Tile> getTiles(){
+    public ArrayList<Tile> getTiles() {
         return this.tiles;
     }
 }
