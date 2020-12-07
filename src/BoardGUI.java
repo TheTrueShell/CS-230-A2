@@ -402,12 +402,12 @@ public class BoardGUI {
         ActionTile t =
                 (ActionTile) this.game.getTurn().getHand().get(this.handIndex);
         //play selected tile at mouseX-1 and mouseY-1
-        if (t instanceof ActionTileFloor){
+        if (t instanceof ActionTileFloor) {
             ActionTileFloor tile = (ActionTileFloor) t;
             try {
                 tile.action(this.game.getBoard(), (int) mouseX, (int) mouseY,
                         this.game.getPlayers().size());
-            } catch (Exception e){
+            } catch (Exception e) {
                 //if null values passed to the action
                 e.printStackTrace();
             }
@@ -448,7 +448,7 @@ public class BoardGUI {
         Tile drawnTile = game.getBag().getRandomTile();
         p.addToHand(drawnTile);
         drawCanvas();
-        if (drawnTile instanceof ActionTile){
+        if (drawnTile instanceof ActionTile) {
             ActionTile actionTile = (ActionTile) drawnTile;
             //choose to play it
             playerTurnTag.setText("Do you want to play the action Tile");
