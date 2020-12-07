@@ -29,7 +29,7 @@ public class LeaderBoardGUI {
     /**
      * Sets the game
      *
-     * @param newgame
+     * @param newgame the game to set
      */
 
     public static void setGame(Game newgame) {
@@ -37,7 +37,6 @@ public class LeaderBoardGUI {
     }
 
     @FXML
-
     /**
      * Loads the profiles into the leaderBoard
      */

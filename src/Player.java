@@ -29,11 +29,6 @@ public class Player {
     private final String currentProfile;
 
     /**
-     * Contains the players turn int.
-     */
-    private int currentTurn = 0;
-
-    /**
      * @param x    Represents the X coordinate of the player.
      * @param y    Represents the Y coordinate of the player
      * @param name Represents the name of the profile the player is linked to.
@@ -60,13 +55,6 @@ public class Player {
         this.PreviousPosition2 = this.PreviousPosition;
         this.PreviousPosition = CurrentPosition;
         CurrentPosition = coords;
-    }
-
-    /**
-     * @param turn The turn you wish the player to be on [May be removed]
-     */
-    public void setTurn(int turn) {
-        currentTurn = turn;
     }
 
     /**

@@ -10,6 +10,6 @@
 public abstract class ActionTileFloor extends ActionTile {
 
     public abstract void action(Board board, int x, int y, int numOfPlayers)
-            throws Exception;
+            ;
 
 }

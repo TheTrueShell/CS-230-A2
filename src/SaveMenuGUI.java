@@ -21,7 +21,7 @@ public class SaveMenuGUI {
     /**
      * Called when save button is pushed. Saves the file using the string given in the input box.
      *
-     * @param actionEvent
+     * @param actionEvent the action event of the object
      */
 
     public void saveButtonAction(ActionEvent actionEvent) {
@@ -36,7 +36,7 @@ public class SaveMenuGUI {
     /**
      * Loads the board back for the user.
      *
-     * @param actionEvent
+     * @param actionEvent teh action event for the object
      */
 
     public void backButtonAction(ActionEvent actionEvent) {
@@ -52,7 +52,7 @@ public class SaveMenuGUI {
     /**
      * Sets the Game to allow the saveBoard implementation.
      *
-     * @param game
+     * @param game the game to set
      */
 
     public void setGame(Game game) {

@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  */
 public class CreateGameMenuGUI {
 
-    String NOPLAYERDISPLAYSTRING = "No Player";
+    final String NOPLAYERDISPLAYSTRING = "No Player";
 
     @FXML
     private Game game;
@@ -87,8 +87,8 @@ public class CreateGameMenuGUI {
     /**
      * Loads the main menu when the back button is clicked
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event of the object
+     * @throws IOException if it cannot find the fxml file
      */
     @FXML
     public void backButtonAction(ActionEvent actionEvent) throws IOException {
@@ -109,8 +109,8 @@ public class CreateGameMenuGUI {
     /**
      * Creates a new Game using the profiles and preset selected
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event of the object
+     * @throws IOException if it cannot find the fxml file
      */
 
     @FXML
@@ -261,7 +261,7 @@ public class CreateGameMenuGUI {
      * Second gets the new Value and removes it from the usable profiles
      * Third Checks that the NOPLAYERDISPLAYSTRING option hasn't been removed.
      *
-     * @param actionEvent
+     * @param actionEvent the action event of the object
      */
 
     public void playerOneProfileAction(ActionEvent actionEvent) {
@@ -301,7 +301,7 @@ public class CreateGameMenuGUI {
      * Second gets the new Value and removes it from the usable profiles
      * Third Checks that the NOPLAYERDISPLAYSTRING option hasn't been removed.
      *
-     * @param actionEvent
+     * @param actionEvent the action event of the object
      */
 
     public void playerTwoProfileAction(ActionEvent actionEvent) {
@@ -338,7 +338,7 @@ public class CreateGameMenuGUI {
      * Second gets the new Value and removes it from the usable profiles
      * Third Checks that the NOPLAYERDISPLAYSTRING option hasn't been removed.
      *
-     * @param actionEvent
+     * @param actionEvent the action event of the object
      */
 
     public void playerThreeProfileAction(ActionEvent actionEvent) {
@@ -375,7 +375,7 @@ public class CreateGameMenuGUI {
      * Second gets the new Value and removes it from the usable profiles
      * Third Checks that the NOPLAYERDISPLAYSTRING option hasn't been removed.
      *
-     * @param actionEvent
+     * @param actionEvent the action event of the object
      */
 
     public void playerFourProfileAction(ActionEvent actionEvent) {

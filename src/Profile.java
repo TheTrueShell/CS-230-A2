@@ -107,7 +107,7 @@ public class Profile {
     /**
      * sets the amount of games played
      *
-     * @param played
+     * @param played the amount of games played
      */
 
     public void editGamesPlayed(int played) {
@@ -117,7 +117,7 @@ public class Profile {
     /**
      * Sets the games lost
      *
-     * @param lost
+     * @param lost the amount of games lost
      */
 
     public void editGamesLost(int lost) {

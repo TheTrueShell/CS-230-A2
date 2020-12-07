@@ -29,7 +29,7 @@ public class WinScreenGUI {
     /**
      * Sets the game
      *
-     * @param newgame
+     * @param newgame the won game
      */
 
     public static void setGame(Game newgame) {
@@ -60,12 +60,11 @@ public class WinScreenGUI {
             if (profile.getName().equals(winnerProfile)) {
                 profile.updateGamesPlayed();
                 profile.updateGamesWon();
-                game.saveProfiles();
             } else {
                 profile.updateGamesPlayed();
                 profile.updateGamesLost();
-                game.saveProfiles();
             }
+            game.saveProfiles();
         }
 
     }

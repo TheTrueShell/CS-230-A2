@@ -5,7 +5,7 @@
  * @version 1.0
  */
 public class Board {
-    FloorTile[][] board;
+    final FloorTile[][] board;
 
     /**
      * Create a new Board with a given width and length
@@ -67,8 +67,8 @@ public class Board {
                     sb.insert(0,
                             x + "," + y + "," + board[x][y].toString() + "\n");
                 } else {
-                    sb.append(
-                            x + "," + y + "," + board[x][y].toString() + "\n");
+                    sb.append(x).append(",").append(y).append(",")
+                            .append(board[x][y].toString()).append("\n");
                 }
             }
         }

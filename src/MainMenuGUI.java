@@ -53,8 +53,8 @@ public class MainMenuGUI {
     /**
      * Called when the profiles button is pushed. Loads ProfileMenu.fxml
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event of the object
+     * @throws IOException if it cannot find the fxml file
      */
 
     public void profilesButtonAction(ActionEvent actionEvent)
@@ -76,8 +76,8 @@ public class MainMenuGUI {
     /**
      * Called when the settings button is pushed. Loads SettingsMenu.fxml
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event of the object
+     * @throws IOException if it cannot find the fxml file
      */
 
     public void settingsButtonAction(ActionEvent actionEvent)
@@ -99,11 +99,10 @@ public class MainMenuGUI {
     /**
      * Called when the quit button is pushed. exits the game.
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event of the object
      */
 
-    public void quitButtonAction(ActionEvent actionEvent) throws IOException {
+    public void quitButtonAction(ActionEvent actionEvent) {
         Game.playMenuSound();
         System.exit(0);
     }

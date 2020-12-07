@@ -80,15 +80,12 @@ public class Game extends Application {
 
     public static void main(String[] args) {
         launch(args); //starts GUI
-        //Game test = new Game();
-        //test.createProfile("Test");
-        //test.saveProfiles();
     }
 
     /**
      * Gets the current music volume
      *
-     * @return
+     * @return the music volume
      */
 
     public static double getMusicVolume() {
@@ -100,7 +97,7 @@ public class Game extends Application {
     /**
      * Sets the music's volume
      *
-     * @param newMusicVolume
+     * @param newMusicVolume the desired volume
      */
     public static void setMusicVolume(double newMusicVolume) {
 
@@ -112,7 +109,7 @@ public class Game extends Application {
     /**
      * Gets the current sound effect volume
      *
-     * @return
+     * @return the current sound effect volume
      */
 
     public static double getMenuSoundVolume() {
@@ -124,7 +121,7 @@ public class Game extends Application {
     /**
      * Sets the sound effect volume
      *
-     * @param newMenuVolume
+     * @param newMenuVolume the desired volume
      */
 
     public static void setMenuSoundVolume(double newMenuVolume) {
@@ -137,7 +134,7 @@ public class Game extends Application {
     /**
      * Returns the winner of the game
      *
-     * @return
+     * @return the winner of the game
      */
 
     public static String getWinner() {
@@ -147,9 +144,9 @@ public class Game extends Application {
     }
 
     /**
-     * sets the winner of the game
+     * Sets the winner of the game
      *
-     * @param profile
+     * @param profile the game's winner
      */
 
     public static void setWinner(String profile) {
@@ -178,7 +175,7 @@ public class Game extends Application {
     /**
      * Determines the action tile and then plays the associated sound.
      *
-     * @param tileType
+     * @param tileType the type of tile
      */
 
     public void playActionSound(String tileType) {
@@ -319,9 +316,9 @@ public class Game extends Application {
             p.setPreviousPosition2(lineReader.nextInt(), lineReader.nextInt());
             this.players.add(p);
         }
-        for (int i = 0; i < this.players.size(); i++) {
-            if (this.players.get(i).getProfile().equals(turnName)) {
-                this.turn = this.players.get(i);
+        for (Player player : this.players) {
+            if (player.getProfile().equals(turnName)) {
+                this.turn = player;
             }
         }
         //load bag
@@ -418,9 +415,6 @@ public class Game extends Application {
      * Deletes current game and updates the profiles to reflect this
      */
     public void deleteBoard() {
-        //for (Player p : this.board.getPlayers()){
-        //  p.getProfile().removeGamesPlayed();
-        //}
         this.board = null;
     }
 
@@ -518,7 +512,7 @@ public class Game extends Application {
     /**
      * Get the profile with the matching name
      *
-     * @param name
+     * @param name the name to get
      */
     private Profile getProfile(String name) {
         for (Profile p : this.profiles) {
@@ -534,7 +528,7 @@ public class Game extends Application {
     /**
      * adds a new player with the profile name
      *
-     * @param profile
+     * @param profile the name of the profile
      */
     public void addPlayer(String profile) {
         if (players.size() < 5) {
@@ -559,13 +553,13 @@ public class Game extends Application {
      * Reset Players
      */
     public void resetPlayers() {
-        this.players = new ArrayList<Player>();
+        this.players = new ArrayList<>();
     }
 
     /**
      * get all the players currently in game
      *
-     * @return
+     * @return all the players currently in game
      */
     public ArrayList<Player> getPlayers() {
         return players;

@@ -15,8 +15,8 @@ public class TJunctionTile extends FloorTile {
      * Constructor for TJuctionTile. Inherits from FloorTile.java.
      * Sets the rotation and uses default values for Rest
      *
-     * @param tileRotation
-     * @throws Exception
+     * @param tileRotation the rotation of the tile
+     * @throws Exception if setRotation fails
      */
 
     public TJunctionTile(int tileRotation) throws Exception {

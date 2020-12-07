@@ -20,8 +20,6 @@ import java.util.ArrayList;
 
 public class LoadGameGUI {
 
-    private final String PATH_TO_SAVE_GAMES = "saves";
-
     @FXML
     private ListView gameList;
     @FXML
@@ -39,6 +37,7 @@ public class LoadGameGUI {
     public void initialize() {
 
         //Getting the folder saves
+        String PATH_TO_SAVE_GAMES = "saves";
         File directoryPath = new File(PATH_TO_SAVE_GAMES);
         //List of all files and directories
         File[] filesList = directoryPath.listFiles();
@@ -61,8 +60,8 @@ public class LoadGameGUI {
     /**
      * Called when the back button is pushed. Loads the main menu.
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event of the object
+     * @throws IOException if it cannot find the fxml file
      */
 
     @FXML
@@ -84,7 +83,7 @@ public class LoadGameGUI {
     /**
      * Loads the selected Game
      *
-     * @param actionEvent
+     * @param actionEvent the action event of the object
      */
 
     public void loadGameButtonAction(ActionEvent actionEvent) {

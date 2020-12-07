@@ -15,7 +15,7 @@ public abstract class Tile {
     /**
      * sets the tile type to the inputted string
      *
-     * @param tileType
+     * @param tileType the type of tile
      */
 
     public void setTileType(String tileType) {
@@ -48,7 +48,7 @@ public abstract class Tile {
     /**
      * Setter for image Location of the tile
      *
-     * @param imageLocation
+     * @param imageLocation the image's location
      */
 
     public void setImageLocation(String imageLocation) {

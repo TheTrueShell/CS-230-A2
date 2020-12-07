@@ -1,5 +1,3 @@
-import java.awt.*;
-
 /**
  * FloorTile.java
  * @author William Aodan Telford and Deividas Prokopovicius
@@ -14,7 +12,7 @@ public abstract class FloorTile extends Tile {
     private boolean isOnFire;
     private int tileRotation; //In 360 degrees
     private boolean[] accessibleSides = new boolean[4]; // Top. right, bottom, Left
-    private String tileType = "FloorTile";
+    private final String tileType = "FloorTile";
 
     private int statusTurnsRemaining = 0;
 
@@ -24,21 +22,14 @@ public abstract class FloorTile extends Tile {
      */
     public boolean canBeMovedOnto() {
 
-        if ( isTileFixed ) {
-
-            return false;
-
-        } else {
-
-            return true;
-        }
+        return !isTileFixed;
 
     }
 
 
     /**
      * Setter for the boolean determining whether or not the tile can be moved.
-     * @param isTileFixed
+     * @param isTileFixed true if fixed
      */
 
     public void setTileFixed(boolean isTileFixed) {
@@ -49,7 +40,7 @@ public abstract class FloorTile extends Tile {
 
     /**
      * Setter for the boolean determining whether or not the tile is frozen.
-     * @param isFrozen
+     * @param isFrozen true if frozen
      */
 
     public void setIsFrozen (boolean isFrozen) {
@@ -60,7 +51,7 @@ public abstract class FloorTile extends Tile {
 
     /**
      *Setter for the boolean determining whether or not the tile is on fire.
-     * @param isFire
+     * @param isFire true if on fire
      */
 
     public void setIsOnFire (boolean isFire) {
@@ -71,7 +62,7 @@ public abstract class FloorTile extends Tile {
 
     /**
      * Setter for the array of booleans determining which sides of the tile are accessible to the player
-     * @param accessibleSides
+     * @param accessibleSides the number of accessible sides
      */
 
     public void setAccessibleSides(boolean[] accessibleSides) {
@@ -127,7 +118,7 @@ public abstract class FloorTile extends Tile {
 
         for (int i = 0; i < accessibleSides.length; i++) {
 
-            if(accessibleSides[i] == true) {
+            if(accessibleSides[i]) {
 
                 try {
 
@@ -140,7 +131,7 @@ public abstract class FloorTile extends Tile {
                 }
 
 
-            } else if (accessibleSides[i] == false) {
+            } else if (!accessibleSides[i]) {
 
                 try {
 
@@ -222,7 +213,7 @@ public abstract class FloorTile extends Tile {
 
     /**
      * Sets the number of turns that that the tile is on fire for
-     * @param turns
+     * @param turns how long the tile burns
      */
     public void setStatusTurnsRemaining(int turns){
         if (turns == 0) {
@@ -234,7 +225,7 @@ public abstract class FloorTile extends Tile {
 
     /**
      * Gets the number of turns remaining
-     * @return
+     * @return the number of turns remaining
      */
     public int getStatusTurnsRemaining(){
         return this.statusTurnsRemaining;

@@ -15,8 +15,8 @@ public class StraightTile extends FloorTile {
      * Constructor for StraightTile. Inherits most of implementation for FloorTile.java.
      * Sets the rotation and then uses default for rest of values
      *
-     * @param tileRotation
-     * @throws Exception
+     * @param tileRotation the rotation of the tile
+     * @throws Exception if setRotation fails
      */
 
     public StraightTile(int tileRotation) throws Exception {

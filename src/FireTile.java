@@ -28,12 +28,10 @@ public class FireTile extends ActionTileFloor {
      * @param board        board object
      * @param x            x coordinate to be placed onto
      * @param y            y coordinate to be placed onto
-     * @param numOfPlayers
-     * @throws Exception if the Fire is outside of the array
+     * @param numOfPlayers the number of players affected
      */
     @Override
-    public void action(Board board, int x, int y, int numOfPlayers)
-            throws Exception {
+    public void action(Board board, int x, int y, int numOfPlayers) {
 
         for (int i = x - 2; i < x + 1; i++) {
 

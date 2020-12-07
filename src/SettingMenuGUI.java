@@ -38,8 +38,8 @@ public class SettingMenuGUI {
     /**
      * Called when the back button is pressed. loads the main menu
      *
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent the action event of the object
+     * @throws IOException if it cannot find the fxml file
      */
 
     @FXML
@@ -61,7 +61,7 @@ public class SettingMenuGUI {
     /**
      * Sets the game
      *
-     * @param game
+     * @param game the game to set
      */
 
     public void setGame(Game game) {
@@ -71,7 +71,7 @@ public class SettingMenuGUI {
     /**
      * Called when the Volume button is pressed. Sets the music volume to the value of the slider
      *
-     * @param actionEvent
+     * @param actionEvent the action event of the object
      */
 
     public void volumeButtonAction(ActionEvent actionEvent) {
@@ -86,7 +86,7 @@ public class SettingMenuGUI {
     /**
      * Called when the sounds effect button is pressed. Sets the sounds volume to the value of the slider.
      *
-     * @param actionEvent
+     * @param actionEvent the action event of the object
      */
 
     public void menuVolumeButtonAction(ActionEvent actionEvent) {

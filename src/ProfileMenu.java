@@ -44,11 +44,6 @@ public class ProfileMenu {
     @FXML
     private ListView profilesList;
 
-    @FXML
-    public void initialize() {
-        //get profiles
-    }
-
     /**
      * Used to go back to main menu of the game
      *
@@ -75,10 +70,9 @@ public class ProfileMenu {
      * When the add profile button is clicked
      *
      * @param actionEvent event of the add button being clicked
-     * @throws IOException if the add button hasn't been used for some reason
      */
     @FXML
-    public void addButtonAction(ActionEvent actionEvent) throws IOException {
+    public void addButtonAction(ActionEvent actionEvent) {
         Game.playMenuSound();
 
         Ok.setVisible(true);
@@ -96,10 +90,9 @@ public class ProfileMenu {
      * When the edit profile button is clicked
      *
      * @param actionEvent the event of clicking edit
-     * @throws IOException if the add button hasn't been used for some reason
      */
     @FXML
-    public void editButtonAction(ActionEvent actionEvent) throws IOException {
+    public void editButtonAction(ActionEvent actionEvent) {
         Game.playMenuSound();
 
         Ok.setVisible(true);
@@ -117,10 +110,9 @@ public class ProfileMenu {
      * When the delete button has been clickec
      *
      * @param actionEvent the event of clicking delete
-     * @throws IOException if the delete button hasn't been clicked for some reason
      */
     @FXML
-    public void deleteButtonAction(ActionEvent actionEvent) throws IOException {
+    public void deleteButtonAction(ActionEvent actionEvent) {
         Game.playMenuSound();
         Ok.setVisible(true);
         Input.setVisible(true);
@@ -137,17 +129,16 @@ public class ProfileMenu {
      * When the ok button has been clicked, it does the corresponding action to the previous button click
      *
      * @param actionEvent the event of clicking the ok button
-     * @throws IOException
      */
     @FXML
-    public void okButtonAction(ActionEvent actionEvent) throws IOException {
+    public void okButtonAction(ActionEvent actionEvent) {
         Game.playMenuSound();
-        if (addClicked == true) {
+        if (addClicked) {
             String name = Input.getText();
             game.createProfile(name);
         }
 
-        if (deleteClicked == true) {
+        if (deleteClicked) {
             String deletedName = Input.getText();
             Profile p = null;
             for (Profile profile : game.getProfiles()) {
@@ -160,7 +151,7 @@ public class ProfileMenu {
         }
 
 
-        if (editClicked == true) {
+        if (editClicked) {
             String currentName = Input.getText();
             String newName = Input2.getText();
             Profile p = null;

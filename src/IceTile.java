@@ -24,16 +24,14 @@ public class IceTile extends ActionTileFloor {
     /**
      * Recursively goes through the 3x3 grid setting the isFrozen to true for those tiles.
      *
-     * @param board
-     * @param x
-     * @param y
-     * @param numOfPlayers
-     * @throws Exception
+     * @param board the board to effect
+     * @param x the x coord of the ice action
+     * @param y the y coord of the ice action
+     * @param numOfPlayers the number of players it effects
      */
 
     @Override
-    public void action(Board board, int x, int y, int numOfPlayers)
-            throws Exception {
+    public void action(Board board, int x, int y, int numOfPlayers) {
 
         for (int i = x - 2; i < x + 1; i++) {
 
