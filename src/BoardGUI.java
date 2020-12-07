@@ -374,6 +374,7 @@ public class BoardGUI {
         isAbleToMove(this.game.getTurn());
         this.game.getTurn().getHand().remove(this.handIndex);
         handIndex = -1;
+        turnProgression = 2;
     }
 
     /**
@@ -455,17 +456,15 @@ public class BoardGUI {
         Player p = game.getTurn();
         this.handIndex = index;
         Tile selectedTile = p.getHand().get(index);
-        try {
+        if (selectedTile instanceof ActionTile && turnProgression == 1)  {
             ActionTile actionTile = (ActionTile)selectedTile;
             //choose to play it
             playerTurnTag.setText("Click on a tile to play this on");
-            this.turnProgression = 1;
-        } catch (Exception e){
+        } else if (selectedTile instanceof FloorTile){
             FloorTile floorTile = (FloorTile)selectedTile;
             //must play this now
             playerTurnTag.setText("Set the rotation and click a triangle to push in from");
             RotationImage.setImage(new Image(floorTile.getImageLocation()));
-            this.turnProgression = 0;
             drawCanvas();
         }
         setCards(this.game.getTurn().getHand());
